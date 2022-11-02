@@ -1,0 +1,199 @@
+
+
+table thead {
+    font-family: montserrat;
+    font-size: 10px;
+    text-align: center;
+}
+
+
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-family: montserrat;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 10px;
+    width: 100%;
+    border-spacing: 0 5px;
+}
+
+.leaderboard .athlete{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.leaderboard .athlete div{
+    border: 1px solid grey;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    height: 30px;
+}
+
+.leaderboard .stats{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    height: 25px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.leaderboard .stats div{
+    width: 6%;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    /* border-left: solid 2px black; */
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.leaderboard .stats .mvt_name{
+    background-color: rgb(203, 203, 203);
+    padding-left: 1px;
+    padding-right: 1px;
+    color: black;
+    text-align: center;
+}
+
+.leaderboard .stats_header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    height: 25px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.leaderboard .stats_header div{
+    width: 6%;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-left: solid 2px black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.leaderboard .stats_header .mvt_name{
+    background-color: rgb(203, 203, 203);
+    padding-left: 1px;
+    padding-right: 1px;
+    color: black;
+    text-align: center;
+}
+
+
+.leaderboard .stats .mvt_id{
+    width: 100px;
+    margin: auto;
+    text-align: center;
+}
+
+
+.leaderboard .athlete .rank{
+    width: 4%;
+    text-align: center;
+    color: white;
+    border-right: 2px solid white;
+    background-color: var(--main-color);
+}
+
+.leaderboard .athlete .Orank{
+    width: 4%;
+    text-align: center;
+    color: white;
+    border-right: 2px solid white;
+    background-color: var(--main-color);
+}
+
+
+.leaderboard .athlete .lane{
+    width: 3%;
+    text-align: center;
+    color: white;
+    background-color: var(--main-color);
+    filter: blur(0px);
+}
+
+.leaderboard .athlete .name {
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 15%;
+    color: white;
+    background-color: var(--main-color);
+}
+.leaderboard .athlete .affiliate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 15%;
+    color: white;
+    background-color: var(--main-color);
+    border-right: 2px solid white;
+}
+
+.leaderboard .athlete .score {
+    width: 8%;
+    max-width: 8%;
+    color: rgb(255,255,255);
+    background-color: var(--main-color);
+    text-align: center;
+}
+
+.leaderboard .athlete .flag {
+    width: 5%;
+    background-color: var(--main-color);
+    text-align: center;
+}
+
+.leaderboard .athlete .flag img {
+    border-radius: 50px;
+}
+
+.leaderboard .athlete .circle_progress{
+    background-color: rgb(221, 221, 221);
+    fill: aquamarine;
+    width: 50%;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+}
+
+.leaderboard .athlete svg{
+    height: 10px;
+}
+
+.leaderboard .mvt{
+    border-left: 2px solid;
+    text-align: center;
+    background-color: var(--main-color);
+    color: white;
+    table-layout: fixed;
+    overflow-wrap: break-word;
+    width: 8%;
+    text-transform: uppercase;
+}
+
+.target{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+
+.stats td{
+    /* width: 200px; */
+}

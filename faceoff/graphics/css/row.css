@@ -1,0 +1,51 @@
+.con{
+    position: absolute;
+    bottom: 100px;
+    align-items: center;
+    width: 100%;
+}
+
+#overlayRow{
+    align-items: center;
+    font-family: montserrat;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 150px;
+}
+
+#overlayRow .athleteRow{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin: 10px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    /* background-color: var(--main-color); */
+    height: 50px;
+}
+
+#overlayRow .name{
+    width: 200px;
+}
+
+#overlayRow .athleteRow .dataRow{
+    width: 200px;
+}
+
+#overlayRow .athleteRow:nth-of-type(odd){
+    background: linear-gradient(110deg, #B20000 60%, #D87F7F 60%);
+    /* background-image: url(../img/WESTCOAST.png); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#overlayRow .athleteRow:nth-of-type(even){
+    background: linear-gradient(110deg, #808080 60%, #a0a0a0 60%);
+    /* background-image: url(../img/LOGO-EASTC-SASNFOND.png); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

@@ -1,0 +1,71 @@
+
+#heatDetails{
+    position: relative;
+    top: 150px;
+    font-family: montserrat;   
+    left: 50px;
+    font-size: 10px;
+    width: 300px;
+}
+
+body{
+    background-color:var(--main-color); 
+}
+
+.heat{
+    height: 1080px;
+    background-color:var(--main-color); 
+    text-align:center;
+    font-size:200px;
+}
+
+.target{
+    width: 100px;
+}
+
+.time{
+    position: relative;
+    color: var(--tx-chrono-color);
+    align-items: center;
+}
+
+.chrono{
+    padding-top: 10px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    background-color: var(--chrono-color);
+}
+
+#timecap{
+    font-size: 80px;
+    padding-top: 10px;
+    font-weight: 600;
+}
+
+.logoSK{
+    width: 300px;
+    padding-right: 50px;
+}
+
+.logoFV{
+    width: 300px;
+    padding-left: 50px;
+}
+
+.logoEvent{
+    width: 400px;
+    padding-bottom: 10px;
+}
+
+.powered{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.powered .text{
+    width: 400px;
+    font-size: 30px;
+    font-weight: 800;
+}

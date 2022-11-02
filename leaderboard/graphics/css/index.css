@@ -1,0 +1,75 @@
+:root {
+    --main-color: rgba(0,0,0,0.9);
+    --second-color: black;
+    --finish-color: black;
+    --firstRank-color: black;
+    --secondRank-color: black;
+    --thirdRank-color: black;
+
+    --chrono-color:white;
+    --tx-chrono-color:white;
+
+    --wod-color:white;
+    --tx-wod-color:white;
+
+    --tx-main-color: white;
+    --tx-second-color: white;
+    --tx-finish-color: white;
+    --tx-firstRank-color: white;
+    --tx-secondRank-color: white;
+    --tx-thirdRank-color: white;
+
+    --X-position-chrono: 105px;
+    --Y-position-chrono: 63px;
+
+    --widthLogoEvent: 250px;
+    --heigth: 29px;
+    --height_ath : 40px;
+    --border: 0px 10px 10px 0px;
+  }
+
+  body{
+    background-image: url(../img/BG_WZA_2.jpeg);
+    background-size: cover;
+  }
+
+@font-face {
+    font-family: "bebas";
+    src: url("../fonts/BebasNeue.otf");
+}
+
+@font-face {
+    font-family: "strasua";
+    src: url("../fonts/strasua.ttf");
+}
+
+@font-face {
+    font-family: "oswald";
+    src: url("../fonts/Oswald-Regular.ttf");
+}
+
+@font-face {
+    font-family: "montserrat";
+    src: url("../fonts/Coamei-Regular.otf");
+}
+
+#video{
+    z-index: 100;
+    position:absolute;
+    width:1920px;
+    height:1080px;
+}
+
+.logoFV{
+    background-image: url('../img/PRESTA/FV-logo.png');
+    height: 150px;
+    width: 150px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:contain;
+    position: absolute;
+    top: 50px;
+    right: 150px;
+    opacity: 100%;
+    transform-origin: 100% 100%;
+}
