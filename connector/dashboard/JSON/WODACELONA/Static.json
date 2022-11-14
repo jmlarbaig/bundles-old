@@ -14,7 +14,7 @@
       "type": "time",
       "description": "",
       "heatsSize": 20,
-      "timeCap": 12,
+      "timeCap": "00:12:00",
       "format": "individual",
       "scoreLabel": "",
       "createDate": "2022-09-07T05:29:09"

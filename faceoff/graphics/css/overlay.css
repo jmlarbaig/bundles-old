@@ -105,10 +105,18 @@
 
 .laneLeft .scoreTotal{
     width: auto;
+    border: 1px solid black;
+    transform: skew(20deg);
+    background-color: var(--main-color);
+    color: var(--tx-main-color);
 }
 
 .laneRight .scoreTotal{
     width: auto;
+    border: 1px solid black;
+    transform: skew(-20deg);
+    background-color: var(--main-color);
+    color: var(--tx-main-color);
 }
 
 .laneRight .events{

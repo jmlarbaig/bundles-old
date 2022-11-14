@@ -84,7 +84,7 @@
             $events.append($i)
         })
         var $i = $(
-            '<div class="scoreTotal" id="scoreTotal">0</div>'
+            '<div class="scoreTotal" id="scoreTotal">POINTS : 0</div>'
         )
         $events.append($i)
         console.log("fini")
@@ -165,6 +165,8 @@
     })
 
     statics.on('change', (newValue, oldValue) => {        
+
+        console.log('Satics = ', newValue)
         
         var timeCap
         tc = newValue.heatInfo[0].timeCap.split(':');
@@ -486,7 +488,7 @@
                     var score = element.score.reduce((a, b)=> parseInt(a) + parseInt(b),0);
                     console.log(score || 0)
                     score != NaN ?
-                    athletes[index].$item.find('#scoreTotal').text(score || 0) :
+                    athletes[index].$item.find('#scoreTotal').text("POINTS : " + score || 0) :
                     ''
                 }
             })

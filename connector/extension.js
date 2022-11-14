@@ -4,28 +4,12 @@ const fs = require('fs');
 const path = require('path');
 
 const mqtt = require('mqtt')
-// const client = mqtt.connect('mqtt://146.59.153.17:1883')
-const client = mqtt.connect('mqtt://10.17.86.100:1883')
+
+const client = mqtt.connect('mqtt://10.17.86.100:1883');
+const ntpClient = require('ntp-client');
+
 var data = {}
 var dataTab = []
-
-
-// const NTP = require('ntp-time').Client;
-// const clientNtp = new NTP('10.17.86.1', '123', { timeout: 5000 });
-// const clientNtp = new NTP('time.google.com', '123', { timeout: 5000 });
-var ntpClient = require('ntp-client');
-
-
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
-const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
-
-// var serviceAccount = require("./functionnalvision-firebase-adminsdk-9po5b-5b4104d520.json");
-
-// initializeApp({
-//   credential: cert(serviceAccount)
-// });
-
-// const db = getFirestore();
 
 
 

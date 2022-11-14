@@ -45,6 +45,8 @@
 
     const TransparenceLogo = nodecg.Replicant('TransparenceLogo', 'leaderboard')
 
+    // console.log(nodecg)
+
 
     statics.on('change', (newValue, oldValue) => {
         console.log("Static")

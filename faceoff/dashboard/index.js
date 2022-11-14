@@ -69,10 +69,11 @@ events.on('change', (newValue, oldValue)=>{
             $.getJSON( newValue[0].url, function( data ) {
                 tableEvent = data.events;
                 var $list = $('#tableEvents');
+                $list.find(".events").remove()
                 data.events.forEach((element)=>{
                     // tableWeight.push(element.score)
                     var $item = $(
-                        '<tr class="" id="'+element.id+'">' +
+                        '<tr class="events" id="'+element.id+'">' +
                             '<td id="number">EVENT ' +element.id+ '</td>'+
                             '<td id="Name">' +element.name+ '</td>'+
                             '<td id="score"><select id="'+element.id+'_gauche"> <input type="checkbox" id="check_'+element.id+'_gauche"><label for="'+element.id+'">DOUBLE</label></td>'+
