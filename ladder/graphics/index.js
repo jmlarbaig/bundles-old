@@ -21,7 +21,7 @@ function actualiserTeam(athletes){
         score[element.lane-1] = 0
         var opt = document.createElement('option')
         opt.value = element.lane
-        opt.innerHTML = element.displayName
+        opt.innerHTML = element.displayName.toUpperCase()
         select.appendChild(opt)
     })
 }
@@ -48,6 +48,20 @@ ladderAssets.on('change', (newValue, oldValue) => {
     }
 })
 
+function actualiserScore(){
+    var e = document.getElementById("Team");
+    var lane = e.value -1;
+    console.log("Onchange : ",Att_poids.value[lane])
+    $('#score').text(Att_poids.value[lane] + ' KG')
+    
+}
+
+Att_poids.on('change', (newValue, oldValue)=>{
+    var e = document.getElementById("Team");
+    var lane = e.value -1;
+    $('#score').text(newValue[lane] + ' KG')
+})
+
 function weightMinus(){
     var id = event.target.id
     var e = document.getElementById("Team");
@@ -64,7 +78,7 @@ function weightMinus(){
         $('#'+id).css('backgroundColor', 'white');
         $('#score').css('backgroundColor', 'white');
     },200)
-    $('#score').text(score[lane])
+    $('#score').text(score[lane] + ' KG')
     Att_poids.value = score;
     console.log(score)
 
@@ -82,7 +96,7 @@ function weightPlus(){
         $('#'+id).css('backgroundColor', 'white');
         $('#score').css('backgroundColor', 'white');
     },200)
-    $('#score').text(score[lane])
+    $('#score').text(score[lane] + ' KG')
     Att_poids.value = score;
     console.log(score)
 }

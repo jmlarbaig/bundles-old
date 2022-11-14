@@ -5,8 +5,23 @@ const path = require('path');
 
 const mqtt = require('mqtt')
 
-const client = mqtt.connect('mqtt://10.17.86.100:1883');
+var ip = require('ip');
+var ip_adresse = ip.address() // my ip address
+
+var ch = ip_adresse.split('.')
+
+if(ch[0] == '10'){
+    var ip_broker = ch[0]+'.'+ch[1]+'.'+ch[2]+'.'+'100'
+    var ip_ntp = ch[0]+'.'+ch[1]+'.'+ch[2]+'.'+'1'
+}
+
+
+console.log(ip_broker, ip_ntp)
+
+const client = mqtt.connect('mqtt://'+ip_broker+':1883');
 const ntpClient = require('ntp-client');
+
+
 
 var data = {}
 var dataTab = []
@@ -110,7 +125,7 @@ module.exports = function (nodecg, bundlePath) {
 
     function time (){
         // ntpClient.getNetworkTime('time.google.com', 123, function(err, date) {
-        ntpClient.getNetworkTime('10.3.86.1', 123, function(err, date) {
+        ntpClient.getNetworkTime(ip_ntp, 123, function(err, date) {
             if(err) {
                 console.error(err);
                 return;

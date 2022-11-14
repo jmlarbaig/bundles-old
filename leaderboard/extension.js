@@ -3,8 +3,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const NTP = require('ntp-time').Client;
-const client = new NTP('0.fr.pool.ntp.org', '221', { timeout: 5000 });
 
 module.exports = function (nodecg) {
 
@@ -85,11 +83,6 @@ module.exports = function (nodecg) {
         fs.writeFileSync(pkgPath, data)
         colorConfig.value = value
     })
-
-    // client
-    //     .syncTime()
-    //     .then(time => console.log(time)) // time is the whole NTP packet
-    //     .catch(console.log);
 
 	nodecg.log.info(`Bundle "${__filename}" is initialized.`);
 };

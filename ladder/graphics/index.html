@@ -17,11 +17,11 @@
 		<h1>LADDER</h1>	
 		<div class='header'>
 			<label for="Team">CHOISI TON EQUIPE : </label>
-			<select id="Team">
+			<select id="Team" onchange="actualiserScore()">
 			</select>
 			<button onclick="resetScore()">RESET</button>
 			<hr>
-			<div id="score">SCORE</div>
+			<div >SCORE</div><div id="score"></div>
 			<hr>
 		</div>
 		<label for="Team">LADDER</label>

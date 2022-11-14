@@ -126,19 +126,18 @@
 }
 
 .laneLeft .event{
-    background-color: rgba(220, 220, 220, 0.35);
-    width: 50px;
-    text-align: center;
-    border: 1px solid black;
     transform: skew(20deg);
 }
 
 .laneRight .event{
-    background-color: rgba(220, 220, 220, 0.35);
-    width: 50px;
+    transform: skew(-20deg);
+}
+
+.event{
+    background-color: rgba(220, 220, 220, 0.58);
+    width: 70px;
     text-align: center;
     border: 1px solid black;
-    transform: skew(-20deg);
 }
 
 

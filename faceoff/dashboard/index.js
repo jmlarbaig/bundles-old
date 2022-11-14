@@ -133,9 +133,6 @@ function actScore(){
         optleft[i] = $("#"+i+"_gauche :selected").text()
         optright[i] = $("#"+i+"_droite :selected").text()
 
-
-        // console.log($("#check_"+i+"_gauche").is(":checked"))
-        // console.log($("#check_"+i+"_droite").is(":checked"))
         if($("#check_"+i+"_gauche").is(":checked")){
             valleft[i] = $("#"+i+"_gauche :selected").val() * 2
             optleft[i] = 'TW'
@@ -162,6 +159,7 @@ function actScore(){
     win[Teams.value[1]].texte = optright ;
     win[Teams.value[0]].score = valleft ;
     win[Teams.value[1]].score = valright ;
+    console.log(win)
     winEvents.value = win
 }
 
@@ -193,6 +191,7 @@ function Actualiser(){
     var team2 = document.getElementById("rigthTeam").value;
     Teams.value = [team1,team2]
     console.log(statics.value.athletes[team1])
+    console.log(statics.value.athletes[team2])
     $('#teamGauche').text(statics.value.athletes[team1].displayName.toUpperCase())
     $('#teamDroite').text(statics.value.athletes[team2].displayName.toUpperCase())
 

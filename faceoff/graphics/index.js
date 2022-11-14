@@ -446,7 +446,7 @@
         if(data != undefined){
             data.forEach((element,index) => {
                 console.log(athletes[index])
-                if (element.texte != undefined){
+                if (element!= null && element.texte != undefined){
                     element.texte.forEach((val,i)=>{
                         switch(val){
                             case '-':
@@ -477,12 +477,12 @@
                                 break;
                             default:
                                 console.log("P ",element.score[i])
-                                athletes[index].$item.find('#event_'+i).text('P.'+ element.score[i])
+                                athletes[index].$item.find('#event_'+i).text(element.score[i]+ 'pts')
                                 break;
                         }
                     })
                 }
-                if(element.score != undefined){
+                if(element != null && element.score != undefined){
                     element.score[0] = 0
                     // console.log(element.score.reduce((a, b)=> parseInt(a) + parseInt(b),0))
                     var score = element.score.reduce((a, b)=> parseInt(a) + parseInt(b),0);
