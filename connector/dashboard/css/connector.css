@@ -148,3 +148,39 @@ label {
     box-shadow: none;
     transform: translateY(0);
   }
+
+.led-box{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    }
+
+    .led-green {
+    margin: 0 auto;
+    width: 24px;
+    height: 24px;
+    background-color: #ABFF00;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #ABFF00 0 2px 12px;
+    }
+
+    .led-orange {
+    margin: 0 auto;
+    width: 24px;
+    height: 24px;
+    background-color: #ff9500;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #ff9500 0 2px 12px;
+    }
+
+    .led-red {
+    margin: 0 auto;
+    width: 24px;
+    height: 24px;
+    background-color: #ff1e00;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #ff1e00 0 2px 12px;
+    }
+    
+    

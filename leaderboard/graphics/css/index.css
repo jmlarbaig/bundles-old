@@ -29,8 +29,10 @@
   }
 
   body{
-    background-image: url(../img/BG_WZA_2.jpeg);
+    /* background-image: url(../img/BG_WZA_2.jpeg); */
     background-size: cover;
+    height: 1080px;
+    width: 1920px;
   }
 
 @font-face {

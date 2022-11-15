@@ -75,7 +75,8 @@ function ascendingLane(a, b) { return Number(a.lane) - Number(b.lane) }
 function descendingLane(a, b) { return Number(a.lane) + Number(b.lane) }
 
 function reposition(WhichLeadeboard, athletes) {
-    var y =  $(WhichLeadeboard + " .header").height();
+    var y =  parseInt($(WhichLeadeboard + " .header").css('height').replace('px'));
+    console.log(y)
     Object.keys(athletes).forEach(key => {
         if(athletes[key].$item.find(WhichLeadeboard) != undefined){
             athletes[key].$item.css("top", y + "px");
@@ -213,6 +214,7 @@ function updateDynamics(newScoring, status){
                 if( status == "W" ){
 
 
+                    athletes_divison[key][i].$item.find(".name").css('width', 130);
                     athletes_divison[key][i].$item.find(".rank").show();
                     athletes_divison[key][i].$item.find(".score").show();
 
@@ -362,11 +364,11 @@ function updateDynamics(newScoring, status){
                 athletes_divison[key].sort(ascendingRank);
                 setTimeout(()=>{
                     reposition("#leaderboard"+ key, athletes_divison[key]);
-                },100)
+                    $("#leaderboard"+ key).css("height", height_tot + $("#leaderboard"+key + " .header").height())
+                },1000)
             }
             else{
-                athletes_divison[key].sort(ascendingLane);            
-                console.log("height total =", height_tot + $("#leaderboard"+key + " .header").height()) 
+                athletes_divison[key].sort(ascendingLane);
                 $("#leaderboard"+ key).css("height", height_tot + $("#leaderboard"+key + " .header").height())
                 reposition("#leaderboard"+ key, athletes_divison[key]);
                 // clearInterval(affiliateTimer)
@@ -507,11 +509,11 @@ function resetLeaderboard(){
             }
             var $tabItem = $(
                 '<div id="leaderboard'+ key +'" class="leaderboard">' +
-                    '<div class="header">'+
+                    '<div class="header" id="header'+ key +'">'+
                         '<div class="text-nowrap text-truncate text-left division">' + divisionsNames[key] + '</div>' +
                         '<div class="repTar repTarget'+[key]+'">' + textRep + '</div>' +
                     '</div>'+
-                    '<div id="athletes" class="athletes">' +
+                    '<div id="athletes'+ key +'" class="athletes">' +
                     '</div>' + 
                 '</div>'
             );
@@ -519,7 +521,7 @@ function resetLeaderboard(){
             heatDetails.$tabItem = $tabItem;
             $tab.append($tabItem);
 
-            var $list = $("#leaderboard"+ key +" #athletes");
+            var $list = $("#leaderboard"+ key +" #athletes"+ key);
             $list.find(".athlete").remove();
 
             athletes_divison[key].sort(descendingLane);
@@ -557,17 +559,20 @@ function resetLeaderboard(){
                 athletes_divison[key][key2].$item.find(".rank").hide();
                 athletes_divison[key][key2].$item.find(".score").hide();
                 athletes_divison[key][key2].$item.find(".popup").hide();
+                athletes_divison[key][key2].$item.find(".name").css('width', 240);
                 !showFlag.value ? athletes_divison[key][key2].$item.find(".flag").hide() : "" ;
                 $list.append($item);
 
                 // console.log(athletes_divison[key][key2].$item)
-                height_tot +=  athletes_divison[key][key2].$item.height();
+                height_tot += 40;
 
             })
 
                 setTimeout(()=>{
+                    console.log("height : ", height_tot)
                     athletes_divison[key].sort(ascendingLane);
-                    $("#leaderboard"+ key).css("height", height_tot + $("#leaderboard"+key + " .header").height() )
+                    $("#athletes"+ key).css("height", height_tot )
+                    $("#leaderboard"+ key).css("height", $("#athletes"+key).height() + $("#leaderboard"+key + " .header").height() )
                     reposition("#leaderboard"+ key, athletes_divison[key]);
                     // animateCSS('#aht'+athletes_divison[key][key2].lane, 'fadeInLeft')
                 }, 1000)
