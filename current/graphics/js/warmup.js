@@ -53,7 +53,7 @@ function resetWarmup(data){
         //     )
         // }
 
-        if( d.heat.current == "CALL FOR WARM UP" ){
+        if( d.heat.current == "CURRENT"){
 
         var $item = $(
             '<div class="col global">'+ 
