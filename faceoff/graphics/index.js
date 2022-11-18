@@ -26,6 +26,8 @@
     
     const ShowRow = nodecg.Replicant('ShowRow')
 
+    const mainSponsors = nodecg.Replicant('assets:mainSponsor', 'connector')
+
     const statics = nodecg.Replicant('statics', 'connector');
     const dynamics = nodecg.Replicant('dynamics', 'connector');
     const showLeaderboard_lead = nodecg.Replicant('showLeaderboard_Lead')
@@ -48,6 +50,10 @@
 
     const lowerThirdData = nodecg.Replicant('lowerThirdData', 'lowerthird')
     const lowerThirdVoidShow = nodecg.Replicant('lowerThirdVoidShow', 'lowerthird')
+    const lowerThirdEventShow = nodecg.Replicant('lowerThirdEventShow', 'lowerthird')
+    const lowerThirdYTShow = nodecg.Replicant('lowerThirdYTShow', 'lowerthird')
+    const lowerThirdCodePromo = nodecg.Replicant('lowerThirdCodePromo', 'lowerthird')
+    const lowerThirdShowCode = nodecg.Replicant('lowerThirdShowCode', 'lowerthird')
 
     const sponsors = nodecg.Replicant('assets:sponsors', 'connector')
     const sponsorLower = nodecg.Replicant('assets:sponsorLower')
@@ -98,7 +104,6 @@
     var staticData;
     let i=0;
 
-    const mainSponsors = nodecg.Replicant('assets:mainSponsor', 'connector')
 
     mainSponsors.on('change', (newValue)=> {
         if(newValue.length>0){
@@ -256,6 +261,8 @@
 
     LogoImg.on('change', (newValue, oldValue) => {
         try{
+
+            logoEvent = newValue;
             console.log(newValue)
             var $imgLogo = $("#logoLocation");
             $imgLogo.find(".logo").remove();

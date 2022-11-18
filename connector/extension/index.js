@@ -155,7 +155,7 @@ module.exports = function (nodecg, bundlePath) {
                 nowNtp.value = err
             }else{
                 console.log("Current time : ");
-                console.log(date.toString()); // Mon Jul 08 2013 21:31:31 GMT+0200 (Paris, Madrid (heure d’été))
+                console.log(date.toString());
                 nowNtp.value = date
                 timeNTP.value = date.getTime()
             }

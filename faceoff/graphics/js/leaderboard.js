@@ -403,6 +403,10 @@ function resetLeaderboard(laneLeft, LaneRigth){
 
         $list.append($itemChrono);
 
+        if(mainSponsors.value.length > 0){
+            $(".mainSponsor").css("background-image", "url(" + mainSponsors.value[0].url + ")");
+        }
+
         Object.keys(athletes).forEach(key => {
             var $item = $(
                 '<div class="cont row">' + 

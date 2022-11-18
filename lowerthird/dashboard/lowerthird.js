@@ -75,9 +75,6 @@ statics.on('change', (newValue, oldValue) => {
 
 function Aff_LW(){
     console.log(event.target.id)
-    console.log("Text infos = ",  document.getElementById("NameLower_1").value)
-    console.log("Text infos = ",  document.getElementById("Fonction_1").value)
-    console.log("Text infos = ",  document.getElementById("sponsor_1").value)
 
     id = event.target.id
     Data.id = id
