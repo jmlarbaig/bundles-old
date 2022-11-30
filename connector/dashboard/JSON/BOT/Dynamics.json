@@ -1,5 +1,5 @@
 {
-  "NtpTimeStart": "11:42:00.004",
+  "NtpTimeStart": "14:42:00.004",
   "eventId": 5034,
   "workoutid": 36997,
   "heatid": 226745,
@@ -523,7 +523,7 @@
     },
     {
       "lane": 15,
-      "division": "SCALED HH",
+      "division": "RX FH",
       "CurrentRank": 4,
       "score_abs": 93,
       "score_rel": -2,

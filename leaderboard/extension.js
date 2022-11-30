@@ -1,12 +1,41 @@
 'use strict';
 
 const fs = require('fs');
-const path = require('path');
+
+const setupFile = __dirname + '/setupFile.json'
 
 
 module.exports = function (nodecg) {
 
     const router = nodecg.Router();
+    router.post('/chrono', (req, res) => {
+        showChrono.value = req.body.show
+    });
+
+    router.post('/wod', (req, res) => {
+        showWodDetails.value = req.body.show
+    });
+
+    router.post('/leaderboard', (req, res) => {
+        showLeaderboard_lead.value = req.body.show
+    });
+
+    router.post('/flag', (req, res) => {
+        showFlag.value = req.body.show
+    });
+
+    router.post('/affiliate', (req, res) => {
+        showAffiliate.value = req.body.show
+    });
+
+    router.post('/logo', (req, res) => {
+        showLogo.value = req.body.show
+    });
+
+    nodecg.mount('/leaderboard', router);
+
+
+    const setupLeaderboard = nodecg.Replicant('setupLeaderboard')
     const showChrono = nodecg.Replicant('showChrono')
     const showWodDetails = nodecg.Replicant('showWodDetails')
     const showLeaderboard_lead = nodecg.Replicant('showLeaderboard_Lead')
@@ -14,74 +43,26 @@ module.exports = function (nodecg) {
     const showAffiliate = nodecg.Replicant('showAffiliate')
     const showLogo = nodecg.Replicant('showLogo')
 
-    router.post('/chrono', (req, res) => {
-        console.log("Bien recu :", req.body)
-        showChrono.value = req.body.show
-    });
-
-    router.post('/wod', (req, res) => {
-        console.log("Bien recu :", req.body)
-        showWodDetails.value = req.body.show
-    });
-
-    router.post('/leaderboard', (req, res) => {
-        console.log("Bien recu :", req.body)
-        showLeaderboard_lead.value = req.body.show
-    });
-
-    router.post('/flag', (req, res) => {
-        console.log("Bien recu :", req.body)
-        showFlag.value = req.body.show
-    });
-
-    router.post('/affiliate', (req, res) => {
-        console.log("Bien recu :", req.body)
-        showAffiliate.value = req.body.show
-    });
-
-    router.post('/logo', (req, res) => {
-        console.log("Bien recu :", req.body)
-        showLogo.value = req.body.show
-    });
-
-    nodecg.mount('/leaderboard', router); // The route '/my-bundle/customroute` is now available
-	
-    const colorConfig = nodecg.Replicant('colorConfig')
-    const currentPath = process.cwd() + "/bundles/leaderboard/";
-	const pkgPath = path.join(currentPath,"colorDefaut.json");
-
-    const BgColor = nodecg.Replicant('BgColor')
-    const MainColor = nodecg.Replicant('MainColor')
-    const SecondColor = nodecg.Replicant('SecondColor')
-    
-    const FinishRankColor = nodecg.Replicant('FinishRankColor')
-    const FirstRankColor = nodecg.Replicant('FirstRankColor')
-    const SecondRankColor = nodecg.Replicant('SecondRankColor')
-    const ThirdRankColor = nodecg.Replicant('ThirdRankColor')
-    
-    const TransparenceLogo = nodecg.Replicant('TransparenceLogo')
-
-    if (fs.existsSync(pkgPath)) {   
+    console.log(setupFile)
+    if (fs.existsSync(setupFile)) {   
         try {
-            const data_ = JSON.parse(fs.readFileSync(pkgPath))
-            BgColor.value = data_.BgColor
-            MainColor.value = data_.MainColor
-            SecondColor.value = data_.SecondColor
-            FinishRankColor.value = data_.FinishRankColor
-            FirstRankColor.value = data_.FirstRankColor
-            SecondRankColor.value = data_.SecondRankColor
-            ThirdRankColor.value = data_.ThirdRankColor
-            TransparenceLogo.value = data_.TransparenceLogo
+            setupLeaderboard.value = JSON.parse(fs.readFileSync(setupFile))
           } 
         catch (err) {
             console.error(err)
           }
-	}
+	}else{
+        console.log('NO')
+    }
 
-    nodecg.listenFor('colorOverwrite', (value, ack) =>{
+    nodecg.listenFor('setupFile', (value, ack) =>{
+        console.log(value)
         let data = JSON.stringify(value);
-        fs.writeFileSync(pkgPath, data)
-        colorConfig.value = value
+        fs.writeFile(setupFile, data, 'utf8',function(err) {
+            if (err) throw err;
+            console.log('complete');
+            })
+            setupLeaderboard.value = value
     })
 
 	nodecg.log.info(`Bundle "${__filename}" is initialized.`);

@@ -2,7 +2,7 @@
 .tableur{
     position: absolute;
     top:200px;
-    font-family: montserrat;
+    /* font-family: var(--family_font); */
     left: 75px;
     display: block;
     width: 700px;

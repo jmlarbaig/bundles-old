@@ -19,47 +19,118 @@
     --tx-secondRank-color: white;
     --tx-thirdRank-color: white;
 
-    --X-position-chrono: 105px;
-    --Y-position-chrono: 63px;
+    --X-position-chrono: 300px;
+    --X-position-heatDetails: 320px;
+    --Y-position-chrono: 75px;
+
+    --positionX_logo : 110px;
+    --positionY_logo : 40px;
+
+    --positionX_leaderboard : 200px;
+    --positionY_leaderboard : 75px;
 
     --widthLogoEvent: 250px;
     --heigth: 29px;
     --height_ath : 40px;
     --border: 0px 10px 10px 0px;
+
+    --family_font:'Typographica';
+
   }
+
+
+@font-face {
+    font-family: "Adarsh";
+    src: url("../fonts/Adarsh-Sans-Regular.otf");
+}
+
+@font-face {
+    font-family: "Antonio";
+    src: url("../fonts/Antonio-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Bebas";
+    src: url("../fonts/BebasNeue.otf");
+}
+
+@font-face {
+    font-family: "Circo";
+    src: url("../fonts/Circo.ttf");
+}
+
+@font-face {
+    font-family: "Coamei";
+    src: url("../fonts/Coamei-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Hoop";
+    src: url("../fonts/Hoop_Regular.otf");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/Montserrat-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Oswald";
+    src: url("../fonts/Oswald-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Power";
+    src: url("../fonts/PowerrMedium.ttf");
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Strasua";
+    src: url("../fonts/strasua.ttf");
+}
+
+@font-face {
+    font-family: "Typographica";
+    src: url("../fonts/Typographica.ttf");
+}
+
 
   body{
     /* background-image: url(../img/BG_WZA_2.jpeg); */
+    font-family: var(--family_font);
+    /* font-family: 'oswald' ; */
     background-size: cover;
     height: 1080px;
     width: 1920px;
   }
 
-@font-face {
-    font-family: "bebas";
-    src: url("../fonts/BebasNeue.otf");
-}
 
-@font-face {
-    font-family: "strasua";
-    src: url("../fonts/strasua.ttf");
-}
 
-@font-face {
-    font-family: "oswald";
-    src: url("../fonts/Oswald-Regular.ttf");
-}
-
-@font-face {
-    font-family: "montserrat";
-    src: url("../fonts/Coamei-Regular.otf");
-}
-
-#video{
+/* #video{
     z-index: 100;
     position:absolute;
     width:1920px;
     height:1080px;
+} */
+
+#video
+{
+    z-index: 100;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	background-size: cover;
 }
 
 .logoFV{

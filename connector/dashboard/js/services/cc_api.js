@@ -2,9 +2,10 @@
 let token ="";
 
 const TOKEN_R = nodecg.Replicant('TOKEN');
+const cors = "https://corsfv.herokuapp.com/"
 
 async function dashboardEventCC(eventId){
-    let response = await fetch("https://competitioncorner.net/api2/v1/events/"+eventId+"/dashboard" , {
+    let response = await fetch(cors + "https://competitioncorner.net/api2/v1/events/"+eventId+"/dashboard" , {
         method:"GET",
         headers:{'Authorization': 'Bearer ' + token}
     });
@@ -15,7 +16,7 @@ async function dashboardEventCC(eventId){
 }
 
 async function getHeatsTopScore(workoutId, divisionId){
-    let response = await fetch("https://competitioncorner.net/api2/v1/leaderboard/workouts/"+workoutId+"/top-results?divisionId="+divisionId, {
+    let response = await fetch(cors + "https://competitioncorner.net/api2/v1/leaderboard/workouts/"+workoutId+"/top-results?divisionId="+divisionId, {
         method:"GET",
         headers:{'Authorization': 'Bearer ' + token}
     });
@@ -24,13 +25,13 @@ async function getHeatsTopScore(workoutId, divisionId){
 }
 
 async function loadInfoEventCC(eventId){
-    let response = await fetch("https://competitioncorner.net/api2/v1/events/" + eventId );
+    let response = await fetch(cors + "https://competitioncorner.net/api2/v1/events/" + eventId );
     let json = await response.json();
     return json;
 }
 
 async function loadWorkouts(eventId, workoutId){
-    let response = await fetch("https://competitioncorner.net/api2/v1/events/"+ eventId +"/workouts/", {
+    let response = await fetch(cors + "https://competitioncorner.net/api2/v1/events/"+ eventId +"/workouts/", {
         method:"GET",
         headers:{'Authorization': 'Bearer ' + token}
     });
@@ -39,21 +40,13 @@ async function loadWorkouts(eventId, workoutId){
 }
 
 async function loadWorkoutsPlanning(eventId) {
-    let response = await fetch("https://competitioncorner.net/api2/v1/schedule/events/" + eventId + "/workouts");
+    let response = await fetch(cors + "https://competitioncorner.net/api2/v1/schedule/events/" + eventId + "/workouts");
     let json = await response.json();
     return json;
 }
 
 async function loadHeats(workoutId) {
-    var myInit = { 
-        method: "GET", 
-        mode: 'cors', 
-        headers: { 
-            'Content-Type': 'text/html',
-        }
-    }
-
-    let response = await fetch('https://competitioncorner.net/api2/v1/schedule/workout/' + workoutId, myInit);
+    let response = await fetch(cors + 'https://competitioncorner.net/api2/v1/schedule/workout/' + workoutId);
 
     let json =  response.json();
     return json;
@@ -66,29 +59,40 @@ async function loadHeats2(eventId, workoutId) {
 }
 
 async function heatDetails(eventId, heatId) {
-    let response = await fetch("https://competitioncorner.net/api2/v1/schedule/workout/"+ eventId + "/heat/" + heatId + "/details");
+    let response = await fetch(cors + "https://competitioncorner.net/api2/v1/schedule/workout/"+ eventId + "/heat/" + heatId + "/details");
     let json = await response.json();
     return json;
 }
 
 async function getHeatInfo(eventId, heatId) {
-    let response = await fetch("https://competitioncorner.net/api2/v1/schedule/workout/"+ eventId + "/heat/" + heatId);
+    let response = await fetch(cors + "https://competitioncorner.net/api2/v1/schedule/workout/"+ eventId + "/heat/" + heatId);
     let json = await response.json();
     return json;
 }
 
 async function getHeatResults(heatId) {
-    var myInit = {
-        mode: 'no-cors',
-        cache: 'no-cache' };
 
-    let response = await fetch("https://competitioncorner.net/api/v1/events/cuecard/heats/" + heatId + "/results", myInit)
+    let response = await fetch(cors + "https://competitioncorner.net/api/v1/events/cuecard/heats/" + heatId + "/results")
+    let json = await response.json();
+    return json;
+}
+
+async function getWorkoutResults(heatId) {
+
+    let response = await fetch(cors + "https://competitioncorner.net/api/v1/cuecard/divisionresults/28601/workout/35638")
+    let json = await response.json();
+    return json;
+}
+
+async function getOverallStanding(heatId) {
+
+    let response = await fetch(cors + "https://competitioncorner.net/api/v1/events/5034/cuecard/standings/team_28601")
     let json = await response.json();
     return json;
 }
 
 async function loadParticpant(eventId, workoutID) {
-    let response = await fetch("https://competitioncorner.net/api2/v1/events/"+ eventId + "/workouts/"+ workoutID +"/eligible-participants", {
+    let response = await fetch(cors + "https://competitioncorner.net/api2/v1/events/"+ eventId + "/workouts/"+ workoutID +"/eligible-participants", {
         method:"GET",
         headers:{'Authorization': 'Bearer ' + token}
     });
@@ -96,8 +100,9 @@ async function loadParticpant(eventId, workoutID) {
     return json;
 }
 
+
 async function loadParticpantId(eventId, id) {
-    let response = await fetch("https://competitioncorner.net/api2/v1/events/"+ eventId + "/participants/"+ id , {
+    let response = await fetch(cors + "https://competitioncorner.net/api2/v1/events/"+ eventId + "/participants/"+ id , {
         method:"GET",
         headers:{'Authorization': 'Bearer ' + token}
     });
@@ -106,7 +111,7 @@ async function loadParticpantId(eventId, id) {
 }
 
 async function loadAttributionLane(heatId){
-    let response = await fetch("https://competitioncorner.net/api/v1/events/cuecard/heats/"+heatId+"/heatlane" , {
+    let response = await fetch(cors + "https://competitioncorner.net/api/v1/events/cuecard/heats/"+heatId+"/heatlane" , {
         method:"GET",
         headers:{'Authorization': 'Bearer ' + token},
         mode:'cors',
@@ -123,7 +128,7 @@ async function logCC(username, password){
     }
     let sign_url = "https://competitioncorner.net/api2/v1/accounts/login"
 
-    await fetch(sign_url,
+    await fetch(cors + sign_url,
     {
         method: "POST",
         body: JSON.stringify(data),
@@ -138,7 +143,7 @@ async function logCC(username, password){
 
     sign_url = "https://competitioncorner.net/api2/v1/accounts/current/profile"
 
-    await fetch(sign_url,
+    await fetch(cors + sign_url,
         {
             method: "GET",
             headers:{'Authorization': 'Bearer ' + token},

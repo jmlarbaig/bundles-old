@@ -197,14 +197,11 @@ function updateDynamics(newScoring, status){
         Object.keys(athletes_divison).forEach(key => {
 
             // console.log(athletes_divison[key])
+            height_tot = 0;
             
             if(status != "0" || athletes_divison[key][1].CurrentRank != null){
             Object.keys(athletes_divison[key]).forEach(i => {
-
-                height_tot = 0;
-                console.log("test")
-                // console.log("Athlete = ", athletes_divison[key][i])
-                // console.log("i =", i)
+                console.log('Im on');
 
                 athletes_divison[key][i] = Object.assign( {}, athletes_divison[key][i],fetchNewData(newScoring, athletes_divison[key][i].lane));
                 athletes_divison[key][i].$item.find(".rank").text(athletes_divison[key][i].CurrentRank);
@@ -313,29 +310,33 @@ function updateDynamics(newScoring, status){
                         athletes_divison[key][i].$item.find(".rank").css("background", first_rank__color )
                         athletes_divison[key][i].$item.find(".rank").css("color", tx_first_rank__color )
 
-                        athletes_divison[key][i].$item.find(".score").css("color", tx_first_rank__color )
-                        athletes_divison[key][i].$item.find(".score").css("background", "linear-gradient(to right, " + main_color + "," + first_rank__color + ")")
+                        // athletes_divison[key][i].$item.find(".score").css("background", "linear-gradient(to right, " + main_color + "," + second_color + ")")
+                        athletes_divison[key][i].$item.find(".score").css("background",  second_color)
+                        athletes_divison[key][i].$item.find(".score").css("color", tx_main_color )
                         // athletes_divison[key][i].$item.find(".score").text(athletes_divison[key][i].score_abs);
                     }
                     else if (athletes_divison[key][i].CurrentRank == 2){
                         // athletes_divison[key][i].$item.find(".rank").css("background", "linear-gradient(to right, rgba(0,0,0,0)," + second_rank__color + ")")
                         athletes_divison[key][i].$item.find(".rank").css("background", second_rank__color )
                         athletes_divison[key][i].$item.find(".rank").css("color", tx_second_rank__color )
-                        athletes_divison[key][i].$item.find(".score").css("color", tx_second_rank__color )
-                        athletes_divison[key][i].$item.find(".score").css("background", "linear-gradient(to right, " + main_color + "," + second_rank__color + ")")
+                        athletes_divison[key][i].$item.find(".score").css("background", "linear-gradient(to right, " + main_color + "," + second_color + ")")
+                        athletes_divison[key][i].$item.find(".score").css("background",  second_color)
+                        athletes_divison[key][i].$item.find(".score").css("color", tx_main_color )
                     }
                     else if (athletes_divison[key][i].CurrentRank == 3){
                         // athletes_divison[key][i].$item.find(".rank").css("background", "linear-gradient(to right, rgba(0,0,0,0)," + third_rank__color + ")")
                         athletes_divison[key][i].$item.find(".rank").css("background", third_rank__color )
                         athletes_divison[key][i].$item.find(".rank").css("color", tx_third_rank__color )
-                        athletes_divison[key][i].$item.find(".score").css("color", tx_third_rank__color )
-                        athletes_divison[key][i].$item.find(".score").css("background", "linear-gradient(to right, " + main_color + "," + third_rank__color + ")")
+                        athletes_divison[key][i].$item.find(".score").css("background", "linear-gradient(to right, " + main_color + "," + second_color + ")")
+                        athletes_divison[key][i].$item.find(".score").css("background",  second_color)
+                        athletes_divison[key][i].$item.find(".score").css("color", tx_main_color )
                     }
                     else {
                         athletes_divison[key][i].$item.find(".rank").css("background", "linear-gradient(to right, rgba(0,0,0,0)," + main_color + ")")
                         athletes_divison[key][i].$item.find(".rank").css("background", main_color )
                         athletes_divison[key][i].$item.find(".rank").css("color", tx_main_color )
                         athletes_divison[key][i].$item.find(".score").css("background", "linear-gradient(to right, " + main_color + "," + second_color + ")")
+                        athletes_divison[key][i].$item.find(".score").css("background",  second_color)
                         athletes_divison[key][i].$item.find(".score").css("color", tx_main_color )
                     }
                 }
@@ -343,12 +344,13 @@ function updateDynamics(newScoring, status){
                     // athletes_divison[key][i].$item.find(".rank").css("background", "linear-gradient(to right, rgba(0,0,0,0)," + finish__color + ")")
                     athletes_divison[key][i].$item.find(".rank").css("background", finish__color )
                     athletes_divison[key][i].$item.find(".rank").css("color", tx_finish__color )
-                    athletes_divison[key][i].$item.find(".score").css("background", "linear-gradient(to right, " + main_color + "," + finish__color + ")")
-                    athletes_divison[key][i].$item.find(".score").css("color", tx_finish__color)
+                    // athletes_divison[key][i].$item.find(".score").css("background", "linear-gradient(to right, " + main_color + "," + finish__color + ")")
+                    // athletes_divison[key][i].$item.find(".score").css("color", tx_finish__color)
                     var result = athletes_divison[key][i].result;
                     athletes_divison[key][i].$item.find(".score").css("width", "120px")
                     if (athletes_divison[key][i].status == "F"){
                         athletes_divison[key][i].$item.find(".popup").hide();
+                        console.log(result.length)
                         athletes_divison[key][i].$item.find(".score").text(result.toString().slice(result.length - 9, result.length - 8) != "0" ? result = result.toString().slice(result.length -8, result.length) : result.toString().slice(result.length - 7, result.length - 6) != "0" ? result = result.toString().slice(result.length -7, result.length)  : result = result.toString().slice(result.length -6, result.length));
                     }
                     else if (athletes_divison[key][i].status == "T"){
@@ -362,35 +364,29 @@ function updateDynamics(newScoring, status){
              })
 
                 athletes_divison[key].sort(ascendingRank);
-                setTimeout(()=>{
-                    reposition("#leaderboard"+ key, athletes_divison[key]);
-                    $("#leaderboard"+ key).css("height", height_tot + $("#leaderboard"+key + " .header").height())
-                },1000)
+                reposition("#leaderboard"+ key, athletes_divison[key]);
+                // $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height()+15)
+                // if ($("#leaderboard"+ key +" .athletes").find(".powered").length < 1){
+                //     var $item = $( 
+                //         '<div class="athlete powered" id="powered'+key+'">' + 
+                //             '<div class="img"><img src="./img/PRESTA/SK-logo.png" alt="" height=15></img></div>' + 
+                //             '<div class="text">POWERED BY</div>' + 
+                //             '<div class="img"><img src="./img/PRESTA/FV-logo.png" alt="" height=15 ></img></div>' + 
+                //         '</div>'
+                //     );
+                //     $("#leaderboard"+ key +" .athletes").append($item);
+                // }
+                // $("#powered"+key).css('top', $("#leaderboard"+ key).height() + 10 + 'px');
+
             }
             else{
                 athletes_divison[key].sort(ascendingLane);
-                $("#leaderboard"+ key).css("height", height_tot + $("#leaderboard"+key + " .header").height())
+                $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height()+15)
                 reposition("#leaderboard"+ key, athletes_divison[key]);
-                // clearInterval(affiliateTimer)
             }
 
-            // console.log("height ",$("#leaderboard"+ key +" #athletes").find(".powered"))
-
-            // if ($("#leaderboard"+ key +" #athletes").find(".powered").length < 1){
-            //     var $item = $( 
-            //         '<div class="athlete powered" id="powered'+key+'">' + 
-            //         '<div class="img"><img src="./img/PRESTA/SK-logo.png" alt="" height=15></img></div>' + 
-            //             '<div class="text">POWERED BY</div>' + 
-            //             '<div class="img"><img src="./img/PRESTA/FV-logo.png" alt="" height=15 ></img></div>' + 
-            //         '</div>'
-            //     );
-            //     $("#leaderboard"+ key +" #athletes").append($item);
-            // }
-            
-            // var height_tot = Object.keys(athletes_divison[key]).length * $("#leaderboard"+ key +" .athlete .ath").height() +50
 
 
-            // $("#powered"+key).css('top', $("#leaderboard"+ key).height()-32)
 
         })
     }
@@ -406,11 +402,9 @@ function resetLeaderboard(){
         // console.log("Static Data = ", staticData)
         // ! On prend le tableau
 
-        showLeaderboard_lead.value != true ?  $("#tableur").hide(1) : ""
-
-        // console.log("Show leaderboard : ",showLeaderboard_lead.value)
+        setupLeaderboard.value.leaderboard != true ?  $(".leaderboards").hide() : ""
         
-        var $tab = $("#tableur")
+        var $tab = $(".leaderboards")
         $tab.find(".leaderboard").remove();
 
         //! on traite le wod en cours 
@@ -444,22 +438,6 @@ function resetLeaderboard(){
             }
         }
 
-        // console.log(divisionsNames)
-        // console.log(repTarget)
-
-
-
-        // if (data.heatInfo[0].type == "time"){
-        //     var typeWod = "";
-        //     for(let i=0; i< data.WorkoutInfo[0]; i++){
-        //         repTarget[i] = data.WorkoutInfo[i].total_reps;
-        //     }
-        // }
-        // else if (data.heatInfo[0].type == "amrap"){
-        //     var typeWod = "BEAT"
-        //     var repTarget = "MAX REPS" ;
-        // }
-
         //! Initialisation des athletes dans un seul format avec un triage par division
 
         for (var y = 0; y < divisionsNames.length; y++){
@@ -489,7 +467,7 @@ function resetLeaderboard(){
 
         // ! On crée un tableau par division
 
-        heatDetails;
+        // heatDetails;
         // for (var y = 0; y < Object.keys(athletes_divison).length; y++){
         Object.keys(athletes_divison).forEach(key => {
             //! Ajouter la séparation ici
@@ -511,14 +489,14 @@ function resetLeaderboard(){
                 '<div id="leaderboard'+ key +'" class="leaderboard">' +
                     '<div class="header" id="header'+ key +'">'+
                         '<div class="text-nowrap text-truncate text-left division">' + divisionsNames[key] + '</div>' +
-                        '<div class="repTar repTarget'+[key]+'">' + textRep + '</div>' +
+                        '<div class="repTar text-nowrap text-truncate repTarget'+[key]+'">' + textRep + '</div>' +
                     '</div>'+
                     '<div id="athletes'+ key +'" class="athletes">' +
                     '</div>' + 
                 '</div>'
             );
 
-            heatDetails.$tabItem = $tabItem;
+            // heatDetails.$tabItem = $tabItem;
             $tab.append($tabItem);
 
             var $list = $("#leaderboard"+ key +" #athletes"+ key);
@@ -534,6 +512,7 @@ function resetLeaderboard(){
                 if (format == "individual"){
                     let char = [];
                     char = athletes_divison[key][key2].displayName.toString().split(" ")
+                    console.log(char)
                     displayName = char[0].substring(0,1) + ". " + char[1]
                 }
                 else{
@@ -543,13 +522,13 @@ function resetLeaderboard(){
                 
                 var $item = $( 
                     '<div class="athlete" id="aht'+athletes_divison[key][key2].lane+'">' + 
-                        '<div class="popup">' + '</div>' +
+                        '<div class="popup text-nowrap text-truncate">' + '</div>' +
                         '<div class="ath">' +
-                            '<div class="rank"></div>' + 
-                            '<div class="lane"># '+ athletes_divison[key][key2].lane + '</div>' + 
+                            '<div class="rank text-nowrap text-truncate"></div>' + 
+                            '<div class="lane text-nowrap text-truncate"># '+ athletes_divison[key][key2].lane + '</div>' + 
                             '<div class="flag">' + '<img src="https://flagcdn.com/'+ athletes_divison[key][key2].countryCode.toLowerCase() + '.svg" width="30"></img> ' + '</div>' +
                             '<div class="text-nowrap text-truncate text-left name">' + displayName + '</div>' + 
-                            '<div class="score"></div>' +
+                            '<div class="score text-nowrap text-center text-truncate"></div>' +
                             '<div class="text-nowrap text-truncate rounds">' + '</div>' +
                         '</div>' +
                     '</div>'
@@ -560,22 +539,22 @@ function resetLeaderboard(){
                 athletes_divison[key][key2].$item.find(".score").hide();
                 athletes_divison[key][key2].$item.find(".popup").hide();
                 athletes_divison[key][key2].$item.find(".name").css('width', 240);
-                !showFlag.value ? athletes_divison[key][key2].$item.find(".flag").hide() : "" ;
+                !setupLeaderboard.value.flag ? athletes_divison[key][key2].$item.find(".flag").hide() : "" ;
+                !setupLeaderboard.value.lane ? athletes_divison[key][key2].$item.find(".lane").hide() : "" ;
+                $item.hide();
                 $list.append($item);
 
-                // console.log(athletes_divison[key][key2].$item)
-                height_tot += 40;
+                setTimeout(()=>{
+                    height_tot +=athletes_divison[key][key2].$item.height();
+                    athletes_divison[key].sort(ascendingLane);
+                    $("#leaderboard"+ key + " #athletes"+key).height(height_tot)
+                    $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height())
+                    reposition("#leaderboard"+ key, athletes_divison[key]);
+                    $item.show()
+                    animateCSS('#aht'+athletes_divison[key][key2].lane, 'fadeInLeft')
+                }, 500)
 
             })
-
-                setTimeout(()=>{
-                    console.log("height : ", height_tot)
-                    athletes_divison[key].sort(ascendingLane);
-                    $("#athletes"+ key).css("height", height_tot )
-                    $("#leaderboard"+ key).css("height", $("#athletes"+key).height() + $("#leaderboard"+key + " .header").height() )
-                    reposition("#leaderboard"+ key, athletes_divison[key]);
-                    // animateCSS('#aht'+athletes_divison[key][key2].lane, 'fadeInLeft')
-                }, 1000)
 
 
         })

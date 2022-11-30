@@ -209,3 +209,27 @@ function reset_parameters(){
     }
     LowerThirdConfig.value = lowerThird
 }
+
+
+
+tinymce.init({
+    selector: 'textarea#default',  // change this value according to your HTML
+    plugins: [
+        'link',
+        'lists',
+        'autolink',
+      ],
+    init_instance_callback: function (editor) {
+        editor.on('input', function (e) {
+            $('#exemple').html(myContent.getContent())
+        });
+    }
+  });
+
+  var myContent;
+
+    tinymce.on('AddEditor', function(e) {
+        console.log('Added editor with id: ' + e.editor.id);
+        myContent = tinymce.get("default");
+        console.log(myContent)    
+    });

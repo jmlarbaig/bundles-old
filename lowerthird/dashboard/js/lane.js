@@ -75,7 +75,7 @@ function resetLane(data){
         $lane.find(".lane_C").remove();
 
         for(let athlete of data.athletes){
-            console.log(athlete)
+            // console.log(athlete)
             var $item = $(
                 '<div class="lane_C">' + 
                     '<div class="rank">0. ' + athlete.rank  + '</div>' + 
@@ -105,7 +105,7 @@ async function affichageLane() {
     laneInfos.value.avatarPath = (participantsCurrentHeats.stations.find(element => element.station == event.target.id).avatarPath);
     laneInfos.value.aff = participantsCurrentHeats.stations.find(element => element.station == event.target.id).affiliate;
     
-    console.log("lane infos = ", laneInfos.value)
+    // console.log("lane infos = ", laneInfos.value)
 
     laneShow.value = true;
     $(".button_lane").attr('disabled', true);

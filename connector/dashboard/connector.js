@@ -60,7 +60,6 @@ var liste_donnees = {'Team':[], 'Individual':[]}
                             // updateWorkout(statics.eventId);
                         //     workoutId = statics.workoutId;
                         // }
-                        console.log("salut")
                         updateScoreToBeat(statics.workoutId , statics.athletes);
                         // AttributionLane.value = loadAttributionLane(statics.heatId)
                     }
@@ -147,121 +146,20 @@ var liste_donnees = {'Team':[], 'Individual':[]}
         WorkoutInfos.value = data;
     }
 
-    // async function updateWorkout(eventId){
-    //     var data = await loadWorkoutsPlanning(eventId);
-
-    //     WorkoutTab = data.workouts;
-
-    //     let i=0;
-    //     for(let workout of WorkoutTab){
-    //         // console.log(i++)
-    //         // workout.heats = await loadHeats(workout.id)
-    //         // workout.participants = await loadParticpant(eventId, workout.id)
-
-    //         await loadHeats(workout.id).then((value) => {
-    //             workout.heats = value;
-    //             console.log(value);
-    //             // expected output: "Success!"
-    //         })
-    //         await loadParticpant(eventId, workout.id).then((value)=>{
-    //             console.log(value)
-    //             workout.participants = value;
-    //         })
-
-    //     }
-
-    //     EventPlanner = [];
-
-    //     for(let date of data.dates){
-    //         EventPlanner.push(date)
-    //     }
-
-    //     for(let date of EventPlanner){
-    //         date.wods = []
-    //         for(let wod of WorkoutTab){
-    //             if(wod.date == date.value){
-    //                 date.wods.push(wod)
-    //             }
-    //         }
-    //     }
-
-    //     // ParticipantsWod.value = WorkoutTab
-    //     // WodTab.value = EventPlanner;
-
+    // async function testButton(){
+    //     var result = await getHeatResults(268188);
+    //     console.log('Resultats Heat = ', result)
     // }
 
-    // function updateWarmUp(logoUrl, workoutId, heatId){
-
-    //     try{
-    //     // var heatWUP = {"wod":[],"heat":[]};
-
-    //     heatWUP = []
-    //     var d = {"wod" :"", "heat":""}
-    //     var d2 = {"wod" :"", "heat":""}
-    //     var d3 = {"wod" :"", "heat":""}
-    //     // console.log("Workout Id =", workoutId)
-    //     // console.log("heat Id =", heatId)
-    //     // console.log("Workout Tab = ", WorkoutTab)
-    //     if (WorkoutTab != undefined){
-    //         for (let i=0; i < WorkoutTab.length; i++){
-    //             if(WorkoutTab[i].id == workoutId){
-    //                 for(let y=0; y < WorkoutTab[i].heats.length; y++){
-    //                     if (WorkoutTab[i].heats[y].id == heatId){
-    //                         d.wod = (WorkoutTab[i])
-    //                         d.heat = (WorkoutTab[i].heats[y])
-    //                         if(WorkoutTab[i].heats[y+1] == undefined){
-    //                             if(WorkoutTab[i+1].heats[0] != undefined){
-    //                                 d2.heat = (WorkoutTab[i+1].heats[0])
-    //                                 d2.wod = (WorkoutTab[i+1])
-    //                                 if(WorkoutTab[i+1].heats[1] != undefined){
-    //                                     d3.heat = (WorkoutTab[i+1].heats[1])
-    //                                     d3.wod = (WorkoutTab[i+1])
-    //                                 }
-    //                             }
-    //                         }
-    //                         else {
-    //                             d2.heat = (WorkoutTab[i].heats[y+1])
-    //                             d2.wod = (WorkoutTab[i])
-
-    //                             if(WorkoutTab[i].heats[y+2] == undefined){
-    //                                 if(WorkoutTab[i+1].heats[0] != undefined){
-    //                                     d3.heat = (WorkoutTab[i+1].heats[0])
-    //                                     d3.wod = (WorkoutTab[i+1])
-    //                                 }
-    //                             }
-    //                             else {
-    //                                 d3.heat = (WorkoutTab[i].heats[y+2])
-    //                                 d3.wod = (WorkoutTab[i])
-    //                             }
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-            
-    //         d.heat.current = "CURRENT"
-    //         d2.heat.current = "NEXT"
-    //         d3.heat.current = "CALL FOR WARM UP"
-            
-    //         heatWUP.push(d)
-    //         heatWUP.push(d2)
-    //         heatWUP.push(d3)
-
-    //         WarmUpTab.value = heatWUP
-    //         // console.log(heatWUP)
-    //     }
-    //     }
-    //     catch(e){
-    //         console.log(e)
-    //         document.getElementById('log_error_static').innerHTML = e;
-    //     }
+    // async function testButton2(){
+    //     var result = await getWorkoutResults();
+    //     console.log('Resultats Heat = ', result)
     // }
 
-    async function testButton(){
-        // var response = await dashboardEventCC(document.getElementById('eventId').value)
-        var result = await getHeatsTopScore(36997,28600);
-        console.log('Resultats Heat = ', result)
-    }
+    // async function testButton3(){
+    //     var result = await getOverallStanding();
+    //     console.log('Resultats Heat = ', result)
+    // }
 
     async function ConnectionCC(){
         try{
@@ -311,8 +209,6 @@ var liste_donnees = {'Team':[], 'Individual':[]}
             Connection_R.value = true;
             statics_timer = setInterval(updateOverlayStatics, timer_updatestatic);
             dynamics_timer = setInterval(updateOverlayDynamics, timer_updatedynamic);
-
-            //  !Faire les configs pour planning / wod / warmup
 
             document.getElementById('connection_but').disabled = true;
             

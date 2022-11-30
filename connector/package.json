@@ -41,8 +41,8 @@
         ]
       },
       {
-        "name": "sponsors",
-        "title": "Logo sponsors",
+        "name": "mainSponsor",
+        "title": "Main Sponsor",
         "allowedTypes": [
           "jpg",
           "jpeg",
@@ -51,8 +51,8 @@
         ]
       },
       {
-        "name": "mainSponsor",
-        "title": "Main Sponsor",
+        "name": "sponsors",
+        "title": "Logo sponsors",
         "allowedTypes": [
           "jpg",
           "jpeg",

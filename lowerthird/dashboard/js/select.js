@@ -1,7 +1,7 @@
 
 function resetSelect(data){
 
-    console.log("Data = ",data)
+    // console.log("Data = ",data)
 
     const listLeft = document.getElementById("leftTeam");
     const listRigth = document.getElementById("rigthTeam");

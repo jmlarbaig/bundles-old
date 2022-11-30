@@ -1,8 +1,8 @@
-#chronoLocation{
+#chrono{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     position: absolute;
-    top: 75px;
-    left: 300px;
+    top: var(--Y-position-chrono);
+    left: var(--X-position-chrono);
     text-align: center;
     background-color:  var(--chrono-color);
     color:  var(--tx-chrono-color);
@@ -15,14 +15,7 @@
     margin-top: 30px;
 }
 
-
-.chrono{
-    font-weight: 800;
-    width: 150px;
-    font-size: 1.8rem;
-}
-
-.time{
+.box_time{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -31,20 +24,27 @@
     color: var(--tx-main-color);
 }
 
+
+#time{
+    font-weight: 800;
+    width: 150px;
+    font-size: 1.8rem;
+}
+
 #timecap{
     font-weight: 600;
     font-size: 1.2rem;
-    width: 100px;
+    width: 150px;
 }
 
 
-.heatDetails{
+#heat{
     margin-top: 30px;
     position: absolute;
     font-weight: 800;
-    top: var(--Y-position-chrono);
-    font-family: montserrat;   
-    left: 300px;
+    top: var(--Y-position-heatDetails);
+    /* font-family: montserrat;    */
+    left: var(--X-position-chrono);
     font-size: 1.4rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color: var(--tx-main-color);
@@ -73,7 +73,7 @@
     text-transform: uppercase;
 }
 
-.heat{
+.heat_name{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -114,7 +114,7 @@
     50%  {transform: scale(1.2);}
   }
 
-  #wodDetails{
+  #wod{
     position: absolute;
     display: flex;
     flex-direction: row-reverse;
@@ -122,10 +122,10 @@
     right: 105px;
 }
 
-  .wod{
+  .wod_box{
       text-transform: uppercase;
       width: 300px;
-      font-family: montserrat;   
+      /* font-family: montserrat;    */
       background-color: var(--main-color);
       color: var(--tx-main-color);
       font-size: 16px;

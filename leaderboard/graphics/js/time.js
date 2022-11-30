@@ -59,8 +59,8 @@ function updateTime(){
     // console.log("endTime =", endTime)
     // console.log("chrono =", chrono)
 
-    $("#chronoLocation").css("background-color", chrono_color)
-    $("#chronoLocation").css("color", tx_chrono_color)
+    $("#chono").css("background-color", chrono_color)
+    $("#chono").css("color", tx_chrono_color)
     if (timeDiffTimeCap < 0 && (timeDiffStart+1000) > 0 && dataTime.status != 0){
         if(typeWod_G == "amrap" || Ft_Ap.value == true){
             chrono = msToTime(timeDiffEnd - 1000)
@@ -73,8 +73,8 @@ function updateTime(){
         }
     } else if (timeDiffTimeCap < 0 && timeDiffStart < 0){
         chrono = msToTime(timeDiffStart).substring(4);
-        $("#chronoLocation").css("background-color", "rgba(255,50,80,1)")
-        $("#chronoLocation").css("color", "rgb(0,0,0")
+        $("#chono").css("background-color", "rgba(255,50,80,1)")
+        $("#chono").css("color", "rgb(0,0,0")
     } else {
         if (timecapNTP != ''){
             chrono = timecapNTP
@@ -84,7 +84,7 @@ function updateTime(){
         }
     }
 
-    document.getElementById("chrono").innerHTML = chrono;
+    document.getElementById("time").innerHTML = chrono;
 
 }
 
@@ -96,42 +96,24 @@ function resetHeat(){
     try{
 
         data = staticData;
-        var $list = $("#heatDetails");
-        $list.find(".heat").remove();
-
-
-        showHeat.value != true ? $("#heatDetails").hide() : "";
+        var $list = $("#heat");
+        $list.find(".heat_name").remove();
 
         typeWod_G = data.heatInfo[0].type;
 
-        heatDetails;
-        // if (data.heatInfo[0].type == "time"){
-        //     var typeWod = "";
-        //     var repTarget = data.WorkoutInfo[0].total_reps + " reps" ;
-        // }
-        // else if (data.heatInfo[0].type == "amrap"){
-        //     var typeWod = "BEAT"
-        //     // var repTarget = data.WorkoutInfo[0].total_reps + " reps" ;
-        // }
-    
         var $item = $(
-            '<div class="heat">' +
+            '<div class="heat_name">' +
                 '<div class="col heatlow">' +
                     '<div id="workout" class="m-auto text-nowrap text-truncate" > ' + data.workoutName + ' </div>' +
                     '<div id="division" class="m-auto text-nowrap text-truncate"></div>' +    
                 '</div>' +
                 '<div class="mainSponsor col">' +
                 '</div>'+
-                // ' <div class="target col" style="color: white; border-radius: 2px; border-left:1px solid;">' +
-                //     '<h3 class="text-center m-auto" style="font-size: 10px;">' + typeWod+ '</h3>' +
-                //     '<h3 class="text-center m-auto" id="repTobeat">'+ repTarget +'</h3>' +
-                // ' </div>' +
-                // ' <div id="sponsor" class="sponsor col" style="">' +
-
             '</div>'
         );
 
-        heatDetails.$item = $item;
+        setupLeaderboard.value.heat != true ? $(".heat").hide() : "";
+        // heatDetails.$item = $item;
         $list.append($item);
 
         if (mainSponsors.value.length > 0){
@@ -150,17 +132,18 @@ function resetHeat(){
 
 function showTime(){
     try{
-        var $list = $("#chronoLocation");
-        $list.find(".time").remove();
+        var $list = $("#chrono");
+        $list.find(".box_time").remove();
 
         var $item = $(
-            '<div class="time row">' +
+            '<div class="box_time row">' +
                 // '<img id="mainSponsor" class="mainSponsor img-fluid" src="./img/PRESTA/SK-logo.png"/>' +
-                '<div id="chrono" class="chrono col" class="text-center m-auto"></div>' +
+                '<div id="time" class="col" class="text-center m-auto"></div>' +
                 '<div id="timecap" class="col">'+ timecapNTP +"' CAP</div>" +
             '</div>'
         );
 
+        setupLeaderboard.value.chrono != true ? $(".chrono").hide() : "";
         $list.append($item);
         if (timerLaunch == undefined){
             clearInterval(timerLaunch)
@@ -206,14 +189,14 @@ function resetWod(){
         }
 
 
-        var $list = $("#wodDetails");
-        $list.find(".wod").remove();
+        var $list = $("#wod");
+        $list.find(".wod_box").remove();
 
-        showWodDetails.value != true ? $("#wodDetails").hide() : ""
+        showWodDetails.value != true ? $("#wod").hide() : ""
 
         for (let wod of workoutNames){
             var $item = $(
-                '<div class="wod">' +
+                '<div class="wod_box">' +
                     '<div class="col" style="">' +
                         '<div class="wodDiv">' + wod.division +' </div>' +    
                         '<div class="wodDescription"> ' + wod.description + ' </div>' +

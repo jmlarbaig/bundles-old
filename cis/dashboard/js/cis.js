@@ -25,7 +25,7 @@
                 // console.log(liste_donnees)
             }
         });
-        console.log("Liste =",liste_donnees)
+        // console.log("Liste =",liste_donnees)
     }
 
     async function updateCIS(){
@@ -202,7 +202,7 @@
             let team_name = ath['Team Name']
             // console.log("alias =", alias)
             loadAthlete(alias).then(function(result){
-                console.log("result = ", result)
+                // console.log("result = ", result)
                 let at = ath_infos_bis
                 at.teamName = team_name
                 // at.affiliate = result.crossfitAffiliateName
@@ -218,7 +218,7 @@
                 at.age = result.age
                 // liste_athlete_full[index] = at
                 // console.log("liste_athlete_full index= ", index)
-                console.log("liste_athlete_full = ", at)
+                // console.log("liste_athlete_full = ", at)
 
             })
             .catch(err => { console.log(err) })
@@ -244,7 +244,7 @@
             let alias = (ath['First Name'].toLowerCase() + ' ' + ath['Last Name'].toLowerCase()).replaceAll(' ', '-')
             // console.log("alias =", alias)
             loadAthlete(alias).then(function(result){
-                console.log("result = ", result)
+                // console.log("result = ", result)
                 // console.log("ath = ", ath)
                 // ath.sponsors = [{}]
                 ath_infos.benchmarks = result.benchmarks
@@ -396,8 +396,8 @@
     }
 
     async function affichageWod() {
-        console.log('target : ', event.target.id)
-        console.log("Search =",liste_heat[event.target.id])
+        // console.log('target : ', event.target.id)
+        // console.log("Search =",liste_heat[event.target.id])
         laneInfos.value = liste_heat[event.target.id]
         
     
@@ -410,9 +410,9 @@
     }
 
     async function affichageAthDetails(){
-        console.log("List heat = ",liste_heat_ath[event.target.id])
+        // console.log("List heat = ",liste_heat_ath[event.target.id])
         let infos_to_transfert = {...liste_heat[event.target.id], ...liste_heat_ath[event.target.id]}
-        console.log("infos_to_transfert = ", infos_to_transfert)
+        // console.log("infos_to_transfert = ", infos_to_transfert)
         // laneAthInfos.value = liste_heat_ath[event.target.id]
         laneInfos.value = infos_to_transfert
     
@@ -425,14 +425,14 @@
     }
 
     async function affichageEvent(){
-        console.log(document.getElementById(event.target.id))
+        // console.log(document.getElementById(event.target.id))
         var ch = [] 
         ch = event.target.id.split('_')
 
             
         var $tab_ath = $("#lane_"+ch[1]+'_ath_'+ch[3])
 
-        // console.log('#lastEvents_'+ ch[1]+'_ath_'+ch[3])
+        console.log('#lastEvents_'+ ch[1]+'_ath_'+ch[3])
         $tab_ath.find('#lastEvents_'+ ch[1]+'_ath_'+ch[3]).hide()
 
         // setTimeout(function(){ 

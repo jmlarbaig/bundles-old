@@ -70,7 +70,7 @@ module.exports = function (nodecg, bundlePath) {
         });
     
         client.on('message', function (topic, message) {
-            console.log(topic)
+            // console.log(topic)
             var ch = topic.split('/');
             var lane = parseInt(ch[1].replace("minos",""))-1
     
@@ -94,13 +94,13 @@ module.exports = function (nodecg, bundlePath) {
                 data.byteState = ch2[10];
                 data.erg = ch[3];
     
-                console.log(lane)
-                console.log(erg)
-                console.log(data)
+                // console.log(lane)
+                // console.log(erg)
+                // console.log(data)
                 dataTab[lane] = data;
                 dataRow.value = dataTab;
     
-                console.log(dataTab)
+                // console.log(dataTab)
             }
           })
     }
@@ -154,8 +154,8 @@ module.exports = function (nodecg, bundlePath) {
                 console.error(err);
                 nowNtp.value = err
             }else{
-                console.log("Current time : ");
-                console.log(date.toString());
+                // console.log("Current time : ");
+                // console.log(date.toString());
                 nowNtp.value = date
                 timeNTP.value = date.getTime()
             }

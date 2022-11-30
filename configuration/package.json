@@ -28,6 +28,16 @@
         "fullbleed": true,
         "headerColor": "#525F78"
       }
+    ],    
+    "assetCategories": [
+      {
+        "name": "font",
+        "title": "Personal Font",
+        "allowedTypes": [
+          "ttf",
+          "otf"
+        ]
+      }
     ]
   },
   "repository": "git@gitlab.com:jeanmarie.larbaig/bundlesfv",

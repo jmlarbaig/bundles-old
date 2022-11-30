@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <title>Leaderboard</title>
+
+	<link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/leaderboard.css">
+    <link rel="stylesheet" href="css/lowerthird.css">
+    <link rel="stylesheet" href="css/cueCard.css">
+    <link rel="stylesheet" href="css/video.css">
+
+</head>
+    <body >
+
+        <!-- Video -->
+        <div class="flex-container">
+            <div class="flex-item video-content">
+                <video id="video" autoplay muted>
+                    <source id="sourceVid" src="" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <!-- create a table here -->
+
+        <!-- Header -->
+
+        <div class="header">
+
+            <div class="box_logo">
+                <div id="logo" class="logo"></div>
+            </div>
+
+            <div class="box_chrono">
+                <div id="chrono" class="chrono"></div>
+            </div>
+    
+            <div class="box_heat">
+                <div id="heat" class="heat"></div>
+            </div>
+
+
+        </div>
+
+        <div class="leaderboards" id="leaderboards"></div>
+
+        <div id="wod" class="wod"></div>
+
+        <div class="lowerThird" id="lowerThird"></div>
+
+        <div class="lowerThirdWod" id="lowerThirdWod"></div>
+        <div class="lowerThirdAth" id="lowerThirdAth"></div>
+
+        <div class="lowerThirdVoid" id="lowerThirdVoid"></div>
+        <div class="lowerThirdEvent" id="lowerThirdEvent"></div>
+        <div class="lowerThirdYT" id="lowerThirdYT"></div>
+        <div class="lowerThirdCodePromo" id="lowerThirdCodePromo"></div>
+        
+        <div class="sponsorLogo" id="sponsorLogo"></div>
+
+        <!-- <div class="logoFV" id="logoFV"></div> -->
+
+        <!-- load in jquery script to use jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <script src="./js/library/qrcode_JS/qrcode.min.js" type="text/javascript"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+        
+        <script src="./js/lowerThird.js" type="text/javascript"></script>
+        <script src="./js/flag.js" type="text/javascript"></script>
+        <script src="./js/leaderboard.js" type="text/javascript"></script>
+        <script src="./js/time.js" type="text/javascript"></script>
+        <script src="index.js" type="text/javascript"></script>
+
+        <script> 
+            $(function(){
+                $("#includedContent").load("./html/time.html"); 
+            });
+        </script> 
+    </body>
+</html>

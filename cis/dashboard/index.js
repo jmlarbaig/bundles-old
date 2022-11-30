@@ -73,7 +73,7 @@ var liste_donnees = {'Team':[], 'Individual':[]}
             let index=0;
             if (!newValue[0].hasOwnProperty('error')){
                 for (let teams of newValue[0]){
-                        console.log("top index =", teams)
+                        // console.log("top index =", teams)
                         var $list = $(".repTarget_Team");
                         teams.scores.forEach((team, index)=>{
                             var $item = $(

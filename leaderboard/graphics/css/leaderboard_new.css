@@ -1,24 +1,25 @@
 
-.tableur{
+.leaderboards{
     position: absolute;
     font-size: 1rem;
-    font-family: montserrat;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 1920px;
-    height: 1080px;
+    min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	background-size: cover;
 }
 
 .leaderboard:nth-child(1){
-    top:200px;
-    left: 75px;
+    top:var(--positionY_leaderboard);
+    left: var(--positionX_leaderboard);
     position: relative;
     display: flex;
     flex-direction: column;
     opacity: 92%;
     /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
-    margin-bottom: 20px;
     width: 300px;
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
@@ -26,14 +27,13 @@
 }
 
 .leaderboard:nth-child(2){
-    top:200px;
-    right: 75px;
+    top:var(--positionY_leaderboard);
+    right: var(--positionX_leaderboard);
     position: relative;
     display: flex;
     flex-direction: column;
     opacity: 92%;
     /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
-    margin-bottom: 20px;
     width: 300px;
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
@@ -47,7 +47,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-left: 50px;
+    padding-left: 10px;
     background-color: var(--second-color);
     color: var(--tx-second-color);
     border-bottom: 2px white solid;
@@ -72,6 +72,7 @@
 }
 
 .leaderboard .athletes {
+    
     /* background-color: var(--second-color); */
     color: var(--tx-second-color);
     display: flex;
@@ -84,12 +85,15 @@
 }
 
 .leaderboard .athlete{
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
     position: absolute;
     display: flex;
     flex-direction: column;
 }
 
-.leaderboard .ath{
+.leaderboard .athletes .ath{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -101,7 +105,7 @@
 
 .leaderboard .athlete .rank{
     padding: 5px 0px 0px 5px;
-    text-align: right;
+    text-align: center;
     width: 45px;
     padding-right: 7px;
     border-right: 2px solid white;
@@ -132,7 +136,7 @@
     padding: 5px 10px 10px 5px;
     width: 80px;
     max-width: 120px;
-    text-align: right;
+    text-align: center;
     border-radius: --(border);
     height: var(--height_ath);
 }
@@ -163,18 +167,22 @@
     height: 20px;
     color: var(--tx-second-color);
     background-color: var(--second-color);
+    -moz-transition-duration: 1s;
+    -webkit-transition-duration: 1s;
+    -ms-transition-duration: 1s;
 }
 
-.leaderboard .athlete .powered{
+.leaderboard .athletes .powered{
     /* haut left right bas */
-    padding: 0px 5px 0px 0px;
+    padding: 0px 10px 0px 10px;
     text-align: center;
     align-items: center;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    padding-left: 5px;
-    width: 200px;
-    left:45px;
+    background-color: var(--second-color);
+    color: var(--tx-second-color);
     height: var(--height_ath);
     font-size: 12px;
+    width: 300px;
 }

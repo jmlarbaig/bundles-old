@@ -39,30 +39,32 @@
     var showDrapeau;
     var logoEvent;
 
-    const statics = nodecg.Replicant('statics', 'connector');
-    const dynamics = nodecg.Replicant('dynamics', 'connector');
+    const Font = nodecg.Replicant('assets:font','configuration');
+    const mainSponsors = nodecg.Replicant('assets:mainSponsor', 'connector')
+
+
+    const setupLeaderboard = nodecg.Replicant('setupLeaderboard')
+
     const showLeaderboard_lead = nodecg.Replicant('showLeaderboard_Lead')
     const showLogo = nodecg.Replicant('showLogo')
     const showFlag = nodecg.Replicant('showFlag')
     const showHeat = nodecg.Replicant('showHeat')
     const showWodDetails = nodecg.Replicant('showWodDetails')
     const LogoImg = nodecg.Replicant('LogoImg', 'connector')
-    const FVReplicant = nodecg.Replicant('FVspot')
-    const LogoFVFixe = nodecg.Replicant('LogoFVFixe')
+    const showChrono = nodecg.Replicant('showChrono')    
+    const Ft_Ap = nodecg.Replicant('fortime_amrap')
+    const HideLane = nodecg.Replicant('HideLane')
 
-    const sponsorWod = nodecg.Replicant('sponsorWod', 'connector')
 
+    const Colors = nodecg.Replicant('Colors', 'configuration');
+    const Border = nodecg.Replicant('Border','configuration');
+
+    /* Lowerthrid Replicants */
     const laneInfos = nodecg.Replicant('laneInfos', 'cis')
     const laneAthInfos = nodecg.Replicant('laneAthInfos', 'cis');
     const laneShow = nodecg.Replicant('laneShow', 'cis')
     const laneWods = nodecg.Replicant('laneWods', 'cis')
     const laneAth = nodecg.Replicant('laneAth', 'cis')
-
-    const showChrono = nodecg.Replicant('showChrono')
-    const Colors = nodecg.Replicant('Colors', 'configuration');
-    const Border = nodecg.Replicant('Border','configuration');
-
-    const UrlChange = nodecg.Replicant('UrlChange', 'leaderboard');
 
     const lowerThirdData = nodecg.Replicant('lowerThirdData', 'lowerthird')
     const lowerThirdVoidShow = nodecg.Replicant('lowerThirdVoidShow', 'lowerthird')
@@ -71,38 +73,41 @@
     const lowerThirdCodePromo = nodecg.Replicant('lowerThirdCodePromo', 'lowerthird')
     const lowerThirdShowCode = nodecg.Replicant('lowerThirdShowCode', 'lowerthird')
 
+    const statics = nodecg.Replicant('statics', 'connector');
+    const dynamics = nodecg.Replicant('dynamics', 'connector');
+
+    const UrlChange = nodecg.Replicant('UrlChange', 'leaderboard');
+
     const timeNTP = nodecg.Replicant('timeNTP','connector')
     const nowNtp = nodecg.Replicant('nowNtp','connector')
 
+    const sponsorWod = nodecg.Replicant('sponsorWod', 'connector')
     const sponsors = nodecg.Replicant('assets:sponsors', 'connector')
     const sponsorLower = nodecg.Replicant('assets:sponsorLower', 'versus') 
 
-    const Ft_Ap = nodecg.Replicant('fortime_amrap')
+    const TopScore = nodecg.Replicant('TopScore', 'connector')
+    
+    
 
-    const HideLane = nodecg.Replicant('HideLane')
-       
+
+
+
+
     sponsorLower.on('change', (newValue)=> {
-        // A revoir
-        $(".logoSponsor").attr('src', newValue[0].url)
+        if(newValue.length > 0){
+            $(".logoSponsor").attr('src', newValue[0].url)
+        }
     })
 
-    const mainSponsors = nodecg.Replicant('assets:mainSponsor', 'connector')
     mainSponsors.on('change', (newValue)=> {
         if(newValue.length>0){
 
             $(".mainSponsor").css("background-image", "url(" + newValue[0].url + ")");
-                $(".mainSponsor").fadeIn(1000)
-
-            // else{
-            //     $("#mainSponsor").fadeOut(1000)
-            // }
+            $(".mainSponsor").fadeIn(1000)
         }
         else{
             $(".mainSponsor").fadeOut(1000)
-            // $("#mainSponsor").attr('src', "./img/PRESTA/SK-logo.png");
-            // $("#mainSponsor").fadeIn(1000)
         }
-        
     })
     
 
@@ -166,29 +171,28 @@
 
     }); 
 
-    // HideLane.on('change', (newValue, oldValue)=>{
-    //     switch(newValue.visible){
-    //         case true:
-    //             $("#tableur").find("#aht"+newValue.lane).fadeIn()
-    //             break;
-
-    //         case false:
-    //             $("#tableur").find("#aht"+newValue.lane).fadeOut()
-    //             break;
-    //     }
-    // })
-    
-    const TopScore = nodecg.Replicant('TopScore', 'connector')
+    setupLeaderboard.on('change', (newValue, oldValue)=>{
+        Object.keys(newValue).forEach((params, index)=>{
+            console.log(params + ' ' + newValue[params])
+            switch(newValue[params]){
+                case true:
+                    $('.'+params).fadeIn(1000)
+                    break;
+                case false :
+                    $('.'+params).fadeOut(1000)
+                    break;
+            }
+        })
+    })
 
     TopScore.on('change', (newValue, oldValue)=>{
-        console.log("top Score = ",newValue)
         // console.log("top Score = ",newValue[0][0].scores[0].score)
         if (newValue != undefined){
             let index=0;
             if (!newValue[0].hasOwnProperty('error')){
                 for (let teams of newValue[0]){
                         console.log("top index =", index)
-                        $('.repTarget'+index).text("-> "+teams.scores[0].score)
+                        $('.repTarget'+index).html("-> "+teams.scores[0].score)
                         index++
                 }
             }
@@ -245,31 +249,13 @@
         }
     })
 
-    FVReplicant.on('change', (newValue, oldValue) => {
-        // console.log(`showLogo changed from ${oldValue} to ${newValue}`);
-        if (newValue == true){
-            $('#fvLocation').show(1000)
-            // showFV();
-        }
-        else{
-            $('#fvLocation').hide(1000); 
-        }
-    }); 
-
     LogoImg.on('change', (newValue, oldValue) => {
         try{
 
             logoEvent = newValue
-            $("#logoLocation").css("background-image", "url(" + logoEvent + ")");
-            // var $imgLogo = $("#logoLocation");
-            // $imgLogo.find(".logo").remove();
+            $("#logo").css("background-image", "url(" + logoEvent + ")");
 
-            // var $item = $(
-            //         '<img class="logo img-fluid" src="'+ newValue +'">' +
-            //         '</img>'
-            // );
-            
-            // $imgLogo.append($item);
+            setupLeaderboard.value.logo != true ? $("#logo").hide() : ""
         }
         catch(e){
             console.log(e)
@@ -452,15 +438,32 @@
         tx_third_rank__color = newValue.TxThirdRankColor;
         root.style.setProperty("--tx-thirdRank-color",tx_third_rank__color );
 
-        console.log(newValue.PositionXChrono)
-
         position_X_chrono = newValue.PositionXChrono;
         root.style.setProperty("--X-position-chrono",position_X_chrono +"px" );
 
         position_Y_chrono = newValue.PositionYChrono;
         root.style.setProperty("--Y-position-chrono",position_Y_chrono+"px" );
+
+        root.style.setProperty("--Y-position-heatDetails",(parseInt(position_Y_chrono) - 70) +"px" );
+
+        position_X_logo = newValue.PositionXLogo;
+        root.style.setProperty("--positionX_logo",position_X_logo +"px" );
+
+        position_Y_logo = newValue.PositionYLogo;
+        root.style.setProperty("--positionY_logo",position_Y_logo+"px" );
+
+        position_X_leaderboard = newValue.PositionXLeaderboard;
+        root.style.setProperty("--positionX_leaderboard",position_X_leaderboard +"px" );
+
+        position_Y_leaderboard = newValue.PositionYLeaderboard;
+        root.style.setProperty("--positionY_leaderboard",position_Y_leaderboard+"px" );
+
+        font = newValue.Font;
+        root.style.setProperty("--family_font",font );
         
     })
+
+
 
     Border.on('change', (newValue) => {
         switch(newValue){

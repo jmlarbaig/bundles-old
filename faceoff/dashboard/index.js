@@ -58,8 +58,8 @@ sponsorLower.on('change', (newValue)=> {
 
 
 statics.on('change', (newValue, oldValue) => {
-    console.log("static = ", newValue)
-    console.log("ParticipantsWod = ", ParticipantsWod.value)
+    // console.log("static = ", newValue)
+    // console.log("ParticipantsWod = ", ParticipantsWod.value)
     resetSelect(newValue);
 }); 
 
@@ -101,7 +101,7 @@ events.on('change', (newValue, oldValue)=>{
                         droite.appendChild(opt)
 
 
-                        console.log(element.scores)
+                        // console.log(element.scores)
 
                         Object.keys(element.scores[0]).forEach((d)=>{
                             // console.log(d)
@@ -113,7 +113,7 @@ events.on('change', (newValue, oldValue)=>{
                             opt.value = element.scores[0][d]
                             opt.innerHTML = d.toUpperCase()
                             gauche.appendChild(opt)
-                            console.log(element.scores[0][d])
+                            // console.log(element.scores[0][d])
                         })
                     }
                 })
@@ -151,15 +151,15 @@ function actScore(){
 
     }
     var win = [];
-    console.log(Teams.value[0])
-    console.log(Teams.value[1])
+    // console.log(Teams.value[0])
+    // console.log(Teams.value[1])
     win[Teams.value[0]] = {"texte":[], "score":[]}
     win[Teams.value[1]] = {"texte":[], "score":[]}
     win[Teams.value[0]].texte = optleft ;
     win[Teams.value[1]].texte = optright ;
     win[Teams.value[0]].score = valleft ;
     win[Teams.value[1]].score = valright ;
-    console.log(win)
+    // console.log(win)
     winEvents.value = win
 }
 
@@ -190,19 +190,19 @@ function Actualiser(){
     var team1 = document.getElementById("leftTeam").value;
     var team2 = document.getElementById("rigthTeam").value;
     Teams.value = [team1,team2]
-    console.log(statics.value.athletes[team1])
-    console.log(statics.value.athletes[team2])
+    // console.log(statics.value.athletes[team1])
+    // console.log(statics.value.athletes[team2])
     $('#teamGauche').text(statics.value.athletes[team1].displayName.toUpperCase())
     $('#teamDroite').text(statics.value.athletes[team2].displayName.toUpperCase())
 
-    console.log(Teams.value)
+    // console.log(Teams.value)
 }
 
 function functionFV(){
     if (FVReplicant.value != true){
         FVReplicant.value = true;
     }
-    console.log(document.getElementById("LogoFvFixe").checked);
+    // console.log(document.getElementById("LogoFvFixe").checked);
     if (!document.getElementById("LogoFvFixe").checked){
         setTimeout(function(){  
             FVReplicant.value = false; }, 10000);
@@ -251,7 +251,7 @@ function resetVideo(data){
 
         var i=0;
         for(let video of data){
-            console.log(video)
+            // console.log(video)
             var $item = $(
                 '<div class="lane_V">' + 
                     '<div class="">' + video.name  + '</div>' + 
@@ -271,8 +271,8 @@ function resetVideo(data){
 
 
 function affichageVideo() {
-    console.log(event.target)
-    console.log(videoAth.value[event.target.id].url)
+    // console.log(event.target)
+    // console.log(videoAth.value[event.target.id].url)
     videoInfos.value = videoAth.value[event.target.id].url;
     videoShow.value = true;
     $(".button_lane").attr('disabled', true);

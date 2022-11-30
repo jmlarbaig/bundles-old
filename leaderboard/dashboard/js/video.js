@@ -7,7 +7,7 @@ function resetVideo(data){
 
         var i=0;
         for(let video of data){
-            console.log(video)
+            // console.log(video)
             var $item = $(
                 '<div class="lane_V">' + 
                     '<div class="">' + video.name  + '</div>' + 
@@ -34,7 +34,7 @@ function resetVideoPub(data){
 
         var i=0;
         for(let video of data){
-            console.log(video)
+            // console.log(video)
             var $item = $(
                 '<div class="pub_V">' + 
                     '<div class="">' + video.name  + '</div>' + 
@@ -53,8 +53,8 @@ function resetVideoPub(data){
 }
 
 function affichageVideo() {
-    console.log(event.target)
-    console.log(videoAth.value[event.target.id].url)
+    // console.log(event.target)
+    // console.log(videoAth.value[event.target.id].url)
     videoInfos.value = videoAth.value[event.target.id].url;
     videoShow.value = true;
     $(".button_lane").attr('disabled', true);
@@ -65,8 +65,8 @@ function affichageVideo() {
 }
 
 function affichageVideoPub() {
-    console.log(event.target)
-    console.log(pubVideo.value[event.target.id].url)
+    // console.log(event.target)
+    // console.log(pubVideo.value[event.target.id].url)
     videoInfos.value = pubVideo.value[event.target.id].url;
     videoShow.value = true;
     $(".button_lane").attr('disabled', true);
