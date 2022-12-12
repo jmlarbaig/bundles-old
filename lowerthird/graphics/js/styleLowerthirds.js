@@ -27,6 +27,8 @@ function createPresentator(data){
                         '</div>' +
                     '</div>' +
                     '<div class="sponsor">'+
+                    '</div>' +
+                    '<div id="qrCode'+ data.id +'" class="qrCode">'+
                     '</div>'+
                 '</div>'
             )
@@ -37,10 +39,16 @@ function createPresentator(data){
             $(".logo_event").css("background-image", "url(" + eventLogo + ")")
             
             if( data.sponsor != ''){
-                console.log(data.sponsor)
                 $(".sponsor").css("background-image", "url(" + data.sponsor + ")")
             }else{
                 $(".sponsor").remove()
+            }
+
+            if( data.qrcode != ''){
+                generateQrCode(data.qrcode, $item.find("#qrCode"+data.id), 100, 100)
+                // $("#qrCode"+data.id).css("background-image", "url(" + data.sponsor + ")")
+            }else{
+                $("#qrCode"+data.id).remove()
             }
 
             changeClass('.headPresentator', data.position)
@@ -87,6 +95,8 @@ function createWaiting(data){
                     '</div>' +
                     '<div class="sponsor">'+
                     '</div>'+
+                    '<div id="qrCode" class="qrCode">'+
+                    '</div>'+
                 '</div>'
             )
 
@@ -100,6 +110,13 @@ function createWaiting(data){
                 $(".sponsor").css("background-image", "url(" + data.sponsor + ")")
             }else{
                 $(".sponsor").remove()
+            }
+
+            if( data.qrcode != ''){
+                generateQrCode(data.qrcode, $item.find("#qrCode"), 100, 100)
+                // $("#qrCode"+data.id).css("background-image", "url(" + data.sponsor + ")")
+            }else{
+                $("#qrCode").remove()
             }
 
             changeClass('.waiting', data.position)
@@ -211,6 +228,9 @@ function createAthleteLowerthird(infos){
                 case 'affiliation':
                     createAffiliation(data, lane)
                     break;
+                case 'athletes':
+                    createAthletes(data, lane)
+                    break;
                 case 'benchmarks':
                     createBenchmarks(data, lane)
                     break;
@@ -240,18 +260,58 @@ function createAthleteLowerthird(infos){
 function createAffiliation(data, lane){
     const {affiliate} = data
 
+    let aff = 'Independant'
+
+    if(affiliate != '' && affiliate != null){
+        aff = affiliate
+    }
+
     let $subItem = $(
-        '<div class="affiliation">FROM ' + affiliate + '</div>'
+        '<div class="affiliation">FROM ' + aff + '</div>'
     )
 
     $root.find('#athlete_'+lane + ' .subtype').append($subItem)
+}
+
+
+function createAthletes(data, lane){
+    const {ath} = data
+
+
+    let $subAth = $root.find('#athlete_'+lane + ' .subtype');
+
+    ath.forEach((athlete, index)=>{
+        const {fullName, age, crossfitAffiliateName, avatarPath, instagram} = athlete
+
+        let aff = 'Independant'
+
+        if(crossfitAffiliateName != '' && crossfitAffiliateName != null){
+            aff = crossfitAffiliateName
+        }
+
+        let $subItem = $(
+            '<div class="ath">' + 
+                '<div class="avatar" id="avatar'+ lane + '_'+index +'" ></div>' +
+                '<h4 class="fullName" >' + fullName + '</h4>' +
+                '<span class="affiliateAth"> / ' + aff + '</span>' +
+            '</div>'
+        )
+            $subAth.append($subItem)
+            // if(instagram != ''){
+            //     generateQrCode('https://www.instagram.com/'+instagram, $subItem.find('#avatar'+ lane + '_'+index))
+            if(avatarPath != '' && avatarPath != null){
+                $("#avatar"+ lane + '_'+index).css("background-image", "url(" + (avatarPath) + ")")
+            }else{
+                $("#avatar"+ lane + '_'+index).css("background-image", "url(" + (eventLogo) + ")")
+            }
+    })
 }
 
 function createBenchmarks(data, lane){
     const {ath} = data
 
     let $subItem = $(
-        '<div>' + affiliate + '</div>'
+        '<div>' + ath + '</div>'
     )
 
     $root.find('#athlete_'+lane + ' .subtype').append($subItem)
@@ -287,48 +347,8 @@ function createOverall(data, lane){
     let numberEvents = workoutRank.length
 
     let $subItem = $(
-        '<div class="overall"> RANKING ' + overallStanding + ' OVERALL AFTER ' + numberEvents + ' EVENTS</div>'
+        '<h4 class="overall"> RANKING ' + overallStanding + ' OVERALL AFTER ' + numberEvents + ' EVENTS</h4>'
     )
 
     $root.find('#athlete_'+lane + ' .subtype').append($subItem)
 }
-
-
-// if (data.qrcode != ""){
-//     var $item = $(
-//         '<div class="lowerThirdChildrenVoid text-left">'+
-//             '<div class="row lowerChildVoid">'+
-//                 '<div class="col-2 img_event">'+
-//                 '</div>'+
-//                 '<div class="col text_lower">'+
-//                     '<div class="text_lower_1">'+
-//                         '<h4 class="text-left eventName">'+data.Fonction+'</h4>' +
-//                         '<h6 class="text-left fonction">'+eventName+'</h6>' +
-//                     '</div>' +
-//                     '<div class="text_lower_2">'+
-//                         '<h5 class="text-left names">'+data.Name+'</h5>' +
-//                     '</div>' +
-//                 '</div>' +
-//                 '<div class="col-2 img_sponsor">'+
-//                 '</div>'+
-//                 '<div class="col qrcodeC">'+
-//                         '<div id="qrcode"></div>' +
-//                 '</div>' +
-//             '</div>'+
-//         '</div>'
-//     )
-// }
-
-// $lower.append($item)
-
-
-// if (data.qrcode != ""){
-//     var qrcode = new QRCode("qrcode", {
-//         text: data.qrcode,
-//         width: 100,
-//         height: 100,
-//         colorDark : "#000000",
-//         colorLight : "#ffffff",
-//         correctLevel : QRCode.CorrectLevel.H
-//     });
-// }

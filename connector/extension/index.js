@@ -145,18 +145,24 @@ module.exports = function (nodecg, bundlePath) {
         dataConfigCC.value = value
     })
 
-    time()
+    nodecg.listenFor('updateNTP', (value, ack)=>{
+        time(value);
+    })
 
-    function time (){
-        ntpClient.getNetworkTime(ip_ntp, 123, function(err, date) {
+    time(ip_ntp)
+
+    function time (ip){
+        ntpClient.getNetworkTime(ip, 123, function(err, date) {
             if(err) {
                 console.error(err);
                 nowNtp.value = err
             }else{
+                console.log(date)
                 let diff = date.getTime() - Date.now()
                 timeNTP.value = diff
+                nowNtp.value = date
             }
-            checkIpKairos()
+            // checkIpKairos()
         });
     }
 
@@ -173,7 +179,7 @@ module.exports = function (nodecg, bundlePath) {
             ip_broker = ''
             ip_ntp = 'time.google.com'
         }
-        time()
+        time(ip_ntp)
 
         console.log("ip_adresse = ", ip_adresse, " ip_broker = ", ip_broker, " ipNTP = ", ip_ntp)
     }
@@ -191,7 +197,7 @@ module.exports = function (nodecg, bundlePath) {
 
 
     // setInterval(time, 1000);
-    // setInterval(checkIpKairos, 1000);
+    setInterval(checkIpKairos, 1000);
 
 	nodecg.log.info(`Bundle "${__filename}" is initialized.`);
         

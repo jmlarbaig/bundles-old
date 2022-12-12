@@ -18,6 +18,7 @@
             document.getElementById('connection_but').disabled = true;
             
             dataNewConfig.staticServer = addIp
+            dataNewConfig.ntpAdress = $('#adresse_ntp').val();
     
             nodecg.sendMessage('dataOverwrite', dataNewConfig);
     

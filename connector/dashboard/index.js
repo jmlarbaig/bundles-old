@@ -64,6 +64,22 @@ let data = []
         }
     }
 
+    function updateNtp(){
+        let ipNtp = $('#adresse_ntp').val();
+        $('#updateButton').attr('disabled', true)
+        $('#ntpTime').text('WAITING')
+        $('#led_NTP').removeClass('led-red')
+        $('#led_NTP').addClass('led-orange')
+        $('#led_NTP').removeClass('led-green')
+
+        dataNewConfig.staticServer =  $('#address_IP').val();
+        dataNewConfig.ntpAdress = $('#adresse_ntp').val();
+
+        nodecg.sendMessage('dataOverwrite', dataNewConfig);
+
+        nodecg.sendMessage('updateNTP', ipNtp);
+    }
+
     // $( document ).ready(function() {
     //     nodecg.readReplicant('Connected', (value)=>{
     //         switch(value){
@@ -99,6 +115,7 @@ let data = []
 
     nodecg.readReplicant('dataConfig', (value) =>{
         document.getElementById('address_IP').value = value.staticServer.toString()
+        document.getElementById('adresse_ntp').value = value.ntpAdress.toString()
     })
 
     nodecg.readReplicant('dataConfigCC', (value) =>{

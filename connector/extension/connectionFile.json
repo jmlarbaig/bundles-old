@@ -2,5 +2,6 @@
     "staticServer": "JSON/BOT",
     "timeStatic": 0,
     "dynamicServer": "",
-    "timeDynamics": 0
+    "timeDynamics": 0,
+    "ntpAdress": "time.google.com"
 }

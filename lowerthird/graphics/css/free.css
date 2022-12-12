@@ -3,6 +3,7 @@
     min-width: 350px;
     background-color: var(--main_color);
     box-shadow: 2px 5px rgb(0, 0, 0), 6px 8px rgb(136, 136, 136);
+    border-radius: 10px 0px 10px 0px;
 }
 
 .first{
@@ -29,11 +30,12 @@
      white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    background: linear-gradient(90deg,var(--second_color) 0%, var(--main_color) 84%);;
+    background: linear-gradient(90deg, var(--main_color) 0%, var(--second_color) 50%, var(--main_color) 100%);
     color: var(--tx_second_color);
     padding: 5px;
     border-bottom: solid 2px white;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .subheader{
@@ -41,6 +43,7 @@
     color: var(--tx_main_color);
     padding: 5px;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .second{
@@ -48,5 +51,6 @@
     color: var(--tx_second_color);
     padding: 5px 20px;
     height: max-content;
+    border-radius: 0px 0px 10px 0px;
 }
 

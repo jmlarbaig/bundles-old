@@ -28,6 +28,19 @@ function createLowerThird(data){
 }
 
 
+function generateQrCode(link, $item, width, height){
+
+    new QRCode($item[0].id, {
+        text: link,
+        width: width || 50,
+        height: height ||  50,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+}
+
+
 function changeClass(selector, myClass){
     console.log(selector)
     console.log(myClass)

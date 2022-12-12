@@ -78,11 +78,19 @@
 				<label class="ip_adresse-label">IP Adress : </label>
 				<input type='text' id='address_IP'></input>
 			</div>
-		</div>
-		<div class="col box">
 			<div class="log-button">
 				<button type='button' id='connection_but' onclick='Connection()'> Connection </button>
 				<button type='button' id='deconnection_but' onclick='Deconnection()'> Deconnection </button>
+			</div>
+		</div>
+		<div class="col box">
+			<h3>NTP Adresse</h3>
+			<div class="input-form">
+				<label class="ip_adresse-label">IP Adress : </label>
+				<input type='text' id='adresse_ntp'></input>
+			</div>
+			<div class="log-button">
+				<button type='button' id='updateButton' onclick='updateNtp()'> Update </button>
 			</div>
 		</div>
 

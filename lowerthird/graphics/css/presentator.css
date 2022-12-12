@@ -12,7 +12,7 @@
     flex-direction: row;
     align-items: center;
     box-shadow: 2px 5px rgb(0, 0, 0), 6px 8px rgb(136, 136, 136);
-
+    border-radius: 10px 0px 10px 0px;
 }
 
 .logo_event{
@@ -45,7 +45,7 @@
     color: var(--tx_main_color);
     text-transform: uppercase;
     border-bottom: solid white 2px;
-    margin-bottom: 5px;
+    margin: 5px 0px;
 }
 
 .eventName{
@@ -55,4 +55,10 @@
     background-color: var(--main_color);
     color: var(--tx_main_color);
     text-transform: uppercase;
+    text-align: center;
+}
+
+.presentator .qrCode{
+    width: 100px;
+    height: 100px;
 }

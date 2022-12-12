@@ -20,6 +20,7 @@ ipAddress.on('change', (newValue, oldValue) => {
 })
 
 nowNtp.on('change', (newValue, oldValue)=>{
+    $('#updateButton').removeAttr('disabled')
     let adresseIp = newValue.split('T')[1]
     if(!newValue.includes('Timeout waiting for NTP')){
         $('#ntpTime').text(adresseIp)
@@ -29,8 +30,8 @@ nowNtp.on('change', (newValue, oldValue)=>{
     }
     else{
         $('#ntpTime').text(adresseIp)
-        $('#led_NTP').removeClass('led-red')
-        $('#led_NTP').addClass('led-orange')
+        $('#led_NTP').addClass('led-red')
+        $('#led_NTP').removeClass('led-orange')
         $('#led_NTP').removeClass('led-green')
     }
 })
