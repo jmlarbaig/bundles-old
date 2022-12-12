@@ -23,7 +23,7 @@
     "dashboardPanels": [
       {
         "name": "configuration",
-        "title": "Configuration",
+        "title": "Parameters",
         "file": "configuration.html",
         "fullbleed": true,
         "headerColor": "#525F78"

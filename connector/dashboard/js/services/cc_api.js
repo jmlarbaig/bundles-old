@@ -30,7 +30,7 @@ async function loadInfoEventCC(eventId){
     return json;
 }
 
-async function loadWorkouts(eventId, workoutId){
+async function loadWorkouts(eventId){
     let response = await fetch(cors + "https://competitioncorner.net/api2/v1/events/"+ eventId +"/workouts/", {
         method:"GET",
         headers:{'Authorization': 'Bearer ' + token}
@@ -114,8 +114,6 @@ async function loadAttributionLane(heatId){
     let response = await fetch(cors + "https://competitioncorner.net/api/v1/events/cuecard/heats/"+heatId+"/heatlane" , {
         method:"GET",
         headers:{'Authorization': 'Bearer ' + token},
-        mode:'cors',
-        cache:'default'
     });
     let json = await response.json();
     return json;

@@ -20,11 +20,44 @@
   ],
   "nodecg": {
     "compatibleRange": "^1.1.1",
+    "dashboardPanels": [
+      {
+        "name": "video-control",
+        "title": "Videos Athletes",
+        "file": "video.html",
+        "fullbleed": false,
+        "width":4,
+        "headerColor": "#525F78",
+        "workspace": "Video Workspace"
+      }
+    ],
     "graphics": [
       {
         "file": "index.html",
         "width": 1920,
         "height": 1080
+      }
+    ],
+    "assetCategories": [
+      {
+        "name": "videoPub",
+        "title": "Pub Vidéo",
+        "allowedTypes": [
+          "mov",
+          "mp4",
+          "avi",
+          "flv"
+        ]
+      },
+      {
+        "name": "videoCall",
+        "title": "Video Call",
+        "allowedTypes": [
+          "mov",
+          "mp4",
+          "avi",
+          "flv"
+        ]
       }
     ]
   },

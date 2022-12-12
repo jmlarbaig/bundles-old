@@ -1,6 +1,5 @@
-const TOKEN_R = nodecg.Replicant('TOKEN','connector');
-
 var WorkoutTab;
+
 
 async function updateWorkout(data){
 
@@ -17,12 +16,8 @@ async function updateWorkout(data){
             console.log(WorkoutTab[i])
 
             if(WorkoutTab[i].id == data.workoutId){
-                // WorkoutTab[i].heats = await loadHeats(WorkoutTab[i].id)
-                // WorkoutTab[i].participants = await loadParticpant(data.eventId, WorkoutTab[i].id)
                 await loadHeats(WorkoutTab[i].id).then((value) => {
                     WorkoutTab[i].heats = value;
-                    // console.log(value);
-                    // expected output: "Success!"
                 })
                 await loadParticpant(data.eventId, WorkoutTab[i].id).then((value)=>{
                     // console.log(value)
@@ -39,8 +34,6 @@ async function updateWorkout(data){
                         // console.log(value)
                         WorkoutTab[i].participants = value;
                     })
-                    // WorkoutTab[i].heats = await loadHeats(WorkoutTab[i].id)
-                    // WorkoutTab[i].participants = await loadParticpant(data.eventId, WorkoutTab[i].id)
                 }
                 break;
             }
@@ -49,25 +42,6 @@ async function updateWorkout(data){
 
     }
     updateWarmUp( data.workoutId, data.heatId)
-
-    // EventPlanner = [];
-
-    // for(let date of data.dates){
-    //     EventPlanner.push(date)
-    // }
-
-    // for(let date of EventPlanner){
-    //     date.wods = []
-    //     for(let wod of WorkoutTab){
-    //         if(wod.date == date.value){
-    //             date.wods.push(wod)
-    //         }
-    //     }
-    // }
-
-    // ParticipantsWod.value = WorkoutTab
-    // WodTab.value = EventPlanner;
-
 }
 
 
@@ -120,7 +94,7 @@ function updateWarmUp( workoutId, heatId){
             
             d.heat.current = "CURRENT"
             d2.heat.current = "NEXT"
-            d3.heat.current = "CALL FOR WARM UP"
+            d3.heat.current = "WARMUP"
             
             heatWUP.push(d)
             heatWUP.push(d2)
@@ -133,46 +107,4 @@ function updateWarmUp( workoutId, heatId){
         console.log(e)
         // document.getElementById('log_error_static').innerHTML = e;
     }
-}
-
-
-async function loadWorkouts(eventId, workoutId){
-    let response = await fetch("https://competitioncorner.net/api2/v1/events/"+ eventId +"/workouts/", {
-        method:"GET",
-        headers:{'Authorization': 'Bearer ' + TOKEN_R.value}
-    });
-    let json = await response.json();
-    return json;
-}
-
-async function loadWorkoutsPlanning(eventId) {
-    let response = await fetch("https://competitioncorner.net/api2/v1/schedule/events/" + eventId + "/workouts");
-    let json = await response.json();
-    return json;
-}
-
-
-async function loadHeats(workoutId) {
-    var myInit = { 
-        method: "GET", 
-        mode: 'cors', 
-        headers: { 
-            'Content-Type': 'text/html',
-        }
-    }
-
-    let response = await fetch('https://competitioncorner.net/api2/v1/schedule/workout/' + workoutId, myInit);
-
-    let json =  response.json();
-    return json;
-}
-
-
-async function loadParticpant(eventId, workoutID) {
-    let response = await fetch("https://competitioncorner.net/api2/v1/events/"+ eventId + "/workouts/"+ workoutID +"/eligible-participants", {
-        method:"GET",
-        headers:{'Authorization': 'Bearer ' + TOKEN_R.value}
-    });
-    let json = await response.json();
-    return json;
 }

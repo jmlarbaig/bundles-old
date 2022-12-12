@@ -9,8 +9,6 @@ function resetHeader(data){
     var $tab = $("#header1")
     $tab.find(".header_").remove();
 
-    console.log(data)
-
     var today = new Date();
     today = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
 
@@ -53,7 +51,11 @@ function resetWarmup(data){
         //     )
         // }
 
-        if( d.heat.current == "CALL FOR WARM UP" ){
+        over = (overlay == 'next-warmup' ? overlay.toUpperCase().split('-') : overlay.toUpperCase())
+
+        console.log(d.heat.current.includes(over) )
+
+        if( over.includes(d.heat.current) ){
 
         var $item = $(
             '<div class="col global">'+ 

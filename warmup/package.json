@@ -22,7 +22,27 @@
     "compatibleRange": "^1.1.1",
     "graphics": [
       {
-        "file": "index.html",
+        "file": "current.html",
+        "width": 1920,
+        "height": 1080
+      },      
+      {
+        "file": "next-warmup.html",
+        "width": 1920,
+        "height": 1080
+      },      
+      {
+        "file": "next.html",
+        "width": 1920,
+        "height": 1080
+      },      
+      {
+        "file": "warmup.html",
+        "width": 1920,
+        "height": 1080
+      },      
+      {
+        "file": "current-next.html",
         "width": 1920,
         "height": 1080
       }

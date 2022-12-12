@@ -22,11 +22,20 @@
     "compatibleRange": "^1.1.1",
     "dashboardPanels": [
       {
-        "name": "cis",
-        "title": "CIS",
+        "name": "lowerthird-athletes",
+        "title": "Lowerthird Athletes Control",
+        "file": "lowerthirds.html",
+        "fullbleed": false,
+        "width":8,
+        "headerColor": "#525F78",
+        "workspace": "Lowerthird Workspace"
+      }
+    ],
+    "graphics": [
+      {
         "file": "cis.html",
-        "fullbleed": true,
-        "headerColor": "#525F78"
+        "width": 1920,
+        "height": 1080
       }
     ]
   },

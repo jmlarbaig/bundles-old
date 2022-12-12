@@ -1,148 +1,136 @@
-:root {
-    --main-color: rgba(0,0,0,0.9);
-    --second-color: black;
-    --finish-color: black;
-    --firstRank-color: black;
-    --secondRank-color: black;
-    --thirdRank-color: black;
+    :root {
+    --bg__color: rgba(0,0,0,0);
 
-    --chrono-color:white;
-    --tx-chrono-color:white;
+    --main_color: rgba(0,0,0,0.9);
+    --second_color: black;
+    --finish_color: black;
+    --first_rank_color: black;
+    --second_rank_color: black;
+    --third_rank_color: black;
 
-    --wod-color:white;
-    --tx-wod-color:white;
+    --chrono_color:white;
+    --tx_chrono_color:white;
 
-    --tx-main-color: white;
-    --tx-second-color: white;
-    --tx-finish-color: white;
-    --tx-firstRank-color: white;
-    --tx-secondRank-color: white;
-    --tx-thirdRank-color: white;
+    --wod_color:white;
+    --tx_wod_color:white;
 
-    --X-position-chrono: 300px;
-    --X-position-heatDetails: 320px;
-    --Y-position-chrono: 75px;
+    --tx_main_color: white;
+    --tx_second_color: white;
+    --tx_finish_color: white;
+    --tx_firstRank_color: white;
+    --tx_secondRank_color: white;
+    --tx_thirdRank_color: white;
 
-    --positionX_logo : 110px;
-    --positionY_logo : 40px;
+    --position_x_chrono: 300px;
+    --position_y_chrono: 75px;
 
-    --positionX_leaderboard : 200px;
-    --positionY_leaderboard : 75px;
+    --position_x_heat: 320px;
+    --position_y_heat: 320px;
+
+    --position_x_logo : 110px;
+    --position_y_logo : 40px;
+
+    --position_x_leaderboard : 200px;
+    --position_y_leaderboard : 75px;
 
     --widthLogoEvent: 250px;
+
     --heigth: 29px;
-    --height_ath : 40px;
+    --height_ath_side : 40px;
+    --height_ath_top : 60px;
+    --height_ath_tv : 60px;
+    --padding_ath_content: 10px;
     --border: 0px 10px 10px 0px;
 
-    --family_font:'Typographica';
+    --font-select:'Typographica';
 
-  }
-
-
-@font-face {
-    font-family: "Adarsh";
-    src: url("../fonts/Adarsh-Sans-Regular.otf");
-}
-
-@font-face {
-    font-family: "Antonio";
-    src: url("../fonts/Antonio-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Bebas";
-    src: url("../fonts/BebasNeue.otf");
-}
-
-@font-face {
-    font-family: "Circo";
-    src: url("../fonts/Circo.ttf");
-}
-
-@font-face {
-    font-family: "Coamei";
-    src: url("../fonts/Coamei-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Hoop";
-    src: url("../fonts/Hoop_Regular.otf");
-}
-
-@font-face {
-    font-family: "Montserrat";
-    src: url("../fonts/Montserrat-Bold.ttf");
-}
-
-@font-face {
-    font-family: "Oswald";
-    src: url("../fonts/Oswald-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Power";
-    src: url("../fonts/PowerrMedium.ttf");
-}
-
-@font-face {
-    font-family: "Roboto";
-    src: url("../fonts/Roboto-Medium.ttf");
-}
-
-@font-face {
-    font-family: "Strasua";
-    src: url("../fonts/strasua.ttf");
-}
-
-@font-face {
-    font-family: "Typographica";
-    src: url("../fonts/Typographica.ttf");
-}
+    }
 
 
-  body{
-    /* background-image: url(../img/BG_WZA_2.jpeg); */
-    font-family: var(--family_font);
-    /* font-family: 'oswald' ; */
-    background-size: cover;
-    height: 1080px;
-    width: 1920px;
-  }
+    @font-face {
+        font-family: "Adarsh";
+        src: url("../fonts/Adarsh-Sans-Regular.otf");
+    }
+
+    @font-face {
+        font-family: "Antonio";
+        src: url("../fonts/Antonio-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: "Bebas";
+        src: url("../fonts/BebasNeue.otf");
+    }
+
+    @font-face {
+        font-family: "Circo";
+        src: url("../fonts/Circo.ttf");
+    }
+
+    @font-face {
+        font-family: "Coamei";
+        src: url("../fonts/Coamei-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: "Hoop";
+        src: url("../fonts/Hoop_Regular.otf");
+    }
+
+    @font-face {
+        font-family: "Montserrat";
+        src: url("../fonts/Montserrat-Bold.ttf");
+    }
+
+    @font-face {
+        font-family: "Oswald";
+        src: url("../fonts/Oswald-Regular.ttf");
+    }
+
+    @font-face {
+        font-family: "Power";
+        src: url("../fonts/PowerrMedium.ttf");
+    }
+
+    @font-face {
+        font-family: "Roboto";
+        src: url("../fonts/Roboto-Medium.ttf");
+    }
+
+    @font-face {
+        font-family: "Strasua";
+        src: url("../fonts/strasua.ttf");
+    }
+
+    @font-face {
+        font-family: "Typographica";
+        src: url("../fonts/Typographica.ttf");
+    }
 
 
+    body{
+        background-color: var(--bg__color);
+        font-family: var(--font-select);
+        background-size: cover;
+        height: 1080px;
+        width: 1920px;
+    }
 
-/* #video{
-    z-index: 100;
-    position:absolute;
-    width:1920px;
-    height:1080px;
-} */
+    .lowerthird{
+        background-color: transparent;
+    }
 
-#video
-{
-    z-index: 100;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	min-width: 100%;
-	min-height: 100%;
-	width: auto;
-	height: auto;
-	-webkit-transform: translateX(-50%) translateY(-50%);
-	transform: translateX(-50%) translateY(-50%);
-	background-size: cover;
-}
-
-.logoFV{
-    background-image: url('../img/PRESTA/FV-logo.png');
-    height: 150px;
-    width: 150px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size:contain;
-    position: absolute;
-    top: 50px;
-    right: 150px;
-    opacity: 100%;
-    transform-origin: 100% 100%;
-}
+    iframe{
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        width: 1920px;
+        height: 1080px;
+        border: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        z-index: -99;
+    }

@@ -20,11 +20,12 @@
   ],
   "nodecg": {
     "compatibleRange": "^1.1.1",
-    "graphics": [
+    "dashboardPanels": [
       {
+        "name":"planning",
+        "title": "Planning",
         "file": "index.html",
-        "width": 1920,
-        "height": 1080
+        "fullbleed":true
       }
     ]
   },

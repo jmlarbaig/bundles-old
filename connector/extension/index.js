@@ -84,7 +84,8 @@ module.exports = function (nodecg, bundlePath) {
                 data.displayUnit = ch2[0];
                 data.displayType = ch2[1];
                 data.workoutState = ch2[2];
-                data.timeWorkout = ch2[3];
+                data.erg = ch[3];
+                // data.timeWorkout = ch2[3];
                 data.spm = ch2[4];
                 data.distance = ch2[5];
                 data.calories = ch2[6];
@@ -92,11 +93,7 @@ module.exports = function (nodecg, bundlePath) {
                 data.calH = ch2[8];
                 data.stroke = ch2[9];
                 data.byteState = ch2[10];
-                data.erg = ch[3];
-    
-                // console.log(lane)
-                // console.log(erg)
-                // console.log(data)
+
                 dataTab[lane] = data;
                 dataRow.value = dataTab;
     
@@ -148,16 +145,16 @@ module.exports = function (nodecg, bundlePath) {
         dataConfigCC.value = value
     })
 
+    time()
+
     function time (){
         ntpClient.getNetworkTime(ip_ntp, 123, function(err, date) {
             if(err) {
                 console.error(err);
                 nowNtp.value = err
             }else{
-                // console.log("Current time : ");
-                // console.log(date.toString());
-                nowNtp.value = date
-                timeNTP.value = date.getTime()
+                let diff = date.getTime() - Date.now()
+                timeNTP.value = diff
             }
             checkIpKairos()
         });
@@ -176,6 +173,7 @@ module.exports = function (nodecg, bundlePath) {
             ip_broker = ''
             ip_ntp = 'time.google.com'
         }
+        time()
 
         console.log("ip_adresse = ", ip_adresse, " ip_broker = ", ip_broker, " ipNTP = ", ip_ntp)
     }
@@ -192,8 +190,8 @@ module.exports = function (nodecg, bundlePath) {
     }
 
 
-    setInterval(time, 1000);
-    setInterval(checkIpKairos, 1000);
+    // setInterval(time, 1000);
+    // setInterval(checkIpKairos, 1000);
 
 	nodecg.log.info(`Bundle "${__filename}" is initialized.`);
         

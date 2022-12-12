@@ -1,214 +1,53 @@
 
-function resetSelect(data){
+function updateSponsorOption(data){
 
-    // console.log("Data = ",data)
+    const listSponsors = $('.sponsor');
 
-    const listLeft = document.getElementById("leftTeam");
-    const listRigth = document.getElementById("rigthTeam");
+    listSponsors.find('option').remove()
 
-    while (listLeft.hasChildNodes()) {
-        listLeft.removeChild(listLeft.firstChild);
-    }
+    let opt = document.createElement('option');
 
-    while (listRigth.hasChildNodes()) {
-        listRigth.removeChild(listRigth.firstChild);
-    }
+    opt.value= '';
+    opt.text = 'No Sponsor'; // whatever property it has
 
-    data.athletes.forEach((element, index) => {
-        // console.log("Element : ",element);
+   // then append it to the select element
+   $('.sponsor').append(opt)
 
-        var opt = document.createElement('option');
+    data.forEach((element) => {
 
-        opt.value= element.lane-1;
-        opt.text = element.lane; // whatever property it has
+        let opt = document.createElement('option');
+
+        opt.value= element.url;
+        opt.text = element.name; // whatever property it has
     
        // then append it to the select element
-       $('#leftTeam').append(opt)
+       $('.sponsor').append(opt)
     });
 
-
-    data.athletes.forEach((element, index) => {
-        // console.log("Element : ",element);
-
-        var opt = document.createElement('option');
-
-        opt.value = element.lane-1;
-        opt.text = element.lane; // whatever property it has
-    
-       // then append it to the select element
-       $('#rigthTeam').append(opt)
-    });
-
-    $('#rigthTeam').val(1)
-    
 }
 
+function addSponsorOption(data, id){
 
-function resetSelectSponsor(data){
+    let opt = document.createElement('option');
 
-    // console.log("Data = ",data)
+    opt.value= '';
+    opt.text = 'No Sponsor'; // whatever property it has
 
-    const listSponsor1 = document.getElementById("sponsor_1");
-    const listSponsor2 = document.getElementById("sponsor_2");
-    const listSponsor3 = document.getElementById("sponsor_3");
-    const listSponsor4 = document.getElementById("sponsor_4");
-    const listSponsor5 = document.getElementById("sponsor_5");
-    const listSponsor6 = document.getElementById("sponsor_6");
-    const listSponsorEvent = document.getElementById('sponsor_static')
+   // then append it to the select element
+   $('#sponsor'+id).append(opt)
 
-    while (listSponsor1.hasChildNodes()) {
-        listSponsor1.removeChild(listSponsor1.firstChild);
-    }
+    data.forEach((element) => {
 
-    while (listSponsor2.hasChildNodes()) {
-        listSponsor2.removeChild(listSponsor2.firstChild);
-    }
-
-    while (listSponsor3.hasChildNodes()) {
-        listSponsor3.removeChild(listSponsor3.firstChild);
-    }
-
-    while (listSponsor4.hasChildNodes()) {
-        listSponsor4.removeChild(listSponsor4.firstChild);
-    }
-
-    while (listSponsor5.hasChildNodes()) {
-        listSponsor5.removeChild(listSponsor5.firstChild);
-    }
-
-    while (listSponsor6.hasChildNodes()) {
-        listSponsor6.removeChild(listSponsor6.firstChild);
-    }
-
-    while (listSponsorEvent.hasChildNodes()) {
-        listSponsorEvent.removeChild(listSponsorEvent.firstChild);
-    }
-
-    data.forEach((element, index) => {
-        // console.log("Element : ",element);
-
-        var opt = document.createElement('option');
+        let opt = document.createElement('option');
 
         opt.value= element.url;
         opt.text = element.name; // whatever property it has
     
        // then append it to the select element
-       $('#sponsor_1').append(opt)
+       $('#sponsor'+id).append(opt)
     });
 
 
-    data.forEach((element, index) => {
-        // console.log("Element : ",element);
 
-        var opt = document.createElement('option');
-
-        opt.value= element.url;
-        opt.text = element.name; // whatever property it has
-    
-       // then append it to the select element
-       $('#sponsor_2').append(opt)
-    });
-
-    data.forEach((element, index) => {
-        // console.log("Element : ",element);
-
-        var opt = document.createElement('option');
-
-        opt.value= element.url;
-        opt.text = element.name; // whatever property it has
-    
-       // then append it to the select element
-       $('#sponsor_3').append(opt)
-    });
-
-    data.forEach((element, index) => {
-        // console.log("Element : ",element);
-
-        var opt = document.createElement('option');
-
-        opt.value= element.url;
-        opt.text = element.name; // whatever property it has
-    
-       // then append it to the select element
-       $('#sponsor_4').append(opt)
-    });
-
-    data.forEach((element, index) => {
-        // console.log("Element : ",element);
-
-        var opt = document.createElement('option');
-
-        opt.value= element.url;
-        opt.text = element.name; // whatever property it has
-    
-       // then append it to the select element
-       $('#sponsor_5').append(opt)
-    });
-
-    data.forEach((element, index) => {
-        // console.log("Element : ",element);
-
-        var opt = document.createElement('option');
-
-        opt.value= element.url;
-        opt.text = element.name; // whatever property it has
-    
-       // then append it to the select element
-       $('#sponsor_6').append(opt)
-    });
-
-    data.forEach((element, index) => {
-        // console.log("Element : ",element);
-
-        var opt = document.createElement('option');
-
-        opt.value= element.url;
-        opt.text = element.name; // whatever property it has
-    
-       // then append it to the select element
-       $('#sponsor_static').append(opt)
-    });
-    
-}
-
-function resetSelectQrCode(data){
-
-    // console.log("Data = ",data)
-
-    const qrCode = document.getElementById("Qrcode");
-    const listSponsor = document.getElementById("sponsor_Qrcode");
-
-    while (qrCode.hasChildNodes()) {
-        qrCode.removeChild(qrCode.firstChild);
-    }
-
-    while (listSponsor.hasChildNodes()) {
-        listSponsor.removeChild(listSponsor.firstChild);
-    }
-
-    data.forEach((element, index) => {
-        // console.log("Element : ",element);
-
-        var opt = document.createElement('option');
-
-        opt.value= element.url;
-        opt.text = element.name; // whatever property it has
-    
-       // then append it to the select element
-       $('#Qrcode').append(opt)
-    });
-
-
-    data.forEach((element, index) => {
-        // console.log("Element : ",element);
-
-        var opt = document.createElement('option');
-
-        opt.value= element.url;
-        opt.text = element.name; // whatever property it has
-    
-       // then append it to the select element
-       $('#sponsor_Qrcode').append(opt)
-    });
 
 }

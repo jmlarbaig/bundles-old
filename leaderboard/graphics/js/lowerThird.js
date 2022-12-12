@@ -177,39 +177,6 @@ async function lowerThirdAthletes(data){
 
     laneAth.value != true ? $("#lowerThirdAth").hide() : ""
 
-        // var $item = $(
-        //     '<div class="lowerThirdChildrenAth">'+
-        //         // '<div class="aths cards-list " id="aths">' +
-        //         // '</div>' +
-        //         '<div class="row lowerChildAth">'+
-        //             '<div class="col-auto text-center d-flex flex-column align-items" style="background-color: #ffffff;padding: 2px 2px;margin-left: 5px;margin-bottom: 5px;margin-right: 5px;margin-top: 5px;"><em class="text-center" style="font-size: 20px; padding-right:5px;">'+overallStanding+'° </em>'+
-        //                 // '<strong style="font-size: 35px;">'+ data.rank+'</strong>'+
-        //             '</div>'+
-        //             // '<div class="col-auto text-truncate text-center" style="width: 30px;padding: 0px 5px; overflow-y: visible;">'+
-        //             //     '<picture><img class="img-fluid" src="'+ avatar +'"></picture>'+
-        //             // '</div>'+
-        //             '<div class="col" >'+
-        //                 '<div class="row justify-content-between">'+
-        //                     '<div class="col-auto d-lg-flex align-items-lg-center" style="padding: 0px; margin-left:5px;"><strong style="font-size: 24px;color:white;">L'+ data.lane+'</strong></div>'+
-        //                     // '<div class="col-auto d-lg-flex align-items-lg-center" style="padding: 0px; margin-left:5px;"><img class="d-lg-flex" src="https://flagcdn.com/'+ country["2L"].toLowerCase() + '.svg" style="width: 30px;margin: -3px 5px;"></div>'+
-        //                     '<div class="col text-left d-xl-flex align-items-xl-center text-nowrap text-truncate text-break" style="padding: 0px 40px 0px 10px;">' +
-        //                         '<h1 class="nameLower text-left d-xl-flex justify-content-xl-start" style="color: rgb(255,255,255);font-size: 24px;margin: 0px;">'+data.displayName+'</h1>' +
-        //                    ' </div>' +
-        //                     // '<div class="col-auto" style="margin-right: 10px;">' +
-        //                     //     '<div class="row">' +
-        //                     //         '<div class="col d-xl-flex justify-content-xl-end" style="padding: 0px 5px;margin-top: 5px;"><em style="color: rgb(255,255,255);font-size: 8px;">FROM</em></div>' +
-        //                     //     '</div>' +
-        //                     //     '<div class="row">' +
-        //                     //         '<div class="col text-nowrap text-truncate text-break text-right" style="padding: 0px;"><strong style="color: rgb(255,255,255);font-size: 12px;padding: 0px 5px;">'+ affiliate +'</strong></div>' +
-        //                     //     '</div>'+
-        //                     // '</div>'+
-        //                 '</div>'+
-        //             '</div>' +
-        //         '</div>'+
-        //         '<div class="aths cards-list " id="aths">' +
-        //         '</div>' +
-        //     '</div>'
-        // )
 
         var $item = $(
             '<div class="lowerThirdChildrenAth">'+
@@ -281,48 +248,8 @@ async function lowerThirdAthletes(data){
             var aff = element.hasOwnProperty('Affiliate') == true ? element['Affiliate'] != undefined ? element['Affiliate'] : '-' :'-'
             var capitaine = element['Captain'] == "TRUE" ? " - CAPTAIN" : ''
 
-            // var $itemWod = $(
-            //     '<div class="row athCol">' +
-            //         // '<div class="col-3 avatar" style="background-image:url('+ avatar +')">' +
-            //         // '</div>' +
-            //         '<div class="col athletesRow">'+
-            //             '<div class=" row athleteName">' +
-            //                 '<div class="text-truncate name">'+ capitaine + element['First Name'] + ' ' +  element['Last Name'] +'</div>' +
-            //                 '<div class="text-truncate affiliate">' + aff + '</div>' +
-            //             '</div>' +
-            //             // '<div class="row benchmark">' +
-            //             //     '<div class="col">' +
-            //             //         'backsquat' + 
-            //             //     '</div>' +
-            //             //     '<div class="col text-center" id="back_squat">' +
-            //             //         back_squat +
-            //             //     '</div>' +
-            //             //     '<div class="col">' +
-            //             //         'Clean&Jerk' +
-            //             //     '</div>' +
-            //             //     '<div class="col text-center" id="clean_jerk">' +
-            //             //         clean_jerk +
-            //             //     '</div>' +
-            //             //     '<div class="col">' +
-            //             //         'Deadlift' +
-            //             //     '</div>' +
-            //             //     '<div class="col text-center" id="deadlift">' +
-            //             //         deadlift+
-            //             //     '</div>' +
-            //             //     '<div class="col">' +
-            //             //         'Snatch' + 
-            //             //     '</div>' +
-            //             //     '<div class="col text-center" id="snatch">' +
-            //             //         snatch +
-            //             //     '</div>' +
-            //             // '</div>'+ 
-            //         '</div>' +
-            //     '</div>'
-            // )
-
             var $itemWod = $(
                 '<li class="text-truncate name">' + element['First Name'] + ' ' +  element['Last Name'] + capitaine + '</li>' 
-                // '<div class="text-truncate affiliate">' + aff + '</div>' +
             )
 
             $wod.append($itemWod)
@@ -331,89 +258,6 @@ async function lowerThirdAthletes(data){
 }
 
 
-
-
-async function lowerThirdVoid(){
-    console.log("LowerThird Data = ",lowerThirdData.value)
-    console.log("sponsorLower Data = ",sponsorLower.value)
-    var data = lowerThirdData.value
-
-    console.log(data.url == '')
-    // if (data.url == ''){
-    //     data.url = logoEvent
-    // }
-    let img = data.url == '' ? logoEvent : data.url
-
-
-    console.log(data)
-
-    var $lower = $("#lowerThirdVoid")
-    $lower.find(".lowerThirdChildrenVoid").remove()
-
-    if (data.qrcode != ""){
-        var $item = $(
-            '<div class="lowerThirdChildrenVoid text-left">'+
-                '<div class="row lowerChildVoid">'+
-                    '<div class="col-2 img_event">'+
-                    '</div>'+
-                    '<div class="col text_lower">'+
-                        '<div class="text_lower_1">'+
-                            '<h4 class="text-left eventName">'+data.Fonction+'</h4>' +
-                            '<h6 class="text-left fonction">'+eventName+'</h6>' +
-                        '</div>' +
-                        '<div class="text_lower_2">'+
-                            '<h5 class="text-left names">'+data.Name+'</h5>' +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="col-2 img_sponsor">'+
-                    '</div>'+
-                    '<div class="col qrcodeC">'+
-                            '<div id="qrcode"></div>' +
-                    '</div>' +
-                '</div>'+
-            '</div>'
-        )
-    }
-    else {
-        var $item = $(
-            '<div class="lowerThirdChildrenVoid text-left">'+
-                '<div class="row lowerChildVoid">'+
-                    '<div class="col-2 img_event">'+
-                    '</div>'+
-                    '<div class="col text_lower">'+
-                        '<div class="text_lower_1">'+
-                            '<h4 class="text-left fonction">'+data.Fonction+'</h4>' +
-                            '<h6 class="text-left eventName">'+eventName+'</h6>' +
-                        '</div>' +
-                        '<div class="text_lower_2">'+
-                            '<h5 class="text-left names">'+data.Name+'</h5>' +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="col-2 img_sponsor">'+
-                    '</div>'+
-                '</div>'+
-            '</div>'
-        )
-    }
-    // lowerThirdVoidShow.value == false ? $lower.find("#lowerThirdVoid").hide() : ''
-
-    $lower.append($item)
-
-    $(".img_event").css("background-image", "url(" + logoEvent + ")")
-    $(".img_sponsor").css("background-image", "url(" + img + ")")
-
-    if (data.qrcode != ""){
-        var qrcode = new QRCode("qrcode", {
-            text: data.qrcode,
-            width: 100,
-            height: 100,
-            colorDark : "#000000",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
-        });
-    }
-
-}
 
 async function lowerThirdEvent(){
 

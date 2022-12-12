@@ -22,11 +22,78 @@
     "compatibleRange": "^1.1.1",
     "dashboardPanels": [
       {
-        "name": "lowerthird",
-        "title": "Lower Third",
-        "file": "lowerthird.html",
-        "fullbleed": true,
-        "headerColor": "#525F78"
+        "name": "presentatorLowerthird",
+        "title": "Presentator LowerThirds",
+        "file": "presentatorLowerthird.html",
+        "fullbleed": false,
+        "width": 8,
+        "headerColor": "#525F78",
+        "workspace":"LowerThird Workspace"
+      },
+      {
+        "name": "freeLowerthird",
+        "title": "Free Lowerthird",
+        "file": "freeLowerthird.html",
+        "fullbleed": false,
+        "width": 3,
+        "headerColor": "#525F78",
+        "workspace":"LowerThird Workspace"
+      },
+      {
+        "name": "waitingLowerthird",
+        "title": "Waiting Lowerthird",
+        "file": "waitingLowerthird.html",
+        "fullbleed": false,
+        "width": 3,
+        "headerColor": "#525F78",
+        "workspace":"LowerThird Workspace"
+      },
+      {
+        "name": "qrCodeLowerthird",
+        "title": "QRCode Lowerthird",
+        "file": "qrCodeLowerthird.html",
+        "fullbleed": false,
+        "width": 2,
+        "headerColor": "#525F78",
+        "workspace":"LowerThird Workspace"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "lowerthirds.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "free.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "athlete.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "presentator.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "waiting.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "assetCategories": [
+      {
+        "name": "sponsorsLowerThirds",
+        "title": "Sponsors Lower Thirds",
+        "allowedTypes": [
+          "jpeg",
+          "jpg",
+          "png"
+        ]
       }
     ]
   },

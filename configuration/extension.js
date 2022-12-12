@@ -1,19 +1,17 @@
 'use strict';
 
-const colorFile = require('./colorDefaut.json');
+const colorFile = __dirname + '/colorDefaut.json'
 
 const fs = require('fs');
 const path = require('path');
 
 module.exports = function (nodecg) {
+
     const Colors = nodecg.Replicant('Colors')
-    const currentPath = process.cwd() + "/bundles/configuration/";
-	const pkgPath = path.join(currentPath,"colorDefaut.json");
 
-
-    if (fs.existsSync(pkgPath)) {   
+    if (fs.existsSync(colorFile)) {   
         try {
-            Colors.value = JSON.parse(fs.readFileSync(pkgPath))
+            Colors.value = JSON.parse(fs.readFileSync(colorFile))
           } 
         catch (err) {
             console.error(err)
@@ -21,14 +19,14 @@ module.exports = function (nodecg) {
 	}
 
     nodecg.listenFor('colorOverwrite', (value, ack) =>{
+
         let data = JSON.stringify(value);
-        fs.writeFile(pkgPath, data, 'utf8',function(err) {
+        fs.writeFile(colorFile, data, 'utf8',function(err) {
             if (err) throw err;
             console.log('complete');
             })
             Colors.value = value
     })
-
 
 	nodecg.log.info(`Bundle "${__filename}" is initialized.`);
 };

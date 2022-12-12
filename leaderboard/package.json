@@ -22,50 +22,40 @@
     "compatibleRange": "^1.1.1",
     "dashboardPanels": [
       {
-        "name": "leaderboard",
-        "title": "Leaderboard",
-        "file": "leaderboard.html",
-        "fullbleed": true,
-        "headerColor": "#525F78"
+        "name": "overlay-control",
+        "title": "Overlay Control",
+        "file": "overlay.html",
+        "fullbleed": false,
+        "width":7,
+        "headerColor": "#525F78",
+        "workspace": "Main Workspace"
       }
     ],
     "graphics": [
       {
-        "file": "index.html",
+        "file": "overlay_side.html",
         "width": 1920,
         "height": 1080
-      }
-    ],
-    "assetCategories": [
-      {
-        "name": "logoEvent",
-        "title": "Logos Events",
-        "allowedTypes": [
-          "jpg",
-          "jpeg",
-          "gif",
-          "png"
-        ]
       },
       {
-        "name": "pub",
-        "title": "Pub Vidéo",
-        "allowedTypes": [
-          "mov",
-          "mp4",
-          "avi",
-          "flv"
-        ]
+        "file": "overlay_top.html",
+        "width": 1920,
+        "height": 1080
       },
       {
-        "name": "ath",
-        "title": "Vidéo Athlètes",
-        "allowedTypes": [
-          "mov",
-          "mp4",
-          "avi",
-          "flv"
-        ]
+        "file": "progression.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "leaderboard.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "commentator.html",
+        "width": 1920,
+        "height": 1080
       }
     ]
   },

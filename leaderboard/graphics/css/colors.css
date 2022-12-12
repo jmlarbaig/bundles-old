@@ -1,0 +1,33 @@
+.finish_rank{
+    background-color: var(--finish_color);
+    color: var(--tx_finish_color);
+    fill: var(--finish_color);
+}
+
+.first_rank{
+    background-color: var(--first_rank_color);
+    color: var(--tx_first_rank_color);
+    fill: var(--first_rank_color);
+}
+
+.second_rank{
+    background-color: var(--second_rank_color);
+    color: var(--tx_second_rank_color);
+    fill: var(--second_rank_color);
+}
+
+.third_rank{
+    background-color: var(--third_rank_color);
+    color: var(--tx_third_rank_color);
+    fill: var(--third_rank_color);
+}
+
+.other_rank{
+    background-color: var(--second_color);
+    color: var(--tx_second_color);
+    fill: var(--second_color);
+}
+
+.intial_rank{
+    padding: 0;
+}

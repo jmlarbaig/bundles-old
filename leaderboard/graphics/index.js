@@ -1,3 +1,4 @@
+    
     // initialization
     var athlete;
     var athletes;
@@ -12,8 +13,14 @@
     var athletes_final = new Array();
     var timerInterval= null;
     var dataTime;
+    var athletesDivison;
+    let Mvt_name = []
+
+    let height_top = 150;
 
     let root = document.documentElement;
+
+    let Clrs = {}
 
     var bg_color;
     var wod_color;
@@ -37,27 +44,29 @@
 
 
     var showDrapeau;
-    var logoEvent;
+
+    const setupLeaderboard = nodecg.Replicant('setupLeaderboard')
+    const Colors = nodecg.Replicant('Colors', 'configuration');
+    const Border = nodecg.Replicant('Border','configuration');
 
     const Font = nodecg.Replicant('assets:font','configuration');
+    
+    const logoEvent = nodecg.Replicant('assets:logoEvent','connector')
     const mainSponsors = nodecg.Replicant('assets:mainSponsor', 'connector')
 
 
-    const setupLeaderboard = nodecg.Replicant('setupLeaderboard')
+    const timeNTP = nodecg.Replicant('timeNTP','connector')
+    const nowNtp = nodecg.Replicant('nowNtp','connector')
 
-    const showLeaderboard_lead = nodecg.Replicant('showLeaderboard_Lead')
-    const showLogo = nodecg.Replicant('showLogo')
-    const showFlag = nodecg.Replicant('showFlag')
-    const showHeat = nodecg.Replicant('showHeat')
-    const showWodDetails = nodecg.Replicant('showWodDetails')
-    const LogoImg = nodecg.Replicant('LogoImg', 'connector')
-    const showChrono = nodecg.Replicant('showChrono')    
-    const Ft_Ap = nodecg.Replicant('fortime_amrap')
-    const HideLane = nodecg.Replicant('HideLane')
+    // Destructuration du fichier static
+    const eventInfos = nodecg.Replicant('eventInfos', 'connector');
+    const heatInfos = nodecg.Replicant('heatInfos', 'connector');
+    const workoutInfo = nodecg.Replicant('workoutInfo', 'connector');
+    const s_athletes = nodecg.Replicant('s_athletes', 'connector');
 
-
-    const Colors = nodecg.Replicant('Colors', 'configuration');
-    const Border = nodecg.Replicant('Border','configuration');
+    // Destructuration du fichier Dynamic
+    const statusHeat = nodecg.Replicant('status', 'connector');
+    const d_athletes = nodecg.Replicant('d_athletes', 'connector');
 
     /* Lowerthrid Replicants */
     const laneInfos = nodecg.Replicant('laneInfos', 'cis')
@@ -78,27 +87,105 @@
 
     const UrlChange = nodecg.Replicant('UrlChange', 'leaderboard');
 
-    const timeNTP = nodecg.Replicant('timeNTP','connector')
-    const nowNtp = nodecg.Replicant('nowNtp','connector')
 
     const sponsorWod = nodecg.Replicant('sponsorWod', 'connector')
-    const sponsors = nodecg.Replicant('assets:sponsors', 'connector')
-    const sponsorLower = nodecg.Replicant('assets:sponsorLower', 'versus') 
+    const bottomSponsors = nodecg.Replicant('assets:bottomSponsors', 'connector')
 
     const TopScore = nodecg.Replicant('TopScore', 'connector')
+
+
+
+    // Initialisation du choix de la vue
     
+    let overlay=''
     
+    $('document').ready(()=>{
+        let ch = document.location.pathname.split('/')
+        overlay = ch[ch.length-1].replace('.html','')
+    })
 
 
 
+    // on récupère les infos provenant du connecteur
 
-
-    sponsorLower.on('change', (newValue)=> {
-        if(newValue.length > 0){
-            $(".logoSponsor").attr('src', newValue[0].url)
+    eventInfos.on('change',(newValue, oldValue)=>{
+        if(newValue != oldValue){
+            resetHeat(newValue);
         }
     })
 
+    var tc
+    let heat = {}
+
+    heatInfos.on('change', (newValue, oldValue)=>{
+        heat = typeWorkout(newValue)
+        showTime(heat.timecap)
+    })
+
+    let workouts = {}
+
+    workoutInfo.on('change', (newValue, oldValue)=>{
+        if(newValue != oldValue){
+            workouts = treatWorkouts(newValue);
+            workouts = newValue
+        }
+    })
+
+    s_athletes.on('change', (newValue, oldValue)=>{
+        resetLeaderboard(newValue);
+    })
+
+    let statusWorkout = '0'
+    let ntpStartTime;
+    let startTime;
+    let endTime;
+
+    statusHeat.on('change', (newValue, oldValue)=>{
+        if( newValue.NtpTimeStart !== ntpStartTime){
+            ntpStartTime = newValue.NtpTimeStart
+            startTime = timeToDateTime(ntpStartTime);
+            endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
+            timerLaunch == undefined && clearInterval(timerLaunch)
+            timerLaunch = setInterval(updateTime, 1000);
+        }
+        statusWorkout = newValue.status
+    })
+
+    d_athletes.on('change', (newValue, oldValue)=>{
+        updateDynamics(newValue, statusWorkout);
+    })
+
+
+    TopScore.on('change', (newValue, oldValue)=>{
+        // console.log("top Score = ",newValue[0][0].scores[0].score)
+        if (newValue!=undefined && newValue.length > 0){
+            let index=0;
+            if (!newValue[0].hasOwnProperty('error')){
+                for (let teams of newValue[0]){
+                        console.log("top index =", index)
+                        $('.repTarget'+index).html("-> "+teams.scores[0].score)
+                        index++
+                }
+            }
+        }
+    })
+
+
+    // Catégorie Assets
+
+    logoEvent.on('change', (newValue, oldValue) => {
+        try{
+            if(newValue.length > 0){
+                $("#logo").css("background-image", "url(" + newValue[0].url + ")");
+                setupLeaderboard.value.logo != true ? $("#logo").hide() : ""
+            }
+        }
+        catch(e){
+            console.log(e)
+        }
+    }); 
+
+    
     mainSponsors.on('change', (newValue)=> {
         if(newValue.length>0){
 
@@ -111,7 +198,7 @@
     })
     
 
-    sponsors.on('change', (newValue)=> {
+    bottomSponsors.on('change', (newValue)=> {
         
         var $list = $("#sponsorLogo");
         $list.find(".sponsorImg").remove();
@@ -129,51 +216,11 @@
     })
 
     var eventName
-    var tc
 
-    statics.on('change', (newValue, oldValue) => {
-        // console.log(`statics changed from ${oldValue} to ${newValue}`);
-
-        var timeCap
-        tc = newValue.heatInfo[0].timeCap.split(':');
-
-        if (tc[0] != "00"){
-            timeCap = tc[0] + "'" + tc[1] + "'" + tc[2];
-        }
-        else if(tc[1] != "00" ){
-            timeCap = tc[1] + "'" + tc[2];
-        }
-        else{
-            timeCap = "0'"+ tc[2];
-        }
-        timecapNTP = timeCap
-
-        heatId = newValue.heatId;
-        heat_Name = newValue.heatName;
-        staticData = newValue
-        eventName = newValue.eventName
-
-        resetHeat();
-        resetWod();
-        showTime();
-        resetLeaderboard();
-    }); 
-
-    dynamics.on('change', (newValue, oldValue) => {
-        // console.log(`dynamics changed from ${oldValue} to ${newValue}`);
-
-        if(newValue.status != 0 ){
-        // console.log("dynamics", newValue.status)
-            updateDynamics(newValue.athletes, newValue.status)
-        }
-        dataTime = newValue
-        // console.log(dataTime)
-
-    }); 
+    // Congifuration et setup
 
     setupLeaderboard.on('change', (newValue, oldValue)=>{
         Object.keys(newValue).forEach((params, index)=>{
-            console.log(params + ' ' + newValue[params])
             switch(newValue[params]){
                 case true:
                     $('.'+params).fadeIn(1000)
@@ -183,108 +230,58 @@
                     break;
             }
         })
-    })
 
-    TopScore.on('change', (newValue, oldValue)=>{
-        // console.log("top Score = ",newValue[0][0].scores[0].score)
-        if (newValue != undefined){
-            let index=0;
-            if (!newValue[0].hasOwnProperty('error')){
-                for (let teams of newValue[0]){
-                        console.log("top index =", index)
-                        $('.repTarget'+index).html("-> "+teams.scores[0].score)
-                        index++
+        if(overlay == 'overlay_top'){
+            setTimeout(()=>{
+                let widthCalc =  ($('.athlete').width() + 10) * 5
+
+                if( widthCalc > 1480){
+                    widthCalc =  ($('.athlete').width() + 10) * 4
+                    if(widthCalc > 1480){
+                        widthCalc =  ($('.athlete').width() + 10) * 3
+                    }
                 }
+        
+                    $('.leaderboard').css('width', 'calc(' + widthCalc + 'px)')
+
+            }, 1500)
+        }
+        if(overlay == 'overlay_side' || overlay == 'overlay_top'){
+            if(newValue.lowerthird){
+                $(function(){
+                    let $item = $('<iframe src="../../lowerthird/graphics/lowerthirds.html" frameBorder="0"></iframe>')
+                    $("#lowerthird").find('iframe').remove()
+                    $("#lowerthird").append($item)
+                });
             }
         }
+
     })
 
-    showLeaderboard_lead.on('change', (newValue, oldValue) => {
-        // console.log(`Showleaderbord changed from ${oldValue} to ${newValue}`);
-        if (newValue != oldValue){
-            switch(newValue){
-                case true:
-                    $('#tableur').show(1000)
-                    break;
-                case false :
-                    $('#tableur').fadeOut(1000)
-                    break;
-            }
-        }
-    }); 
+    Colors.on('change', (newValue, oldValue) => {
 
-    showFlag.on('change', (newValue) => {
-        console.log(newValue)
-        switch(newValue){
-            case true:
-                $('.flag').fadeIn(1000)
-                // resetLeaderboard()
-                break;
-            case false :
-                $('.flag').fadeOut(1000)
-                break;
-        }
+        Object.keys(newValue).forEach((color, index) => {
+            // console.log(color, newValue[color])
+            root.style.setProperty("--"+ color, newValue[color] );
+            Clrs[color] = newValue[color]
+        })
+        
     })
 
-    showLogo.on('change', (newValue, oldValue) => {
-        // console.log(`showLogo changed from ${oldValue} to ${newValue}`);
+    Border.on('change', (newValue) => {
         switch(newValue){
-            case true:
-                $('#logoLocation').show(1000)
+            case true: 
+                $('.score').css('border-radius', '0px 10px 10px 0px');
+                $('#chronoLocation').css('border-radius', '10px');
+                $('.heat').css('border-radius', '10px');
                 break;
-            case false :
-                $('#logoLocation').hide(1000)
-                break;
-        }
-    }); 
-
-    showChrono.on('change', (newValue, oldValue)=> {
-        switch(newValue){
-            case true:
-                $('#chronoLocation').fadeIn(1000)
-                break;
-            case false :
-                $('#chronoLocation').fadeOut(1000)
+            case false:    
+                $('.score').css('border-radius', '0px 0px 0px 0px');
+                $('.heat').css('border-radius', '0px');
+                $('#chronoLocation').css('border-radius', '0px');
                 break;
         }
     })
-
-    LogoImg.on('change', (newValue, oldValue) => {
-        try{
-
-            logoEvent = newValue
-            $("#logo").css("background-image", "url(" + logoEvent + ")");
-
-            setupLeaderboard.value.logo != true ? $("#logo").hide() : ""
-        }
-        catch(e){
-            console.log(e)
-        }
-    }); 
-
-    showHeat.on('change', (newValue, oldValue) => {
-        console.log(`heatDetails changed from ${oldValue} to ${newValue}`);
-        switch(newValue){
-            case true:
-                $('#heatDetails').fadeIn(1000)
-                break;
-            case false :
-                $('#heatDetails').fadeOut(1000)
-                break;
-        }
-    }); 
-
-    showWodDetails.on('change', (newValue, oldValue) =>{
-        switch(newValue){
-            case true:
-                $('#wodDetails').fadeIn(1000)
-                break;
-            case false :
-                $('#wodDetails').fadeOut(1000)
-                break;
-        }
-    })
-
     
 
     laneShow.on('change', (newValue, oldValue) => {
@@ -384,103 +381,6 @@
         }
     })
 
-    Colors.on('change', (newValue, oldValue) => {
-        console.log("new value = ", newValue)
-
-        bg_color = newValue.BgColor
-        $("body").css('background-color', bg_color)
-
-        chrono_color = newValue.ChronoColor
-        root.style.setProperty("--chrono-color", chrono_color );
-
-        tx_chrono_color = newValue.TxChronoColor
-        root.style.setProperty("--tx-chrono-color", tx_chrono_color );
-
-        wod_color = newValue.WodColor
-        root.style.setProperty("--wod-color", wod_color );
-
-        tx_wod_color = newValue.TxWodColor
-        root.style.setProperty("--tx-wod-color",tx_wod_color );
-
-        main_color = newValue.MainColor;
-        root.style.setProperty("--main-color",main_color );
-
-        second_color = newValue.SecondColor;
-        root.style.setProperty("--second-color",second_color );
-
-        finish__color = newValue.FinishRankColor;
-        root.style.setProperty("--finish-color",finish__color );
-
-        first_rank__color = newValue.FirstRankColor;
-        root.style.setProperty("--firstRank-color",first_rank__color );
-
-        second_rank__color = newValue.SecondRankColor;
-        root.style.setProperty("--secondRank-color",second_rank__color );
-
-        third_rank__color = newValue.ThirdRankColor;
-        root.style.setProperty("--thirdRank-color",third_rank__color );
-
-        tx_main_color = newValue.TxMainColor;
-        root.style.setProperty("--tx-main-color",tx_main_color );
-
-        tx_second_color = newValue.TxSecondColor;
-        root.style.setProperty("--tx-second-color",tx_second_color );
-
-        tx_finish__color = newValue.TxFinishRankColor;
-        root.style.setProperty("--tx-finish-color",tx_finish__color );
-
-        tx_first_rank__color = newValue.TxFirstRankColor;
-        root.style.setProperty("--tx-firstRank-color",tx_first_rank__color );
-
-        tx_second_rank__color = newValue.TxSecondRankColor;
-        root.style.setProperty("--tx-secondRank-color",tx_second_rank__color );
-
-        tx_third_rank__color = newValue.TxThirdRankColor;
-        root.style.setProperty("--tx-thirdRank-color",tx_third_rank__color );
-
-        position_X_chrono = newValue.PositionXChrono;
-        root.style.setProperty("--X-position-chrono",position_X_chrono +"px" );
-
-        position_Y_chrono = newValue.PositionYChrono;
-        root.style.setProperty("--Y-position-chrono",position_Y_chrono+"px" );
-
-        root.style.setProperty("--Y-position-heatDetails",(parseInt(position_Y_chrono) - 70) +"px" );
-
-        position_X_logo = newValue.PositionXLogo;
-        root.style.setProperty("--positionX_logo",position_X_logo +"px" );
-
-        position_Y_logo = newValue.PositionYLogo;
-        root.style.setProperty("--positionY_logo",position_Y_logo+"px" );
-
-        position_X_leaderboard = newValue.PositionXLeaderboard;
-        root.style.setProperty("--positionX_leaderboard",position_X_leaderboard +"px" );
-
-        position_Y_leaderboard = newValue.PositionYLeaderboard;
-        root.style.setProperty("--positionY_leaderboard",position_Y_leaderboard+"px" );
-
-        font = newValue.Font;
-        root.style.setProperty("--family_font",font );
-        
-    })
-
-
-
-    Border.on('change', (newValue) => {
-        switch(newValue){
-            case true: 
-            console.log("border")
-                $('.score').css('border-radius', '0px 10px 10px 0px');
-                $('#chronoLocation').css('border-radius', '10px');
-                $('.heat').css('border-radius', '10px');
-                break;
-            case false:    
-                console.log("pas border")
-                $('.score').css('border-radius', '0px 0px 0px 0px');
-                $('.heat').css('border-radius', '0px');
-                $('#chronoLocation').css('border-radius', '0px');
-                break;
-        }
-    })
 
 const videoInfos = nodecg.Replicant('videoInfos', 'leaderboard')
 const videoShow = nodecg.Replicant('videoShow', 'leaderboard')

@@ -22,7 +22,12 @@
     "compatibleRange": "^1.1.1",
     "graphics": [
       {
-        "file": "index.html",
+        "file": "timer-1.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "timer-2.html",
         "width": 1920,
         "height": 1080
       }

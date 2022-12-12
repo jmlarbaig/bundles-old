@@ -1,6 +1,6 @@
 {
-    "staticServer": "JSON/WODACELONA/Static.json",
-    "timeStatic": "1000",
-    "dynamicServer": "JSON/WODACELONA/Dynamics.json",
-    "timeDynamics": "1000"
+    "staticServer": "JSON/BOT",
+    "timeStatic": 0,
+    "dynamicServer": "",
+    "timeDynamics": 0
 }

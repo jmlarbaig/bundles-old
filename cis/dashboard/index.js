@@ -24,59 +24,55 @@ const athletes_infos = {
     "Participant ID": ""
 }
 
-const eventId = nodecg.Replicant('eventId', 'connector');
-
-const token = nodecg.Replicant('TOKEN','connector');
-const listeAthlete = nodecg.Replicant('listeAthlete', 'connector')
-const laneAthInfos = nodecg.Replicant('laneAthInfos');
-const laneInfos = nodecg.Replicant('laneInfos')
-const laneShow = nodecg.Replicant('laneShow')
-const laneWods = nodecg.Replicant('laneWods')
-const laneAth  = nodecg.Replicant('laneAth')
-
-const statics = nodecg.Replicant('statics', 'connector');
-const dynamics = nodecg.Replicant('dynamics', 'connector');
-
+let eventId;
 let liste_heat = []
 let liste_heat_ath = []
-var athletes = []
-var heatInfos = []
-var liste_donnees = {'Team':[], 'Individual':[]}
+let athletes = []
+let heatInfos = []
+let liste_donnees = {'Team':[], 'Individual':[]}
 
-    statics.on('change', (newValue, oldValue) => {
+const listeAthlete = nodecg.Replicant('listeAthlete', 'connector')
+
+const lowerThirdData = nodecg.Replicant('lowerThirdData', 'lowerthird')
+
+
+// Destructuration du fichier static
+const eventInfos = nodecg.Replicant('eventInfos', 'connector');
+const s_athletes = nodecg.Replicant('s_athletes', 'connector');
+
+
+    eventInfos.on('change',(newValue, oldValue)=>{
+        eventId = newValue.eventId;
+    })
+
+    s_athletes.on('change', (newValue, oldValue) => {
         // console.log("CIS ", newValue)
         if(newValue != undefined){
-            updateHeat(newValue)
-            if(newValue.athletes != undefined ){
-                athletes = newValue.athletes
-                updateCIS()
-            }
-
+            athletes = newValue
+            updateCIS()
         }
     })
 
     listeAthlete.on('change', (newValue, oldValue) => {
-        // console.log("listeAthlete ", newValue)
             if(newValue != oldValue ){
-                // updateAthInfos(newValue)
                 dataTreatment(newValue)
-                athletes.length != 0 ? updateCIS() : ''
+                athletes.length != 0 && updateCIS()
             }
         })
 
     const TopScore = nodecg.Replicant('TopScore', 'connector')
 
     TopScore.on('change', (newValue, oldValue)=>{
-        console.log("top Score = ",newValue)
-        // console.log("top Score = ",newValue[0][0].scores[0].score)
+
         if (newValue != undefined){
             let index=0;
             if (!newValue[0].hasOwnProperty('error')){
                 for (let teams of newValue[0]){
                         // console.log("top index =", teams)
-                        var $list = $(".repTarget_Team");
+                        let $list = $(".repTarget_Team");
+                        $list.remove('span')
                         teams.scores.forEach((team, index)=>{
-                            var $item = $(
+                            let $item = $(
                                 '<span class="row">' +team.rank  + '-' + team.name + ' -> ' + team.score +'</span> '
                             )
                             $('.repTarget'+index).text("-> "+teams.scores[0].score)

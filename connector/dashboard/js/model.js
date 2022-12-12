@@ -44,3 +44,18 @@ const athletes_infos = {
     "Run 5K": "",
     "Participant ID": ""
 }
+
+let EventInit = {
+    "eventId": 0,
+    "workoutId": 0,
+    "heatId": 0,
+    "eventName": "",
+    "workoutName": "",
+    "heatName": "",
+    "location": "",
+    "logoUrl": "",
+    "heatTime": "",
+    "totalRecordsCount": 0,
+    "recordsCount": 0,
+    "wodType": ""
+}

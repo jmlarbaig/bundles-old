@@ -14,7 +14,7 @@
       "type": "time",
       "description": "",
       "heatsSize": 15,
-      "timeCap": "00:15:00",
+      "timeCap": "00:08:00",
       "format": "team",
       "scoreLabel": "",
       "createDate": "2022-03-31T08:08:18"
@@ -2650,7 +2650,7 @@
       "displayName": "Isabierre",
       "rank": 22,
       "overallPoints": 646,
-      "affiliate": "",
+      "affiliate": "Salut",
       "division": "RX FH",
       "countryCode": "FRA"
     },

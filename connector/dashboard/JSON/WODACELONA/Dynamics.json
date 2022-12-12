@@ -1,12 +1,12 @@
 {
-  "NtpTimeStart": "19:48:10.000",
+  "NtpTimeStart": "15:07:00.000",
   "eventId": 7984,
   "workoutid": 44710,
   "heatid": 268188,
   "eventName": "Wodcelona 2022",
   "workoutName": "IE4 HARAKIRI",
   "heatName": "H2 - MASTER MALE +40 & +45",
-  "status": "0",
+  "status": "W",
   "athletes": [
     {
       "lane": 1,

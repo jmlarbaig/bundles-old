@@ -22,11 +22,22 @@
     "compatibleRange": "^1.1.1",
     "dashboardPanels": [
       {
-        "name": "connector",
-        "title": "Connector",
-        "file": "connector.html",
-        "fullbleed": true,
-        "headerColor": "#525F78"
+        "name": "connection",
+        "title": "Connection Panel",
+        "file": "connection.html",
+        "width": 3,
+        "fullbleed": false,
+        "headerColor": "#525F78",
+        "workspace":"Main Workspace"
+      },
+      {
+        "name": "Data",
+        "title": "Data",
+        "file": "data.html",
+        "width": 4,
+        "fullbleed": false,
+        "headerColor": "#525F78",
+        "workspace":"Data Workspace"
       }
     ],
     "assetCategories": [
@@ -42,7 +53,7 @@
       },
       {
         "name": "mainSponsor",
-        "title": "Main Sponsor",
+        "title": "Main Sponsor Or Workout Sponsor",
         "allowedTypes": [
           "jpg",
           "jpeg",
@@ -51,8 +62,8 @@
         ]
       },
       {
-        "name": "sponsors",
-        "title": "Logo sponsors",
+        "name": "bottomSponsors",
+        "title": "Bottom sponsors",
         "allowedTypes": [
           "jpg",
           "jpeg",

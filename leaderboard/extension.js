@@ -36,14 +36,7 @@ module.exports = function (nodecg) {
 
 
     const setupLeaderboard = nodecg.Replicant('setupLeaderboard')
-    const showChrono = nodecg.Replicant('showChrono')
-    const showWodDetails = nodecg.Replicant('showWodDetails')
-    const showLeaderboard_lead = nodecg.Replicant('showLeaderboard_Lead')
-    const showFlag = nodecg.Replicant('showFlag')
-    const showAffiliate = nodecg.Replicant('showAffiliate')
-    const showLogo = nodecg.Replicant('showLogo')
 
-    console.log(setupFile)
     if (fs.existsSync(setupFile)) {   
         try {
             setupLeaderboard.value = JSON.parse(fs.readFileSync(setupFile))
@@ -56,7 +49,6 @@ module.exports = function (nodecg) {
     }
 
     nodecg.listenFor('setupFile', (value, ack) =>{
-        console.log(value)
         let data = JSON.stringify(value);
         fs.writeFile(setupFile, data, 'utf8',function(err) {
             if (err) throw err;
