@@ -38,6 +38,7 @@
 					<div id="led_NTP" class="led led-red"></div>
 					<h4>NTP</h4>
 					<p id="ntpTime"></p>
+					<p id="ntpIp"></p>
 			</div>
 			<div class="led-box col">
 					<div id="led_MQTT" class="led led-red"></div>
@@ -46,17 +47,20 @@
 			</div>
 		</div>
 		<div class="row box">
-			<div id="logo_event" class="col">
-			</div>
 			<div class="led-box col">
 				<div id="led_CC" class="led led-red"></div>
 				<h4>CC State</h4>
 				<p id="ccState"></p>
 			</div>
 			<div class="led-box col">
-				<div id="led_SK" class="led led-red"></div>
-				<h4>SK State</h4>
-				<p id="skState"></p>
+				<div id="led_SK_static" class="led led-red"></div>
+				<h4>SK State Static</h4>
+				<p id="skStateStatic"></p>
+			</div>
+			<div class="led-box col">
+				<div id="led_SK_dynamic" class="led led-red"></div>
+				<h4>SK State Dynamic</h4>
+				<p id="skStateDynamic"></p>
 			</div>
 		</div>
 		<div class="col box">
@@ -85,9 +89,10 @@
 		</div>
 		<div class="col box">
 			<h3>NTP Adresse</h3>
-			<div class="input-form">
+			<div class="input-form" id="ntpForm">
 				<label class="ip_adresse-label">IP Adress : </label>
-				<input type='text' id='adresse_ntp'></input>
+				<input type='radio' name='NTPradio' id="local" value="local">Local Ip</input>
+				<input type='radio' name='NTPradio' id="custom" value="custom" ><input type="text" id="adresse_ntp"></input></input>
 			</div>
 			<div class="log-button">
 				<button type='button' id='updateButton' onclick='updateNtp()'> Update </button>

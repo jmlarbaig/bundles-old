@@ -1,10 +1,8 @@
 
 async function resetOption(){
-    $("#division-select option").remove()
     $("#division-select option").append('<option value=0>-- Please Choose Division --</option>')
 
-    $("#workout-select option").remove()
-    $("#workout-select option").append('<option value=0>-- Please Choose Division --</option>')
+    $("#workout-select option").append('<option value=0>-- Please Choose Workout --</option>')
 
 }
 

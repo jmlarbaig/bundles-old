@@ -146,7 +146,11 @@ module.exports = function (nodecg, bundlePath) {
     })
 
     nodecg.listenFor('updateNTP', (value, ack)=>{
-        time(value);
+        if(value != 'local'){
+            time(value);
+        }else{
+            time(ip_ntp);
+        }
     })
 
     time(ip_ntp)
@@ -158,9 +162,18 @@ module.exports = function (nodecg, bundlePath) {
                 nowNtp.value = err
             }else{
                 console.log(date)
+                let d = Date.now()
                 let diff = date.getTime() - Date.now()
                 timeNTP.value = diff
-                nowNtp.value = date
+
+                let object = {
+                    'ip':ip,
+                    'date':date
+                }
+
+                nowNtp.value = object
+
+                console.log(diff)
             }
             // checkIpKairos()
         });
@@ -197,7 +210,7 @@ module.exports = function (nodecg, bundlePath) {
 
 
     // setInterval(time, 1000);
-    setInterval(checkIpKairos, 1000);
+    // setInterval(checkIpKairos, 1000);
 
 	nodecg.log.info(`Bundle "${__filename}" is initialized.`);
         

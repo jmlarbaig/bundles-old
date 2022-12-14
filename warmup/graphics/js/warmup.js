@@ -15,19 +15,21 @@ function resetHeader(data){
     var $item = $(
         '<div class="header_">' +
             '<div class="col">'+
-                '<img id="logo" src="' + data.logoUrl + '" />' +
+                '<div id="logo"></div>' +
             '</div>' +
             '<div class="col titleEvent">'+
                 '<h1>' +
                     data.eventName +
                 '</h1>' +
             '</div>' +
-            '<div class="col">'+
+            '<div class="col hTime">'+
                 '<h2 id="time">' + today + '</h2>' +
             '</div>' +
         '</div>'
     )
     $tab.append($item);
+
+    $tab.find('#logo').css('background-image','url('+eventLogo +')')
 
 
     setInterval(updateTimer, 1000)
@@ -63,17 +65,13 @@ function resetWarmup(data){
                     d.heat.current +
                 '</h1>' +
                 '<h2 class="WodName">'+
-                    d.wod.name + 
+                    d.wod.name + ' - ' + d.heat.title +
                 '</h2>' +
-                // '<h2  class="format_location">'+
-                //     d.wod.format + " - " + d.wod.location +
-                // '</h2>' +
-                '<h3 class="hours">'+
-                    "START AT : " + d.heat.time + 
-                '</h3>' +
-                '<h2 class="title">'+
-                    d.heat.title +
-                '</h2>' +
+                '<div class="hHours">' +
+                    '<h3 class="hours">'+
+                        "START AT : " + d.heat.time + 
+                    '</h3>' +
+                '</div>' +
                 '<div class="division">'+
                 '</div>' +
                 '<div class="table">'+
@@ -83,10 +81,10 @@ function resetWarmup(data){
                         '<tr>' +
                             // '<th>' + "Av" + '</th>' +
                             '<th>' + "Lane" + '</th>' +
-                            '<th>' + "Div" + '</th>' +
+                            '<th>' + "Division" + '</th>' +
                             '<th>' + "" + '</th>' +
                             '<th>' + "Name" + '</th>' +
-                            '<th>' + "Aff" + '</th>' +
+                            '<th>' + "Affiliation" + '</th>' +
                             '<th>' + "Rank" + '</th>' +
                             '<th>' + "Point" + '</th>' +
                             
@@ -109,7 +107,7 @@ function resetWarmup(data){
 
             console.log("a = ",a)
 
-            if (a.countryCode=="" || a.countryCode==null){a.countryCode = "null"}
+            if (a.countryCode=="" || a.countryCode==null){a.countryCode = null}
             else{
                 for(let f=0; f < FLAG.length; f++){
                     if (a.countryCode == FLAG[f]["3L"]){
@@ -119,16 +117,27 @@ function resetWarmup(data){
                 }
             }
 
+            let aff = '-'
+
+            if(station.affiliate != '' && station.affiliate != null){
+                aff=station.affiliate
+            }
+
+            let logo = eventLogo;
+            if(a.countryCode != null){
+                logo ='https://flagcdn.com/'+ a.countryCode.toLowerCase() + '.svg'
+            }
+
             var $itemtab = $(
                 '<tr class="athlete">' + 
                     // '<td class="flag">' + '<img src='+ station.avatarPath +' width="100"></img> ' + '</td>' +
                     '<td class="station">' + station.station  + '</th>' +
-                    '<td class="text-nowrap division">' + a.division  + '</th>' +
-                    '<td class="flag">' + '<img src="https://flagcdn.com/'+ a.countryCode.toLowerCase() + '.svg" width="20"></img> ' + '</td>' +
+                    '<td class="text-nowrap text-truncate division">' + a.division  + '</th>' +
+                    '<td class="flag">' + '<img src="'+ logo +'" width="20"></img> ' + '</td>' +
                     '<td class="text-nowrap text-truncate text-left name">' + a.displayName + '</td>' + 
-                    '<td class="text-nowrap text-truncate text-left name">' + station.affiliate + '</td>' + 
-                    '<td class="rank">' + a.rank  + '</th>' +
-                    '<td class="score">' + a.points + '</td>' +
+                    '<td class="text-nowrap text-truncate text-left name">' + aff + '</td>' + 
+                    '<td class="rank">' + a.rank  + '°</th>' +
+                    '<td class="score">' + a.points + ' PTS</td>' +
                 '</tr>'
             );
             

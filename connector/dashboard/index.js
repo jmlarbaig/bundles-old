@@ -20,6 +20,19 @@ let init = false
 
 let data = []
 
+    // Initialisation du choix de la vue
+    
+    let overlay=''
+
+    $('document').ready(()=>{
+        let ch = document.location.pathname.split('/')
+        overlay = ch[ch.length-1].replace('.html','')
+        
+        if(overlay == 'data'){
+            createDataView();
+        }
+    })
+
 
     logoEvent.on('change', (newValue) => {
         // console.log(newValue[0].url)
@@ -29,11 +42,18 @@ let data = []
     })
 
 
-
     async function Connection (){
         try{
+
+            StateConnection('connecting','static','')
+            StateConnection('connecting','dynamic','')
+            StateConnection('connecting','cc','')
+
             await ConnectionCC()
             await ConnectionSK()
+            
+            window.addEventListener('beforeunload', Deconnection , false);
+
         }
         catch(e){
             Deconnection();
@@ -42,17 +62,20 @@ let data = []
 
     function Deconnection(){
         try{
-            document.getElementById('connection_but').disabled = false;
-            nodecg.sendMessageToBundle('connection', 'leaderboard', false);
+            $('#connection_but').prop('disabled', false)
             clearInterval(statics_timer)
             clearInterval(dynamics_timer)
             Connected.value = false;
             staticJSONString = "";
             dynamicJSONString = "";
 
-            $('#skState').text("DECONNECTION")
-            $('#led_SK').removeClass('led-green led-orange')
-            $('#led_SK').addClass('led-red')
+            $('#skStateStatic').text("DECONNECTION")
+            $('#led_SK_static').removeClass('led-green led-orange')
+            $('#led_SK_static').addClass('led-red')
+
+            $('#skStateDynamic').text("DECONNECTION")
+            $('#led_SK_dynamic').removeClass('led-green led-orange')
+            $('#led_SK_dynamic').addClass('led-red')
 
             $('#ccState').text("DECONNECTION")
             $('#led_CC').removeClass('led-green led-orange')
@@ -65,7 +88,16 @@ let data = []
     }
 
     function updateNtp(){
-        let ipNtp = $('#adresse_ntp').val();
+
+        let radio = $('input[name=NTPradio]:checked', '#ntpForm').val();
+
+        let ipNtp;
+        if(radio == 'custom'){
+            ipNtp = $('#adresse_ntp').val();
+        }else{
+            ipNtp = 'local';
+        }
+
         $('#updateButton').attr('disabled', true)
         $('#ntpTime').text('WAITING')
         $('#led_NTP').removeClass('led-red')
@@ -80,32 +112,35 @@ let data = []
         nodecg.sendMessage('updateNTP', ipNtp);
     }
 
-    // $( document ).ready(function() {
-    //     nodecg.readReplicant('Connected', (value)=>{
-    //         switch(value){
-    //             case true:
-    //                 Connection()
-    //                 break;
-    //             case false:
-    //                 Deconnection();
-    //                 break;
-    //         }
-    //     })
-    // });
+    $('document').ready(function(){
+        if(Connected.value){
+            $('#connection_but').prop('disabled', true)
+        }else{
+            $('#connection_but').prop('disabled', false)
+        }
+    })
 
     Connected.on('change',(newValue, oldValue)=>{
         if(newValue){
-            $('#skState').text("CONNECTED")
-            $('#led_SK').removeClass('led-orange led-red')
-            $('#led_SK').addClass('led-green')
+            $('#connection_but').prop('disabled', true)
+            $('#skStateStatic').text("CONNECTED")
+            $('#led_SK_static').removeClass('led-orange led-red')
+            $('#led_SK_static').addClass('led-green')
+            $('#skStateDynamic').text("CONNECTED")
+            $('#led_SK_dynamic').removeClass('led-orange led-red')
+            $('#led_SK_dynamic').addClass('led-green')
             
             $('#ccState').text("CONNECTED")
             $('#led_CC').removeClass('led-orange led-red')
             $('#led_CC').addClass('led-green')
         }else{
-            $('#skState').text("DECONNECTION")
-            $('#led_SK').removeClass('led-green led-orange')
-            $('#led_SK').addClass('led-red')
+            $('#connection_but').prop('disabled', false)
+            $('#skStateStatic').text("DECONNECTION")
+            $('#skStateDynamic').text("DECONNECTION")
+            $('#led_SK_static').removeClass('led-green led-orange')
+            $('#led_SK_static').addClass('led-red')
+            $('#led_SK_dynamic').removeClass('led-green led-orange')
+            $('#led_SK_dynamic').addClass('led-red')
 
             $('#ccState').text("DECONNECTION")
             $('#led_CC').removeClass('led-green led-orange')
@@ -114,13 +149,12 @@ let data = []
     })
 
     nodecg.readReplicant('dataConfig', (value) =>{
-        document.getElementById('address_IP').value = value.staticServer.toString()
-        document.getElementById('adresse_ntp').value = value.ntpAdress.toString()
+        $('#address_IP').val(value.staticServer.toString())
+        $('#adresse_ntp').val(value.ntpAdress.toString())
     })
 
     nodecg.readReplicant('dataConfigCC', (value) =>{
-        document.getElementById('usernameCC').value = value.usernameCC.toString()
-        document.getElementById('passwordCC').value = value.passwordCC.toString()
-        document.getElementById('eventId').value = value.eventId.toString()
+        $('#usernameCC').val(value.usernameCC.toString())
+        $('#passwordCC').val(value.passwordCC.toString())
+        $('#eventId').val(value.eventId.toString())
     })
-

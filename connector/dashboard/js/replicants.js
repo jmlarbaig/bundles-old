@@ -21,7 +21,7 @@ const heatInfos = nodecg.Replicant('heatInfos');
 const workoutInfo = nodecg.Replicant('workoutInfo');
 const s_athletes = nodecg.Replicant('s_athletes');
 //! A supprimer
-const Statics = nodecg.Replicant('statics');
+// const Statics = nodecg.Replicant('statics');
 
 
 // Destructuration du fichier Dynamic
@@ -29,7 +29,7 @@ const statusHeat = nodecg.Replicant('status');
 const d_athletes = nodecg.Replicant('d_athletes');
 
 //! À supprimer
-const Dynamics = nodecg.Replicant('dynamics');
+// const Dynamics = nodecg.Replicant('dynamics');
 
 
 const ParticipantsWod = nodecg.Replicant('ParticipantsWod');

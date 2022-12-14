@@ -21,7 +21,7 @@ function updateFront(data){
                         '<select id="subtype'+val.lane+'" class="subtype">' +
                             '<option value="affiliation">Affiliation</option>' +
                             '<option value="athletes">Athlete(s)</option>' +
-                            '<option value="benchmarks">Benchmarck</option>' +
+                            // '<option value="benchmarks">Benchmarck</option>' +
                             '<option value="wods">Wod results</option>' +
                             '<option value="overall">X overall standing after X events</option>' +
                         '</select>' +

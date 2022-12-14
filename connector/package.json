@@ -34,7 +34,7 @@
         "name": "Data",
         "title": "Data",
         "file": "data.html",
-        "width": 4,
+        "width": 8,
         "fullbleed": false,
         "headerColor": "#525F78",
         "workspace":"Data Workspace"

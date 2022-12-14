@@ -1,9 +1,6 @@
 
     async function ConnectionSK(){
         try{
-            $('#skState').text("CONNECTING..");
-            $('#led_SK').removeClass('led-green led-red')
-            $('#led_SK').addClass('led-orange')
 
             let addIp = $('#address_IP').val()
             adr_IP_static = addIp + '/Static.json';
@@ -21,15 +18,10 @@
             dataNewConfig.ntpAdress = $('#adresse_ntp').val();
     
             nodecg.sendMessage('dataOverwrite', dataNewConfig);
-    
-            $('#skState').text("CONNECTED")
-            $('#led_SK').removeClass('led-orange led-red')
-            $('#led_SK').addClass('led-green')
-    
+
 
         }catch(e){
-            console.log(e)            
-            Deconnection();
+            console.log(e)
         }
 
     }
@@ -65,9 +57,13 @@
                         updateScoreToBeat(statics.workoutId , statics.athletes);
                     }
 
+                }).then(()=>{
+                    StateConnection('connected','static','')
                 })
                 .catch(function(e) {
                     console.log(e)
+                    StateConnection('error','static', e)
+                    // Deconnection();
                 })
     }
 
@@ -88,10 +84,14 @@
 
                     // Dynamics.value = dynamics
                 }
-                
-                console.log(dynamics)
+
+                // console.log(dynamics)
+            }).then(()=>{
+                StateConnection('connected','dynamic','')
             })
             .catch(function(e) {
                 console.log(e)
+                StateConnection('error','dynamic', e)
+                // Deconnection();
             })
     }

@@ -150,5 +150,9 @@ async function logCC(username, password){
         .then(response => response.json())
         .then(d => {
             console.log("Response CC = ", d)
+            StateConnection('connected','cc','')
+        })
+        .catch((e)=>{
+            StateConnection('error','cc',e)
         })
 }

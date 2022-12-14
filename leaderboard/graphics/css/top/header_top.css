@@ -19,6 +19,7 @@
     height: 150px;
     background-color: var(--main_color);
     box-shadow: 2px 5px rgb(0, 0, 0), 6px 8px rgb(136, 136, 136);
+    text-align: center;
 }
 
 .header .box_logo .logo{
@@ -56,7 +57,7 @@
 }
 
 .header .box_heat .heat .heat_content .details{
-    font-size: 1.5em;
+    font-size: 1.8em;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -75,7 +76,8 @@
 }
 
 .header .box_heat .heat .heat_content .details #mvt{
-    font-size: 0.5em;
+    font-size: 1.5rem;
+    font-weight: 800;
     padding: 10px;
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
@@ -87,7 +89,7 @@
 }
 
 #mvt span:first-child{
-    border: red solid 1px;
+    border: red solid 2px;
 }
 
 .header .box_heat .heat .heat_content .box_mainSponsor {
@@ -104,6 +106,7 @@
     padding: 10px 10px 10px 10px;
     width:200px;
     font-size: 1.5em;
+    text-align: right;
 }
 
 .header .box_heat .heat .heat_content .box_mainSponsor .mainSponsor {
@@ -112,7 +115,7 @@
     height: 75px;
     background-repeat: no-repeat;
     background-size:     contain;                      /* <------ */
-    background-position: right center;
+    background-position: center;
     background-origin: content-box;
 }
 

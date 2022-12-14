@@ -42,6 +42,8 @@
     var tx_second_rank__color;
     var tx_third_rank__color;
 
+    let chrono;
+
 
     var showDrapeau;
 
@@ -68,27 +70,12 @@
     const statusHeat = nodecg.Replicant('status', 'connector');
     const d_athletes = nodecg.Replicant('d_athletes', 'connector');
 
-    /* Lowerthrid Replicants */
-    const laneInfos = nodecg.Replicant('laneInfos', 'cis')
-    const laneAthInfos = nodecg.Replicant('laneAthInfos', 'cis');
-    const laneShow = nodecg.Replicant('laneShow', 'cis')
-    const laneWods = nodecg.Replicant('laneWods', 'cis')
-    const laneAth = nodecg.Replicant('laneAth', 'cis')
-
-    const lowerThirdData = nodecg.Replicant('lowerThirdData', 'lowerthird')
-    const lowerThirdVoidShow = nodecg.Replicant('lowerThirdVoidShow', 'lowerthird')
-    const lowerThirdEventShow = nodecg.Replicant('lowerThirdEventShow', 'lowerthird')
-    const lowerThirdYTShow = nodecg.Replicant('lowerThirdYTShow', 'lowerthird')
-    const lowerThirdCodePromo = nodecg.Replicant('lowerThirdCodePromo', 'lowerthird')
-    const lowerThirdShowCode = nodecg.Replicant('lowerThirdShowCode', 'lowerthird')
 
     const statics = nodecg.Replicant('statics', 'connector');
     const dynamics = nodecg.Replicant('dynamics', 'connector');
 
     const UrlChange = nodecg.Replicant('UrlChange', 'leaderboard');
 
-
-    const sponsorWod = nodecg.Replicant('sponsorWod', 'connector')
     const bottomSponsors = nodecg.Replicant('assets:bottomSponsors', 'connector')
 
     const TopScore = nodecg.Replicant('TopScore', 'connector')
@@ -141,6 +128,7 @@
     let endTime;
 
     statusHeat.on('change', (newValue, oldValue)=>{
+        console.log(newValue)
         if( newValue.NtpTimeStart !== ntpStartTime){
             ntpStartTime = newValue.NtpTimeStart
             startTime = timeToDateTime(ntpStartTime);
@@ -283,103 +271,6 @@
         }
     })
     
-
-    laneShow.on('change', (newValue, oldValue) => {
-            console.log(newValue)
-            switch(newValue){
-                case true:
-                    lowerThird(laneInfos.value).then(()=>{
-                        $('#lowerThird').fadeIn(1000)
-                    })
-                    break;
-                case false :
-                    $('#lowerThird').fadeOut(1000)
-                    break;
-            }
-    })
-
-    laneWods.on('change', (newValue, oldValue)=> {
-        console.log("lane info = ", newValue)
-        switch(newValue){
-            case true:
-                lowerThirdWods(laneInfos.value).then(()=>{
-                    $('#lowerThirdWod').fadeIn(1000)
-                })
-                break;
-            case false :
-                $('#lowerThirdWod').fadeOut(1000)
-                break;
-        }
-    })
-
-    laneAth.on('change', (newValue, oldValue)=> {
-        console.log("lane info = ", newValue)
-        switch(newValue){
-            case true:
-                lowerThirdAthletes(laneInfos.value).then(()=>{
-                    $('#lowerThirdAth').fadeIn(1000)
-                })
-                break;
-            case false :
-                $('#lowerThirdAth').fadeOut(1000)
-                break;
-        }
-    })
-
-
-    lowerThirdVoidShow.on('change', (newValue, oldValue) => {
-            switch(newValue){
-                case true:
-                    lowerThirdVoid().then(()=>{
-                        $('#lowerThirdVoid').fadeIn(1000)
-                    })
-                    break;
-                case false :
-                    $('#lowerThirdVoid').fadeOut(1000)
-                    break;
-            }
-
-    })
-
-    lowerThirdEventShow.on('change', (newValue)=> {
-        switch(newValue){
-            case true:
-                lowerThirdEvent().then(()=>{
-                    $('#lowerThirdEvent').fadeIn(1000)
-                })
-                break;
-            case false :
-                $('#lowerThirdEvent').fadeOut(1000)
-                break;
-        }
-    })
-
-    lowerThirdYTShow.on('change', (newValue)=> {
-        switch(newValue){
-            case true:
-                lowerThirdYT().then(()=>{
-                    $('#lowerThirdYT').fadeIn(1000)
-                })
-                break;
-            case false :
-                $('#lowerThirdYT').fadeOut(1000)
-                break;
-        }
-    })
-
-    lowerThirdShowCode.on('change', (newValue)=>{
-        console.log(newValue)
-        switch(newValue){
-            case true:
-                lowerThirdPromo().then(()=>{
-                    $('#lowerThirdCodePromo').fadeIn(1000)
-                })
-                break;
-            case false :
-                $('#lowerThirdCodePromo').fadeOut(1000)
-                break;
-        }
-    })
 
 
 const videoInfos = nodecg.Replicant('videoInfos', 'leaderboard')

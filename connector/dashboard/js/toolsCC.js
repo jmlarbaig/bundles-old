@@ -1,9 +1,6 @@
 async function ConnectionCC(){
     try{
 
-        $('#ccState').text("CONNECTING..");
-        $('#led_CC').removeClass('led-green led-red')
-        $('#led_CC').addClass('led-orange')
 
         let user = document.getElementById('usernameCC').value.toString()
         let passwd = document.getElementById('passwordCC').value.toString()
@@ -24,13 +21,9 @@ async function ConnectionCC(){
         
         await updateEvent(event)
         await updateWorkoutInfos(event)
-
-        $('#ccState').text("CONNECTED")
-        $('#led_CC').removeClass('led-orange led-red')
-        $('#led_CC').addClass('led-green')
     }
     catch(e){
-        Deconnection();
+        ErrorFetch('cc', e)
     }
 }
 

@@ -20,16 +20,20 @@ ipAddress.on('change', (newValue, oldValue) => {
 })
 
 nowNtp.on('change', (newValue, oldValue)=>{
+    console.log(newValue)
     $('#updateButton').removeAttr('disabled')
-    let adresseIp = newValue.split('T')[1]
-    if(!newValue.includes('Timeout waiting for NTP')){
-        $('#ntpTime').text(adresseIp)
+    let ip = newValue.ip
+    let date = newValue.date.split('T')[1]
+    if(!newValue.date.includes('Timeout waiting for NTP')){
+        $('#ntpTime').text(date)        
+        $('#ntpIp').text(ip)
         $('#led_NTP').addClass('led-green')
         $('#led_NTP').removeClass('led-orange')
         $('#led_NTP').removeClass('led-red')
     }
     else{
-        $('#ntpTime').text(adresseIp)
+        $('#ntpTime').text(date)
+        $('#ntpIp').text(ip)
         $('#led_NTP').addClass('led-red')
         $('#led_NTP').removeClass('led-orange')
         $('#led_NTP').removeClass('led-green')
@@ -71,3 +75,71 @@ data_ath.on('change', (newValue, oldValue) => {
         }
     }
 })
+
+
+
+function StateConnection(state,location, error){
+    switch(state){
+        case 'connecting':
+            switch(location){
+                case 'cc':
+                    $('#ccState').text("CONNECTING")
+                    $('#led_CC').removeClass('led-green led-red')
+                    $('#led_CC').addClass('led-orange')
+                    break;
+                case 'static':
+                    $('#skStateStatic').text("CONNECTING")
+                    $('#led_SK_static').removeClass('led-green led-red')
+                    $('#led_SK_static').addClass('led-orange')
+                    clearInterval(statics_timer)
+                    break;
+                case'dynamic':
+                    $('#skStateDynamic').text("CONNECTING")
+                    $('#led_SK_dynamic').removeClass('led-green led-red')
+                    $('#led_SK_dynamic').addClass('led-orange')
+                    clearInterval(dynamics_timer)
+                    break;
+            }
+            break;
+        case 'error':
+            switch(location){
+                case 'cc':
+                    $('#ccState').text("ERROR : " + error)
+                    $('#led_CC').removeClass('led-green led-orange')
+                    $('#led_CC').addClass('led-red')
+                    break;
+                case 'static':
+                    $('#skStateStatic').text("ERROR : " + error)
+                    $('#led_SK_static').removeClass('led-green led-orange')
+                    $('#led_SK_static').addClass('led-red')
+                    break;
+                case'dynamic':
+                    $('#skStateDynamic').text("ERROR : " + error)
+                    $('#led_SK_dynamic').removeClass('led-green led-orange')
+                    $('#led_SK_dynamic').addClass('led-red')
+                    break;
+            }
+            break;
+        case 'connected':
+            switch(location){
+                case 'cc':
+                    $('#ccState').text("CONNECTED")
+                    $('#led_CC').removeClass('led-red led-orange')
+                    $('#led_CC').addClass('led-green')
+                    break;
+                case 'static':
+                    $('#skStateStatic').text("CONNECTED")
+                    $('#led_SK_static').removeClass('led-orange led-red')
+                    $('#led_SK_static').addClass('led-green')
+                    clearInterval(statics_timer)
+                    break;
+                case'dynamic':
+                    $('#skStateDynamic').text("CONNECTED")
+                    $('#led_SK_dynamic').removeClass('led-orange led-red')
+                    $('#led_SK_dynamic').addClass('led-green')
+                    clearInterval(dynamics_timer)
+                    break;
+            }
+            break;
+    }
+}

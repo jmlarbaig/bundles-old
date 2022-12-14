@@ -1,7 +1,7 @@
 {
-    "staticServer": "JSON/BOT",
+    "staticServer": "JSON/WODACELONA",
     "timeStatic": 0,
     "dynamicServer": "",
     "timeDynamics": 0,
-    "ntpAdress": "time.google.com"
+    "ntpAdress": "0.be.pool.ntp.org"
 }

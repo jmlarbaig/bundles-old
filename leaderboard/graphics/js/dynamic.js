@@ -31,6 +31,7 @@ function updateDynamics(newScoring, status){
                             if ( Mvt_name[elemAth[i].lane].mvtNames.includes("Sprint")){
                                 elemAth[i].$item.find(".popup").text( Mvt_name[elemAth[i].lane].mvtNames);
                                 elemAth[i].$item.find(".popup").show();
+                                console.log('chorno : ', chrono)
                                 elemAth[i].$item.find(".score").text(chrono);
                             }
                             else{
@@ -83,7 +84,8 @@ function updateDynamics(newScoring, status){
                                     elemAth[i].$item.find(".popup").show();
                                 break;
                             }
-
+                            setupLeaderboard.value.scoreConfig && elemAth[i].$item.find(".score").text(elemAth[i].score_abs) 
+                            setupLeaderboard.value.scoreConfig && elemAth[i].$item.find(".popup").hide();
                         }
                         else{
                             elemAth[i].$item.find(".score").text(elemAth[i].score_abs)
@@ -129,11 +131,13 @@ function updateDynamics(newScoring, status){
                         elemAth[i].$item.find(".score").toggleClass('score finish_rank', true)
                         elemAth[i].$item.find(".circle").toggleClass('circle finish_rank', true)
 
-                        if(elemAth[i].CurrentRank > 1 ){
-                            setTimeout(()=>{
-                                elemAth[i].$item.remove();
-                                reposition("#leaderboard"+ key, elemAth);
-                            }, 5000)
+                        if(overlay == 'overlay_top'){
+                            if(elemAth[i].CurrentRank > 1 ){
+                                setTimeout(()=>{
+                                    elemAth[i].$item.remove();
+                                    reposition("#leaderboard"+ key, elemAth);
+                                }, 5000)
+                            }
                         }
                     }
 
