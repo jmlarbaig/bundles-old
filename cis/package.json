@@ -30,13 +30,6 @@
         "headerColor": "#525F78",
         "workspace": "Lowerthird Workspace"
       }
-    ],
-    "graphics": [
-      {
-        "file": "cis.html",
-        "width": 1920,
-        "height": 1080
-      }
     ]
   },
   "repository": "git@gitlab.com:jeanmarie.larbaig/bundlesfv",
