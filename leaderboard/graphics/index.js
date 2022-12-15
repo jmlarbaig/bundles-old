@@ -151,7 +151,8 @@
             if( newValue.NtpTimeStart !== ntpStartTime){
                 ntpStartTime = newValue.NtpTimeStart
                 startTime = timeToDateTime(ntpStartTime);
-                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
+                console.log('tc : ',tc)
+                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1] ));
                 if(timerLaunch != null){
                     clearInterval(timerLaunch)
                     timerLaunch = null;

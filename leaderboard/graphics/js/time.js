@@ -51,7 +51,8 @@ function updateTime(){
             chrono = msToTime(timeDiffStart);
         }
     }
-    document.getElementById("time").innerHTML = chrono;
+    $('#time').text(chrono)
+    // $("#time").val(chrono.toString());
 
 }
 

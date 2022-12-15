@@ -51,6 +51,8 @@ function typeWorkout(data){
         timecap = "0'"+ tc[2];
     }
 
+    console.log()
+
     return ({typeWod, formatWod, timecap, heatId})
 }
 

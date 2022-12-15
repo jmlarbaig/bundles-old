@@ -100,11 +100,16 @@ function updateDynamics(newScoring, status){
                             elemAth[i].$item.find(".score").text('TC');
                             elemAth[i].$item.find(".popup").show();
                             elemAth[i].$item.find(".popup").text( _r);
+                        }else if(status == "F"){
+                            var result = elemAth[i].result;
+                            elemAth[i].$item.find(".popup").show();
+                            elemAth[i].$item.find(".score").text('FIN')
+                            elemAth[i].$item.find(".popup").text(result.toString().slice(result.length - 9, result.length - 8) != "0" ? result = result.toString().slice(result.length -8, result.length) : result.toString().slice(result.length - 7, result.length - 6) != "0" ? result = result.toString().slice(result.length -7, result.length)  : result = result.toString().slice(result.length -6, result.length));
                         }
                     }
 
 
-                    if(elemAth[i].result == "" && status != "T"){
+                    if(elemAth[i].result == ""){
                         if (elemAth[i].CurrentRank == 1){
                             elemAth[i].$item.find(".rank").toggleClass('rank first_rank', true)
                             elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank other_rank', false)
@@ -147,24 +152,24 @@ function updateDynamics(newScoring, status){
                         elemAth[i].$item.find(".circle").toggleClass('circle finish_rank', true)
                         elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank first_rank other_rank', false)
 
-                        if(overlay == 'overlay_top'){
-                            if(elemAth[i].CurrentRank > 2 ){
-                                let _lane = elemAth[i].lane;
-                                setTimeout(()=>{
-                                    for(let ath of elemAth){
-                                        if(ath.lane === _lane){
-                                            ath.$item.fadeOut(1000);
-                                            setTimeout(()=>{
-                                                ath.$item.remove();
-                                                reposition("#leaderboard"+ key, elemAth);
-                                            }, 2000)
-                                            break;
-                                        }
-                                    }
+                        // if(overlay == 'overlay_top'){
+                        //     if(elemAth[i].CurrentRank > 2 ){
+                        //         let _lane = elemAth[i].lane;
+                        //         setTimeout(()=>{
+                        //             for(let ath of elemAth){
+                        //                 if(ath.lane === _lane){
+                        //                     ath.$item.fadeOut(1000);
+                        //                     setTimeout(()=>{
+                        //                         ath.$item.remove();
+                        //                         reposition("#leaderboard"+ key, elemAth);
+                        //                     }, 2000)
+                        //                     break;
+                        //                 }
+                        //             }
 
-                                }, 5000)
-                            }
-                        }
+                        //         }, 5000)
+                        //     }
+                        // }
                     }
 
                     if(overlay == 'commentator'){
