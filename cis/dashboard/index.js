@@ -32,6 +32,7 @@ let heatInfos = []
 let liste_donnees = {'Team':[], 'Individual':[]}
 
 const listeAthlete = nodecg.Replicant('listeAthlete', 'connector')
+const listCis = nodecg.Replicant('CIS')
 
 const lowerThirdData = nodecg.Replicant('lowerThirdData', 'lowerthird')
 
@@ -64,7 +65,7 @@ const s_athletes = nodecg.Replicant('s_athletes', 'connector');
 
     TopScore.on('change', (newValue, oldValue)=>{
 
-        if (newValue != undefined){
+        if (newValue!=undefined && newValue.length > 0){
             let index=0;
             if (!newValue[0].hasOwnProperty('error')){
                 for (let teams of newValue[0]){

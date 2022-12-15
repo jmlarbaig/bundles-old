@@ -127,9 +127,16 @@ function resetLeaderboard(newData){
                 case 'progression':
                     $tabItem = headerTV(divisionsNames, indexDivision, repTarget)
                     break;
+                case 'commentator':
+                    $tabItem = headerCommentator(divisionsNames, indexDivision, repTarget)
+                    break;
             }
 
             $tab.append($tabItem);
+
+            if(overlay == 'commentator'){
+                createStatsHeader(indexDivision);
+            }
 
             let $list = $("#leaderboard"+ indexDivision +" #athletes");
             $list.find(".athlete").remove();
@@ -152,12 +159,19 @@ function resetLeaderboard(newData){
                     case 'progression':
                         $item = progressView(elementAth)
                     break;
+                    case 'commentator':
+                        $item = commentator(elementAth)
+                    break;
                 }
 
                 elementAth.$item = $item;
                 elementAth.$item.hide()
                 elementAth.$item.show(500)
                 $list.append($item);
+
+                if(overlay == 'commentator'){
+                    createStats( elementAth, indexDivision);
+                }
 
                 
                 setTimeout(()=>{                    
@@ -166,14 +180,14 @@ function resetLeaderboard(newData){
                     if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
                     if(overlay === 'overlay_top') {height_tot = height_top} else {(height_tot +=  elementAth.$item.height()) }
                     
-                    $("#leaderboard"+ indexDivision + " #athletes").height(height_tot)
-                    $("#leaderboard"+ indexDivision).height(height_tot + $("#leaderboard"+indexDivision + " .header").height())
+                    if(overlay !== 'commentator'){
+                        $("#leaderboard"+ indexDivision + " #athletes").height(height_tot)
+                        $("#leaderboard"+ indexDivision).height(height_tot + $("#leaderboard"+indexDivision + " .header").height())
+                    }
+
                     
                     statusHeat.status == '0' && athletesDivision[indexDivision].sort(ascendingLane);
                     reposition("#leaderboard"+ indexDivision, athletesDivision[indexDivision]);
-
-
-                    // animateCSS('#aht'+elementAth.lane, 'fadeInLeft')
 
                 }, 1000)
 
@@ -188,20 +202,3 @@ function resetLeaderboard(newData){
 }
 
 
-const animateCSS = (element, animation, prefix = 'animate__') =>
-  // We create a Promise and return it
-  new Promise((resolve, reject) => {
-    const animationName = `${prefix}${animation}`;
-    const node = document.querySelector(element);
-
-    node.classList.add(`${prefix}animated`, animationName);
-
-    // When the animation ends, we clean the classes and resolve the Promise
-    function handleAnimationEnd(event) {
-      event.stopPropagation();
-      node.classList.remove(`${prefix}animated`, animationName);
-      resolve('Animation ended');
-    }
-
-    node.addEventListener('animationend', handleAnimationEnd, {once: true});
-  });

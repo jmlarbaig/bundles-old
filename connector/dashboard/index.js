@@ -63,8 +63,18 @@ let data = []
     function Deconnection(){
         try{
             $('#connection_but').prop('disabled', false)
-            clearInterval(statics_timer)
-            clearInterval(dynamics_timer)
+            if(intervalStatic != null){
+                console.log('clear')
+                clearInterval(intervalStatic)
+                intervalStatic = null;
+            }
+            if(intervalDynamic != null){
+                console.log('clear')
+                clearInterval(intervalDynamic)
+                intervalDynamic = null;
+            }
+            // clearInterval(statics_timer)
+            // clearInterval(dynamics_timer)
             Connected.value = false;
             staticJSONString = "";
             dynamicJSONString = "";
@@ -151,6 +161,7 @@ let data = []
     nodecg.readReplicant('dataConfig', (value) =>{
         $('#address_IP').val(value.staticServer.toString())
         $('#adresse_ntp').val(value.ntpAdress.toString())
+        $('#local').attr('checked', true);
     })
 
     nodecg.readReplicant('dataConfigCC', (value) =>{

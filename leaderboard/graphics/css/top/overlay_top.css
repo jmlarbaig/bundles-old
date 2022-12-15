@@ -104,8 +104,8 @@
 
 .leaderboard .athlete .lane{
     text-align: center;
-    width: 60px;
-    max-width: 60px;
+    width: 45px;
+    max-width: 45px;
     filter: blur(0px);
     padding: var(--padding_ath_content);
     white-space: nowrap;
@@ -114,7 +114,7 @@
 }
 
 .leaderboard .athlete .name {
-    padding-left: 10px;
+    padding: 0px 5px;
     text-transform: uppercase;
     font-weight: 900;
     width: 150px;

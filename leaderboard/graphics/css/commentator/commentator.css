@@ -1,0 +1,116 @@
+
+.leaderboards{
+    background-color: rgb(232, 232, 232);
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
+}
+
+.leaderboard{
+    display: flex;
+    flex-direction: column;
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
+}
+
+.leaderboard .header{
+    height: 100px;
+    padding: 20px 20px;
+    font-weight: 900;
+    font-size: 30px; 
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--second_color);
+    color: var(--tx_second_color);
+    border-bottom: 2px white solid;
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
+}
+
+
+.leaderboard .division{
+    width: 15%;
+}
+
+
+.leaderboard #mvt{
+    width: 70%;
+}
+
+.leaderboard #mvt span:nth-child(1){
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
+    border: solid 5px red;
+    padding: 10px;
+}
+
+.leaderboard .repTar{
+    text-align: right;
+    margin: auto;
+    width: 15%;
+    background-color: var(--second_color);
+}
+
+.leaderboard .athletes {
+    width: 100%;
+    font-weight: 900;
+    font-size: 24px;  
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
+}
+
+.leaderboard .athlete{
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
+}
+
+.leaderboard .rank{
+    border-right: 2px solid white;
+}
+
+.leaderboard .lane{
+    filter: blur(0px);
+}
+
+.leaderboard .name {
+}
+
+.leaderboard .affiliate {
+}
+
+.leaderboard .score {
+    text-align: center;
+    border-radius: --(border);
+}
+
+.leaderboard .popup {
+    text-align: center;
+}
+
+.leaderboard .flag {
+}
+
+.leaderboard .flag .box_flag {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.rounds{
+    text-align: center;
+    background-color: white;
+}

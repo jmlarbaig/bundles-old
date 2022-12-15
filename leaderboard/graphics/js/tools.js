@@ -37,6 +37,7 @@ function typeWorkout(data){
     let typeWod = data[0].type;
     let formatWod = data[0].format
     let timecap = data[0].timeCap
+    let heatId =  data[0].heatId;
 
     tc = timecap.split(':');
 
@@ -50,7 +51,7 @@ function typeWorkout(data){
         timecap = "0'"+ tc[2];
     }
 
-    return ({typeWod, formatWod, timecap})
+    return ({typeWod, formatWod, timecap, heatId})
 }
 
 function treatReptarget(repTarget){
@@ -81,10 +82,22 @@ function treatDisplayName(displayName){
     return newName
 }
 
-function treatWorkouts(data){
-    for ( let workout of data){
-        const { description, mvt_id, mvt_names, mvt_reps, mvt_units, increments, total_reps, rounds, rep_per_rounds, division, mvt_type } = data
+let auth = {};
 
+function treatWorkouts(data){
+
+    auth = {}
+
+    for ( let workout of data){
+        const { description, mvt_id, mvt_names, mvt_reps, mvt_units, increments, total_reps, rounds, rep_per_rounds, division, mvt_type } = workout
+
+        if(mvt_id.length > 0){
+            auth[division] = true
+        }else{
+            auth[division] = false
+        }
+
+        console.log('Workout :', auth)
     }
 }
 
@@ -223,36 +236,36 @@ function mvtIndexAmrap(nbrReps, division, rounds){
     let repTarget;
     let id;
     let arrayMvt = [];
-    for (let wod of workout){
+    for (let wod of workouts){
         if (wod.division == division ){
             if(nbrReps !=0){
-                if (wod.mvt_reps[index] != 0 ){
-                    if (rounds > 1){
-                        nbrReps = nbrReps - (wod.total_reps*(rounds-1))
-                        var res_seuil = nbrReps
-                        // console.log(nbrReps)
+                    if (wod.mvt_reps[index] != 0 ){
+                        if (rounds > 1){
+                            nbrReps = nbrReps - (wod.total_reps*(rounds-1))
+                            var res_seuil = nbrReps
+                            // console.log(nbrReps)
+                        }
+                        if (nbrReps <= wod.mvt_reps[index] && rounds > 1){
+                            index = 0
+                        }
+                        while(nbrReps >= 0){
+                            nbrReps =  (nbrReps - wod.mvt_reps[index])
+                            // console.log("je suis à l'index : ", index)
+                            index++;
+                        }
+                        res = nbrReps
+                        var res2 = res
+                        // console.log("je suis à l'index =", index-1 ," et l'id : ",wod.mvt_id[index-1], " donc ", wod.mvt_reps[index-1], wod.mvt_names[index-1])
+                        index = index -1;
+                        repTarget = wod.mvt_reps[index]
                     }
-                    if (nbrReps <= wod.mvt_reps[index] && rounds > 1){
-                        index = 0
+                    else{
+                        res2 != undefined ? res = nbrReps - res2 : res = (nbrReps - (wod.total_reps*rounds))
+                        index = wod.mvt_reps.length -1
+                        repTarget = 'MAX'
+                        // console.log("MAX : ", nbrReps)
+                        // console.log("MAX index : ", index)
                     }
-                    while(nbrReps >= 0){
-                        nbrReps =  (nbrReps - wod.mvt_reps[index])
-                        // console.log("je suis à l'index : ", index)
-                        index++;
-                    }
-                    res = nbrReps
-                    var res2 = res
-                    // console.log("je suis à l'index =", index-1 ," et l'id : ",wod.mvt_id[index-1], " donc ", wod.mvt_reps[index-1], wod.mvt_names[index-1])
-                    index = index -1;
-                    repTarget = wod.mvt_reps[index]
-                }
-                else{
-                    res2 != undefined ? res = nbrReps - res2 : res = (nbrReps - (wod.total_reps*rounds))
-                    index = wod.mvt_reps.length -1
-                    repTarget = 'MAX'
-                    // console.log("MAX : ", nbrReps)
-                    // console.log("MAX index : ", index)
-                }
     
             }
             else {
@@ -271,7 +284,7 @@ function mvtIndexAmrap(nbrReps, division, rounds){
                 mvtToUP = wod.mvt_names[i].toUpperCase();
                 arrayMvt.push("<span>"+wod.mvt_names[i].toUpperCase()+"</span>")
             }
-            return( {'scoreAbsMvt':wod.mvt_reps[index] + res,'scoreRelMvt':res_seuil,'id':wod.mvt_id[index],'repTarget':repTarget,'mvtNames':wod.mvt_names[index], 'rounds':rounds, 'totalReps': wod.total_reps, 'arrayMvt':arrayMvt})
+            return( {'scoreAbsMvt':(wod.mvt_reps[index] + res) || nbrReps,'scoreRelMvt':res_seuil || nbrReps,'id':wod.mvt_id[index] || 0,'repTarget':repTarget || res,'mvtNames':wod.mvt_names[index] || 'WORKOUT', 'rounds':rounds || 0, 'totalReps': (wod.total_reps) || nbrReps, 'arrayMvt':arrayMvt || {}})
         }
     }
 }

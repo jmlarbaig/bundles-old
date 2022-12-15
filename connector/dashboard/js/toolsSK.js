@@ -1,3 +1,5 @@
+let intervalStatic = null;
+let intervalDynamic = null;
 
     async function ConnectionSK(){
         try{
@@ -6,11 +8,22 @@
             adr_IP_static = addIp + '/Static.json';
             adr_IP_dynamics = addIp + '/Dynamics.json';
             
-            updateOverlayStatics();
+            getStatics(adr_IP_static);
+
+            if(intervalStatic != null){
+                console.log('clear')
+                clearInterval(intervalStatic)
+                intervalStatic = null;
+            }
+            if(intervalDynamic != null){
+                console.log('clear')
+                clearInterval(intervalDynamic)
+                intervalDynamic = null;
+            }
+            
+            intervalStatic = setInterval(getStatics, 1000, adr_IP_static);
+            intervalDynamic = setInterval(getDynamics, 1000, adr_IP_dynamics);
     
-            Connected.value = true;
-            statics_timer = setInterval(updateOverlayStatics, 1000);
-            dynamics_timer = setInterval(updateOverlayDynamics, 1000);
     
             document.getElementById('connection_but').disabled = true;
             
@@ -18,6 +31,9 @@
             dataNewConfig.ntpAdress = $('#adresse_ntp').val();
     
             nodecg.sendMessage('dataOverwrite', dataNewConfig);
+
+
+            Connected.value = true;
 
 
         }catch(e){
@@ -30,32 +46,33 @@
     async function updateOverlayStatics() {
         getStatics(adr_IP_static)
                 .then(function(statics) {
+                    // console.log('static')
 
-                    if(statics.eventId != undefined){
-                        let sameJson = sha256(staticJSONString) == sha256(JSON.stringify(statics));
-                        console.log(sameJson)
-                        if (sameJson) {
-                            return
-                        }
-                        staticJSONString = JSON.stringify(statics);
-                        // statics.logoUrl = LogoImg.value
+                    // if(statics.eventId != undefined){
+                    //     let sameJson = sha256(staticJSONString) == sha256(JSON.stringify(statics));
+                    //     console.log(sameJson)
+                    //     if (sameJson) {
+                    //         return
+                    //     }
+                    //     staticJSONString = JSON.stringify(statics);
+                    //     // statics.logoUrl = LogoImg.value
 
-                        const {WorkoutInfo, heatInfo, athletes, ...rest} = statics
+                    //     const {WorkoutInfo, heatInfo, athletes, ...rest} = statics
         
 
-                        eventInfos.value = rest
-                        console.log('event in ok')
-                        heatInfos.value = heatInfo
-                        console.log('event in ok')
-                        workoutInfo.value = WorkoutInfo
-                        console.log('event in ok')
-                        s_athletes.value = athletes
-                        console.log('event in ok')
+                    //     eventInfos.value = rest
+                    //     console.log('event in ok')
+                    //     heatInfos.value = heatInfo
+                    //     console.log('event in ok')
+                    //     workoutInfo.value = WorkoutInfo
+                    //     console.log('event in ok')
+                    //     s_athletes.value = athletes
+                    //     console.log('event in ok')
 
-                        // Statics.value = statics
+                    //     // Statics.value = statics
         
-                        updateScoreToBeat(statics.workoutId , statics.athletes);
-                    }
+                    //     updateScoreToBeat(statics.workoutId , statics.athletes);
+                    // }
 
                 }).then(()=>{
                     StateConnection('connected','static','')
@@ -70,6 +87,7 @@
     async function updateOverlayDynamics() {
         getDynamics(adr_IP_dynamics)
             .then(function(dynamics) {
+                console.log('dynamics')
 
                 if(dynamics.eventId != undefined){
                     const {athletes, status, NtpTimeStart, ...rest} = dynamics

@@ -20,6 +20,9 @@ function resetHeat(data){
             case 'progression':
                 $item = styleHeat_TV(data)
             break;
+            case 'commentator':
+                $item = styleHeat_TV(data)
+            break;
         }
 
 

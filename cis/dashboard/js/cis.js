@@ -138,6 +138,8 @@
                 }else{
                     liste_heat_ath[lane].ath_infos[index] = {...result}
                 }
+                liste_heat[lane].ath = liste_heat_ath[lane].ath_infos
+                listCis.value = liste_heat;
             }).then(function(){
                 updateFrontAth(ath_infos, lane, index)
             })

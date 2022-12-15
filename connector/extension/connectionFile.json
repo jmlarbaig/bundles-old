@@ -1,5 +1,5 @@
 {
-    "staticServer": "JSON/WODACELONA",
+    "staticServer": "http://10.3.86.200:5000",
     "timeStatic": 0,
     "dynamicServer": "",
     "timeDynamics": 0,

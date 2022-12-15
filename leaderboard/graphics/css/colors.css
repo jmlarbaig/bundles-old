@@ -23,7 +23,7 @@
 }
 
 .other_rank{
-    background-color: var(--second_color);
+    background-color:  var(--second_color);
     color: var(--tx_second_color);
     fill: var(--second_color);
 }

@@ -70,9 +70,8 @@
     const statusHeat = nodecg.Replicant('status', 'connector');
     const d_athletes = nodecg.Replicant('d_athletes', 'connector');
 
-
-    const statics = nodecg.Replicant('statics', 'connector');
-    const dynamics = nodecg.Replicant('dynamics', 'connector');
+    // const statics = nodecg.Replicant('statics', 'connector');
+    // const dynamics = nodecg.Replicant('dynamics', 'connector');
 
     const UrlChange = nodecg.Replicant('UrlChange', 'leaderboard');
 
@@ -89,24 +88,38 @@
     $('document').ready(()=>{
         let ch = document.location.pathname.split('/')
         overlay = ch[ch.length-1].replace('.html','')
+        if(overlay == 'commentator'){
+            // Data du CIS
+            const listCis = nodecg.Replicant('CIS', 'cis')
+            console.log(listCis)
+        }
     })
 
-
+    let newHeat = false;
 
     // on récupère les infos provenant du connecteur
 
     eventInfos.on('change',(newValue, oldValue)=>{
-        if(newValue != oldValue){
-            resetHeat(newValue);
+        if(newValue != undefined){
+            if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
+                resetHeat(newValue);
+                if (newValue.heatId != heat.heatId){
+                    newHeat = true;
+                }else{
+                    newHeat = false
+                }
+            }
         }
     })
 
-    var tc
+    let tc
     let heat = {}
 
     heatInfos.on('change', (newValue, oldValue)=>{
-        heat = typeWorkout(newValue)
-        showTime(heat.timecap)
+        if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
+            heat = typeWorkout(newValue)
+            showTime(heat.timecap)
+        }
     })
 
     let workouts = {}
@@ -119,28 +132,41 @@
     })
 
     s_athletes.on('change', (newValue, oldValue)=>{
-        resetLeaderboard(newValue);
+        console.log('update Static :', JSON.stringify(newValue) !== JSON.stringify(oldValue))
+        if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
+            resetLeaderboard(newValue);
+        }
     })
 
     let statusWorkout = '0'
     let ntpStartTime;
     let startTime;
     let endTime;
+    let timerLaunch = null;
 
     statusHeat.on('change', (newValue, oldValue)=>{
-        console.log(newValue)
-        if( newValue.NtpTimeStart !== ntpStartTime){
-            ntpStartTime = newValue.NtpTimeStart
-            startTime = timeToDateTime(ntpStartTime);
-            endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
-            timerLaunch == undefined && clearInterval(timerLaunch)
-            timerLaunch = setInterval(updateTime, 1000);
+        if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
+            if( newValue.NtpTimeStart !== ntpStartTime){
+                ntpStartTime = newValue.NtpTimeStart
+                startTime = timeToDateTime(ntpStartTime);
+                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
+                if(timerLaunch != null){
+                    clearInterval(timerLaunch)
+                    timerLaunch = null;
+                }
+                newHeat = false
+                timerLaunch = setInterval(updateTime, 500);
+            }
+            statusWorkout = newValue.status
         }
-        statusWorkout = newValue.status
     })
 
     d_athletes.on('change', (newValue, oldValue)=>{
-        updateDynamics(newValue, statusWorkout);
+        console.log('update :', newValue)
+        console.log('Status Update :', statusWorkout)
+        if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
+            updateDynamics(newValue, statusWorkout);
+        }
     })
 
 
@@ -206,10 +232,18 @@
     var eventName
 
     // Congifuration et setup
-
     setupLeaderboard.on('change', (newValue, oldValue)=>{
         Object.keys(newValue).forEach((params, index)=>{
-            switch(newValue[params]){
+            let authorize = newValue[params]
+            if(overlay ==  'leaderboard' || overlay == 'progression'){
+                if(params == 'lane' || params == 'flag' || params == 'affiliate' ){
+                    authorize = true
+                }
+            }
+            if(overlay=='commentator'){
+                authorize = true;
+            }
+            switch(authorize){
                 case true:
                     $('.'+params).fadeIn(1000)
                     break;
@@ -248,10 +282,19 @@
 
     Colors.on('change', (newValue, oldValue) => {
 
+        let tabColor = newValue
+        
         Object.keys(newValue).forEach((color, index) => {
-            // console.log(color, newValue[color])
-            root.style.setProperty("--"+ color, newValue[color] );
-            Clrs[color] = newValue[color]
+
+            let _color = tabColor[color]
+
+            if(overlay == 'commentator' && color == 'bg__color'){
+                _color = 'black'
+            }
+
+
+            root.style.setProperty("--"+ color, _color );
+            Clrs[color] = _color
         })
         
     })

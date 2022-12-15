@@ -1,35 +1,35 @@
-var startTimeNTP;
-var timerLaunch;
-
-
 function updateTime(){
 
-    Ft_Ap = setupLeaderboard.value.fortimeAmrap;
+    console.log('time')
 
-    timer = Date.now() + (timeNTP.value||0)
+    let Ft_Ap = setupLeaderboard.value.fortimeAmrap;
+
+    let timer = Date.now() + (timeNTP.value||0)
+    console.log('newHeat',newHeat)
+
+    if(newHeat){
+        timer = endTime
+    }
+
     let timeDiffStart = timer - startTime;
     let timeDiffTimeCap = timer - endTime;
 
     let timeDiffEnd = endTime - timer;
 
+    let chrono;
+
     $("#time").css("background-color", "black")
     $("#time").css("color", "white")
 
-    // console.log('startTime ', startTime)
-    // console.log('endTime ', endTime)
-    // console.log('timeDiffStart ', msToTime( timeDiffStart))
-    // console.log('timeDiffTimeCap ',  msToTime( timeDiffTimeCap))
-    // console.log('timeDiffEnd ',  msToTime( timeDiffEnd))
-
-    if (timeDiffTimeCap < 0 && (timeDiffStart+1000) > 0 ){
+    if (timeDiffTimeCap < 0 && (timeDiffStart) > 0 ){
         $('#cap').fadeIn(1000)
-        if(heat.typeWod == "amrap" || Ft_Ap == true){
-            chrono = msToTime(timeDiffEnd - 1000)
+        if(heat.typeWod == "amrap" || Ft_Ap ){
+            chrono = msToTime(timeDiffEnd )
         }
         else {
-            chrono = msToTime(timeDiffStart + 1000);
+            chrono = msToTime(timeDiffStart );
         }
-    } else if (timeDiffStart < 0  && timeDiffStart > -5000 ){
+    } else if (timeDiffStart < 0  && timeDiffStart > -5999 ){
         $('#cap').fadeOut(1000)
         $("#time").css("background-color", "rgba(255,50,80,1)")
         $("#time").css("color", "rgb(255,255,255")
@@ -46,11 +46,11 @@ function updateTime(){
     if (timeDiffTimeCap > -30000 && timeDiffTimeCap < 0 ){
         $("#time").css("background-color", "rgba(255,50,80,1)")
         $("#time").css("color", "rgb(255,255,255")
-        if(heat.typeWod == "amrap" || Ft_Ap == true){
-            chrono = msToTime(timeDiffEnd - 1000)
+        if(heat.typeWod == "amrap" || Ft_Ap ){
+            chrono = msToTime(timeDiffEnd)
         }
         else {
-            chrono = msToTime(timeDiffStart + 1000);
+            chrono = msToTime(timeDiffStart);
         }
     }
     document.getElementById("time").innerHTML = chrono;
@@ -60,16 +60,16 @@ function updateTime(){
 
 function showTime(Cap){
     try{
-        var $list = $(".chrono");
+        let $list = $(".chrono");
         $list.find("#time").remove();
         $list.find("#cap").remove();
 
-        var $item = $(
+        let $item = $(
             '<div id="time"> </div>' +
             '<div id="cap">CAP '+Cap+'</div>' 
         );
 
-        setupLeaderboard.value.chrono != true ? $(".chrono").hide() : "";
+        !setupLeaderboard.value.chrono && $(".chrono").hide();
         $list.append($item);
         $(".chrono").find('#cap').hide();
 

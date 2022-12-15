@@ -29,13 +29,9 @@ const eventId = nodecg.Replicant('eventId', 'connector');
 
 const listeAthlete = nodecg.Replicant('listeAthlete', 'connector')
 const laneAthInfos = nodecg.Replicant('laneAthInfos');
-const laneInfos = nodecg.Replicant('laneInfos')
-const laneShow = nodecg.Replicant('laneShow')
-const laneWods = nodecg.Replicant('laneWods')
-const laneAth  = nodecg.Replicant('laneAth')
 
-const statics = nodecg.Replicant('statics', 'connector');
-const dynamics = nodecg.Replicant('dynamics', 'connector');
+// const statics = nodecg.Replicant('statics', 'connector');
+// const dynamics = nodecg.Replicant('dynamics', 'connector');
 
 let liste_heat = []
 let liste_heat_ath = []
@@ -43,26 +39,26 @@ var athletes = []
 var heatInfos = []
 var liste_donnees = {'Team':[], 'Individual':[]}
 
-    statics.on('change', (newValue, oldValue) => {
-        // console.log("CIS ", newValue)
-        if(newValue != undefined){
-            updateHeat(newValue)
-            if(newValue.athletes != undefined ){
-                athletes = newValue.athletes
-                updateCIS()
-            }
+    // statics.on('change', (newValue, oldValue) => {
+    //     // console.log("CIS ", newValue)
+    //     if(newValue != undefined){
+    //         updateHeat(newValue)
+    //         if(newValue.athletes != undefined ){
+    //             athletes = newValue.athletes
+    //             updateCIS()
+    //         }
 
-        }
-    })
+    //     }
+    // })
 
-    listeAthlete.on('change', (newValue, oldValue) => {
-        // console.log("listeAthlete ", newValue)
-            if(newValue != oldValue ){
-                // updateAthInfos(newValue)
-                dataTreatment(newValue)
-                athletes.length != 0 ? updateCIS() : ''
-            }
-        })
+    // listeAthlete.on('change', (newValue, oldValue) => {
+    //     // console.log("listeAthlete ", newValue)
+    //         if(newValue != oldValue ){
+    //             // updateAthInfos(newValue)
+    //             dataTreatment(newValue)
+    //             athletes.length != 0 ? updateCIS() : ''
+    //         }
+    //     })
 
     const TopScore = nodecg.Replicant('TopScore', 'connector')
 
