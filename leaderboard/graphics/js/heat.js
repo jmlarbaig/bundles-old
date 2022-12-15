@@ -85,10 +85,10 @@ function styleHeat_TV(element){
                 '<div id="workout" class="detail" > ' + element.workoutName + ' </div>' +
                 '<div id="division" class="detail"> ' + element.heatName + ' </div>' +    
             '</div>' +
-            '<div class="box_mainSponsor">' +
-                '<div class="presented">PRESENTED BY</div>'+
-                '<div class="mainSponsor">' +
-                '</div>'+
+            '<div class="box_FVSK">' +
+                '<div class="presented"><span>LIVE STATS AND VISUALS POWERED BY</span></br></div>'+
+                '<div class="FV col">' + '</div>'+
+                '<div class="SK col">' + '</div>'+
             '</div>'+
         '</div>'
     );

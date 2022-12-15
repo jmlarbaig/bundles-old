@@ -64,7 +64,7 @@
 .details{
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 50%;
 }
 
 .details #workout{
