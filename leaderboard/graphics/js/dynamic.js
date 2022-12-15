@@ -12,7 +12,7 @@ function updateDynamics(newScoring, status){
                 Object.keys(elemAth).forEach(i => {
 
                     elemAth[i] = Object.assign( {}, elemAth[i],fetchNewData(newScoring, elemAth[i].lane));
-                    elemAth[i].$item.find(".rank").text(elemAth[i].CurrentRank || 'W');
+                    elemAth[i].$item.find(".rank").text(elemAth[i].CurrentRank);
                     
                     if( status == "W" || status == "0"){
 
@@ -24,7 +24,6 @@ function updateDynamics(newScoring, status){
                                     
                                 Mvt_name[elemAth[i].lane] = heat.typeWod != "amrap" ? mvtIndexForTime(elemAth[i].score_abs, elemAth[i].division) : mvtIndexAmrap(elemAth[i].score_abs, elemAth[i].division, elemAth[i].log_round_time[0].length +1)
 
-                                console.log(Mvt_name[elemAth[i].lane] != undefined)
                                 
                                 if ( Mvt_name[elemAth[i].lane] != undefined && Mvt_name[elemAth[i].lane].mvtNames.includes("_")){
                                     Mvt_name[elemAth[i].lane].mvtNames = Mvt_name[elemAth[i].lane].mvtNames.replaceAll("_", " ")
@@ -33,7 +32,6 @@ function updateDynamics(newScoring, status){
                                 if ( Mvt_name[elemAth[i].lane] != undefined && Mvt_name[elemAth[i].lane].mvtNames.includes("Sprint")){
                                     elemAth[i].$item.find(".popup").text( Mvt_name[elemAth[i].lane].mvtNames);
                                     elemAth[i].$item.find(".popup").show();
-                                    console.log('chorno : ', chrono)
                                     elemAth[i].$item.find(".score").text(chrono);
                                 }
                                 else{
@@ -80,6 +78,10 @@ function updateDynamics(newScoring, status){
                                     $('#circle'+elemAth[i].lane).css("transform","translateX("+ percent +"%)");
                                 }
 
+                                if(overlay == 'commentator' || overlay == 'progression' || overlay == 'leaderboard'){
+                                    elemAth[i].$item.find(".popup").show();
+                                }
+
                                 setupLeaderboard.value.scoreConfig && elemAth[i].$item.find(".score").text(elemAth[i].score_abs) 
                                 setupLeaderboard.value.scoreConfig && elemAth[i].$item.find(".popup").hide();
                             }
@@ -93,19 +95,17 @@ function updateDynamics(newScoring, status){
                             elemAth[i].$item.find(".popup").text(result.toString().slice(result.length - 9, result.length - 8) != "0" ? result = result.toString().slice(result.length -8, result.length) : result.toString().slice(result.length - 7, result.length - 6) != "0" ? result = result.toString().slice(result.length -7, result.length)  : result = result.toString().slice(result.length -6, result.length));
                         }
                     } else if(status == "T"){
-                        if (elemAth[i].status == "T" || elemAth[i].status == "W"){
-                            let _r = (result || elemAth[i].score_abs).toString()
+                        if (elemAth[i].status != "F"){
+                            let _r = (elemAth[i].result || ('CAP ' +elemAth[i].score_abs)).toString()
                             elemAth[i].$item.find(".score").text('TC');
                             elemAth[i].$item.find(".popup").show();
-                            elemAth[i].$item.find(".popup").text(_r);
+                            elemAth[i].$item.find(".popup").text( _r);
                         }
                     }
 
 
-
                     if(elemAth[i].result == "" && status != "T"){
                         if (elemAth[i].CurrentRank == 1){
-                            console.log('First :',elemAth[i])
                             elemAth[i].$item.find(".rank").toggleClass('rank first_rank', true)
                             elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank other_rank', false)
                             elemAth[i].$item.find(".score").toggleClass('score first_rank', true)
@@ -114,7 +114,6 @@ function updateDynamics(newScoring, status){
                             elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank other_rank', false)
                         }
                         else if (elemAth[i].CurrentRank == 2){
-                            console.log('Second :',elemAth[i])
                             elemAth[i].$item.find(".rank").toggleClass('rank second_rank', true)
                             elemAth[i].$item.find(".rank").toggleClass('first_rank third_rank other_rank', false)
                             elemAth[i].$item.find(".score").toggleClass('score second_rank', true)
@@ -123,7 +122,6 @@ function updateDynamics(newScoring, status){
                             elemAth[i].$item.find(".circle").toggleClass('first_rank third_rank other_rank', false)
                         }
                         else if (elemAth[i].CurrentRank == 3){
-                            console.log('Third :',elemAth[i])
                             elemAth[i].$item.find(".rank").toggleClass('rank third_rank', true)
                             elemAth[i].$item.find(".rank").toggleClass('second_rank first_rank other_rank', false)
                             elemAth[i].$item.find(".score").toggleClass('score third_rank', true)
@@ -132,7 +130,6 @@ function updateDynamics(newScoring, status){
                             elemAth[i].$item.find(".circle").toggleClass('second_rank first_rank other_rank', false)
                         }
                         else {
-                            console.log('Other :',elemAth[i])
                             elemAth[i].$item.find(".rank").toggleClass('rank other_rank', true)
                             elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank', false)
                             elemAth[i].$item.find(".score").toggleClass('score other_rank', true)
@@ -144,20 +141,37 @@ function updateDynamics(newScoring, status){
                     else{
 
                         elemAth[i].$item.find(".rank").toggleClass('rank finish_rank',true)
+                        elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank other_rank', false)
                         elemAth[i].$item.find(".score").toggleClass('score finish_rank', true)
+                        elemAth[i].$item.find(".score").toggleClass('second_rank third_rank first_rank other_rank', false)
                         elemAth[i].$item.find(".circle").toggleClass('circle finish_rank', true)
+                        elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank first_rank other_rank', false)
 
                         if(overlay == 'overlay_top'){
-                            if(elemAth[i].CurrentRank > 1 ){
+                            if(elemAth[i].CurrentRank > 2 ){
+                                let _lane = elemAth[i].lane;
                                 setTimeout(()=>{
-                                    elemAth[i].$item.fadeOut(1000);
-                                    setTimeout(()=>{
-                                        elemAth[i].$item.remove();
-                                        reposition("#leaderboard"+ key, elemAth);
-                                    }, 2000)
+                                    for(let ath of elemAth){
+                                        if(ath.lane === _lane){
+                                            ath.$item.fadeOut(1000);
+                                            setTimeout(()=>{
+                                                ath.$item.remove();
+                                                reposition("#leaderboard"+ key, elemAth);
+                                            }, 2000)
+                                            break;
+                                        }
+                                    }
+
                                 }, 5000)
                             }
                         }
+                    }
+
+                    if(overlay == 'commentator'){
+                        console.log(elemAth[i].log_mvt[0])
+                        Object.values(elemAth[i].log_mvt[0]).forEach((time, index)=>{
+                            elemAth[i].$item.find(".mvt_id"+index).text(time)
+                        })
                     }
 
                     // Dans tous les cas, on prend la valeur height pour redéféinir les dimensions du leaderboard
@@ -191,6 +205,7 @@ function updateDynamics(newScoring, status){
                 // elemAth.sort(ascendingLane);
                 overlay !== 'commentator' && $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height())
 
+                elemAth.sort(ascendingLane);
                 reposition("#leaderboard"+ key, elemAth);
 
             }

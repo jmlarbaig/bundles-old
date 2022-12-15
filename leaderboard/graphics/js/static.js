@@ -171,6 +171,7 @@ function resetLeaderboard(newData){
 
                 if(overlay == 'commentator'){
                     createStats( elementAth, indexDivision);
+                    console.log('Listy CIS',listCis)
                 }
 
                 

@@ -206,17 +206,17 @@ function headerCommentator(divisions, indexDivision, repTarget){
             '<table>' +
                 '<thead>'+
                     '<tr>'+
-                        '<th class="lane">LANE</th>' + 
-                        '<th class="flag">FLAG</th>' +
-                        '<th class="text-nowrap text-truncate text-left name">NAME</th>' + 
-                        '<th class="text-nowrap text-truncate text-left affiliate">AFFILIATE</th>' +
-                        '<th class="Orank">O. Points</th>' + 
-                        '<th class="Orank">O. Rank</th>' +
-                        '<th class="rank">Rank</th>' + 
-                        '<th class="stats_header" id="statsHeader_'+indexDivision+'">' + '</th>'+
-                        '<th class="rounds text-nowrap text-truncate">Rounds</th>' + 
-                        '<th class="score align-items-xl-center">Scores</th>' +
-                        '<th class="popup text-nowrap text-truncate">Mouvement</th>' + 
+                        '<th class="lane box">LANE</th>' + 
+                        '<th class="flag box">FLAG</th>' +
+                        '<th class="box text-nowrap text-truncate text-left name">NAME</th>' + 
+                        '<th class="box text-nowrap text-truncate text-left affiliate">AFFILIATE</th>' +
+                        '<th class="box Orank">O. Points</th>' + 
+                        '<th class="box Orank">O. Rank</th>' +
+                        '<th class="box rank">Rank</th>' + 
+                        '<th class="box stats statsHeader" id="statsHeader_'+indexDivision+'">' + '</th>'+
+                        '<th class="box rounds text-nowrap text-truncate">Rounds</th>' + 
+                        '<th class="box score align-items-xl-center">Scores</th>' +
+                        '<th class="box popup text-nowrap text-truncate">Mouvement</th>' + 
                     '</tr>' +
                 '</thead>'+
                 '<tbody id="athletes" class="athletes">' +
@@ -233,16 +233,18 @@ function headerCommentator(divisions, indexDivision, repTarget){
 function createStatsHeader(iDiv){
 
     var $stat_header = $('#statsHeader_'+iDiv);
-    $stat_header.find("th").remove();
+    $stat_header.find("tr").remove();
+
+    $stat_header.append('<tr id="'+ iDiv +'"></tr>')
 
     if(workouts.length >0){
         workouts[iDiv].mvt_id.forEach((id, index)=> {
-            console.log(workouts[iDiv].mvt_names[index])
+            
             var $item_header = $(
-                '<th class="stats_name text-nowrap text-truncate">'+workouts[iDiv].mvt_reps[index]+ ' ' +workouts[iDiv].mvt_names[index]+' </th>'
+                '<td class="stats_name text-nowrap text-truncate">'+ (workouts[iDiv].mvt_reps[index] != 0 ? workouts[iDiv].mvt_reps[index] : '') + ' ' +workouts[iDiv].mvt_names[index]+' </td>'
                 // '<div class="mvt_id'+id+' "></div>'
             )
-            $stat_header.append($item_header);
+            $stat_header.find('#'+iDiv).append($item_header);
         })
     }
     else{
@@ -263,12 +265,12 @@ function commentator(data){
         '<tr class="athlete" id="aht'+data.lane+'">' + 
             '<td class="lane">'+ data.lane + '</td>' + 
             '<td class="flag">' + '<div class="box_flag"> </div> ' + '</td>' +
-            '<td class="text-nowrap text-truncate text-left name">' + name + '</td>' + 
+            '<td class="text-nowrap text-truncate text-left name" onclick="affichageStats()" id="showStats_'+ data.lane +'">' + name + '</td>' + 
             '<td class="text-nowrap text-truncate text-left affiliate">' + affiliate_team + '</td>' +
             '<td class="Orank">' + data.overallPoints + '</td>' + 
             '<td class="Orank">' + data.rank + '</td>' +
             '<td class="rank">' + data.CurrentRank  + '</td>' + 
-            '<td class=" stats athlete_stats_'+ data.lane+'">' + '</td>'+
+            '<td class="stats" id="athlete_stats_'+ data.lane+'">' + '</td>'+
             // '<td class="circle_progress">' +
             //     '<svg>' +
             //         '<circle cx="10" cy="50%" r="5px" fill="#aeaeae" class="circle" id="' + athletes_tdison[key][i].lane+'"/>' +
@@ -291,7 +293,7 @@ function createStats( data, iDiv){
 
     console.log(workouts.length)
 
-    let $stats = $('.athlete_stats_'+data.lane);
+    let $stats = $('#athlete_stats_'+data.lane);
     $stats.find("td").remove();
 
     let $stat;
@@ -301,7 +303,7 @@ function createStats( data, iDiv){
             $stat = $('');
             console.log(workouts[iDiv].mvt_names[index])
             $stat = $(
-                '<td class="mvt_id'+id+'" id="'+ id +'_'+ data.lane +'" onclick="toggleStats()"></td>'
+                '<td class="mvt_id'+id+'" id="'+ id +'_'+ data.lane +'">00:00</td>'
             )
             $stats.append($stat)
         })

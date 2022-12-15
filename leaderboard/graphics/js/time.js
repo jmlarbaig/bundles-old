@@ -1,11 +1,9 @@
 function updateTime(){
 
-    console.log('time')
 
     let Ft_Ap = setupLeaderboard.value.fortimeAmrap;
 
     let timer = Date.now() + (timeNTP.value||0)
-    console.log('newHeat',newHeat)
 
     if(newHeat){
         timer = endTime

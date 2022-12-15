@@ -60,6 +60,8 @@
     const timeNTP = nodecg.Replicant('timeNTP','connector')
     const nowNtp = nodecg.Replicant('nowNtp','connector')
 
+    const listCis = nodecg.Replicant('CIS','cis')
+
     // Destructuration du fichier static
     const eventInfos = nodecg.Replicant('eventInfos', 'connector');
     const heatInfos = nodecg.Replicant('heatInfos', 'connector');
@@ -162,11 +164,7 @@
     })
 
     d_athletes.on('change', (newValue, oldValue)=>{
-        console.log('update :', newValue)
-        console.log('Status Update :', statusWorkout)
-        if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
-            updateDynamics(newValue, statusWorkout);
-        }
+        updateDynamics(newValue, statusWorkout);
     })
 
 
