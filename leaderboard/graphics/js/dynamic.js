@@ -1,5 +1,7 @@
 var percent = 0;
 
+let bestPerf = []
+let best = []
 
 function updateDynamics(newScoring, status){
     try{
@@ -104,73 +106,106 @@ function updateDynamics(newScoring, status){
                     }
 
 
+
                     if(elemAth[i].result == "" && status != "T"){
-                        if (elemAth[i].CurrentRank == 1){
-                            elemAth[i].$item.find(".rank").toggleClass('rank first_rank', true)
-                            elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank other_rank', false)
-                            elemAth[i].$item.find(".score").toggleClass('score first_rank', true)
-                            elemAth[i].$item.find(".score").toggleClass('second_rank third_rank other_rank', false)
-                            elemAth[i].$item.find(".circle").toggleClass('circle first_rank', true)
-                            elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank other_rank', false)
-                        }
-                        else if (elemAth[i].CurrentRank == 2){
-                            elemAth[i].$item.find(".rank").toggleClass('rank second_rank', true)
-                            elemAth[i].$item.find(".rank").toggleClass('first_rank third_rank other_rank', false)
-                            elemAth[i].$item.find(".score").toggleClass('score second_rank', true)
-                            elemAth[i].$item.find(".score").toggleClass('first_rank third_rank other_rank', false)
-                            elemAth[i].$item.find(".circle").toggleClass('circle second_rank', true)
-                            elemAth[i].$item.find(".circle").toggleClass('first_rank third_rank other_rank', false)
-                        }
-                        else if (elemAth[i].CurrentRank == 3){
-                            elemAth[i].$item.find(".rank").toggleClass('rank third_rank', true)
-                            elemAth[i].$item.find(".rank").toggleClass('second_rank first_rank other_rank', false)
-                            elemAth[i].$item.find(".score").toggleClass('score third_rank', true)
-                            elemAth[i].$item.find(".score").toggleClass('second_rank first_rank other_rank', false)
-                            elemAth[i].$item.find(".circle").toggleClass('circle third_rank', true)
-                            elemAth[i].$item.find(".circle").toggleClass('second_rank first_rank other_rank', false)
-                        }
-                        else {
-                            elemAth[i].$item.find(".rank").toggleClass('rank other_rank', true)
-                            elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank', false)
-                            elemAth[i].$item.find(".score").toggleClass('score other_rank', true)
-                            elemAth[i].$item.find(".score").toggleClass('second_rank third_rank first_rank', false)
-                            elemAth[i].$item.find(".circle").toggleClass('circle other_rank', true)
-                            elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank first_rank', false)
+                        if(overlay != 'overlay_top'){
+                            if (elemAth[i].CurrentRank == 1){
+                                elemAth[i].$item.find(".rank").toggleClass('rank first_rank', true)
+                                elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank other_rank', false)
+                                elemAth[i].$item.find(".score").toggleClass('score first_rank', true)
+                                elemAth[i].$item.find(".score").toggleClass('second_rank third_rank other_rank', false)
+                                elemAth[i].$item.find(".circle").toggleClass('circle first_rank', true)
+                                elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank other_rank', false)
+    
+                            }
+                            else if (elemAth[i].CurrentRank == 2){
+                                elemAth[i].$item.find(".rank").toggleClass('rank second_rank', true)
+                                elemAth[i].$item.find(".rank").toggleClass('first_rank third_rank other_rank', false)
+                                elemAth[i].$item.find(".score").toggleClass('score second_rank', true)
+                                elemAth[i].$item.find(".score").toggleClass('first_rank third_rank other_rank', false)
+                                elemAth[i].$item.find(".circle").toggleClass('circle second_rank', true)
+                                elemAth[i].$item.find(".circle").toggleClass('first_rank third_rank other_rank', false)
+                            }
+                            else if (elemAth[i].CurrentRank == 3){
+                                elemAth[i].$item.find(".rank").toggleClass('rank third_rank', true)
+                                elemAth[i].$item.find(".rank").toggleClass('second_rank first_rank other_rank', false)
+                                elemAth[i].$item.find(".score").toggleClass('score third_rank', true)
+                                elemAth[i].$item.find(".score").toggleClass('second_rank first_rank other_rank', false)
+                                elemAth[i].$item.find(".circle").toggleClass('circle third_rank', true)
+                                elemAth[i].$item.find(".circle").toggleClass('second_rank first_rank other_rank', false)
+                            }
+                            else {                           
+                                elemAth[i].$item.find(".rank").toggleClass('rank other_rank', true)
+                                elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank', false)
+                                elemAth[i].$item.find(".score").toggleClass('score other_rank', true)
+                                elemAth[i].$item.find(".score").toggleClass('second_rank third_rank first_rank', false)
+                                elemAth[i].$item.find(".circle").toggleClass('circle other_rank', true)
+                                elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank first_rank', false)
+                            }
                         }
                     }
                     else{
-
-                        elemAth[i].$item.find(".rank").toggleClass('rank finish_rank',true)
-                        elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank other_rank', false)
-                        elemAth[i].$item.find(".score").toggleClass('score finish_rank', true)
-                        elemAth[i].$item.find(".score").toggleClass('second_rank third_rank first_rank other_rank', false)
-                        elemAth[i].$item.find(".circle").toggleClass('circle finish_rank', true)
-                        elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank first_rank other_rank', false)
-
                         if(overlay == 'overlay_top'){
-                            if(elemAth[i].CurrentRank > 2 ){
-                                let _lane = elemAth[i].lane;
-                                setTimeout(()=>{
-                                    for(let ath of elemAth){
-                                        if(ath.lane === _lane){
-                                            ath.$item.fadeOut(1000);
-                                            setTimeout(()=>{
-                                                ath.$item.remove();
-                                                reposition("#leaderboard"+ key, elemAth);
-                                            }, 2000)
-                                            break;
-                                        }
-                                    }
-
-                                }, 5000)
-                            }
+                            elemAth[i].$item.find(".rank").toggleClass('rank finish_rank',true)
+                            elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank other_rank', false)
+                            elemAth[i].$item.find(".score").toggleClass('score finish_rank', true)
+                            elemAth[i].$item.find(".score").toggleClass('second_rank third_rank first_rank other_rank', false)
+                            elemAth[i].$item.find(".name").toggleClass('name finish_rank', true)
+                            elemAth[i].$item.find(".name").toggleClass('second_rank third_rank first_rank other_rank', false)
+                        }else{
+                            elemAth[i].$item.find(".rank").toggleClass('rank finish_rank',true)
+                            elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank other_rank', false)
+                            elemAth[i].$item.find(".score").toggleClass('score finish_rank', true)
+                            elemAth[i].$item.find(".score").toggleClass('second_rank third_rank first_rank other_rank', false)
+                            elemAth[i].$item.find(".circle").toggleClass('circle finish_rank', true)
+                            elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank first_rank other_rank', false)
                         }
+
+                        // if(overlay == 'overlay_top'){
+                        //     if(elemAth[i].CurrentRank > 2 ){
+                        //         let _lane = elemAth[i].lane;
+                        //         setTimeout(()=>{
+                        //             for(let ath of elemAth){
+                        //                 if(ath.lane === _lane){
+                        //                     ath.$item.fadeOut(1000);
+                        //                     setTimeout(()=>{
+                        //                         ath.$item.remove();
+                        //                         reposition("#leaderboard"+ key, elemAth);
+                        //                     }, 2000)
+                        //                     break;
+                        //                 }
+                        //             }
+
+                        //         }, 5000)
+                        //     }
+                        // }
                     }
 
                     if(overlay == 'commentator'){
                         console.log(elemAth[i].log_mvt[0])
+                        bestPerf[elemAth[i].lane] = []
                         Object.values(elemAth[i].log_mvt[0]).forEach((time, index)=>{
-                            elemAth[i].$item.find(".mvt_id"+index).text(time)
+
+                            elemAth[i].$item.find("#mvt_id_"+index+"_"+elemAth[i].lane).text(time)
+
+                            let secondes = time.split(':').map(Number)
+                            let min = secondes[0]*60;
+                            let total = secondes[1] + min
+
+                            bestPerf[elemAth[i].lane][index] = total
+
+
+                            if(best[index] == undefined){
+                                best[index] = total
+                            }
+
+                            if(bestPerf[elemAth[i].lane][index] <= best[index]){
+                                best[index] = bestPerf[elemAth[i].lane][index]
+                                
+                                $('#leaderboard'+key).find('.mvt_id_'+index).removeClass('bestStat');
+                                elemAth[i].$item.find("#mvt_id_"+index+"_"+elemAth[i].lane).addClass('bestStat');
+                            }
+
                         })
                     }
 

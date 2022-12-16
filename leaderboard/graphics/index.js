@@ -252,19 +252,19 @@
         })
 
         if(overlay == 'overlay_top'){
-            setTimeout(()=>{
-                let widthCalc =  ($('.athlete').width() + 10) * 5
+            // setTimeout(()=>{
+            //     let widthCalc =  ($('.athlete').width() + 10) * 5
 
-                if( widthCalc > 1480){
-                    widthCalc =  ($('.athlete').width() + 10) * 4
-                    if(widthCalc > 1480){
-                        widthCalc =  ($('.athlete').width() + 10) * 3
-                    }
-                }
+            //     if( widthCalc > 1680){
+            //         widthCalc =  ($('.athlete').width() + 10) * 4
+            //         if(widthCalc > 1680){
+            //             widthCalc =  ($('.athlete').width() + 10) * 3
+            //         }
+            //     }
         
-                    $('.leaderboard').css('width', 'calc(' + widthCalc + 'px)')
+            //         $('.leaderboard').css('width', 'calc(' + widthCalc + 'px)')
 
-            }, 1500)
+            // }, 1500)
         }
         if(overlay == 'overlay_side' || overlay == 'overlay_top'){
             if(newValue.lowerthird){

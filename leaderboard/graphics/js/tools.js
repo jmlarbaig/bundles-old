@@ -42,10 +42,10 @@ function typeWorkout(data){
     tc = timecap.split(':');
 
     if (tc[0] != "00"){
-        timecap = tc[0] + "'" + tc[1] + "'" + tc[2];
+        timecap = tc[0] + ":" + tc[1] + ":" + tc[2];
     }
     else if(tc[1] != "00" ){
-        timecap = tc[1] + "'" + tc[2];
+        timecap = tc[1] + ":" + tc[2];
     }
     else{
         timecap = "0'"+ tc[2];
@@ -219,8 +219,8 @@ function mvtIndexForTime(nbrReps, division){
                 res = -wod.mvt_reps[index];
             }
             for(let i = index; i < wod.mvt_names.length ; i++){
-                mvtToUP = wod.mvt_names[i].toUpperCase();
-                arrayMvt.push("<span>"+wod.mvt_names[i].toUpperCase()+"</span>")
+                mvtToUP = wod.mvt_names[i].toLowerCase();
+                arrayMvt.push("<span>"+wod.mvt_names[i].toLowerCase()+"</span>")
             }
             return( {'scoreAbsMvt':wod.mvt_reps[index] + res,'scoreRelMvt':res,'id':wod.mvt_id[index],'repTarget':wod.mvt_reps[index], 'rounds':0, 'totalReps': wod.total_reps,'mvtNames':wod.mvt_names[index],'arrayMvt':arrayMvt})
         }
@@ -281,8 +281,8 @@ function mvtIndexAmrap(nbrReps, division, rounds){
                 }
             }
             for(let i = index; i < wod.mvt_names.length ; i++){
-                mvtToUP = wod.mvt_names[i].toUpperCase();
-                arrayMvt.push("<span>"+wod.mvt_names[i].toUpperCase()+"</span>")
+                mvtToUP = wod.mvt_names[i].toLowerCase();
+                arrayMvt.push("<span>"+wod.mvt_names[i].toLowerCase()+"</span>")
             }
             return( {'scoreAbsMvt':(wod.mvt_reps[index] + res) || nbrReps,'scoreRelMvt':res_seuil || nbrReps,'id':wod.mvt_id[index] || 0,'repTarget':repTarget || res,'mvtNames':wod.mvt_names[index] || 'WORKOUT', 'rounds':rounds || 0, 'totalReps': (wod.total_reps) || nbrReps, 'arrayMvt':arrayMvt || {}})
         }

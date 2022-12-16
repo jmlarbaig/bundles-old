@@ -45,6 +45,9 @@
     width: 70%;
 }
 
+.leaderboard .mvt_id{
+}
+
 .leaderboard #mvt span:nth-child(1){
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
@@ -61,23 +64,36 @@
 }
 
 .leaderboard table{
+	position:relative;
     width: 100%;
-    overflow-x: scroll;
+    overflow: hidden;
     border-collapse: separate;
     border-spacing: 0;
     border-top: 1px solid grey;
 }
 
+.fixed-side{
+    visibility:visible;
+}
+
+.leaderboard tbody th{
+
+}
+
 .leaderboard .stats{
+    overflow-x: scroll;
     max-width: 200px;
 }
+
 
 .leaderboard .stats td{
     border: 1px solid grey;
     white-space: nowrap;
     border-top-width: 0px;
     text-align: center;
-    width: 100px;
+    width: 75px;
+    max-width: 75px;
+    min-width: 75px;
 }
 
 .leaderboard .athletes {
@@ -101,14 +117,15 @@
 }
 
 .leaderboard .lane{
+    visibility:visible;
     width: 50px;
     text-align: center;
     filter: blur(0px);
 }
 
 .leaderboard .name {
+    visibility:visible;
     text-align: center;
-    position:sticky;
     padding: 5px 5px;
     text-align: left;
     width: 10%;   
@@ -125,8 +142,8 @@
 }
 
 .leaderboard .affiliate {
-    text-align: center;
-    position:sticky;
+    padding: 5px 5px;
+    text-align: left;
     width: 10%;   
     max-width: 200px;
     white-space: nowrap;
@@ -136,7 +153,6 @@
 }
 
 .leaderboard .Orank{
-    position:sticky;
     width: 50px;
     white-space: nowrap;
     overflow: hidden;
@@ -145,27 +161,24 @@
 }
 
 .leaderboard .rank{
-    position:sticky;
     width: 50px;
     text-align: center;
     border-right: 2px solid white;
 }
 
 .leaderboard .score {
-    position:sticky;
+    visibility:visible;
     width: 100px;
     text-align: center;
-    border-radius: --(border);
 }
 
 .leaderboard .popup {
-    position:sticky;
+    visibility:visible;
     text-align: center;
     width: 200px;
 }
 
 .leaderboard .flag {
-    position:sticky;
     text-align: center;
     width: 60px;
     max-width: 60px;
@@ -184,4 +197,9 @@
 .rounds{
     text-align: center;
     background-color: white;
+}
+
+.bestStat{
+    background-color: green;
+    color: white;
 }

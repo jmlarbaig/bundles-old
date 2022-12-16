@@ -16,7 +16,7 @@ function updateTime(){
 
     let chrono;
 
-    $("#time").css("background-color", "black")
+    $("#time").css("background-color",' rgb(53, 53, 53)')
     $("#time").css("color", "white")
 
     if (timeDiffTimeCap < 0 && (timeDiffStart) > 0 ){

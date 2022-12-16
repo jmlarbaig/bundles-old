@@ -6,6 +6,11 @@ const path = require('path');
 const mqtt = require('mqtt')
 
 var ip = require('ip');
+
+var sk = require('./services/sk');
+console.log(typeof sk.getStatics); // => 'function'
+console.log(typeof sk.getDynamics); // => 'function'
+
 var ip_adresse = ip.address() // my ip address
 
 var ch = ip_adresse.split('.')
@@ -31,6 +36,8 @@ var dataTab = []
 
 
 module.exports = function (nodecg, bundlePath) {
+
+    
 
     const router = nodecg.Router();
     const timeNTP = nodecg.Replicant('timeNTP')
@@ -208,6 +215,10 @@ module.exports = function (nodecg, bundlePath) {
         }
     }
 
+    // console.log(__dirname)
+
+    // setInterval(sk.getStatics, 1000, 'http://10.3.86.200:5000/Static.json')
+    // setInterval(sk.getDynamics, 1000, 'http://10.3.86.200:5000/Dynamics.json')
 
     // setInterval(time, 1000);
     // setInterval(checkIpKairos, 1000);

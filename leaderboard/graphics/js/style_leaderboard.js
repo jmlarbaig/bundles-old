@@ -76,8 +76,6 @@ function overlayTop(data){
         '<div class="athlete" id="aht'+ data.lane+'">' + 
             '<div class="ath">' +
                 '<div class="rank">'+ data.lane + '</div>' + 
-                '<div class="lane"># '+ data.lane + '</div>' + 
-                '<div class="flag">' + '<div class="box_flag" ></div> ' + '</div>' +
                 '<div class="name">' + name + '</div>' + 
                 '<div class="score intial_rank"></div>' +
             '</div>' +
@@ -206,17 +204,17 @@ function headerCommentator(divisions, indexDivision, repTarget){
             '<table>' +
                 '<thead>'+
                     '<tr>'+
-                        '<th class="lane box">LANE</th>' + 
-                        '<th class="flag box">FLAG</th>' +
-                        '<th class="box text-nowrap text-truncate text-left name">NAME</th>' + 
-                        '<th class="box text-nowrap text-truncate text-left affiliate">AFFILIATE</th>' +
-                        '<th class="box Orank">O. Points</th>' + 
-                        '<th class="box Orank">O. Rank</th>' +
-                        '<th class="box rank">Rank</th>' + 
-                        '<th class="box stats statsHeader" id="statsHeader_'+indexDivision+'">' + '</th>'+
-                        '<th class="box rounds text-nowrap text-truncate">Rounds</th>' + 
-                        '<th class="box score align-items-xl-center">Scores</th>' +
-                        '<th class="box popup text-nowrap text-truncate">Mouvement</th>' + 
+                        '<th fixed-side scope="col" class="lane box">LANE</th>' + 
+                        '<th scope="col" class="flag box">FLAG</th>' +
+                        '<th scope="col" class="box text-nowrap text-truncate text-left name">NAME</th>' + 
+                        '<th scope="col" class="box text-nowrap text-truncate text-left affiliate">AFFILIATE</th>' +
+                        '<th scope="col" class="box Orank">O. Points</th>' + 
+                        '<th scope="col" class="box Orank">O. Rank</th>' +
+                        '<th scope="col" class="box rank">Rank</th>' + 
+                        '<th scope="col" class="box stats statsHeader" id="statsHeader_'+indexDivision+'">' + '</th>'+
+                        '<th scope="col" class="box rounds text-nowrap text-truncate">Rounds</th>' + 
+                        '<th scope="col" class="box score align-items-xl-center">Scores</th>' +
+                        '<th scope="col" class="box popup text-nowrap text-truncate">Mouvement</th>' + 
                     '</tr>' +
                 '</thead>'+
                 '<tbody id="athletes" class="athletes">' +
@@ -303,7 +301,7 @@ function createStats( data, iDiv){
             $stat = $('');
             console.log(workouts[iDiv].mvt_names[index])
             $stat = $(
-                '<td class="mvt_id'+id+'" id="'+ id +'_'+ data.lane +'">00:00</td>'
+                '<td class="mvt_id mvt_id_'+ index +'" id="mvt_id_'+ id +'_'+ data.lane +'">00:00</td>'
             )
             $stats.append($stat)
         })

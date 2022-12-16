@@ -50,12 +50,12 @@ function styleHeat_top(element){
     let $item = $(
         '<div class="heat_content">' +
             '<div class="details">' +
-                '<div id="workout" class="detail" > ' + element.workoutName + ' - </div>' +
-                '<div id="division" class="detail"> ' + element.heatName + ' </div>' +    
-                '// ' +'<div id="mvt" class="text-nowrap text-truncate"></div>' + 
+                '<div id="workout" class="detail" > ' + element.workoutName.toLowerCase() + ' - </div>' +
+                '<div id="division" class="detail"> ' + element.heatName.toLowerCase() + ' </div>' +    
+                '<div id="mvt" class="text-nowrap text-truncate"></div>' + 
             '</div>' +
             '<div class="box_mainSponsor">' +
-                '<div class="presented">PRESENTED BY</div>'+
+                '<div class="presented">Presented by</div>'+
                 '<div class="mainSponsor">' +
                 '</div>'+
             '</div>'+

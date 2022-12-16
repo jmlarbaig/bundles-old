@@ -37,9 +37,9 @@
 
     --heigth: 29px;
     --height_ath_side : 40px;
-    --height_ath_top : 60px;
+    --height_ath_top : 50px;
     --height_ath_tv : 60px;
-    --padding_ath_content: 5px;
+    --padding_ath_content: 11px;
     --border: 0px 10px 10px 0px;
 
     --font-select:'Typographica';
@@ -138,28 +138,3 @@
         z-index: -99;
     }
 
-    .box_FVSK{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    .FV{
-        margin: 0px 5px;
-        background-image: url('../img/PRESTA/FV-logo.png');
-        background-position: 2px 5px;
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 200px;
-        height: 100px;
-    }
-
-    .SK{
-        margin: 0px 5px;
-        background-image: url('../img/PRESTA/SK-logo.png');
-        background-position: top;
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 170px;
-        height: 100px;
-    }
