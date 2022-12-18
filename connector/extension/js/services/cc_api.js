@@ -72,40 +72,68 @@ module.exports = () => {
             headers:{'Authorization': 'Bearer ' + token}
         }).then((response) => response.json());
     }
-    
-    async function heatDetails(eventId, heatId) {
-        let response = await fetch( "https://competitioncorner.net/api2/v1/schedule/workout/"+ eventId + "/heat/" + heatId + "/details");
-        let json = await response.json();
-        return json;
+
+    async function loadAttributionLane(eventId, workoutId, heatId, start, end){
+    return fetch("https://competitioncorner.net/api2/v1/events/"+ eventId + "/cuecard/heat-lane?workoutId="+workoutId+"&heatId=" +heatId + "&hideEmptyLanes=true&from="+start+"&totalCount=" + end , {
+            method:"GET",
+            headers:{'Authorization': 'Bearer ' + token},
+        }).then((response)=>{
+            return response.json();
+        }).catch((err)=>{return err})
+    }
+
+    async function loadHeatResults(eventId, workoutId, heatId, start, end) {
+        return fetch("https://competitioncorner.net/api2/v1/events/"+eventId+"/cuecard/heat-results?workoutId="+ workoutId+"&heatId="+ heatId + "&from="+ start +"&totalCount=" + end , {
+            method:"GET",
+            headers:{'Authorization': 'Bearer ' + token},
+        }).then((response)=>{ return response.json();
+        }).catch((err)=>{return err})
+    }
+
+    async function loadDivisionWorkoutResults(eventId, divisionId, workoutId, start, end){
+        return fetch("https://competitioncorner.net/api2/v1/events/" + eventId + "/cuecard/division-results?divisionId="+ divisionId +"&workoutId="+ workoutId +"&from="+ start +"&totalCount=" + end, {
+            method:"GET",
+            headers:{'Authorization': 'Bearer ' + token},
+        }).then((response)=>{
+            return response.json();
+        }).catch((err)=>{return err})
     }
     
-    async function getHeatInfo(eventId, heatId) {
-        let response = await fetch( "https://competitioncorner.net/api2/v1/schedule/workout/"+ eventId + "/heat/" + heatId);
-        let json = await response.json();
-        return json;
-    }
-    
-    async function getHeatResults(heatId) {
-    
-        let response = await fetch( "https://competitioncorner.net/api/v1/events/cuecard/heats/" + heatId + "/results")
-        let json = await response.json();
-        return json;
-    }
-    
-    async function getWorkoutResults(heatId) {
-    
-        let response = await fetch( "https://competitioncorner.net/api/v1/cuecard/divisionresults/28601/workout/35638")
-        let json = await response.json();
-        return json;
-    }
-    
-    async function getOverallStanding(heatId) {
-    
-        let response = await fetch( "https://competitioncorner.net/api/v1/events/5034/cuecard/standings/team_28601")
-        let json = await response.json();
-        return json;
+    async function loadOverallStanding(eventId, scoringGroup, start, end){
+        return fetch("https://competitioncorner.net/api2/v1/events/" + eventId + "/cuecard/standing?scoringGroup="+ scoringGroup +"&from="+ start +"&totalCount="+end, {
+            method:"GET",
+            headers:{'Authorization': 'Bearer ' + token.value},
+        }).then((response)=>{
+            return response.json();
+        }).catch((err)=>{return err})
     }
         
+    // async function loadDivisions(eventId){
+    //     return fetch("https://competitioncorner.net/api2/v1/lookups/"+ eventId +"/divisions" , {
+    //         method:"GET",
+    //         headers:{'Authorization': 'Bearer ' + token},
+    //     }).then((response)=>{
+    //         return response.json();
+    //     }).catch((err)=>{return err})
+    // }
+    
+    async function loadWorkoutsByDivision(eventId, divisionId){
+        return fetch("https://competitioncorner.net/api2/v1/lookups/"+ eventId +"/workouts?divisionId=" + divisionId , {
+            method:"GET",
+            headers:{'Authorization': 'Bearer ' + token},
+        }).then((response)=>{
+            return response.json();
+        }).catch((err)=>{return err})
+    }
+    
+    async function loadHeatsByWorkout(eventId, workoutId){
+        return fetch("https://competitioncorner.net/api2/v1/lookups/"+ eventId +"/workouts/" + workoutId + "/heats" , {
+            method:"GET",
+            headers:{'Authorization': 'Bearer ' + token},
+        }).then((response)=>{
+            return response.json();
+        }).catch((err)=>{return err})
+    }
     
     async function loadParticpantId(eventId, id) {
         return await fetch( "https://competitioncorner.net/api2/v1/events/"+ eventId + "/participants/"+ id , {
@@ -121,15 +149,6 @@ module.exports = () => {
         }).then((response) => response.json())
     }    
     
-    async function loadAttributionLane(heatId){
-        let response = await fetch( "https://competitioncorner.net/api/v1/events/cuecard/heats/"+heatId+"/heatlane" , {
-            method:"GET",
-            headers:{'Authorization': 'Bearer ' + token},
-        });
-        let json = await response.json();
-        return json;
-    }
-    
     return {
         logCC,
         dashboardEventCC,
@@ -140,6 +159,12 @@ module.exports = () => {
         loadAthlete,
         loadWorkoutsPlanning,
         loadHeats,
-        loadParticpant
+        loadParticpant,
+        loadAttributionLane,
+        loadDivisionWorkoutResults,
+        loadHeatResults,
+        loadOverallStanding,
+        loadWorkoutsByDivision,
+        loadHeatsByWorkout,
     }
 }

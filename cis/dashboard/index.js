@@ -6,7 +6,6 @@
     let listeCurrentHeat;
 
     listCis.on('change', (newValue, oldValue)=>{
-        console.log(newValue)
         if(JSON.stringify(newValue) != JSON.stringify(oldValue)){
             listeCurrentHeat = newValue
             updateFront(newValue)

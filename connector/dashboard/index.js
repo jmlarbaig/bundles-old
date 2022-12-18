@@ -27,7 +27,6 @@ let data = []
 
 
     logoEvent.on('change', (newValue) => {
-        // console.log(newValue[0].url)
         if(newValue.length>0){
             $("#logo_event").css("background-image", "url(" + newValue[0].url + ")");
         }
@@ -92,7 +91,6 @@ let data = []
     })
 
     Connected.on('change',(newValue)=>{
-        console.log(newValue)
         Object.keys(newValue).forEach((element)=>{
             let state = newValue[element]
             if(newValue[element].includes('error')){

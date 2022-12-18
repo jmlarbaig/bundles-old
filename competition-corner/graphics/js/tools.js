@@ -1,6 +1,6 @@
-async function resetAttrLane(data){
+async function resetAttrLane(dataCC){
 
-    let dataCC = await loadAttributionLane(data.heatId)
+    // let dataCC = await loadAttributionLane(data.heatId)
   
     // Donnée de l'event Info
     console.log(dataCC)
@@ -18,12 +18,10 @@ async function resetAttrLane(data){
   
   }
 
-  async function resetHeatResults(data){
-
-    let dataCC = await loadHeatResult(data.heatId)
-  
+  async function resetHeatResults(dataCC){
+    
     // Donnée de l'event Info
-    console.log(dataCC)
+    // console.log(dataCC)
   
     $('.headerLogo-text').text(dataCC.eventName)
     $('#heatName').text(dataCC.heatName)
@@ -31,7 +29,7 @@ async function resetAttrLane(data){
   
     athletes = dataCC.participants
   
-    console.log(athletes)
+    // console.log(athletes)
     maximumAthlete = athletes.length;
   
     loadTableResult(athletes)
@@ -39,9 +37,9 @@ async function resetAttrLane(data){
   }
   
 
-  async function resetWorkoutDivision(data){
+  async function resetWorkoutDivision(dataCC){
 
-    let dataCC = await loadDivisionWorkoutResult(data.selectedDivision, data.workoutSelected)
+    // let dataCC = await loadDivisionWorkoutResult(data.selectedDivision, data.workoutSelected)
   
     // Donnée de l'event Info
     console.log(dataCC)

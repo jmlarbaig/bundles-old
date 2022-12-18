@@ -186,8 +186,8 @@ html {
     border-radius: 0;
     background-repeat: no-repeat;
     background-position: center center;
-    -webkit-background-size: cover;
-    background-size: cover;
+    -webkit-background-size: contain;
+    background-size: contain;
     top: 5px;
     left: 20px;
     z-index: 3

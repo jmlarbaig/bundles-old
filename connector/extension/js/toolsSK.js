@@ -1,6 +1,7 @@
 
-const sha256 = require('sha256')
 let staticJSONString = ''
+const fs = require("fs");
+
 
 module.exports = (nodecg, Connected) => {
 
@@ -17,6 +18,10 @@ module.exports = (nodecg, Connected) => {
     let intervalStatic = null;
     let intervalDynamic = null;
 
+    nodecg.listenFor('reconnection', ()=>{
+        staticJSONString = ''
+    })
+
     function connectionSK(addIp){    
         let adr_IP_static = addIp + '/Static.json';
         let adr_IP_dynamics = addIp + '/Dynamics.json'; 
@@ -31,10 +36,15 @@ module.exports = (nodecg, Connected) => {
             clearInterval(intervalDynamic)
             intervalDynamic = null;
         }
-        
-        intervalStatic = setInterval(getStatics, 1000, adr_IP_static)
-        intervalDynamic = setInterval(getDynamics, 1000, adr_IP_dynamics)
 
+        if(addIp.includes('http')){
+            intervalStatic = setInterval(getStatics, 1000, adr_IP_static)
+            intervalDynamic = setInterval(getDynamics, 1000, adr_IP_dynamics)
+        }else{
+            console.log(__dirname)
+            intervalStatic = setInterval(getStaticsFile, 1000, adr_IP_static)
+            intervalDynamic = setInterval(getDynamicsFile, 1000, adr_IP_dynamics)
+        }
     }
 
     function deconnectionSK(){
@@ -44,6 +54,62 @@ module.exports = (nodecg, Connected) => {
         intervalDynamic = null;
     }
 
+    function getStaticsFile(ip){
+        fs.readFile(__dirname+'/'+ip, "utf8", (err, jsonString) => {
+            if (err) {
+              console.log("Error reading file from disk:", err);
+              return;
+            }
+            try {
+                Connected.value.static = 'connected'
+                const statics = JSON.parse(jsonString);
+                if(statics.eventId != undefined){
+                    let sameJson = (staticJSONString) == JSON.stringify(statics);
+                    if (sameJson) {
+                        return
+                    }
+    
+                    staticJSONString = JSON.stringify(statics);
+    
+                    const {WorkoutInfo, heatInfo, athletes, ...rest} = statics
+    
+                    eventInfos.value = rest
+                    heatInfos.value = heatInfo
+                    workoutInfo.value = WorkoutInfo
+                    s_athletes.value = athletes
+
+                    nodecg.sendMessage('static_update', statics);
+                }
+            } catch (err) {
+              console.log("Error parsing JSON string:", err);
+            }
+          });
+    }
+
+    function getDynamicsFile(ip){
+        fs.readFile(__dirname+'/'+ip, "utf8", (err, jsonString) => {
+            if (err) {
+              console.log("Error reading file from disk:", err);
+              return;
+            }
+            try {
+                Connected.value.dynamic = 'connected'
+                const dynamics = JSON.parse(jsonString);
+                if(dynamics.eventId != undefined){
+                    const {athletes, status, NtpTimeStart, ...rest} = dynamics
+    
+                    // Insert des datas dans l'objet status
+                    statusHeat.value = {status, NtpTimeStart}
+                    
+                    // Insert des nouvelles datas des athletes
+                    d_athletes.value = athletes
+    
+                }
+            } catch (err) {
+              console.log("Error parsing JSON string:", err);
+            }
+          });
+    }
 
     async function getStatics(skStaticUrl) {
         return fetch(skStaticUrl,{cache: "no-store"})
@@ -67,8 +133,8 @@ module.exports = (nodecg, Connected) => {
                     s_athletes.value = athletes
 
                     nodecg.sendMessage('static_update', statics);
-
                 }
+
             }).then(()=>{
                 Connected.value.static = 'connected'
             })

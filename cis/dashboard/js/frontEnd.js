@@ -5,7 +5,6 @@ function updateFront(data){
     $tab.find(".cueCardParents").remove();
     
     Object.values(data).forEach(( val, index ) => {
-        console.log(val)
         if(val != null ){
             let $item = $( 
                 '<div class="cueCardParents" >' + 

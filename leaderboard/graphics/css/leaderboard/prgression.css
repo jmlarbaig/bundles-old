@@ -49,6 +49,8 @@
 
 .leaderboard #mvt{
     width: 70%;
+    text-transform: capitalize;
+
 }
 
 .leaderboard #mvt span:nth-child(1){

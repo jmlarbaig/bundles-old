@@ -18,8 +18,8 @@ module.exports = function (nodecg) {
 
     Connected.value = connect
 
-    var cc = require('./js/toolsCC')(nodecg, Connected)
-    var sk = require('./js/toolsSK')(nodecg, Connected)
+    let cc = require('./js/toolsCC')(nodecg, Connected)
+    let sk = require('./js/toolsSK')(nodecg, Connected)
     require('./js/tools')(nodecg)
 
     const router = nodecg.Router();
@@ -54,6 +54,8 @@ module.exports = function (nodecg) {
 
 
     nodecg.listenFor('connection', (value, ack)=>{
+
+        nodecg.sendMessage('reconnection')
 
         let data = {cc : 'connecting', 'static': 'connecting', 'dynamic': 'connecting'}
         Connected.value = data;

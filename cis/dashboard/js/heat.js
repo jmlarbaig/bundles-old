@@ -1,10 +1,9 @@
 
 function updateHeat(data){
-    console.log(data)
 
-    var divisionsNames = []
-    var repTarget = []
-    var workout = []
+    let divisionsNames = []
+    let repTarget = []
+    let workout = []
     
     for(let athletes of data.athletes){
         if( !divisionsNames.includes(athletes.division) ){
@@ -21,18 +20,18 @@ function updateHeat(data){
         }
     }
 
-    var eventName = data.eventName
-    var heatName = data.heatName
-    var heatTime = data.heatTime
-    var workoutName = data.workoutName
-    var location = data.location
+    let eventName = data.eventName || '-'
+    let heatName = data.heatName || '-'
+    let heatTime = data.heatTime || '-'
+    let workoutName = data.workoutName || '-'
+    let location = data.location || '-'
 
-    var $tab = $("#cis_heat")
+    let $tab = $("#cis_heat")
     $tab.find(".rowHeat").remove();
     $tab.find(".wodDescription").remove();
 
 
-    var $item = $( 
+    let $item = $( 
         '<div class="rowHeat" >' + 
             '<div>'+
                 '<span class="time heatName">'+ heatTime + ' : ' + heatName +'</span>' + 
@@ -52,14 +51,14 @@ function updateHeat(data){
     );
     $tab.append($item);
 
-    var $description = $(".wodDescription")
+    let $description = $(".wodDescription")
     $description.find(".description").remove();
 
     workout.forEach((wod, index)=>{
         let mvtDescription = wod.description.replaceAll('<p>', '  ') ;
         mvtDescription = mvtDescription.replaceAll('</p>',' ')
         mvtDescription = mvtDescription.replaceAll('_',' ')
-        var $item = $( 
+        let $item = $( 
             '<div class="col">'+
                 '<div class="description row" >' + 
                     '<span class="division col-3">Divison : '+divisionsNames[index]+'</span>' + 

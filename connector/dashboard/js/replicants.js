@@ -27,25 +27,12 @@ const d_athletes = nodecg.Replicant('d_athletes');
 
 
 
-const ParticipantsWod = nodecg.Replicant('ParticipantsWod');
-const DatesEvent = nodecg.Replicant('DatesEvent');
-const WodTab = nodecg.Replicant('WodTab');
-const WarmUpTab = nodecg.Replicant('WarmUpTab');
-const WorkoutInfos = nodecg.Replicant('WorkoutInfos');
-
-
-const LogoImg = nodecg.Replicant('LogoImg')
-const sponsorWod = nodecg.Replicant('sponsorWod')
-
-
 // Data from Competition Corner
 const affiliateStats = nodecg.Replicant('affiliateStats')
 const Divisions = nodecg.Replicant('Divisions')
-const eventId = nodecg.Replicant('eventId', { defaultValue: 0, persistent:false})
+const WorkoutInfos = nodecg.Replicant('WorkoutInfos');
+
 const TopScore = nodecg.Replicant('TopScore')
-
-const listeAthlete = nodecg.Replicant('listeAthlete')
-
 
 // State Connection Replicant
 const Connected = nodecg.Replicant('Connected');

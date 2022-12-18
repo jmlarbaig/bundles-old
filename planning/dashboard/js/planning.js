@@ -53,36 +53,32 @@ function createPlanning(data){
     
         let $navContent = $("#nav-tabContent") 
         $nav.find(".itemContent").remove();
-    
-        const d = new Date();
+
     
         let i=0
         for(let day of dates){
-            // var cpr = day.text.split(' ')
-            // var dayDate = days[ d.getDay() ];
-            // var month = months[ d.getMonth() ];
-            // var dayNb = months[ d.getDate() ];
     
-            var $item = $(
+            let $item = $(
                 '<button class="day nav-link" id="nav-schedule-tab" data-bs-toggle="tab" data-bs-target="#tab'+i+'"  type="button" role="tab" aria-controls="tab'+i+'" aria-selected="false">' + day.text + ' </button>'
             )
             $nav.append($item)
     
-            var $itemContent = $(
+            let $itemContent = $(
                 '<div class="itemContent tab-pane fade" id="tab'+i+'"  role="tabpanel" aria-labelledby="tab'+i+'-tab">' + 
                     '<div class="accordion accordion-flush" id="accordion'+i+'"/>' +
                 '</div>'
             )
     
             $navContent.append($itemContent)
-            var $wodContent = $('#accordion'+i) 
+            let $wodContent = $('#accordion'+i) 
             $wodContent.find(".accordion-item").remove()
             
             let y =0
             for (let wod of workouts){
                 if(wod.date == day.value){
+                    let $itemWod = $();
                     if (wod.id != workoutId){
-                        var $itemWod = (
+                        $itemWod = (
                             '<div class="accordion-item">' + 
                                 '<h2 class="accordion-header" id="heading'+i+'y'+y+'">' +
                                     '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+i+'y'+y+'" aria-expanded="false" aria-controls="collapse'+i+'y'+y+'">' +
@@ -97,7 +93,7 @@ function createPlanning(data){
                         )
                     }
                     else{
-                        var $itemWod = (
+                        $itemWod = (
                             '<div class="accordion-item">' + 
                                 '<h2 class="accordion-header" id="heading'+i+'y'+y+'">' +
                                     '<button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+i+'y'+y+'" aria-expanded="true" aria-controls="collapse'+i+'y'+y+'">' +
@@ -115,11 +111,11 @@ function createPlanning(data){
         
                     $wodContent.append($itemWod)
         
-                    var $heatBody = $("#heat"+i+'y'+y)
+                    let $heatBody = $("#heat"+i+'y'+y)
                     let h = 0;
                     for(let heat of wod.heats){
 
-                        var $itemHeats = (
+                        let $itemHeats = (
                             '<div class="heatName">' + 
                                 heat.title + " - " + heat.time +
                             '</div>' + 
@@ -139,32 +135,34 @@ function createPlanning(data){
                         )
                         $heatBody.append($itemHeats)
         
-                        var $heatStation = $("#heatContent"+i+'y'+y+'h'+h)
+                        let $heatStation = $("#heatContent"+i+'y'+y+'h'+h)
                         for(let station of heat.stations){
                             
-                            let a = wod.participants.find( element => element.id === station.participantId)
+                            if(wod.participants != undefined){
+                                let a = wod.participants.find( element => element.id === station.participantId)
                 
-                            if (a.countryCode=="" || a.countryCode==null){a.countryCode = "null"}
-                            else{
-                                for(let f=0; f < FLAG.length; f++){
-                                    if (a.countryCode == FLAG[f]["3L"]){
-                                        a.countryCode = FLAG[f]["2L"];
-                                        break;
+                                if (a.countryCode=="" || a.countryCode==null){a.countryCode = "null"}
+                                else{
+                                    for(let fl of FLAG){
+                                        if (a.countryCode == fl["3L"]){
+                                            a.countryCode = fl["2L"];
+                                            break;
+                                        }
                                     }
                                 }
+    
+    
+                                let $itemStation = $(
+                                    '<tr class="athlete">' + 
+                                        '<td class="lane">'+ station.station + '</td>' + 
+                                        '<td class="rank">'+ a.rank + '</td>' + 
+                                        '<td class="points">'+ a.points + '</td>' + 
+                                        // '<td class="flag">' + '<img src="https://flagcdn.com/'+ a.countryCode.toLowerCase() + '.svg" width="30"></img> ' + '</td>' +
+                                        '<td class="text-nowrap text-truncate text-left name">' + station.participantName + '</td>' + 
+                                    '</tr>'
+                                )
+                                $heatStation.append($itemStation)
                             }
-
-
-                            var $itemStation = $(
-                                '<tr class="athlete">' + 
-                                    '<td class="lane">'+ station.station + '</td>' + 
-                                    '<td class="rank">'+ a.rank + '</td>' + 
-                                    '<td class="points">'+ a.points + '</td>' + 
-                                    '<td class="flag">' + '<img src="https://flagcdn.com/'+ a.countryCode.toLowerCase() + '.svg" width="30"></img> ' + '</td>' +
-                                    '<td class="text-nowrap text-truncate text-left name">' + station.participantName + '</td>' + 
-                                '</tr>'
-                            )
-                            $heatStation.append($itemStation)
                         }
         
                         h++

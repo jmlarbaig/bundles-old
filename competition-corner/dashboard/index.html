@@ -30,9 +30,28 @@
 			</div>
 			<h4>Attribution Lane Control</h4>
 			<div class="row">
-				<button id="minus" onclick="changeLane()">Previous Athletes</button>
-				<button id="plus" onclick="changeLane()">Next Athletes</button>
+				<button id="minus" name="lane" onclick="changeLane()">Previous Athletes</button>
+				<button id="plus" name="lane" onclick="changeLane()">Next Athletes</button>
 			</div>
+
+			<h4>Heat Results </h4>
+			<div class="row">
+				<label for="workout_heat-select">Which Workouts</label>
+				<select name="workout_heat" id="workout_heat-select">
+					<option value="">--Please choose an division--</option>
+				</select>
+			</div>
+			<div class="row">
+				<label for="heat-select">Which Heat</label>
+				<select name="heat" id="heat-select">
+					<option value="">--Please choose a workout--</option>
+				</select>
+			</div>
+			<div class="row">
+				<button id="minus" name="heats" onclick="changeLane()">Previous Athletes</button>
+				<button id="plus" name="heats" onclick="changeLane()">Next Athletes</button>
+			</div>
+
 			<h4>Overall Standing Division By Workout Control</h4>
 			<div class="row">
 				<label for="division-select">Which Division</label>
@@ -41,18 +60,17 @@
 				</select>
 			</div>
 			<div class="row">
-				<label for="workout-select">Next Athletes</label>
-				<select name="workout" id="workout-select">
+				<label for="workout_division-select">Which Workout</label>
+				<select name="workout_division" id="workout_division-select">
 					<option value="">--Please choose a workout--</option>
 				</select>
 			</div>
 			<div class="row">
-				<button id="minus" onclick="changeLane()">Previous Athletes</button>
-				<button id="plus" onclick="changeLane()">Next Athletes</button>
+				<button id="minus" name="osDivWod" onclick="changeLane()">Previous Athletes</button>
+				<button id="plus" name="osDivWod" onclick="changeLane()">Next Athletes</button>
 			</div>
 		</div>
 	</div>
-	<script src="./js/ccApi.js"></script>
 	<script src="./js/function.js"></script>
 	<script src="index.js"></script>
 </html>

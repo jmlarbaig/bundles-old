@@ -43,6 +43,8 @@
 
 .leaderboard #mvt{
     width: 70%;
+    text-transform: capitalize;
+
 }
 
 /* .leaderboard .mvt_id:nth-child(odd){

@@ -3,12 +3,27 @@ async function resetOption(){
     $("#division-select option").append('<option value=0>-- Please Choose Division --</option>')
 
     $("#workout-select option").append('<option value=0>-- Please Choose Workout --</option>')
+}
 
+async function loadOptionsWorkoutHeat(workouts){
+
+    $("#workout_heat-select option").remove()
+
+    for(let workout of workouts){
+        $("#workout_heat-select").append('<option value='+ workout.id +'>' + workout.name + '</option>');
+    }
+}
+
+async function loadOptionsHeats(heats){
+
+    $("#heat-select option").remove()
+
+    for(let heat of heats){
+        $("#heat-select").append('<option value='+ heat.key +'>' + heat.value + '</option>');
+    }
 }
 
 async function loadOptionDivisions(divisions){
-    // let divisions = await loadDivisions(data)
-    console.log(divisions)
 
     $("#division-select option").remove()
 
@@ -17,13 +32,11 @@ async function loadOptionDivisions(divisions){
     }
 }
 
-async function loadOptionsWorkouts(_EvId, divisionId){
-    let workouts = await loadWorkoutsByDivision(_EvId, divisionId)
-    console.log(workouts)
+async function loadOptionsWorkoutsDivision(workouts){
 
-    $("#workout-select option").remove()
+    $("#workout_division-select option").remove()
 
     for(let workout of workouts){
-        $("#workout-select").append('<option value='+ workout.key +'>' + workout.value + '</option>');
+        $("#workout_division-select").append('<option value='+ workout.key +'>' + workout.value + '</option>');
     }
 }

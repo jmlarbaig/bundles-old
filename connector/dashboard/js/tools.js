@@ -3,7 +3,6 @@
 ipAddress.on('change', (newValue, oldValue) => {
     let ipHtml = $('#ipAdresse');
     ipHtml.text(newValue)
-    console.log(newValue.includes('10.'))
     if(newValue != undefined && newValue.includes('10.')){
         $('#led_ipAdresse').addClass('led-green')
         $('#led_ipAdresse').removeClass('led-red')
@@ -20,7 +19,6 @@ ipAddress.on('change', (newValue, oldValue) => {
 })
 
 nowNtp.on('change', (newValue, oldValue)=>{
-    console.log(newValue)
     $('#updateButton').removeAttr('disabled')
     let ip = newValue.ip
     let date = newValue.date.split('T')[1]
@@ -41,7 +39,6 @@ nowNtp.on('change', (newValue, oldValue)=>{
 })
 
 Mqtt_connected.on('change', (newValue, oldValue) => {
-    console.log("NewValue MQTT =",newValue)
     if(newValue.connected == true){
         $('#mqttMSG').text('Connected')
         $('#led_MQTT').addClass('led-green')

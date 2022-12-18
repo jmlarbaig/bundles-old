@@ -5,14 +5,9 @@
     const sponsors = nodecg.Replicant('assets:sponsors', 'connector')
     const sponsorLower = nodecg.Replicant('assets:sponsorLower', 'versus') 
 
-    // Appel des infos de l'événements
-    const eventInfos = nodecg.Replicant('eventInfos', 'connector');
-
-    // Replican from Competition Corner Control
-    const attributeLaneIndex = nodecg.Replicant('attributeLaneIndex')
-    const heatResultIndex = nodecg.Replicant('heatResultIndex')
-    const OSDivisionWorkout = nodecg.Replicant('OSDivisionWorkout')
-
+    const AttributionLane = nodecg.Replicant('AttributionLane', 'connector');
+    const HeatResults = nodecg.Replicant('HeatResults', 'connector')
+    const OSDivisionWorkout = nodecg.Replicant('OSDivisionWorkout', 'connector')
 
     let overlay=''
     let eventLogo;
@@ -32,38 +27,21 @@
         }
     })
 
-    eventInfos.on('change', (newValue, oldValue) => {
-        if (newValue != oldValue && newValue != undefined){
-            switch(overlay){
-                case 'attribution-lane':
-                    resetAttrLane(newValue)
-                    break;
-                case 'heat-result':
-                    resetHeatResults(newValue)
-                    break;
-                case 'overall-division-workout':
-                    resetHeatResults(newValue)
-                    break;
-            }
-        }
-    })
-    
-    attributeLaneIndex.on('change', (newValue, oldValue)=>{
-        if((newValue == 'minus' || newValue == 'plus')){
-            changeLane(newValue)
+    AttributionLane.on('change', (newValue, oldValue)=>{
+        if(overlay == 'attribution-lane'){
+            resetAttrLane(newValue)
         }
     })
 
-    heatResultIndex.on('change', (newValue, oldValue)=>{
-        console.log(newValue)
-        if((newValue == 'minus' || newValue == 'plus') && (overlay == 'heat-result' || overlay == 'overall-division-workout')){
-            changeLane(newValue)
+    HeatResults.on('change', (newValue, oldValue)=>{
+        if(overlay == 'heat-result'){
+            resetHeatResults(newValue)
         }
     })
 
     OSDivisionWorkout.on('change', (newValue, oldValue)=>{
         if(overlay == 'overall-division-workout'){
-            console.log(newValue)
             resetWorkoutDivision(newValue)
         }
     })
+
