@@ -288,30 +288,3 @@ function mvtIndexAmrap(nbrReps, division, rounds){
         }
     }
 }
-
-function affichageStats(){
-    console.log(event.target.id)
-
-    let _lane = parseInt(event.target.id.replace('showStats_',''))
-
-    console.log(listCis.value[_lane])
-
-    $('#myModal').find('#card_ath').remove()
-
-    let $modal = $(
-        '<div id="card_ath" class="modal-content">' +
-            '<span class="close">&times;</span>' +
-            '<p>Display Name : '+ listCis.value[_lane].displayName + '</p>' +
-            '<p>Division : '+ listCis.value[_lane].division + '</p>' +
-            '<p>#'+ listCis.value[_lane].lane + '</p>' +
-            '<p>Affiliation : '+ listCis.value[_lane].affiliate + '</p>' +
-            '<p>Rank : '+ listCis.value[_lane].rank + '</p>' +
-        '</div>'
-    )
-    $('#myModal').append($modal)
-    $('#myModal').slideDown(1000)
-
-    document.getElementsByClassName('close')[0].addEventListener('click', ()=>{
-        $('#myModal').slideUp(1000)
-    })
-}

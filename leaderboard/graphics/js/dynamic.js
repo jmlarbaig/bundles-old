@@ -34,7 +34,11 @@ function updateDynamics(newScoring, status){
                                 if ( Mvt_name[elemAth[i].lane] != undefined && Mvt_name[elemAth[i].lane].mvtNames.includes("Sprint")){
                                     elemAth[i].$item.find(".popup").text( Mvt_name[elemAth[i].lane].mvtNames);
                                     elemAth[i].$item.find(".popup").show();
+                                    console.log(chrono)
                                     elemAth[i].$item.find(".score").text(chrono);
+                                    let mvts = Mvt_name[elemAth[i].lane].arrayMvt.toString().replaceAll(',', ' - ').replaceAll('_', ' ')
+                                    $('#mvt').html(mvts)
+                                    $('.mvt').html(mvts)
                                 }
                                 else{
                                     if (i!=0){
@@ -147,11 +151,13 @@ function updateDynamics(newScoring, status){
                     else{
                         if(overlay == 'overlay_top'){
                             elemAth[i].$item.find(".rank").toggleClass('rank finish_rank',true)
-                            elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank other_rank', false)
+                            elemAth[i].$item.find(".rank").toggleClass('initial_rank_top', false)
                             elemAth[i].$item.find(".score").toggleClass('score finish_rank', true)
-                            elemAth[i].$item.find(".score").toggleClass('second_rank third_rank first_rank other_rank', false)
+                            elemAth[i].$item.find(".score").toggleClass('initial_rank_top', false)
                             elemAth[i].$item.find(".name").toggleClass('name finish_rank', true)
-                            elemAth[i].$item.find(".name").toggleClass('second_rank third_rank first_rank other_rank', false)
+                            elemAth[i].$item.find(".name").toggleClass('initial_rank_top', false)
+                            elemAth[i].$item.find(".popup").toggleClass('popup finish_rank', true)
+                            elemAth[i].$item.find(".popup").toggleClass('initial_rank_top', false)
                         }else{
                             elemAth[i].$item.find(".rank").toggleClass('rank finish_rank',true)
                             elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank other_rank', false)
@@ -182,8 +188,9 @@ function updateDynamics(newScoring, status){
                     }
 
                     if(overlay == 'commentator'){
-                        console.log(elemAth[i].log_mvt[0])
-                        bestPerf[elemAth[i].lane] = []
+                        if(bestPerf[elemAth[i].lane] == undefined){
+                            bestPerf[elemAth[i].lane] = []
+                        }
                         Object.values(elemAth[i].log_mvt[0]).forEach((time, index)=>{
 
                             elemAth[i].$item.find("#mvt_id_"+index+"_"+elemAth[i].lane).text(time)

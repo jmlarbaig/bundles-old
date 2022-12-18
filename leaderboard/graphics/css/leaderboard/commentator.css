@@ -45,8 +45,15 @@
     width: 70%;
 }
 
-.leaderboard .mvt_id{
+/* .leaderboard .mvt_id:nth-child(odd){
+    background-color: white;
+    color: black;
 }
+
+.leaderboard .mvt_id:nth-child(even){
+    background-color: grey;
+    color: white;
+} */
 
 .leaderboard #mvt span:nth-child(1){
     -moz-transition-duration: 0.7s;

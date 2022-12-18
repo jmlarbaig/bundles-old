@@ -171,7 +171,6 @@ function resetLeaderboard(newData){
 
                 if(overlay == 'commentator'){
                     createStats( elementAth, indexDivision);
-                    console.log('Listy CIS',listCis)
                 }
 
                 
@@ -186,7 +185,7 @@ function resetLeaderboard(newData){
                         $("#leaderboard"+ indexDivision).height(height_tot + $("#leaderboard"+indexDivision + " .header").height())
                     }
 
-                    
+                    console.log(athletesDivision[indexDivision])
                     statusHeat.status == '0' && athletesDivision[indexDivision].sort(ascendingLane);
                     reposition("#leaderboard"+ indexDivision, athletesDivision[indexDivision]);
 

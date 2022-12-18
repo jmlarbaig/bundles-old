@@ -21,13 +21,7 @@
 	<link rel="stylesheet" href="css/connector.css">
 	<script src='./js/model.js'></script>
 	<script src='./js/replicants.js'></script>
-	<script src='./js/services/sk.js'></script>
-	<script src='./js/services/cc_api.js'></script>
-	<script src='./js/services/sha256.min.js'></script>
-
 	<script src="./js/tools.js"></script>
-	<script src="./js/toolsCC.js"></script>
-	<script src="./js/toolsSK.js"></script>
 
 </head>
 <body>
@@ -52,19 +46,19 @@
 		</div>
 		<div class="row box">
 			<div class="led-box col">
-				<div id="led_CC" class="led led-red"></div>
+				<div id="led_cc" class="led led-red"></div>
 				<h4>CC State</h4>
-				<p id="ccState"></p>
+				<p id="State_cc"></p>
 			</div>
 			<div class="led-box col">
-				<div id="led_SK_static" class="led led-red"></div>
+				<div id="led_static" class="led led-red"></div>
 				<h4>SK State Static</h4>
-				<p id="skStateStatic"></p>
+				<p id="State_static"></p>
 			</div>
 			<div class="led-box col">
-				<div id="led_SK_dynamic" class="led led-red"></div>
+				<div id="led_dynamic" class="led led-red"></div>
 				<h4>SK State Dynamic</h4>
-				<p id="skStateDynamic"></p>
+				<p id="State_dynamic"></p>
 			</div>
 		</div>
 		<div class="col box">

@@ -1,122 +1,37 @@
-'use strict';
 
 const fs = require('fs');
 const path = require('path');
 
-const mqtt = require('mqtt')
 
-var ip = require('ip');
 
-var sk = require('./services/sk');
-console.log(typeof sk.getStatics); // => 'function'
-console.log(typeof sk.getDynamics); // => 'function'
-
-var ip_adresse = ip.address() // my ip address
-
-var ch = ip_adresse.split('.')
-
-if(ch[0] == '10'){
-    var ip_broker = ch[0]+'.'+ch[1]+'.'+ch[2]+'.'+'100'
-    var ip_ntp = ch[0]+'.'+ch[1]+'.'+ch[2]+'.'+'1'
-}else{
-    var ip_ntp = 'time.google.com'
+let connect = {
+    'cc':'deconnected',
+    'static': 'deconnected',
+    'dynamic':'deconnected'
 }
 
 
-console.log("ip_adresse = ", ip_adresse, " ip_broker = ", ip_broker, " ipNTP = ", ip_ntp)
 
-const client = mqtt.connect('mqtt://'+ip_broker+':1883');
-const ntpClient = require('ntp-client');
+module.exports = function (nodecg) {
 
+    const Connected = nodecg.Replicant('Connected', { persistent: false });
 
+    Connected.value = connect
 
-var data = {}
-var dataTab = []
-
-
-
-module.exports = function (nodecg, bundlePath) {
-
-    
+    var cc = require('./js/toolsCC')(nodecg, Connected)
+    var sk = require('./js/toolsSK')(nodecg, Connected)
+    require('./js/tools')(nodecg)
 
     const router = nodecg.Router();
-    const timeNTP = nodecg.Replicant('timeNTP')
-    const nowNtp = nodecg.Replicant('nowNtp')
     const dataConfig = nodecg.Replicant('dataConfig')
-    const dataConfigCC = nodecg.Replicant('dataConfigCC')
-    const ipAddress = nodecg.Replicant('ipAddress')
-    const dataRow = nodecg.Replicant('dataRow')
-    const Mqtt_connected = nodecg.Replicant('Mqtt_connected', { defaultValue: {connected:false, error:''}, persistent: false })
 
-    const currentPath = __dirname;
-	const pkgPath = path.join(currentPath,"connectionFile.json");
-	const pkgPathCC = path.join(currentPath,"connectionFileCC.json");
+	const pkgPath = path.join(__dirname,"connectionFile.json");
 
-    ipAddress.value = ip_adresse;
-
-    if(ip_broker != null){
-        client.on('connect', function () {
-            console.log('Connected MQTT')
-            Mqtt_connected.value = {connected:true, error:''};
-            client.subscribe('kairos/+/ERG/#')
-            })
-    
-        client.on('disconnect', () => {
-            console.log('disconnected', new Date())
-            Mqtt_connected.value = {connected:false, error:''};
-            client.reconnect()
-        });
-        client.on('close', () => {
-            console.log('disconnected', new Date())
-            Mqtt_connected.value = {connected:false, error:''};
-        });
-        client.on('error', err => {
-            console.error('error', err)
-            Mqtt_connected.value = {connected:false, error:err};
-            client.reconnect()
-        });
-    
-        client.on('message', function (topic, message) {
-            // console.log(topic)
-            var ch = topic.split('/');
-            var lane = parseInt(ch[1].replace("minos",""))-1
-    
-            console.log("lane =", lane)
-            if(topic.includes("ERG")){
-                var erg = ch[3];
-                var ch2 = message.toString().split(';');
-    
-                data={}
-                data.lane = lane;
-                data.displayUnit = ch2[0];
-                data.displayType = ch2[1];
-                data.workoutState = ch2[2];
-                data.erg = ch[3];
-                // data.timeWorkout = ch2[3];
-                data.spm = ch2[4];
-                data.distance = ch2[5];
-                data.calories = ch2[6];
-                data.power = ch2[7];
-                data.calH = ch2[8];
-                data.stroke = ch2[9];
-                data.byteState = ch2[10];
-
-                dataTab[lane] = data;
-                dataRow.value = dataTab;
-    
-                // console.log(dataTab)
-            }
-          })
-    }
 
 
     router.post('/companion', (req, res) => {
         console.log("Bien recu :", req.body)
     });
-
-    router.get('/leaderboard', (req, res)=> {
-        res.redirect('http://'+ip_adresse+':9090/bundles/leaderboard/graphics/index.html');
-    })
 
     nodecg.mount('/functionnalVision', router);
 
@@ -130,98 +45,38 @@ module.exports = function (nodecg, bundlePath) {
           }
 	}
 
-    nodecg.listenFor('dataOverwrite', (value, ack) =>{
+    function writeConfig(value){
         let data = JSON.stringify(value, undefined, 4);
         fs.writeFileSync(pkgPath, data)
         dataConfig.value = value
-    })
-
-    if (fs.existsSync(pkgPathCC)) {   
-        try {
-            const data_ = JSON.parse(fs.readFileSync(pkgPathCC))
-            dataConfigCC.value = data_
-          } 
-        catch (err) {
-            console.error(err)
-          }
-	}
-
-    nodecg.listenFor('dataOverwriteCC', (value, ack) =>{
-        let data = JSON.stringify(value);
-        fs.writeFileSync(pkgPathCC, data)
-        dataConfigCC.value = value
-    })
-
-    nodecg.listenFor('updateNTP', (value, ack)=>{
-        if(value != 'local'){
-            time(value);
-        }else{
-            time(ip_ntp);
-        }
-    })
-
-    time(ip_ntp)
-
-    function time (ip){
-        ntpClient.getNetworkTime(ip, 123, function(err, date) {
-            if(err) {
-                console.error(err);
-                nowNtp.value = err
-            }else{
-                console.log(date)
-                let d = Date.now()
-                let diff = date.getTime() - Date.now()
-                timeNTP.value = diff
-
-                let object = {
-                    'ip':ip,
-                    'date':date
-                }
-
-                nowNtp.value = object
-
-                console.log(diff)
-            }
-            // checkIpKairos()
-        });
     }
 
-    function changeIpAdresse(){
-        ip_adresse = ip.address() // my ip address
-        ipAddress.value = ip_adresse;
 
-        ch = ip_adresse.split('.')
-        if(ch[0] == '10'){
-            ip_broker = ch[0]+'.'+ch[1]+'.'+ch[2]+'.'+'100'
-            ip_ntp = ch[0]+'.'+ch[1]+'.'+ch[2]+'.'+'1'
-        }
-        else{
-            ip_broker = ''
-            ip_ntp = 'time.google.com'
-        }
-        time(ip_ntp)
 
-        console.log("ip_adresse = ", ip_adresse, " ip_broker = ", ip_broker, " ipNTP = ", ip_ntp)
-    }
+    nodecg.listenFor('connection', (value, ack)=>{
 
-    function checkIpKairos(){
-        if(ch[0] == '10' && ip.address().includes('10.')){
-            return
-        }
-        else if(ch[0] != '10' && ip.address().includes('10.')){
-            changeIpAdresse()
-        }else if(ch[0] == '10' && !ip.address().includes('10.')){
-            changeIpAdresse()
-        }
-    }
+        let data = {cc : 'connecting', 'static': 'connecting', 'dynamic': 'connecting'}
+        Connected.value = data;
 
-    // console.log(__dirname)
+        const { user, passwd, event, addIp, ntpAdress} = value
 
-    // setInterval(sk.getStatics, 1000, 'http://10.3.86.200:5000/Static.json')
-    // setInterval(sk.getDynamics, 1000, 'http://10.3.86.200:5000/Dynamics.json')
+        cc.connectionCC(user, passwd, event)
+        sk.connectionSK(addIp)
 
-    // setInterval(time, 1000);
-    // setInterval(checkIpKairos, 1000);
+        writeConfig(value)
+
+    })
+
+    nodecg.listenFor('deconnection', (value, ack)=>{
+        let data = {cc : 'deconnecting', 'static': 'deconnecting', 'dynamic': 'deconnecting'}
+        Connected.value = data;
+
+        sk.deconnectionSK()
+        
+        data = {cc : 'deconnected', 'static': 'deconnected', 'dynamic': 'deconnected'}
+        Connected.value = data;
+    })
+
 
 	nodecg.log.info(`Bundle "${__filename}" is initialized.`);
         

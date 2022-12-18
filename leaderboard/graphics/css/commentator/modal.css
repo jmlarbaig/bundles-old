@@ -2,10 +2,10 @@
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 10; /* Sit on top */
+    z-index: 100; /* Sit on top */
     margin: auto;
-    width: 60%; /* Full width */
-    height: 60%; /* Full height */
+    width: 90%; /* Full width */
+    height: 90%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -17,14 +17,14 @@
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 90%; /* Could be more or less, depending on screen size */
   }
   
   /* The Close Button */
   .close {
-    color: #aaa;
+    color: rgb(163, 25, 25);
     float: right;
-    font-size: 28px;
+    font-size: 40px;
     font-weight: bold;
   }
   
@@ -33,4 +33,43 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  .modal .workouts{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    margin: 40px 10px;
+  }
+
+  .modal .workouts .wod{
+    padding: 0px 10px ;
+  }
+
+
+  .modal .athlete{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal .first{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .modal .details{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal .avatar{
+    background-position: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100px;
+    height: 100px;
   }

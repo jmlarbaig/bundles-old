@@ -1,6 +1,7 @@
-const statics = nodecg.Replicant('statics', 'connector');
+
+const s_athletes = nodecg.Replicant('s_athletes', 'connector');
 const ladderAssets = nodecg.Replicant('assets:ladder')
-const Att_poids = nodecg.Replicant('Att_poids', 'faceoff');
+const Att_poids = nodecg.Replicant('Att_poids');
 
 var participantEvent = {}
 var participantsCurrentHeats = {}
@@ -10,8 +11,8 @@ var lowerThird = []
 var tableWeight = [];
 var score = [];
 
-statics.on('change', (newValue, oldValue) => {
-    actualiserTeam(newValue.athletes);
+s_athletes.on('change', (newValue, oldValue) => {
+    actualiserTeam(newValue);
 }); 
 
 function actualiserTeam(athletes){
@@ -51,15 +52,15 @@ ladderAssets.on('change', (newValue, oldValue) => {
 function actualiserScore(){
     var e = document.getElementById("Team");
     var lane = e.value -1;
-    console.log("Onchange : ",Att_poids.value[lane])
     $('#score').text(Att_poids.value[lane] + ' KG')
     
 }
 
 Att_poids.on('change', (newValue, oldValue)=>{
     var e = document.getElementById("Team");
-    var lane = e.value -1;
+    var lane = e.value - 1;
     $('#score').text(newValue[lane] + ' KG')
+    score = Att_poids.value
 })
 
 function weightMinus(){
@@ -80,11 +81,11 @@ function weightMinus(){
     },200)
     $('#score').text(score[lane] + ' KG')
     Att_poids.value = score;
-    console.log(score)
 
 }
 
 function weightPlus(){
+    console.log(score)
     var id = event.target.id
     var e = document.getElementById("Team");
     var lane = e.value -1;
@@ -98,7 +99,6 @@ function weightPlus(){
     },200)
     $('#score').text(score[lane] + ' KG')
     Att_poids.value = score;
-    console.log(score)
 }
 
 

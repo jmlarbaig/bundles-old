@@ -16,14 +16,12 @@ async function askAffichage() {
         $('#ath_'+id).removeAttr("disabled");
     }, 1000)
 
-    liste_heat[id].ath = liste_heat_ath[id].ath_infos
-
     let dataToSend = Object.assign({}, _configAthletes)
 
     dataToSend.checked = $('#ath_'+id).is(':checked');
     dataToSend.subtype = $('#subtype'+id).val();
     dataToSend.lane = id;
-    dataToSend.data = liste_heat[id];
+    dataToSend.data = listeCurrentHeat[id];
 
     lowerThirdData.value = dataToSend;
 }

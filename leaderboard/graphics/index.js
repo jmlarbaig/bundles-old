@@ -22,26 +22,6 @@
 
     let Clrs = {}
 
-    var bg_color;
-    var wod_color;
-    var tx_wod_color;
-    var chrono_color;
-    var tx_chrono_color
-
-    var main_color;
-    var second_color;
-    var finish__color;
-    var first_rank__color;
-    var second_rank__color;
-    var third_rank__color;
-
-    var tx_main_color;
-    var tx_second_color;
-    var tx_finish__color;
-    var tx_first_rank__color;
-    var tx_second_rank__color;
-    var tx_third_rank__color;
-
     let chrono;
 
 
@@ -49,18 +29,16 @@
 
     const setupLeaderboard = nodecg.Replicant('setupLeaderboard')
     const Colors = nodecg.Replicant('Colors', 'configuration');
-    const Border = nodecg.Replicant('Border','configuration');
 
-    const Font = nodecg.Replicant('assets:font','configuration');
+    // const Font = nodecg.Replicant('assets:font','configuration');
     
     const logoEvent = nodecg.Replicant('assets:logoEvent','connector')
     const mainSponsors = nodecg.Replicant('assets:mainSponsor', 'connector')
 
-
     const timeNTP = nodecg.Replicant('timeNTP','connector')
     const nowNtp = nodecg.Replicant('nowNtp','connector')
 
-    const listCis = nodecg.Replicant('CIS','cis')
+    const listCis = nodecg.Replicant('CIS', 'connector')
 
     // Destructuration du fichier static
     const eventInfos = nodecg.Replicant('eventInfos', 'connector');
@@ -82,7 +60,6 @@
     const TopScore = nodecg.Replicant('TopScore', 'connector')
 
 
-
     // Initialisation du choix de la vue
     
     let overlay=''
@@ -90,11 +67,6 @@
     $('document').ready(()=>{
         let ch = document.location.pathname.split('/')
         overlay = ch[ch.length-1].replace('.html','')
-        if(overlay == 'commentator'){
-            // Data du CIS
-            const listCis = nodecg.Replicant('CIS', 'cis')
-            console.log(listCis)
-        }
     })
 
     let newHeat = false;
@@ -297,43 +269,27 @@
         
     })
 
-    Border.on('change', (newValue) => {
+
+    const videoInfos = nodecg.Replicant('videoInfos', 'leaderboard')
+    const videoShow = nodecg.Replicant('videoShow', 'leaderboard')
+
+    // const UrlChange = nodecg.Replicant('UrlChange', 'leaderboard')
+
+    var videocontainer = document.getElementById('video');
+    var videosource = document.getElementById('sourceVid');
+
+    videoShow.on('change', (newValue)=>{
         switch(newValue){
-            case true: 
-                $('.score').css('border-radius', '0px 10px 10px 0px');
-                $('#chronoLocation').css('border-radius', '10px');
-                $('.heat').css('border-radius', '10px');
+            case true:
+
+                videosource.setAttribute('src', videoInfos.value);
+                videocontainer.load();
+                videocontainer.play();
+                
+                $('#video').fadeIn(1000)
                 break;
-            case false:    
-                $('.score').css('border-radius', '0px 0px 0px 0px');
-                $('.heat').css('border-radius', '0px');
-                $('#chronoLocation').css('border-radius', '0px');
+            case false:
+                $('#video').fadeOut(1000)
                 break;
         }
     })
-    
-
-
-const videoInfos = nodecg.Replicant('videoInfos', 'leaderboard')
-const videoShow = nodecg.Replicant('videoShow', 'leaderboard')
-
-// const UrlChange = nodecg.Replicant('UrlChange', 'leaderboard')
-
-var videocontainer = document.getElementById('video');
-var videosource = document.getElementById('sourceVid');
-
-videoShow.on('change', (newValue)=>{
-    switch(newValue){
-        case true:
-
-            videosource.setAttribute('src', videoInfos.value);
-            videocontainer.load();
-            videocontainer.play();
-            
-            $('#video').fadeIn(1000)
-            break;
-        case false:
-            $('#video').fadeOut(1000)
-            break;
-    }
-})

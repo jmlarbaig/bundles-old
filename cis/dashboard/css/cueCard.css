@@ -229,10 +229,11 @@ p+ol,p+ul {
     color: #9e9e9e
 }
 
+
 .cis_ath{
     display: flex;
     flex-direction: row;
-    
+    min-height: fit-content;
 }
 
 .cueCardParents{

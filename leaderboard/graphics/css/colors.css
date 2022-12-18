@@ -31,3 +31,8 @@
 .intial_rank{
     padding: 0;
 }
+
+.initial_rank_top{
+    background-color: rgb(237, 237, 237);
+    color: black;
+}

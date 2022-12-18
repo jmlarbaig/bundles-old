@@ -4,18 +4,17 @@
     const Colors = nodecg.Replicant('Colors', 'configuration');
     const mainSponsors = nodecg.Replicant('assets:mainSponsor','connector')
 
-    const DatesEvent = nodecg.Replicant('DatesEvent', 'connector');
-    const WodTab = nodecg.Replicant('WodTab', 'connector');
-
-
     // Destructuration du fichier static
-    const eventInfos = nodecg.Replicant('eventInfos', 'connector');
-
-
+    const listWarmpUp = nodecg.Replicant('listWarmpUp', 'connector');
     const logoEvent = nodecg.Replicant('assets:logoEvent','connector')
 
-    // Destructuration du fichier Dynamic
-    const statusHeat = nodecg.Replicant('status', 'connector');
+
+    let overlay=''
+    
+    $('document').ready(()=>{
+        let ch = document.location.pathname.split('/')
+        overlay = ch[ch.length-1].replace('.html','')
+    })
 
     let eventLogo;
 
@@ -31,30 +30,17 @@
         }
     }); 
 
-
-    var workoutId=0;
-
-
-
-    eventInfos.on('change', (newValue)=>{
-        resetHeader(newValue)
-        updateWorkout(newValue);
+    listWarmpUp.on('change', (newValue)=>{
+        console.log(newValue)
+        resetHeader(newValue.eventName)
+        resetWarmup(newValue.warmUp)
     })
 
     Colors.on('change', (newValue, oldValue) => {
 
         Object.keys(newValue).forEach((color, index) => {
-            // console.log(color, newValue[color])
             root.style.setProperty("--"+ color, newValue[color] );
-            // Clrs[color] = newValue[color]
         })
         
     })
 
-
-    let overlay=''
-    
-    $('document').ready(()=>{
-        let ch = document.location.pathname.split('/')
-        overlay = ch[ch.length-1].replace('.html','')
-    })

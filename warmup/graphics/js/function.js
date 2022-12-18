@@ -7,11 +7,9 @@ async function updateWorkout(data){
         var d = await loadWorkoutsPlanning(data.eventId);
     
         WorkoutTab = d.workouts;
-    
-        console.log(WorkoutTab)
+
         workoutId = data.workoutId;
 
-        // for(let workout of WorkoutTab){
         for(let i=0; i<WorkoutTab.length;i++){
             console.log(WorkoutTab[i])
 
@@ -41,11 +39,11 @@ async function updateWorkout(data){
         }
 
     }
-    updateWarmUp( data.workoutId, data.heatId)
+    updateWarmUp(data.eventName, data.workoutId, data.heatId)
 }
 
 
-function updateWarmUp( workoutId, heatId){
+function updateWarmUp(eventName, workoutId, heatId){
 
     try{
         
@@ -100,11 +98,15 @@ function updateWarmUp( workoutId, heatId){
             heatWUP.push(d2)
             heatWUP.push(d3)
 
-            resetWarmup(heatWUP)
+            let obeject = {
+                'eventName' : eventName,
+                'warmUp' : heatWUP
+            }
+            
+            listWarmpUp.value = obeject
         }
     }
     catch(e){
         console.log(e)
-        // document.getElementById('log_error_static').innerHTML = e;
     }
 }

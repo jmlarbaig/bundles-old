@@ -30,7 +30,7 @@ function overlaySide(data){
         '<div class="athlete" id="aht'+data.lane+'">' + 
             '<div class="popup text-nowrap text-truncate">' + '</div>' +
             '<div class="ath">' +
-                '<div class="rank text-nowrap text-truncate"> ' + data.rank + '</div>' + 
+                '<div class="rank text-nowrap text-truncate"> ' + '</div>' + 
                 '<div class="lane text-nowrap text-truncate"># '+ data.lane + '</div>' + 
                 '<div class="flag">' + '<div class="box_flag" ></div> ' + '</div>' +
                 '<div class="text-nowrap text-truncate text-left name">' + name + '</div>' + 
@@ -46,6 +46,7 @@ function overlaySide(data){
     $item.find(".popup").hide();
     !setupLeaderboard.value.flag ? $item.find(".flag").hide() : "" ;
     !setupLeaderboard.value.lane ? $item.find(".lane").hide() : "" ;
+    !setupLeaderboard.value.lane ? $item.find(".rank").text(data.lane) : "" ;
     // $item.hide();
 
     return $item
@@ -75,11 +76,11 @@ function overlayTop(data){
     var $item = $( 
         '<div class="athlete" id="aht'+ data.lane+'">' + 
             '<div class="ath">' +
-                '<div class="rank">'+ data.lane + '</div>' + 
-                '<div class="name">' + name + '</div>' + 
-                '<div class="score intial_rank"></div>' +
+                '<div class="rank initial_rank_top">'+ data.lane + '</div>' + 
+                '<div class="name initial_rank_top">' + name + '</div>' + 
+                '<div class="score initial_rank_top"></div>' +
             '</div>' +
-            '<div class="popup">' + '</div>' +
+            '<div class="popup initial_rank_top">' + '</div>' +
         '</div>'
     );
     $item.find(".box_flag").css('background-image','url('+ flag +')')
@@ -122,7 +123,7 @@ function leaderboardTV(data){
         '<div class="athlete" id="aht'+data.lane+'">' + 
             // '<div class="popup text-nowrap text-truncate">' + '</div>' +
             '<div class="ath">' +
-                '<div class="rank text-nowrap text-truncate"> ' + data.rank + '</div>' + 
+                '<div class="rank text-nowrap text-truncate"> ' + '</div>' + 
                 '<div class="lane text-nowrap text-truncate"># '+ data.lane + '</div>' + 
                 '<div class="flag">' + '<div class="box_flag" ></div> ' + '</div>' +
                 '<div class="text-nowrap text-truncate text-left name">' + name + '</div>' + 
@@ -140,6 +141,7 @@ function leaderboardTV(data){
     $item.find(".popup").hide();
     !setupLeaderboard.value.flag ? $item.find(".flag").hide() : "" ;
     !setupLeaderboard.value.lane ? $item.find(".lane").hide() : "" ;
+    !setupLeaderboard.value.lane ? $item.find(".rank").text(data.lane) : "" ;
     !setupLeaderboard.value.affiliate ? $item.find(".affiliate").hide() : "" ;
     // $item.hide();
 
@@ -182,6 +184,7 @@ function progressView(data){
     $item.find(".popup").hide();
     !setupLeaderboard.value.flag ? $item.find(".flag").hide() : "" ;
     !setupLeaderboard.value.lane ? $item.find(".lane").hide() : "" ;
+    !setupLeaderboard.value.lane ? $item.find(".rank").text(data.lane) : "" ;
     !setupLeaderboard.value.affiliate ? $item.find(".affiliate").hide() : "" ;
     // !setupLeaderboard.value.lane ? $item.find(".lane").hide() : "" ;
     // $item.hide();
@@ -207,7 +210,6 @@ function headerCommentator(divisions, indexDivision, repTarget){
                         '<th fixed-side scope="col" class="lane box">LANE</th>' + 
                         '<th scope="col" class="flag box">FLAG</th>' +
                         '<th scope="col" class="box text-nowrap text-truncate text-left name">NAME</th>' + 
-                        '<th scope="col" class="box text-nowrap text-truncate text-left affiliate">AFFILIATE</th>' +
                         '<th scope="col" class="box Orank">O. Points</th>' + 
                         '<th scope="col" class="box Orank">O. Rank</th>' +
                         '<th scope="col" class="box rank">Rank</th>' + 
@@ -264,7 +266,6 @@ function commentator(data){
             '<td class="lane">'+ data.lane + '</td>' + 
             '<td class="flag">' + '<div class="box_flag"> </div> ' + '</td>' +
             '<td class="text-nowrap text-truncate text-left name" onclick="affichageStats()" id="showStats_'+ data.lane +'">' + name + '</td>' + 
-            '<td class="text-nowrap text-truncate text-left affiliate">' + affiliate_team + '</td>' +
             '<td class="Orank">' + data.overallPoints + '</td>' + 
             '<td class="Orank">' + data.rank + '</td>' +
             '<td class="rank">' + data.CurrentRank  + '</td>' + 
@@ -289,8 +290,6 @@ function commentator(data){
 
 function createStats( data, iDiv){
 
-    console.log(workouts.length)
-
     let $stats = $('#athlete_stats_'+data.lane);
     $stats.find("td").remove();
 
@@ -299,9 +298,8 @@ function createStats( data, iDiv){
     if( workouts.length > 0){
         workouts[iDiv].mvt_id.forEach((id, index)=> {
             $stat = $('');
-            console.log(workouts[iDiv].mvt_names[index])
             $stat = $(
-                '<td class="mvt_id mvt_id_'+ index +'" id="mvt_id_'+ id +'_'+ data.lane +'">00:00</td>'
+                '<td class="mvt_id mvt_id_'+ index +'" id="mvt_id_'+ id +'_'+ data.lane +'">-</td>'
             )
             $stats.append($stat)
         })

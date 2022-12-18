@@ -17,7 +17,7 @@
     background-size: contain;
 }
 
-.chrono{
+.box_chrono{
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     position: absolute;
@@ -25,8 +25,7 @@
     color:  var(--tx_chrono_color);
     top: var(--position_y_chrono);
     left: var(--position_x_chrono);
-    width: 200px;
-    height: 80px;
+    width: 150px;
     margin: auto;
     align-items: center;
     padding: 10px auto;
@@ -37,13 +36,10 @@
 }
 
 #time{
-    background-color: black;
     font-size: 2em;
-    margin: 5px auto;
-    padding: 10px;
+    padding: 10px 0px;
+    margin: auto;
     /* border-bottom: solid white 1px; */
-    width: 150px;
-    
 }
 
 #cap{

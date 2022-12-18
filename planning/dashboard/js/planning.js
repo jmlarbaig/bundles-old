@@ -43,8 +43,10 @@ function resetHeader(data){
 }
 
 
-function createPlanning(workoutTab){
+function createPlanning(data){
     try{
+
+        const {dates, locations, workouts } = data
 
         let $nav = $("#nav-tab") 
         $nav.find(".day").remove();
@@ -55,7 +57,7 @@ function createPlanning(workoutTab){
         const d = new Date();
     
         let i=0
-        for(let day of workoutTab){
+        for(let day of dates){
             // var cpr = day.text.split(' ')
             // var dayDate = days[ d.getDay() ];
             // var month = months[ d.getMonth() ];
@@ -77,107 +79,99 @@ function createPlanning(workoutTab){
             $wodContent.find(".accordion-item").remove()
             
             let y =0
-            for (let wod of day.wods){
-                if (wod.id != workoutId.value){
-                    var $itemWod = (
-                        '<div class="accordion-item">' + 
-                            '<h2 class="accordion-header" id="heading'+i+'y'+y+'">' +
-                                '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+i+'y'+y+'" aria-expanded="false" aria-controls="collapse'+i+'y'+y+'">' +
-                                    wod.name + " - " + wod.start + " - Floor " + wod.location + " - " + wod.format +
-                                '</button>' +
-                            '</h2>' +
-                            '<div id="collapse'+i+'y'+y+'" class="accordion-collapse collapse" aria-labelledby="heading'+i+'y'+y+'" data-bs-parent="#accordion'+i+'">' +
-                                '<div class="heat" id="heat'+i+'y'+y+'">' +
+            for (let wod of workouts){
+                if(wod.date == day.value){
+                    if (wod.id != workoutId){
+                        var $itemWod = (
+                            '<div class="accordion-item">' + 
+                                '<h2 class="accordion-header" id="heading'+i+'y'+y+'">' +
+                                    '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+i+'y'+y+'" aria-expanded="false" aria-controls="collapse'+i+'y'+y+'">' +
+                                        wod.name + " - " + wod.start + " - Floor " + wod.location + " - " + wod.format +
+                                    '</button>' +
+                                '</h2>' +
+                                '<div id="collapse'+i+'y'+y+'" class="accordion-collapse collapse" aria-labelledby="heading'+i+'y'+y+'" data-bs-parent="#accordion'+i+'">' +
+                                    '<div class="heat" id="heat'+i+'y'+y+'">' +
+                                    '</div>' +
                                 '</div>' +
-                            '</div>' +
-                        '</div>' 
-                    )
-                }
-                else{
-                    var $itemWod = (
-                        '<div class="accordion-item">' + 
-                            '<h2 class="accordion-header" id="heading'+i+'y'+y+'">' +
-                                '<button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+i+'y'+y+'" aria-expanded="true" aria-controls="collapse'+i+'y'+y+'">' +
-                                    wod.name + " - " + wod.start + " - Floor " + wod.location + " - " + wod.format +
-                                '</button>' +
-                            '</h2>' +
-                            '<div id="collapse'+i+'y'+y+'" class="accordion-collapse collapse" aria-labelledby="heading'+i+'y'+y+'" data-bs-parent="#accordion'+i+'">' +
-                                '<div class="heat" id="heat'+i+'y'+y+'">' +
+                            '</div>' 
+                        )
+                    }
+                    else{
+                        var $itemWod = (
+                            '<div class="accordion-item">' + 
+                                '<h2 class="accordion-header" id="heading'+i+'y'+y+'">' +
+                                    '<button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+i+'y'+y+'" aria-expanded="true" aria-controls="collapse'+i+'y'+y+'">' +
+                                        wod.name + " - " + wod.start + " - Floor " + wod.location + " - " + wod.format +
+                                    '</button>' +
+                                '</h2>' +
+                                '<div id="collapse'+i+'y'+y+'" class="accordion-collapse collapse" aria-labelledby="heading'+i+'y'+y+'" data-bs-parent="#accordion'+i+'">' +
+                                    '<div class="heat" id="heat'+i+'y'+y+'">' +
+                                    '</div>' +
                                 '</div>' +
-                            '</div>' +
-                        '</div>' 
-                    )
-                }
-    
-    
-                $wodContent.append($itemWod)
-    
-                var $heatBody = $("#heat"+i+'y'+y)
-                let h = 0;
-                for(let heat of wod.heats){
+                            '</div>' 
+                        )
+                    }
+        
+        
+                    $wodContent.append($itemWod)
+        
+                    var $heatBody = $("#heat"+i+'y'+y)
+                    let h = 0;
+                    for(let heat of wod.heats){
 
-                    var $itemHeats = (
-                        '<div class="heatName">' + 
-                            heat.title + " - " + heat.time +
-                        '</div>' + 
-                        '<table id="heattab" class="heattab">' +
-                            '<thead> ' +
-                                    '<tr>' +
-                                        '<th>#</th>' +
-                                        '<th>RANK</th>' +
-                                        '<th>POINTS</th>' +
-                                        '<th>FLAG</th>' +
-                                        '<th>AVATAR</th>' +
-                                        '<th>WEIGHT</th>' +
-                                        '<th>HEIGHT</th>' +
-                                        '<th>NAME</th>' +
-                                        '<th>DIV</th>' +
-                                    '</tr>' +
-                                '</thead>' +
-                            '<tbody id="heatContent'+i+'y'+y+'h'+h+'" class="athletes">' +
-                            '</tbody>' + 
-                        '</table>' 
-                    )
-                    $heatBody.append($itemHeats)
-    
-                    var $heatStation = $("#heatContent"+i+'y'+y+'h'+h)
-                    for(let station of heat.stations){
-                        
-                        let a = wod.participants.find( element => element.id === station.participantId)
-            
-                        if (a.countryCode=="" || a.countryCode==null){a.countryCode = "null"}
-                        else{
-                            for(let f=0; f < FLAG.length; f++){
-                                if (a.countryCode == FLAG[f]["3L"]){
-                                    a.countryCode = FLAG[f]["2L"];
-                                    break;
+                        var $itemHeats = (
+                            '<div class="heatName">' + 
+                                heat.title + " - " + heat.time +
+                            '</div>' + 
+                            '<table id="heattab" class="heattab">' +
+                                '<thead> ' +
+                                        '<tr>' +
+                                            '<th>#</th>' +
+                                            '<th>RANK</th>' +
+                                            '<th>POINTS</th>' +
+                                            '<th>FLAG</th>' +
+                                            '<th>NAME</th>' +
+                                        '</tr>' +
+                                    '</thead>' +
+                                '<tbody id="heatContent'+i+'y'+y+'h'+h+'" class="athletes">' +
+                                '</tbody>' + 
+                            '</table>' 
+                        )
+                        $heatBody.append($itemHeats)
+        
+                        var $heatStation = $("#heatContent"+i+'y'+y+'h'+h)
+                        for(let station of heat.stations){
+                            
+                            let a = wod.participants.find( element => element.id === station.participantId)
+                
+                            if (a.countryCode=="" || a.countryCode==null){a.countryCode = "null"}
+                            else{
+                                for(let f=0; f < FLAG.length; f++){
+                                    if (a.countryCode == FLAG[f]["3L"]){
+                                        a.countryCode = FLAG[f]["2L"];
+                                        break;
+                                    }
                                 }
                             }
+
+
+                            var $itemStation = $(
+                                '<tr class="athlete">' + 
+                                    '<td class="lane">'+ station.station + '</td>' + 
+                                    '<td class="rank">'+ a.rank + '</td>' + 
+                                    '<td class="points">'+ a.points + '</td>' + 
+                                    '<td class="flag">' + '<img src="https://flagcdn.com/'+ a.countryCode.toLowerCase() + '.svg" width="30"></img> ' + '</td>' +
+                                    '<td class="text-nowrap text-truncate text-left name">' + station.participantName + '</td>' + 
+                                '</tr>'
+                            )
+                            $heatStation.append($itemStation)
                         }
-
-
-                        var $itemStation = $(
-                            '<tr class="athlete">' + 
-                                '<td class="lane">'+ station.station + '</td>' + 
-                                '<td class="rank">'+ a.rank + '</td>' + 
-                                '<td class="points">'+ a.points + '</td>' + 
-                                '<td class="flag">' + '<img src="https://flagcdn.com/'+ a.countryCode.toLowerCase() + '.svg" width="30"></img> ' + '</td>' +
-                                '<td class="avatar">' + '<img src="'+station.avatarPath+'" width="30"></img> ' + '</td>' +
-                                '<td class="height">'+ a.height + '</td>' + 
-                                '<td class="weight">'+ a.weight + '</td>' + 
-                                '<td class="text-nowrap text-truncate text-left name">' + station.participantName + '</td>' + 
-                                '<td class="text-nowrap text-truncate text-left affiliate">' + station.division + '</td>' +
-                            '</tr>'
-                        )
-                        $heatStation.append($itemStation)
+        
+                        h++
                     }
-    
-                    h++
+        
+                    y++
                 }
-    
-    
-                y++
-    
             }
             i++
         }

@@ -14,10 +14,10 @@ function updateTime(){
 
     let timeDiffEnd = endTime - timer;
 
-    let chrono;
-
-    $("#time").css("background-color",' rgb(53, 53, 53)')
-    $("#time").css("color", "white")
+    $(".box_chrono").css("background-color", Clrs.chrono_color)
+    $(".box_chrono").css("color", Clrs.tx_chrono_color)
+    $(".chrono").css("background-color", Clrs.chrono_color)
+    $(".chrono").css("color", Clrs.tx_chrono_color)
 
     if (timeDiffTimeCap < 0 && (timeDiffStart) > 0 ){
         $('#cap').fadeIn(1000)
@@ -29,8 +29,10 @@ function updateTime(){
         }
     } else if (timeDiffStart < 0  && timeDiffStart > -5999 ){
         $('#cap').fadeOut(1000)
-        $("#time").css("background-color", "rgba(255,50,80,1)")
-        $("#time").css("color", "rgb(255,255,255")
+        $(".box_chrono").css("background-color", "rgba(255,50,80,1)")
+        $(".box_chrono").css("color", "rgb(255,255,255")
+        $(".chrono").css("background-color", "rgba(255,50,80,1)")
+        $(".chrono").css("color", "rgb(255,255,255")
         chrono = msToTime(timeDiffStart).substring(4);
     } else {
         $('#cap').fadeOut(1000)
@@ -42,8 +44,10 @@ function updateTime(){
         }
     }
     if (timeDiffTimeCap > -30000 && timeDiffTimeCap < 0 ){
-        $("#time").css("background-color", "rgba(255,50,80,1)")
-        $("#time").css("color", "rgb(255,255,255")
+        $(".box_chrono").css("background-color", "rgba(255,50,80,1)")
+        $(".box_chrono").css("color", "rgb(255,255,255")
+        $(".chrono").css("background-color", "rgba(255,50,80,1)")
+        $(".chrono").css("color", "rgb(255,255,255")
         if(heat.typeWod == "amrap" || Ft_Ap ){
             chrono = msToTime(timeDiffEnd)
         }

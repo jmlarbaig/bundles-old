@@ -12,6 +12,7 @@ const mainSponsors = nodecg.Replicant('assets:mainSponsor')
 const data_ath = nodecg.Replicant('assets:dataAth')
 
 // Fichiers de configuraiton
+const dataConfigCC = nodecg.Replicant('dataConfigCC')
 const dataConfig = nodecg.Replicant('dataConfig')
 
 // Destructuration du fichier static
@@ -19,12 +20,16 @@ const eventInfos = nodecg.Replicant('eventInfos');
 const heatInfos = nodecg.Replicant('heatInfos');
 const workoutInfo = nodecg.Replicant('workoutInfo');
 const s_athletes = nodecg.Replicant('s_athletes');
+//! A supprimer
+// const Statics = nodecg.Replicant('statics');
 
 
 // Destructuration du fichier Dynamic
 const statusHeat = nodecg.Replicant('status');
 const d_athletes = nodecg.Replicant('d_athletes');
 
+//! À supprimer
+// const Dynamics = nodecg.Replicant('dynamics');
 
 
 const ParticipantsWod = nodecg.Replicant('ParticipantsWod');
@@ -48,4 +53,4 @@ const listeAthlete = nodecg.Replicant('listeAthlete')
 
 
 // State Connection Replicant
-const Connected = nodecg.Replicant('Connected');
+const Connected = nodecg.Replicant('Connected', { defaultValue: false, persistent:false});

@@ -73,9 +73,10 @@
       },
       {
         "name": "dataAth",
-        "title": "Data Athletes",
+        "title": "Data Athletes From Competition Corner",
         "allowedTypes": [
-          "json"
+          "xlsx",
+          "xls"
         ]
       },
       {

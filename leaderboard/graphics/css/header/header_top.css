@@ -144,6 +144,8 @@
     background-color: rgb(53, 53, 53);
     font-size: 1.7em;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: var(--chrono_color);
+    color: var(--tx_chrono_color);
 }
 
 .header .box_chrono .chrono{

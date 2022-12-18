@@ -3,8 +3,7 @@ function updateTimer(){
     $("#time").text(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds())
 }
 
-function resetHeader(data){
-    console.log(data)
+function resetHeader(eventName){
 
     var $tab = $("#header1")
     $tab.find(".header_").remove();
@@ -19,7 +18,7 @@ function resetHeader(data){
             '</div>' +
             '<div class="col titleEvent">'+
                 '<h1>' +
-                    data.eventName +
+                    eventName +
                 '</h1>' +
             '</div>' +
             '<div class="col hTime">'+
@@ -45,14 +44,6 @@ function resetWarmup(data){
     let i =0;
     for(let d of data){
 
-        // for(let div of d.heat.divisions){
-        //     var $item_div= $(
-        //         '<h2>'+
-        //             div +
-        //         '</h2>'
-        //     )
-        // }
-
         over = (overlay == 'next-warmup' ? overlay.toUpperCase().split('-') : overlay.toUpperCase())
 
         console.log(d.heat.current.includes(over) )
@@ -62,14 +53,14 @@ function resetWarmup(data){
         var $item = $(
             '<div class="col global">'+ 
                 '<h1 class="first">'+
-                    d.heat.current +
+                    (d.heat.current || '-') +
                 '</h1>' +
                 '<h2 class="WodName">'+
-                    d.wod.name + ' - ' + d.heat.title +
+                    (d.wod.name || '-') + ' - ' + (d.heat.title || '-') +
                 '</h2>' +
                 '<div class="hHours">' +
                     '<h3 class="hours">'+
-                        "START AT : " + d.heat.time + 
+                        "START AT : " + (d.heat.time || '-') + 
                     '</h3>' +
                 '</div>' +
                 '<div class="division">'+
@@ -100,50 +91,52 @@ function resetWarmup(data){
         var $list = $("#tab_participants"+ i +" #athletes");
         $list.find(".athlete").remove();
 
-        
-        for(let station of d.heat.stations){
-            let a = d.wod.participants.find( element => element.id === station.participantId)
-            console.log("Station : ",station)
-
-            console.log("a = ",a)
-
-            if (a.countryCode=="" || a.countryCode==null){a.countryCode = null}
-            else{
-                for(let f=0; f < FLAG.length; f++){
-                    if (a.countryCode == FLAG[f]["3L"]){
-                        a.countryCode = FLAG[f]["2L"];
-                        break;
+        if(d.heat.stations != undefined){
+            for(let station of d.heat.stations){
+                let a = d.wod.participants.find( element => element.id === station.participantId)
+                console.log("Station : ",station)
+    
+                console.log("a = ",a)
+    
+                if (a.countryCode=="" || a.countryCode==null){a.countryCode = null}
+                else{
+                    for(let f=0; f < FLAG.length; f++){
+                        if (a.countryCode == FLAG[f]["3L"]){
+                            a.countryCode = FLAG[f]["2L"];
+                            break;
+                        }
                     }
                 }
+    
+                let aff = '-'
+    
+                if(station.affiliate != '' && station.affiliate != null){
+                    aff=station.affiliate
+                }
+    
+                let logo = eventLogo;
+                if(a.countryCode != null){
+                    logo ='https://flagcdn.com/'+ a.countryCode.toLowerCase() + '.svg'
+                }
+    
+                var $itemtab = $(
+                    '<tr class="athlete">' + 
+                        // '<td class="flag">' + '<img src='+ station.avatarPath +' width="100"></img> ' + '</td>' +
+                        '<td class="station">' + station.station  + '</th>' +
+                        '<td class="text-nowrap text-truncate division">' + a.division  + '</th>' +
+                        '<td class="flag">' + '<img src="'+ logo +'" width="20"></img> ' + '</td>' +
+                        '<td class="text-nowrap text-truncate text-left name">' + a.displayName + '</td>' + 
+                        '<td class="text-nowrap text-truncate text-left name">' + aff + '</td>' + 
+                        '<td class="rank">' + a.rank  + '°</th>' +
+                        '<td class="score">' + a.points + ' PTS</td>' +
+                    '</tr>'
+                );
+                
+                $list.append($itemtab);
             }
-
-            let aff = '-'
-
-            if(station.affiliate != '' && station.affiliate != null){
-                aff=station.affiliate
-            }
-
-            let logo = eventLogo;
-            if(a.countryCode != null){
-                logo ='https://flagcdn.com/'+ a.countryCode.toLowerCase() + '.svg'
-            }
-
-            var $itemtab = $(
-                '<tr class="athlete">' + 
-                    // '<td class="flag">' + '<img src='+ station.avatarPath +' width="100"></img> ' + '</td>' +
-                    '<td class="station">' + station.station  + '</th>' +
-                    '<td class="text-nowrap text-truncate division">' + a.division  + '</th>' +
-                    '<td class="flag">' + '<img src="'+ logo +'" width="20"></img> ' + '</td>' +
-                    '<td class="text-nowrap text-truncate text-left name">' + a.displayName + '</td>' + 
-                    '<td class="text-nowrap text-truncate text-left name">' + aff + '</td>' + 
-                    '<td class="rank">' + a.rank  + '°</th>' +
-                    '<td class="score">' + a.points + ' PTS</td>' +
-                '</tr>'
-            );
-            
-            $list.append($itemtab);
+    
         }
-
+        
         i++
 
     }}

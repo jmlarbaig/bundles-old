@@ -1,7 +1,7 @@
 {
-    "staticServer": "JSON/BOT",
-    "timeStatic": 0,
-    "dynamicServer": "",
-    "timeDynamics": 0,
+    "user": "feliz@competitioncorner.fr",
+    "passwd": "euroregion42",
+    "event": "5034",
+    "addIp": "http://10.3.86.200:5000",
     "ntpAdress": "0.be.pool.ntp.org"
 }

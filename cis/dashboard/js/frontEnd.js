@@ -4,8 +4,9 @@ function updateFront(data){
     let $tab = $("#cis")
     $tab.find(".cueCardParents").remove();
     
-    $.each( data, function( key, val ) {
-        if(val != undefined ){
+    Object.values(data).forEach(( val, index ) => {
+        console.log(val)
+        if(val != null ){
             let $item = $( 
                 '<div class="cueCardParents" >' + 
                     '<h3 class="lane name">#'+ val.lane +" - "+ val.displayName +'</h3>' + 
@@ -42,28 +43,35 @@ function updateFront(data){
             );
             $tab.append($item);
 
+            updateFrontWorkout(val.workoutRank, val.lane)
+
             let $tab_elm = $("#cards_"+val.lane)
 
-            val.ath.forEach((d, key) => {
+            val.ath.forEach((ath, key) => {
+
+                let age = ath.age != undefined ? ath.age : '-'
+                let height = ath.height != undefined ? ath.height : '-'
+                let weight = ath.weight != undefined ? ath.weight : '-'
+                let avatarPath = ath.avatarPath != undefined ? ath.avatarPath : ''
 
                 let $item_ath = $( 
                     '<div class="card-item" id="lane_'+ val.lane +'_aht_'+ key +'">' +
                         '<div class="card">'+
                             '<div class="card-item">'+
-                                '<div class="card__athlete__avatar" style="background-image:url()">' +
+                                '<div class="card__athlete__avatar" style="background-image:url(' + avatarPath + ')">' +
                                         // '<i class="material-icons"></i>' +
                                 '</div>' +
                                 '<div class="card__athlete__name">' +
-                                    '<h3>'+ d['First Name'] + ' ' +  d['Last Name'] +'</h3>' +
-                                    '<div>' + d['Affiliate'] + '</div>' +
+                                    '<h3>'+ ath.fullName +'</h3>' +
+                                    '<div>' + ath.crossfitAffiliateName + '</div>' +
                                 '</div>' +
                             '</div>'+
                             '<div class="card__info">' +
-                                '<div class="card__info__age" id="age">' +' - '+
+                                '<div class="card__info__age" id="age">' + age +
                                 '</div>' +
-                                '<div class="card__info__height" id="height">' +' - '+
+                                '<div class="card__info__height" id="height">' + height +
                                 '</div>' +
-                                '<div class="card__info__weight" id="weight">' +' - '+
+                                '<div class="card__info__weight" id="weight">' + weight +
                                 '</div>' +
                             '</div>' +
 
@@ -73,32 +81,20 @@ function updateFront(data){
                 );
 
                 $tab_elm.append($item_ath)
+
             })
+
         }
     })
 }
 
-function updateFrontAth(ath, lane, index){
-    // console.log('index =', index)
-    let $tab_ath = $("#lane_"+ lane +"_aht_"+ index)
-    // console.log("Age :",ath.age)
-    ath.age != undefined ? $tab_ath.find('#age').text(ath.age ) : $tab_ath.find('#age').text( '-' )
-    ath.height != undefined ? $tab_ath.find('#height').text(ath.height + "cm") :  $tab_ath.find('#height').text("-")
-    ath.weight != undefined ? $tab_ath.find('#weight').text(ath.weight + "kg") : $tab_ath.find('#weight').text("-")
-    ath.avatarPath != undefined && $tab_ath.find('.card__athlete__avatar').css("background-image", "url(" + ath.avatarPath + ")")
 
-}
-
-function updateFrontWorkout(liste, lane){
+function updateFrontWorkout(workouts, lane){
 
     var $tab_workouts = $("#workouts_"+lane)
     $tab_workouts.find(".wodRank").remove()
 
-    $('#overallRank_'+lane).html("Overall Rank : " + liste.overallStanding)
-    $('#overallPoints_'+lane).html("Overall Points : " + liste.overallPoints)
-
-
-    liste.workoutRank.forEach(wod=>{
+    workouts.forEach(wod=>{
         var $item_wod = $( 
             '<div class="card__wod wodRank">' +
                 '<div class="text-nowrap text-truncate text-left card_info_workoutName">' +

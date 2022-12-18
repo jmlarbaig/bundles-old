@@ -1,72 +1,70 @@
 
-async function getStatics(skStaticUrl) {
+const sha256 = require('sha256')
+let staticJSONString = ''
+
+
+
+async function getStatics(skStaticUrl, eventInfos, heatInfos, workoutInfo, s_athletes, Connected) {
     return fetch(skStaticUrl,{cache: "no-store"})
         .then((response)=>{
             return response.json()
         }).then((statics)=>{
 
             if(statics.eventId != undefined){
-                let sameJson = sha256(staticJSONString) == sha256(JSON.stringify(statics));
-                console.log(sameJson)
+                let sameJson = (staticJSONString) == JSON.stringify(statics);
                 if (sameJson) {
                     return
                 }
+
                 staticJSONString = JSON.stringify(statics);
-                // statics.logoUrl = LogoImg.value
 
                 const {WorkoutInfo, heatInfo, athletes, ...rest} = statics
 
-
                 eventInfos.value = rest
-                console.log('event in ok')
                 heatInfos.value = heatInfo
-                console.log('event in ok')
                 workoutInfo.value = WorkoutInfo
-                console.log('event in ok')
                 s_athletes.value = athletes
-                console.log('event in ok')
 
-                // Statics.value = statics
-
-                updateScoreToBeat(statics.workoutId , statics.athletes);
-                updateNtp();
+                // updateScoreToBeat(statics.workoutId , statics.athletes);
+                // updateNtp();
             }
         }).then(()=>{
-            StateConnection('connected','static','')
+            Connected.value.static = 'connected'
         })
         .catch((e)=>{
             console.log(e)
-            StateConnection('error','static', e)
+            Connected.value.static = 'error :' + e
         });
 }
 
-async function getDynamics(skDynamicUrl) {
+async function getDynamics(skDynamicUrl, statusHeat, d_athletes, Connected) {
     return fetch(skDynamicUrl, {cache: "no-store"})
         .then((response)=>{
             return response.json()
         }).then((dynamics)=>{
-            console.log('dynamics')
 
             if(dynamics.eventId != undefined){
                 const {athletes, status, NtpTimeStart, ...rest} = dynamics
 
                 // Insert des datas dans l'objet status
                 statusHeat.value = {status, NtpTimeStart}
-
-                console.log(statusHeat.value)
                 
                 // Insert des nouvelles datas des athletes
                 d_athletes.value = athletes
 
-                // Dynamics.value = dynamics
             }
-
-            // console.log(dynamics)
         }).then(()=>{
-            StateConnection('connected','dynamic','')
+            Connected.value.dynamic = 'connected'
         })
         .catch((e)=>{
             console.log(e)
-            StateConnection('error','dynamic', e)
+            console.log("error")
+            Connected.value.dynamic = 'error :' + e
         })
 }
+
+
+module.exports = {
+    getStatics,
+    getDynamics
+  };

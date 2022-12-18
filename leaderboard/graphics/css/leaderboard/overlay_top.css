@@ -58,8 +58,6 @@
 
 .leaderboard .athlete .rank{
     height: var(--height_ath_top);
-    background-color: rgb(237, 237, 237);
-    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,7 +71,6 @@
 
 .leaderboard .athlete .name {
     height: var(--height_ath_top);
-    background-color: rgb(237, 237, 237);
     padding-top: 11px;
     padding-right: 20px;
     text-transform: uppercase;
@@ -87,8 +84,6 @@
 
 .leaderboard .athlete .score {
     /* haut left right bas */
-    background-color: rgb(237, 237, 237);
-    color: black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -116,8 +111,6 @@
 }
 
 .popup{
-    background-color: rgb(237, 237, 237);
-    color: black;
     /* haut left right bas */
     z-index: 1;
     width: 253px;
