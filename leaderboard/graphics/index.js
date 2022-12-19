@@ -58,6 +58,7 @@
     const bottomSponsors = nodecg.Replicant('assets:bottomSponsors', 'connector')
 
     const TopScore = nodecg.Replicant('TopScore', 'connector')
+    const listWarmpUp = nodecg.Replicant('listWarmpUp', 'connector');
 
 
     // Initialisation du choix de la vue
@@ -137,6 +138,25 @@
 
     d_athletes.on('change', (newValue, oldValue)=>{
         updateDynamics(newValue, statusWorkout);
+    })
+
+    let listOverall = []
+
+    listWarmpUp.on('change', (newValue, oldValue)=>{
+        if(newValue != undefined && JSON.stringify(newValue) != JSON.stringify(oldValue) && overlay == 'commentator'){
+            let participantsHeat = newValue.warmUp[0].wod.participants
+            let stations = newValue.warmUp[0].heat.stations
+            for(let station of stations){
+                let data = participantsHeat.find( element => element.id === station.participantId)
+                listOverall[station.station] = {}
+                listOverall[station.station].oR = data.rank
+                listOverall[station.station].oP = data.points
+
+                $('#oP_'+station.station).text(data.points)
+                $('#oR_'+station.station).text(data.rank)
+            }
+            console.log('warmup : ', newValue)
+        }
     })
 
 

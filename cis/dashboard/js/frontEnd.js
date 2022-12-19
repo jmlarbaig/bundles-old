@@ -42,7 +42,9 @@ function updateFront(data){
             );
             $tab.append($item);
 
-            updateFrontWorkout(val.workoutRank, val.lane)
+            if (val.workoutRank.length > 0){
+                updateFrontWorkout(val.workoutRank, val.lane)
+            }
 
             let $tab_elm = $("#cards_"+val.lane)
 

@@ -26,70 +26,71 @@ function updateDynamics(newScoring, status){
                                     
                                 Mvt_name[elemAth[i].lane] = heat.typeWod != "amrap" ? mvtIndexForTime(elemAth[i].score_abs, elemAth[i].division) : mvtIndexAmrap(elemAth[i].score_abs, elemAth[i].division, elemAth[i].log_round_time[0].length +1)
 
-                                
                                 if ( Mvt_name[elemAth[i].lane] != undefined && Mvt_name[elemAth[i].lane].mvtNames.includes("_")){
                                     Mvt_name[elemAth[i].lane].mvtNames = Mvt_name[elemAth[i].lane].mvtNames.replaceAll("_", " ")
                                 }
 
                                 if ( Mvt_name[elemAth[i].lane] != undefined && Mvt_name[elemAth[i].lane].mvtNames.includes("Sprint")){
-                                    elemAth[i].$item.find(".popup").text( Mvt_name[elemAth[i].lane].mvtNames);
+                                    elemAth[i].$item.find(".popup").text("SPRINT");
                                     elemAth[i].$item.find(".popup").show();
-                                    console.log(chrono)
                                     elemAth[i].$item.find(".score").text(chrono);
-                                    let mvts = Mvt_name[elemAth[i].lane].arrayMvt.toString().replaceAll(',', ' - ').replaceAll('_', ' ')
-                                    $('#mvt').html(mvts)
-                                    $('.mvt').html(mvts)
                                 }
                                 else{
-                                    if (i!=0){
-                                        if (Mvt_name[elemAth[i].lane].id != Mvt_name[elemAth[i-1].lane].id ){
-                                            if (heat.typeWod == 'amrap' && !Number.isNaN(Mvt_name[elemAth[i].lane].rounds)){
-                                                elemAth[i].$item.find(".rounds").text("R"+(Mvt_name[elemAth[i].lane].rounds));
-                                                elemAth[i].$item.find(".popup").text( "R"+(Mvt_name[elemAth[i].lane].rounds) + ' - ' + Mvt_name[elemAth[i].lane].mvtNames);
-                                            }else{
-                                                elemAth[i].$item.find(".popup").text(Mvt_name[elemAth[i].lane].mvtNames);
-                                            }
-                                            elemAth[i].$item.find(".score").text(Mvt_name[elemAth[i].lane].scoreAbsMvt + "/" + Mvt_name[elemAth[i].lane].repTarget);
-                                            elemAth[i].$item.find(".popup").show();
+                                    if(overlay == 'progression' || overlay == 'commentator' || overlay == 'leaderboard'){
+                                        if (heat.typeWod == 'amrap' && !Number.isNaN(Mvt_name[elemAth[i].lane].rounds)){
+                                            percent = (Mvt_name[elemAth[i].lane].scoreRelMvt / Mvt_name[elemAth[i].lane].totalReps)*95
+                                            elemAth[i].$item.find(".rounds").text("R"+(Mvt_name[elemAth[i].lane].rounds));
+                                            elemAth[i].$item.find(".popup").text( "R"+(Mvt_name[elemAth[i].lane].rounds) + ' - ' + Mvt_name[elemAth[i].lane].mvtNames);
+                                        }else{
+                                            percent = (elemAth[i].score_abs / Mvt_name[elemAth[i].lane].totalReps)*95
+                                            elemAth[i].$item.find(".popup").text(Mvt_name[elemAth[i].lane].mvtNames);
                                         }
-                                        else{
-                                            elemAth[i].$item.find(".popup").hide();
-                                            elemAth[i].$item.find(".score").text(Mvt_name[elemAth[i].lane].scoreAbsMvt + "/" + Mvt_name[elemAth[i].lane].repTarget);
-                                        }
-                                    }
-                                    else {
-                                        if(Mvt_name[elemAth[i].lane].mvtNames == "" || Mvt_name[elemAth[i].lane].mvtNames.includes("Workout")){
-                                            elemAth[i].$item.find(".popup").hide();
-                                        }
-                                        else{
-                                            if (heat.typeWod == 'amrap' && !Number.isNaN(Mvt_name[elemAth[i].lane].rounds)){
-                                                elemAth[i].$item.find(".popup").text( "R"+(Mvt_name[elemAth[i].lane].rounds) + ' - ' + Mvt_name[elemAth[i].lane].mvtNames);
-                                            }else{
-                                                elemAth[i].$item.find(".popup").text(Mvt_name[elemAth[i].lane].mvtNames);
-                                            }
-                                            // console.log(Mvt_name)
-                                            elemAth[i].$item.find(".score").text(Mvt_name[elemAth[i].lane].scoreAbsMvt + "/" + Mvt_name[elemAth[i].lane].repTarget);
-                                            elemAth[i].$item.find(".popup").show();
-                                            let mvts = Mvt_name[elemAth[i].lane].arrayMvt.toString().replaceAll(',', ' - ').replaceAll('_', ' ')
-                                            $('#mvt').html(mvts)
-                                            $('.mvt').html(mvts)
-                                        }
-                                    }
-                                    if(heat.typeWod == 'amrap'){
-                                        percent = (Mvt_name[elemAth[i].lane].scoreRelMvt / Mvt_name[elemAth[i].lane].totalReps)*95
+                                        elemAth[i].$item.find(".popup").show();
+                                        $('#circle'+elemAth[i].lane).css("transform","translateX("+ percent +"%)");
                                     }else{
-                                        percent = (elemAth[i].score_abs / Mvt_name[elemAth[i].lane].totalReps)*95
+                                        if (i!=0){
+                                            if (Mvt_name[elemAth[i].lane].id != Mvt_name[elemAth[i-1].lane].id ){
+                                                if (heat.typeWod == 'amrap' && !Number.isNaN(Mvt_name[elemAth[i].lane].rounds)){
+                                                    elemAth[i].$item.find(".rounds").text("R"+(Mvt_name[elemAth[i].lane].rounds));
+                                                    elemAth[i].$item.find(".popup").text( "R"+(Mvt_name[elemAth[i].lane].rounds) + ' - ' + Mvt_name[elemAth[i].lane].mvtNames);
+                                                }else{
+                                                    elemAth[i].$item.find(".popup").text(Mvt_name[elemAth[i].lane].mvtNames);
+                                                }
+                                                elemAth[i].$item.find(".popup").show();
+                                            }
+                                            else{
+                                                elemAth[i].$item.find(".popup").hide();
+                                            }
+                                        }
+                                        else {
+                                            if(Mvt_name[elemAth[i].lane].mvtNames == "" || Mvt_name[elemAth[i].lane].mvtNames.includes("Workout")){
+                                                elemAth[i].$item.find(".popup").hide();
+                                            }
+                                            else{
+                                                if (heat.typeWod == 'amrap' && !Number.isNaN(Mvt_name[elemAth[i].lane].rounds)){
+                                                    elemAth[i].$item.find(".popup").text( "R"+(Mvt_name[elemAth[i].lane].rounds) + ' - ' + Mvt_name[elemAth[i].lane].mvtNames);
+                                                }else{
+                                                    elemAth[i].$item.find(".popup").text(Mvt_name[elemAth[i].lane].mvtNames);
+                                                }
+                                                elemAth[i].$item.find(".popup").show();
+                                            }
+                                        }
                                     }
 
-                                    $('#circle'+elemAth[i].lane).css("transform","translateX("+ percent +"%)");
+                                    elemAth[i].$item.find(".score").text(Mvt_name[elemAth[i].lane].scoreAbsMvt + "/" + Mvt_name[elemAth[i].lane].repTarget);
                                 }
+
+                                let mvts = Mvt_name[elemAth[0].lane].arrayMvt.toString().replaceAll(',', ' - ').replaceAll('_', ' ')
+                                $('#mvt').html(mvts)
+                                $('.mvt').html(mvts)
 
                                 if(overlay == 'commentator' || overlay == 'progression' || overlay == 'leaderboard'){
                                     elemAth[i].$item.find(".popup").show();
+                                }else{
+                                    // setupLeaderboard.value.scoreConfig && elemAth[i].$item.find(".popup").hide();
                                 }
 
                                 setupLeaderboard.value.scoreConfig && elemAth[i].$item.find(".score").text(elemAth[i].score_abs) 
-                                setupLeaderboard.value.scoreConfig && elemAth[i].$item.find(".popup").hide();
                             }
                             else{
                                 elemAth[i].$item.find(".score").text(elemAth[i].score_abs)
@@ -108,8 +109,6 @@ function updateDynamics(newScoring, status){
                             elemAth[i].$item.find(".popup").text( _r);
                         }
                     }
-
-
 
                     if(elemAth[i].result == "" && status != "T"){
                         if(overlay != 'overlay_top'){
@@ -145,6 +144,31 @@ function updateDynamics(newScoring, status){
                                 elemAth[i].$item.find(".score").toggleClass('second_rank third_rank first_rank', false)
                                 elemAth[i].$item.find(".circle").toggleClass('circle other_rank', true)
                                 elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank first_rank', false)
+                            }
+                        }else{
+                            if (elemAth[i].CurrentRank == 1){
+                                elemAth[i].$item.find(".rank").addClass('first_rank')
+                                elemAth[i].$item.find(".rank").removeClass('initial_rank_top second_rank third_rank other_rank')
+                                elemAth[i].$item.find(".name").addClass('first_rank')
+                                elemAth[i].$item.find(".name").removeClass('initial_rank_top second_rank third_rank other_rank')
+                                elemAth[i].$item.find(".popup").addClass('first_rank')
+                                elemAth[i].$item.find(".popup").removeClass('initial_rank_top second_rank third_rank other_rank')
+                                elemAth[i].$item.find(".score").addClass('first_rank')
+                                elemAth[i].$item.find(".score").removeClass('initial_rank_top second_rank third_rank other_rank')
+                                elemAth[i].$item.find(".circle").addClass('first_rank')
+                                elemAth[i].$item.find(".circle").removeClass('initial_rank_top second_rank third_rank other_rank')
+                            }
+                            else {                           
+                                elemAth[i].$item.find(".rank").addClass('initial_rank_top')
+                                elemAth[i].$item.find(".rank").removeClass('first_rank second_rank third_rank other_rank')
+                                elemAth[i].$item.find(".name").addClass('initial_rank_top')
+                                elemAth[i].$item.find(".name").removeClass('first_rank second_rank third_rank other_rank')
+                                elemAth[i].$item.find(".popup").addClass('initial_rank_top')
+                                elemAth[i].$item.find(".popup").removeClass('first_rank second_rank third_rank other_rank')
+                                elemAth[i].$item.find(".score").addClass('initial_rank_top')
+                                elemAth[i].$item.find(".score").removeClass('first_rank second_rank third_rank other_rank')
+                                elemAth[i].$item.find(".circle").addClass('initial_rank_top')
+                                elemAth[i].$item.find(".circle").removeClass('first_rank second_rank third_rank other_rank')
                             }
                         }
                     }
@@ -223,7 +247,7 @@ function updateDynamics(newScoring, status){
                 })
 
                 elemAth.sort(ascendingRank);
-                reposition("#leaderboard"+ key, elemAth);
+                    reposition("#leaderboard"+ key, elemAth);
 
                 if(overlay !== 'commentator'){
                     $("#leaderboard"+ key + " #athletes").height(height_tot)
@@ -244,7 +268,6 @@ function updateDynamics(newScoring, status){
 
             }
             else{
-                // elemAth.sort(ascendingLane);
                 overlay !== 'commentator' && $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height())
 
                 elemAth.sort(ascendingLane);

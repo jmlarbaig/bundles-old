@@ -23,8 +23,15 @@ module.exports = (nodecg, Connected) => {
     })
 
     function connectionSK(addIp){    
-        let adr_IP_static = addIp + '/Static.json';
-        let adr_IP_dynamics = addIp + '/Dynamics.json'; 
+
+        let ip = addIp;
+
+        if(addIp.charAt(addIp.length -1) != '/'){
+            ip = addIp + '/'
+        }
+
+        let adr_IP_static = ip + 'Static.json';
+        let adr_IP_dynamics = ip + 'Dynamics.json'; 
 
         if(intervalStatic != null){
             console.log('clear')
@@ -41,7 +48,7 @@ module.exports = (nodecg, Connected) => {
             intervalStatic = setInterval(getStatics, 1000, adr_IP_static)
             intervalDynamic = setInterval(getDynamics, 1000, adr_IP_dynamics)
         }else{
-            console.log(__dirname)
+            // console.log(__dirname)
             intervalStatic = setInterval(getStaticsFile, 1000, adr_IP_static)
             intervalDynamic = setInterval(getDynamicsFile, 1000, adr_IP_dynamics)
         }

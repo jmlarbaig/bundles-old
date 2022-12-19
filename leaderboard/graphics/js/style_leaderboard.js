@@ -172,7 +172,7 @@ function progressView(data){
                     '</svg>' +
                 '</div>' +
                 '<div class="score text-nowrap text-center text-truncate"></div>' +
-                '<div class="popup text-nowrap text-center text-truncate">HHH</div>' +
+                '<div class="popup text-nowrap text-center text-truncate"></div>' +
                 '<div class="text-nowrap text-truncate rounds">' + '</div>' +
             '</div>' +
         '</div>'
@@ -261,13 +261,21 @@ function commentator(data){
     let flag = data.countryCode != "LOGO" ? ("https://flagcdn.com/"+ data.countryCode.toLowerCase()+'.svg') : (logoEvent.value[0].url) ;
     var affiliate_team =  data.affiliate != undefined ?  data.affiliate : '-'
 
+    let O_points = data.overallPoints
+    let O_rank = data.rank
+
+    if (listOverall[data.lane] != undefined){
+        O_points = listOverall[data.lane].oP
+        O_rank = listOverall[data.lane].oR
+    }
+
     let $item = $( 
         '<tr class="athlete" id="aht'+data.lane+'">' + 
             '<td class="lane">'+ data.lane + '</td>' + 
             '<td class="flag">' + '<div class="box_flag"> </div> ' + '</td>' +
             '<td class="text-nowrap text-truncate text-left name" onclick="affichageStats()" id="showStats_'+ data.lane +'">' + name + '</td>' + 
-            '<td class="Orank">' + data.overallPoints + '</td>' + 
-            '<td class="Orank">' + data.rank + '</td>' +
+            '<td class="Orank" id="oP_'+ data.lane +'">' + O_points + '</td>' + 
+            '<td class="Orank" id="oR_'+ data.lane +'">' + O_rank + '</td>' +
             '<td class="rank">' + data.CurrentRank  + '</td>' + 
             '<td class="stats" id="athlete_stats_'+ data.lane+'">' + '</td>'+
             // '<td class="circle_progress">' +

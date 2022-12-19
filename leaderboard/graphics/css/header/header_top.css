@@ -19,16 +19,16 @@
     top: 0px;
     left:0px;
     text-align: right;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background-color: rgb(234, 234, 234);
     text-align: center;
 }
 
 .header .box_logo .logo{
     padding: 15px;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background-repeat: no-repeat;
     background-size:     contain;                      /* <------ */
     background-position: right center;
@@ -39,15 +39,15 @@
     z-index: 40;
     position: absolute;
     top:0px;
-    left:100px;
-    width: 1820px;
+    left:150px;
+    width: 1770px;
     height: 100px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .header .box_heat .heat{
     display: inline-block;
-    width: 1820px;
+    width: 1770px;
     height: 100px;
 }
 
@@ -63,7 +63,7 @@
     flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
-    width: 1450px;
+    width: 1400px;
     height: 100px;
     padding: 20px;
 }
@@ -137,7 +137,7 @@
     z-index: 2;
     position: absolute;
     top:100px;
-    left:100px;
+    left:150px;
     width: 150px;
     height: 50px;
     color: white;
@@ -155,7 +155,7 @@
 }
 
 .header .box_chrono .chrono #cap{
-    font-size: 0.5em;
+    font-size: 0.8em;
     background-color: var(--main_color);
     color: var(--tx_main_color);
     margin: 15px auto;

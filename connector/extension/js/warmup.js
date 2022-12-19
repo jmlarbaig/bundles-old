@@ -21,11 +21,11 @@ module.exports = (nodecg, cc) => {
                         if(WorkoutTab[i+1] != undefined){
                             i++
                             updateHeats(WorkoutTab[i], data.eventId).then(()=>{
-                                console.log('5')
+                                // console.log('5')
                                 updateWarmUp(data.eventName, data.workoutId, data.heatId)
                             })
                         }else{
-                            console.log('4')
+                            // console.log('4')
 		                    updateWarmUp(data.eventName, data.workoutId, data.heatId)
                         }
                     })
@@ -41,7 +41,6 @@ module.exports = (nodecg, cc) => {
 			tab.heats = value;
             return cc.loadParticpant(eventId, tab.id).then((value)=>{
 				tab.participants = value;
-                console.log('3')
                 return tab
 			})
 		})

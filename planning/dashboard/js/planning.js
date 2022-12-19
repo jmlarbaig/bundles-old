@@ -113,6 +113,8 @@ function createPlanning(data){
         
                     let $heatBody = $("#heat"+i+'y'+y)
                     let h = 0;
+
+                    console.log(wod)
                     for(let heat of wod.heats){
 
                         let $itemHeats = (
