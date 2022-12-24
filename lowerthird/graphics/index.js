@@ -8,6 +8,7 @@
     const logoEvent = nodecg.Replicant('assets:logoEvent','connector')
     const eventInfos = nodecg.Replicant('eventInfos', 'connector');
     const lowerThirdData = nodecg.Replicant('lowerThirdData')
+    const lowerThirdConfig = nodecg.Replicant('lowerThirdConfig');
 
     // Initialisation du choix de la vue
     let overlay=''
@@ -48,15 +49,22 @@
                 case 'lowerthirds':
                     createLowerThird(newValue);
                     break;
+                case 'workouts':
+                    newValue.type == 'workout' && createWorkout(newValue);
+                    break;
             }
         }
     })
 
-    Colors.on('change', (newValue, oldValue) => {
 
+    lowerThirdConfig.on('change', (newValue,oldValue)=>{
         Object.keys(newValue).forEach((color, index) => {
-            root.style.setProperty("--"+ color, newValue[color] );
-            // Clrs[color] = newValue[color]
+            console.log(color.includes('ft'))
+            console.log(newValue[color])
+            if(color.includes('ft')){
+                root.style.setProperty("--"+ color, newValue[color] + 'px');
+            }else{
+                root.style.setProperty("--"+ color, newValue[color]);
+            }
         })
-        
     })

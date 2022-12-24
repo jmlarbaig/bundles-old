@@ -317,3 +317,63 @@ function createStats( data, iDiv){
     }
 
 }
+
+function headerScoringKairos(divisions, indexDivision, repTarget){
+    //! Ajouter la séparation ici
+    const reps = treatReptarget(repTarget[indexDivision])
+    // var reps = 0;
+
+    var $headerTop = $(
+        '<div id="leaderboard'+ indexDivision +'" class="leaderboard">' +
+            '<div class="header">'+
+                '<div class="text-nowrap text-truncate text-left division">' + divisions[indexDivision] + '</div>' +
+                '<div id="mvt" class="text-nowrap text-truncate text-left"></div>' +
+                '<div class="repTar text-nowrap text-truncate repTarget'+[indexDivision]+'">' + reps + '</div>' +
+            '</div>'+
+            '<table>' +
+                '<thead>'+
+                    '<tr>'+
+                        '<th fixed-side scope="col" class="lane box">LANE</th>' + 
+                        '<th fixed-side scope="col" class="state box">STATE</th>' + 
+                        '<th scope="col" class="box score align-items-xl-center">IP</th>' +
+                        '<th scope="col" class="box popup text-nowrap text-truncate">BATTERY</th>' +
+                        '<th fixed-side scope="col" class="timeAth box">TIME</th>' +  
+                        '<th scope="col" class="flag box">FLAG</th>' +
+                        '<th scope="col" class="box text-nowrap text-truncate text-left name">NAME</th>' + 
+                    '</tr>' +
+                '</thead>'+
+                '<tbody id="athletes" class="athletes">' +
+                '</tbody>' + 
+            '</table>' +
+        '</div>'
+
+    );
+
+    $headerTop.find('.rounds').hide()
+    return $headerTop
+}
+
+
+function scoringKairos(data){
+
+    let name = treatDisplayName(data.displayName);
+    let flag = data.countryCode != "LOGO" ? ("https://flagcdn.com/"+ data.countryCode.toLowerCase()+'.svg') : (logoEvent.value[0].url) ;
+
+    let $item = $( 
+        '<tr class="athlete zero" id="lane'+data.lane+'">' + 
+            '<td class="lane">'+ data.lane + '</td>' +
+            '<td class="state"></td>' + 
+            '<td class="score align-items-xl-center"></td>' +
+            '<td class="popup text-nowrap text-truncate"></td>' + 
+            '<td class="timeAth"></td>' + 
+            '<td class="flag">' + '<div class="box_flag"> </div> ' + '</td>' +
+            '<td class="text-nowrap text-truncate text-left name" onclick="requestPing()" id="request_'+ data.lane +'">' + name + '</td>' + 
+        '</tr>'
+    );
+
+    $item.find(".box_flag").css('background-image','url('+ flag +')')
+    $item.find(".rounds").hide();
+    // $item.hide();
+
+    return $item
+}

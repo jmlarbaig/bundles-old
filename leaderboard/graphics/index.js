@@ -8,7 +8,6 @@
     var heatId ;
     var heat_Name;
     var heatName;
-    var updateInterval = 30000;
     var resetVar = false;
     var athletes_final = new Array();
     var timerInterval= null;
@@ -29,8 +28,6 @@
 
     const setupLeaderboard = nodecg.Replicant('setupLeaderboard')
     const Colors = nodecg.Replicant('Colors', 'configuration');
-
-    // const Font = nodecg.Replicant('assets:font','configuration');
     
     const logoEvent = nodecg.Replicant('assets:logoEvent','connector')
     const mainSponsors = nodecg.Replicant('assets:mainSponsor', 'connector')
@@ -49,11 +46,6 @@
     // Destructuration du fichier Dynamic
     const statusHeat = nodecg.Replicant('status', 'connector');
     const d_athletes = nodecg.Replicant('d_athletes', 'connector');
-
-    // const statics = nodecg.Replicant('statics', 'connector');
-    // const dynamics = nodecg.Replicant('dynamics', 'connector');
-
-    const UrlChange = nodecg.Replicant('UrlChange', 'leaderboard');
 
     const bottomSponsors = nodecg.Replicant('assets:bottomSponsors', 'connector')
 
@@ -137,7 +129,9 @@
     })
 
     d_athletes.on('change', (newValue, oldValue)=>{
-        updateDynamics(newValue, statusWorkout);
+        if(overlay != 'sk' && newValue != undefined){
+            updateDynamics(newValue, statusWorkout);
+        }
     })
 
     let listOverall = []
@@ -181,7 +175,7 @@
         try{
             if(newValue.length > 0){
                 $("#logo").css("background-image", "url(" + newValue[0].url + ")");
-                setupLeaderboard.value.logo != true ? $("#logo").hide() : ""
+                setupLeaderboard.value.logo != true ? $("#box_logo").hide() : ""
             }
         }
         catch(e){
@@ -261,10 +255,62 @@
         if(overlay == 'overlay_side' || overlay == 'overlay_top'){
             if(newValue.lowerthird){
                 $(function(){
-                    let $item = $('<iframe src="../../lowerthird/graphics/lowerthirds.html" frameBorder="0"></iframe>')
-                    $("#lowerthird").find('iframe').remove()
-                    $("#lowerthird").append($item)
+                    if($("#frame").find('#lower').length > 0){
+                        $("#frame").find('#lower').show()
+                    }else{                    
+                        let $item = $('<iframe id="lower" src="../../lowerthird/graphics/lowerthirds.html" frameBorder="0"></iframe>')
+                        $item.hide()
+                        $("#frame").append($item)
+                    }
                 });
+            }else{
+                $("#frame").find('#lower').slideUp()
+            }
+            if(newValue.attributionLane){
+                $(function(){
+                    if($("#frame").find('#attributionLane').length > 0){
+                        $("#frame").find('#attributionLane').slideDown()
+                    }else{                    
+                        let $item = $('<iframe id="attributionLane" class="foreground" src="../../competition-corner/graphics/attribution-lane.html" frameBorder="0"></iframe>')
+                        $item.hide()
+                        $("#frame").append($item)
+                        setTimeout(()=>{
+                            $item.slideDown()
+                        }, 1000)
+                    }
+                });
+            }else{
+                $("#frame").find('#attributionLane').slideUp()
+            }
+            if(newValue.heatResults){
+                $(function(){
+                    if($("#frame").find('#heatResults').length > 0){
+                        $("#frame").find('#heatResults').slideDown()
+                    }else{                    
+                        let $item = $('<iframe id="heatResults" class="foreground" src="../../competition-corner/graphics/heat-result.html" frameBorder="0"></iframe>')
+                        $item.hide()
+                        $("#frame").append($item)
+                        setTimeout(()=>{
+                            $item.slideDown()
+                        }, 1000)}
+                });
+            }else{
+                $("#frame").find('#heatResults').slideUp()
+            }
+            if(newValue.overallStandingDivwod){
+                $(function(){
+                    if($("#frame").find('#osDivWod').length > 0){
+                        $("#frame").find('#osDivWod').slideDown()
+                    }else{                    
+                        let $item = $('<iframe id="osDivWod" class="foreground" src="../../competition-corner/graphics/overall-division-workout.html" frameBorder="0"></iframe>')
+                        $item.hide()
+                        $("#frame").append($item)
+                        setTimeout(()=>{
+                            $item.slideDown()
+                        }, 1000)}
+                });
+            }else{
+                $("#frame").find('#osDivWod').slideUp()
             }
         }
 
@@ -292,8 +338,6 @@
 
     const videoInfos = nodecg.Replicant('videoInfos', 'leaderboard')
     const videoShow = nodecg.Replicant('videoShow', 'leaderboard')
-
-    // const UrlChange = nodecg.Replicant('UrlChange', 'leaderboard')
 
     var videocontainer = document.getElementById('video');
     var videosource = document.getElementById('sourceVid');

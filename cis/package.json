@@ -25,10 +25,8 @@
         "name": "lowerthird-athletes",
         "title": "Lowerthird Athletes Control",
         "file": "index.html",
-        "fullbleed": false,
-        "width":8,
-        "headerColor": "#525F78",
-        "workspace": "Lowerthird Workspace"
+        "fullbleed": true,
+        "headerColor": "#525F78"
       }
     ]
   },

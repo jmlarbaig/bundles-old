@@ -14,6 +14,8 @@ let connect = {
 
 module.exports = function (nodecg) {
 
+    require('events').EventEmitter.defaultMaxListeners = 0;
+
     const Connected = nodecg.Replicant('Connected', { persistent: false });
 
     Connected.value = connect

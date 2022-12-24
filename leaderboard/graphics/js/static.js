@@ -1,3 +1,4 @@
+
 const athletes_init = {
     "lane": 0,
     "displayName": "",
@@ -130,6 +131,9 @@ function resetLeaderboard(newData){
                 case 'commentator':
                     $tabItem = headerCommentator(divisionsNames, indexDivision, repTarget)
                     break;
+                case 'sk':
+                    $tabItem = headerScoringKairos(divisionsNames, indexDivision, repTarget)
+                    break;
             }
 
             $tab.append($tabItem);
@@ -162,6 +166,9 @@ function resetLeaderboard(newData){
                     case 'commentator':
                         $item = commentator(elementAth)
                     break;
+                    case 'sk':
+                        $item = scoringKairos(elementAth)
+                    break;
                 }
 
                 elementAth.$item = $item;
@@ -180,7 +187,7 @@ function resetLeaderboard(newData){
                     if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
                     if(overlay === 'overlay_top') {height_tot = height_top} else {(height_tot +=  elementAth.$item.height()) }
                     
-                    if(overlay !== 'commentator'){
+                    if(overlay !== 'commentator' || overlay != 'sk'){
                         $("#leaderboard"+ indexDivision + " #athletes").height(height_tot)
                         $("#leaderboard"+ indexDivision).height(height_tot + $("#leaderboard"+indexDivision + " .header").height())
                     }

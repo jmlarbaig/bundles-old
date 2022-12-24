@@ -5,8 +5,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<title>LowerThird Presentator</title>
-
 	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
@@ -24,36 +22,27 @@
 
 	<!-- CSS Sheets -->
 	<link rel="stylesheet" href="css/index.css">
-	<link rel="stylesheet" href="css/presentator.css">
+	<link rel="stylesheet" href="css/waiting.css">
+
 
 </head>
 <body>
 	<div class='container'>
-		<div id="presentatorsDiv" class='box'>
-			<h1>Lower Third Generator</h1>	
-			<table id="presentators" class="box">
-				<tr class="presentator">
-					<th>
-						Name
-					</th>
-					<th>
-						Function
-					</th>
-					<th>
-						QrCode link
-					</th>
-					<th>
-						Sponsor
-					</th>
-					<th>
-						Show
-					</th>
-					<th>
-						Remove
-					</th>
-				</tr>
-			</table>
-			<button onclick="addItem()" > Add lowerthird + </button>
+		<div id="workoutDiv" class="box">
+
+
+			<label for="workout-select">Choose workout</label>
+			<select id="workout-select" class="workout">
+			</select>
+			
+			<label for="header">Text Header</label>
+			<input type="text" class="" id="header" />
+
+			<label for="subheader">Text Sub Header</label>
+			<input type="text" class="" id="subheader" />
+
+			<textarea id="textWorkout"></textarea>
+
 			<label for="position">Position</label>
 			<select id="position" class="position">
 				<option value="top_left">Top Left</option>
@@ -63,18 +52,21 @@
 				<option value="bottom_center">Bottom Center</option>
 				<option value="bottom_right">Bottom Right</option>
 			</select>
-		</div>
-		<div class='parameters'>			
-			<button type="button" id="resetPresentator" class="button-27" onclick="resetParameters()" style="background-color:grey"> RESET PARAMETERS </button>
-			<button type="button" id="savePresentator" class="button-27" onclick="saveParameters()"> SAVE PARAMETERS </button>
-		</div>
-		
+			
+			<label for="sponsor">Sponsor</label>
+			<select id="sponsor" class="sponsor"></select>
 
+			<div class="input-checkbox">
+				<input type="checkbox" id="workoutCheckbox" onclick="affichageWorkoutLowerthird()"/>
+				<span class="toogle"></span>
+			</div> 
+
+		</div>
 	</div>
+
 
     <script src="./js/select.js" type="text/javascript"></script>
     <script src="./js/tools.js" type="text/javascript"></script>
-    <script src="./js/lane.js" type="text/javascript"></script>
     <script src="./lowerthird.js" type="text/javascript"></script>
 
 </body>

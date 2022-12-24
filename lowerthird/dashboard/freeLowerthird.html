@@ -28,7 +28,7 @@
 </head>
 <body>
 	<div class='container'>
-		<div id="freeDiv" class="">
+		<div id="freeDiv" class="box">
 			
 			<label for="header">Text Header</label>
 			<input type="text" class="" id="header" />
@@ -48,12 +48,17 @@
 				<option value="bottom_right">Bottom Right</option>
 			</select>
 
+			<label for="sponsor">Sponsor</label>
+			<select id="sponsor" class="sponsor"></select>
+
 			<div class="input-checkbox">
 				<input type="checkbox" id="freeCheckbox" onclick="affichageFreeLowerthird()"/>
 				<span class="toogle"></span>
 			</div> 
-			<div id="exemple">
-				
+
+			<div class='parameters'>			
+				<button type="button" id="resetFree" class="button-27" onclick="resetParameters()" style="background-color:grey"> RESET PARAMETERS </button>
+				<button type="button" id="saveFree" class="button-27" onclick="saveParameters()"> SAVE PARAMETERS </button>
 			</div>
 		</div>
 	</div>

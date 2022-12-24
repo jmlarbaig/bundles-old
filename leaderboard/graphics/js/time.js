@@ -71,7 +71,7 @@ function showTime(Cap){
             '<div id="cap">CAP '+Cap+'</div>' 
         );
 
-        !setupLeaderboard.value.chrono && $(".chrono").hide();
+        !setupLeaderboard.value.chrono && $("#box_chrono").hide();
         $list.append($item);
         $(".chrono").find('#cap').hide();
 

@@ -46,8 +46,4 @@ function addSponsorOption(data, id){
        // then append it to the select element
        $('#sponsor'+id).append(opt)
     });
-
-
-
-
 }

@@ -26,13 +26,20 @@ const statusHeat = nodecg.Replicant('status');
 const d_athletes = nodecg.Replicant('d_athletes');
 
 
-
 // Data from Competition Corner
 const affiliateStats = nodecg.Replicant('affiliateStats')
 const Divisions = nodecg.Replicant('Divisions')
 const WorkoutInfos = nodecg.Replicant('WorkoutInfos');
+const listWarmpUp = nodecg.Replicant('listWarmpUp');
 
 const TopScore = nodecg.Replicant('TopScore')
+
+// Competition Corner braodcast
+const AttributionLane = nodecg.Replicant('AttributionLane');
+const HeatResults = nodecg.Replicant('HeatResults')
+const OSDivisionWorkout = nodecg.Replicant('OSDivisionWorkout')
+const listCis = nodecg.Replicant('CIS', { defaultValue: {}, persistent: true })
+
 
 // State Connection Replicant
 const Connected = nodecg.Replicant('Connected');

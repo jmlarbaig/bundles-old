@@ -30,6 +30,20 @@ function msToTime(s) {
     return mins + ':' + secs ;
 }
 
+function msToTimeSK(s) {
+    var ms = s % 1000;
+    s = (s - ms) / 1000;
+    var secs = s % 60;
+    s = (s - secs) / 60;
+    var mins = s % 60;
+    s = (s - mins) / 60;
+    var hrs = s % 60;
+    if (secs<10) { secs = '0' + secs}
+    if (mins<10) { mins = '0' + mins}
+    if (hrs<10) { hrs = '0' + hrs}
+    return  mins + ':' + secs ;
+  }
+
 
 function typeWorkout(data){
 

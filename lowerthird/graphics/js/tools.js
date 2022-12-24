@@ -24,6 +24,9 @@ function createLowerThird(data){
         case 'qrcode':
             createQrcode(data)
             break;
+        case 'workout':
+            createWorkout(data)
+            break;
     }
 }
 

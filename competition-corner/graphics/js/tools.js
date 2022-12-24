@@ -1,17 +1,15 @@
 async function resetAttrLane(dataCC){
-
-    // let dataCC = await loadAttributionLane(data.heatId)
-  
-    // Donnée de l'event Info
-    console.log(dataCC)
   
     $('.headerLogo-text').text(dataCC.eventName)
     $('#heatName').text(dataCC.heatName)
     $('#workoutName').text(dataCC.workoutName)
+
+    if(dataCC.backgroundImage != null){
+      $('.headerLogo').removeClass('header-without-background')
+      $('.headerLogo').css('background-image','url('+ dataCC.backgroundImage +')')
+    }
   
     athletes = dataCC.participants
-  
-    console.log(athletes.length)
     maximumAthlete = athletes.length;
   
     loadTableLane(athletes)
@@ -19,17 +17,17 @@ async function resetAttrLane(dataCC){
   }
 
   async function resetHeatResults(dataCC){
-    
-    // Donnée de l'event Info
-    // console.log(dataCC)
   
     $('.headerLogo-text').text(dataCC.eventName)
     $('#heatName').text(dataCC.heatName)
     $('#workoutName').text(dataCC.workoutName)
+
+    if(dataCC.backgroundImage != null){
+      $('.headerLogo').removeClass('header-without-background')
+      $('.headerLogo').css('background-image','url('+ dataCC.backgroundImage +')')
+    }
   
     athletes = dataCC.participants
-  
-    // console.log(athletes)
     maximumAthlete = athletes.length;
   
     loadTableResult(athletes)
@@ -38,19 +36,17 @@ async function resetAttrLane(dataCC){
   
 
   async function resetWorkoutDivision(dataCC){
-
-    // let dataCC = await loadDivisionWorkoutResult(data.selectedDivision, data.workoutSelected)
-  
-    // Donnée de l'event Info
-    console.log(dataCC)
   
     $('.headerLogo-text').text(dataCC.eventName)
     $('#heatName').text(dataCC.divisionName)
     $('#workoutName').text(dataCC.workoutName)
+
+    if(dataCC.backgroundImage != null){
+      $('.headerLogo').removeClass('header-without-background')
+      $('.headerLogo').css('background-image','url('+ dataCC.backgroundImage +')')
+    }
   
     athletes = dataCC.athletesResults
-  
-    console.log(athletes)
     maximumAthlete = athletes.length;
   
     loadTableDivisionResults(athletes)

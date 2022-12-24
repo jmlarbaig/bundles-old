@@ -1,116 +1,132 @@
-    // initialization
-    var athlete;
-    var athletes;
-    var timerId;
-    var timecapNTP = "";
-    var startTimeNTP;
-    var heatId ;
-    var heat_Name;
-    var heatName;
-    var heatInfos = []
-    var updateInterval = 30000;
-    var resetVar = false;
-    var athletes_final = new Array();
-    var timerInterval= null;
-    var dataTime;
-    var totalRep = [];
 
+
+    let Clrs = {}
     let root = document.documentElement;
-    let logoEvent = document.getElementById("logoProgress");
 
-    var pathLogo;
-    var main_color;
-    var second_color;
 
-    var finish__color
-    var first_rank__color
-    var second_rank__color
-    var third_rank__color
 
-    const statics = nodecg.Replicant('statics', 'connector');
-    const dynamics = nodecg.Replicant('dynamics', 'connector');
-    const LogoImg = nodecg.Replicant('LogoImg', 'leaderboard')
-    const FVReplicant = nodecg.Replicant('FVspot', 'leaderboard')
+    const setupLeaderboard = nodecg.Replicant('setupLeaderboard', 'leaderboard')
+    const Colors = nodecg.Replicant('Colors', 'configuration');
 
-    const BgColor = nodecg.Replicant('BgColor', 'leaderboard')
-    const MainColor = nodecg.Replicant('MainColor', 'leaderboard')
-    const SecondColor = nodecg.Replicant('SecondColor', 'leaderboard')
+    const logoEvent = nodecg.Replicant('assets:logoEvent','connector')
+    const mainSponsors = nodecg.Replicant('assets:mainSponsor', 'connector')
 
-    const FinishRankColor = nodecg.Replicant('FinishRankColor', 'leaderboard')
-    const FirstRankColor = nodecg.Replicant('FirstRankColor', 'leaderboard')
-    const SecondRankColor = nodecg.Replicant('SecondRankColor', 'leaderboard')
-    const ThirdRankColor = nodecg.Replicant('ThirdRankColor', 'leaderboard')
+    const timeNTP = nodecg.Replicant('timeNTP','connector')
+    const nowNtp = nodecg.Replicant('nowNtp','connector')
 
-    const TransparenceLogo = nodecg.Replicant('TransparenceLogo', 'leaderboard')
+    // Destructuration du fichier static
+    const eventInfos = nodecg.Replicant('eventInfos', 'connector');
+    const heatInfos = nodecg.Replicant('heatInfos', 'connector');
 
-    statics.on('change', (newValue, oldValue) => {
-        console.log("Static")
-        // console.log(`statics changed from ${oldValue} to ${newValue}`);
+    // Destructuration du fichier Dynamic
+    const statusHeat = nodecg.Replicant('status', 'connector');
 
-        timecapNTP = newValue.heatInfo[0].timeCap;
-        heatId = newValue.heatId;
-        heat_Name = newValue.heatName;
+    // on récupère les infos provenant du connecteur
 
-        resetHeat(newValue);
-        // resetWod(newValue);
-        showTime()
-        // resetProgress(newValue)
-        // showFV();
-    }); 
+    eventInfos.on('change',(newValue, oldValue)=>{
+        if(newValue != undefined){
+            if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
+                // resetHeat(newValue);
+                if (newValue.heatId != heat.heatId){
+                    newHeat = true;
+                }else{
+                    newHeat = false
+                }
+            }
+        }
+    })
 
-    dynamics.on('change', (newValue, oldValue) => {
-        // console.log(`dynamics changed from ${oldValue} to ${newValue}`);
-        // updateDynamics(newValue.athletes, newValue.status)
-        dataTime = newValue;
+    let tc
+    let heat = {}
 
-    }); 
+    heatInfos.on('change', (newValue, oldValue)=>{
+        if(newValue != undefined){
+            heat = typeWorkout(newValue)
+            showTime(heat.timecap)
+        }
+    })
 
-    FVReplicant.on('change', (newValue, oldValue) => {
-        // console.log(`showLogo changed from ${oldValue} to ${newValue}`);
-        showFV();
-    }); 
+    let statusWorkout = '0'
+    let ntpStartTime;
+    let startTime;
+    let endTime;
+    let timerLaunch = null;
 
-    LogoImg.on('change', (newValue, oldValue) => {
+    statusHeat.on('change', (newValue, oldValue)=>{
+        if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
+            if( newValue.NtpTimeStart !== ntpStartTime){
+                ntpStartTime = newValue.NtpTimeStart
+                startTime = timeToDateTime(ntpStartTime);
+                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
+                if(timerLaunch != null){
+                    clearInterval(timerLaunch)
+                    timerLaunch = null;
+                }
+                console.log(startTime)
+                console.log(endTime)
+                newHeat = false
+                timerLaunch = setInterval(updateTime, 500);
+            }
+            statusWorkout = newValue.status
+        }
+    })
+
+    // Catégorie Assets
+
+    logoEvent.on('change', (newValue, oldValue) => {
         try{
-            $("#logoProgress").attr("src", newValue);
+            if(newValue.length > 0){
+                $("#logo").css("background-image", "url(" + newValue[0].url + ")");
+                $(".box_logo").css("background-image", "url(" + newValue[0].url + ")");
+            }
         }
         catch(e){
             console.log(e)
         }
     }); 
 
-    TransparenceLogo.on('change', (newValue) => {
-        root.style.setProperty("--transparence",newValue );
-    })
-
-
-    MainColor.on('change', (newValue, oldValue) => {
-        main_color = newValue;
-        root.style.setProperty("--main-color",newValue );
-    })
-
-    SecondColor.on('change', (newValue, oldValue) => {
-        second_color = newValue;
-        root.style.setProperty("--second-color",newValue );
-    })
-
-    FinishRankColor.on('change', (newValue, oldValue) => {
-        console.log(newValue)
-        finish__color = newValue;
-        root.style.setProperty("--finish-color",newValue );
-    })
-
-    FirstRankColor.on('change', (newValue, oldValue) => {
-        first_rank__color = newValue;
-        root.style.setProperty("--firstRank-color",newValue );
-    })    
     
-    SecondRankColor.on('change', (newValue, oldValue) => {
-        second_rank__color = newValue;
-        root.style.setProperty("--secondRank-color",newValue );
+    mainSponsors.on('change', (newValue)=> {
+        if(newValue.length>0){
+
+            $(".mainSponsor").css("background-image", "url(" + newValue[0].url + ")");
+            $(".mainSponsor").fadeIn(1000)
+        }
+        else{
+            $(".mainSponsor").fadeOut(1000)
+        }
     })
 
-    ThirdRankColor.on('change', (newValue, oldValue) => {
-        third_rank__color = newValue;
-        root.style.setProperty("--thirdRank-color",newValue );
+
+    Colors.on('change', (newValue, oldValue) => {
+
+        let tabColor = newValue
+        
+        Object.keys(newValue).forEach((color, index) => {
+
+            let _color = tabColor[color]
+
+            root.style.setProperty("--"+ color, _color );
+            Clrs[color] = _color
+        })
+        
+    })
+
+    // Congifuration et setup
+    setupLeaderboard.on('change', (newValue, oldValue)=>{
+        if(newValue != undefined){
+
+            Object.keys(newValue).forEach((params, index)=>{
+                if(params ==  'fortimeAmrap'){
+                    switch(newValue[params]){
+                        case true:
+                            $('.'+params).fadeIn(1000)
+                            break;
+                        case false :
+                            $('.'+params).fadeOut(1000)
+                            break;
+                    }
+                }
+            })
+        }
     })

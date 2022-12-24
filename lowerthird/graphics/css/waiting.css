@@ -1,6 +1,6 @@
 .waiting{
     position: absolute;
-    background-color: var(--main_color);
+    background-color: var(--back_color);
     width: fit-content;
     padding: 0px 20px;
     margin: 10px 0px;
@@ -28,8 +28,8 @@
     font-size: 1.6em;
     font: 800;
     padding: 5px;
-    background: linear-gradient(90deg, var(--main_color) 0%, var(--second_color) 50%, var(--main_color) 100%);
-    color: var(--tx_second_color);
+    background-color: var(--subheader_color);
+    color: var(--tx_subheader_color);
     text-transform: uppercase;
 
 }
@@ -39,8 +39,8 @@
     font: 600;
     padding: 5px;
     padding-bottom: 10px;
-    background-color: var(--main_color);
-    color: var(--tx_main_color);
+    background: linear-gradient(90deg, var(--header_color) 0%, var(--header_color) 50%, var(--header_color) 100%);
+    color: var(--tx_header_color);
     text-transform: uppercase;
     border-bottom: solid white 2px;
     margin-bottom: 5px;
@@ -50,7 +50,15 @@
     font-size: 0.8em;
     font: 200;
     padding: 10px;
-    background-color: var(--main_color);
-    color: var(--tx_main_color);
+    color: white;
     text-transform: uppercase;
+}
+
+.sponsor{
+    background-color: var(--sponsor_color);
+    margin: auto;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: var(--ft_height_sponsor);
 }

@@ -47,29 +47,83 @@ function removeItem(){
 }
 
 function saveParameters(){
-    let $items = $('.presentator');
-    let data = []
+    let id = event.target.id
 
-    for( let i=0; i < $items.length - 1 ; i++){
-        data[i] = Object.assign({}, _configPresentator);
-        data[i].name = $items.find('#name'+i).val()
-        data[i].function = $items.find('#function'+i).val()
-        data[i].qrcode = $items.find('#qrcode'+i).val()
-        data[i].sponsor = $items.find('#sponsor'+i).val()
-        data[i].position = $items.find('#position').val()
+    switch(id){
+        case 'saveFree' : 
+            let dataFree = {}
+            dataFree.checked = $("#freeCheckbox").is(':checked');
+            dataFree.header = $("#header").val();
+            dataFree.subheader = $("#subheader").val();
+            dataFree.text = myContent.getContent();
+            dataFree.position = $("#position").val();
+            dataFree.sponsor = $("#sponsor").val();
+
+            LowerThirdFree.value = dataFree
+            break;
+        case 'savePresentator':
+            let $items = $('.presentator');
+            let data = []
+
+            for( let i=0; i < $items.length - 1 ; i++){
+                data[i] = Object.assign({}, _configPresentator);
+                data[i].name = $items.find('#name'+i).val()
+                data[i].function = $items.find('#function'+i).val()
+                data[i].qrcode = $items.find('#qrcode'+i).val()
+                data[i].sponsor = $items.find('#sponsor'+i).val()
+                data[i].position = $items.find('#position').val()
+            }
+
+            LowerThirdPres.value = data
+            break;
+        case 'saveWaiting':
+            let dataWaiting = {}
+
+            dataWaiting.checked = $("#waitingCheckbox").is(':checked');
+            dataWaiting.localisation = $("#localisation").val();
+            dataWaiting.nextEvent = $("#nextEvent").val();
+            dataWaiting.qrcode = $("#qrcode").val();
+            dataWaiting.sponsor = $("#sponsor").val();
+            dataWaiting.position = $("#position").val();
+
+            LowerThirdWaiting.value = dataWaiting;
+            break;
     }
-
-    console.log(data)
-
-    LowerThirdConfig.value = data
 }
 
 function resetParameters(){
-    
-    let $tab = $('#presentators');
-    $tab.find('.presentator').remove();
+
+    let id = event.target.id
+
+    switch(id){
+        case 'resetFree' : 
+            $('#freeDiv').find('#header').val('');
+            $('#freeDiv').find('#subheader').val('');
+            myContent.setContent('');
+            break;
+        case 'resetPresentator':
+            $('#presentators').find('.presentator').remove();
+            break;
+        case 'resetWaiting':
+            $('#waitingDiv').find('#localisation').val('');
+            $('#waitingDiv').find('#nextEvent').val('');
+            $('#waitingDiv').find('#qrcode').val('');
+            break;
+    }
 }
 
 function rpl (complete, replace){
     return parseInt(complete.replace(replace, ''))
+}
+
+function createOptionWorkout(data){
+
+    $("#workout-select option").remove()
+
+    $("#workout-select").append('<option value=0>-- Please Choose Workout --</option>')
+
+    for(let workout of data){
+        $("#workout-select").append('<option value='+ workout.id +'>' + workout.name + '</option>');
+    }
+
 }

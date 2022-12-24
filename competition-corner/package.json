@@ -26,12 +26,17 @@
         "title": "Competition Corner Control",
         "file": "index.html",
         "fullbleed": false,
-        "width":3,
+        "width":4,
         "headerColor": "#525F78",
         "workspace": "Main Workspace"
       }
     ],
     "graphics": [
+      {
+        "file": "all.html",
+        "width": 1920,
+        "height": 1080
+      },
       {
         "file": "attribution-lane.html",
         "width": 1920,
@@ -46,6 +51,18 @@
         "file": "overall-division-workout.html",
         "width": 1920,
         "height": 1080
+      }
+    ],
+    "assetCategories": [
+      {
+        "name": "sponsorCC",
+        "title": "Sponsors For Competition Corner Window",
+        "allowedTypes": [
+          "jpg",
+          "jpeg",
+          "gif",
+          "png"
+        ]
       }
     ]
   },

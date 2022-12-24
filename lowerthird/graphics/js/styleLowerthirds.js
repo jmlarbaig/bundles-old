@@ -6,7 +6,22 @@ function createPresentator(data){
         if($root.find('#presentator_'+data.id).length>0){
             $('#presentator_'+data.id).find('#name').text(data.name)
             $('#presentator_'+data.id).find('#function').text(data.function)
+            if( data.sponsor != ''){
+                if($('#presentator_'+data.id).find("#sponsorPresentator_"+ data.id).length > 0){
+                    $('#presentator_'+data.id).find("#sponsorPresentator_"+ data.id).css("background-image", "url(" + data.sponsor + ")")
+                }else{
+                    let $item = $(
+                        '<div id="sponsorPresentator_'+ data.id +'" class="sponsor">'+
+                        '</div>' 
+                    )
+                    $('#presentator_'+data.id).append($item)
+                    $('#presentator_'+data.id).find("#sponsorPresentator_"+ data.id).css("background-image", "url(" + data.sponsor + ")")
+                }
+            }else{
+                $('#presentator_'+data.id).find("#sponsorPresentator_"+ data.id).remove()
+            }
             changeClass('.headPresentator', data.position)
+            $('#presentator_'+data.id).slideDown(1000)
         }else{
 
             let $item = $(
@@ -26,7 +41,7 @@ function createPresentator(data){
                             '</div>' +
                         '</div>' +
                     '</div>' +
-                    '<div class="sponsor">'+
+                    '<div id="sponsorPresentator_'+ data.id +'" class="sponsor">'+
                     '</div>' +
                     '<div id="qrCode'+ data.id +'" class="qrCode">'+
                     '</div>'+
@@ -39,9 +54,9 @@ function createPresentator(data){
             $(".logo_event").css("background-image", "url(" + eventLogo + ")")
             
             if( data.sponsor != ''){
-                $(".sponsor").css("background-image", "url(" + data.sponsor + ")")
+                $("#sponsorPresentator_"+ data.id).css("background-image", "url(" + data.sponsor + ")")
             }else{
-                $(".sponsor").remove()
+                $("#sponsorPresentator_"+ data.id).remove()
             }
 
             if( data.qrcode != ''){
@@ -58,10 +73,6 @@ function createPresentator(data){
 
     }else{
         $root.find('#presentator_'+data.id).slideUp(1000)
-
-        setTimeout(()=>{
-            $root.find('#presentator_'+data.id).remove()
-        }, 1000)
     }
 
 
@@ -69,31 +80,48 @@ function createPresentator(data){
 
 function createWaiting(data){
 
+    console.log(data)
+
     if(data.checked){
 
-        if($root.find('.waiting').length>0){
-            $('.waiting').find('#nextEvent').text(data.nextEvent)
-            $('.waiting').find('#localisation').text(data.localisation)
-            $('.waiting').find('#qrcode').html(data.qrcode)
-            changeClass('.waiting', data.position)
+        if($root.find('#waiting').length>0){
+            $('#waiting').find('#nextEvent').text(data.nextEvent)
+            $('#waiting').find('#localisation').text(data.localisation)
+            $('#waiting').find('#qrcode').html(data.qrcode)
+            if( data.sponsor != ''){
+                if($('#waiting').find("#sponsorWaiting").length > 0){
+                    $('#waiting').find("#sponsorWaiting").css("background-image", "url(" + data.sponsor + ")")
+                }else{
+                    let $item = $(
+                        '<div id="sponsorWaiting" class="sponsor">' +
+                        '</div>'
+                    )
+                    $('#waiting').append($item)
+                    $("#sponsorWaiting").css("background-image", "url(" + data.sponsor + ")")
+                }
+            }else{
+                $('#waiting').find("#sponsorWaiting").remove()
+            }
+            changeClass('#waiting', data.position)
+            $('#waiting').slideDown(1000)
         }else{
 
             let $item = $(
-                '<div class="waiting">'+
+                '<div id="waiting" class="waiting">'+
                     '<div class="logo_event">'+
                     '</div>'+
                     '<div class="detailsWaiting">'+
                         '<div class="nextEvent">'+
-                            '<h4 id="nextEvent">'+data.nextEvent+'</h4>' +
+                            '<div id="nextEvent">'+data.nextEvent+'</div>' +
                         '</div>' +
                         '<div class="localisation">'+
-                            '<h5 id="localisation">'+data.localisation+'</h5>' +
+                            '<div id="localisation">'+data.localisation+'</div>' +
                         '</div>' +
                         '<div class="eventName">'+
                             '<h6>'+infos.eventName+'</h6>' +
                         '</div>' +
                     '</div>' +
-                    '<div class="sponsor">'+
+                    '<div id="sponsorWaiting" class="sponsor">'+
                     '</div>'+
                     '<div id="qrCode" class="qrCode">'+
                     '</div>'+
@@ -107,9 +135,9 @@ function createWaiting(data){
             
             if( data.sponsor != ''){
                 console.log(data.sponsor)
-                $(".sponsor").css("background-image", "url(" + data.sponsor + ")")
+                $("#sponsorWaiting").css("background-image", "url(" + data.sponsor + ")")
             }else{
-                $(".sponsor").remove()
+                $("#sponsorWaiting").remove()
             }
 
             if( data.qrcode != ''){
@@ -119,17 +147,14 @@ function createWaiting(data){
                 $("#qrCode").remove()
             }
 
-            changeClass('.waiting', data.position)
+            changeClass('#waiting', data.position)
 
-            $item.fadeIn(1000)
+            $item.slideDown(1000)
 
         }
     }else{
-        $root.find('.waiting').fadeOut(1000)
+        $root.find('#waiting').slideUp(1000)
 
-        setTimeout(()=>{
-            $root.find('.waiting').remove()
-        }, 1000)
     }
 }
 
@@ -139,31 +164,47 @@ function createFree(data){
     console.log(data)
 
     if(data.checked){
-        if($root.find('.free').length>0){
-            $('.free').find('#header').text(data.header)
-            $('.free').find('#subheader').text(data.subheader)
-            $('.free').find('#text').html(data.text)
-            changeClass('.free', data.position)
+        if($root.find('#free').length>0){
+            $('#free').find('#header').text(data.header)
+            $('#free').find('#subheader').text(data.subheader)
+            $('#free').find('#text').html(data.text)
+            console.log($('#free').find("#sponsorFree").length > 0)
+            if( data.sponsor != ''){
+                if($('#free').find("#sponsorFree").length > 0){
+                    $('#free').find("#sponsorFree").css("background-image", "url(" + data.sponsor + ")")
+                }else{
+                    let $item = $(
+                        '<div id="sponsorFree" class="">' +
+                        '</div>'
+                    )
+                    $('#free').append($item)
+                    $("#sponsorFree").css("background-image", "url(" + data.sponsor + ")")
+                }
+            }else{
+                $('#free').find("#sponsorFree").remove()
+            }
+            changeClass('#free', data.position)
+            $('#free').slideDown(1000)
 
         }else{
             let $item = $(
-                '<div class="free">'+
+                '<div id="free" class="textArea">'+
                     '<div class="first">'+
                         '<div class="logo_event">'+
                         '</div>'+
                         '<div class="headerSubheader">' +
                             '<div class="header">'+
-                                '<h4 id="header">'+data.header+'</h4>' +
+                                '<div id="header">'+data.header+'</div>' +
                             '</div>' +
                             '<div class="subheader">'+
-                                '<h5 id="subheader">'+data.subheader+'</h5>' +
+                                '<div id="subheader">'+data.subheader+'</div>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
                     '<div class="second">'+
                         '<div id="text">'+data.text+'</div>' +
                     '</div>' +
-                    '<div id="sponsorFree" class="sponsor">'+
+                    '<div id="sponsorFree" class="">'+
                     '</div>'+
                 '</div>'
             )
@@ -173,22 +214,93 @@ function createFree(data){
             
             $(".logo_event").css("background-image", "url(" + eventLogo + ")")
 
-            console.log(data.sponsor)
-            if(data.sponsor == undefined){
-                $('#sponsorFree').remove()
+            if( data.sponsor != ''){
+                $("#sponsorFree").css("background-image", "url(" + data.sponsor + ")")
+            }else{
+                $('#free').find("#sponsorFree").remove()
             }
 
-            changeClass('.free', data.position)
+            changeClass('#free', data.position)
 
             $item.slideDown(1000)
         }
 
     }else{
-        $root.find('.free').slideUp(1000)
+        $root.find('#free').slideUp(1000)
 
-        setTimeout(()=>{
-            $root.find('.free').remove()
-        }, 1000)
+    }
+
+}
+
+function createWorkout(data){
+
+    console.log(data)
+
+    if(data.checked){
+        if($root.find('#workout').length>0){
+            $('#workout').find('#headerWorkout').text(data.header)
+            $('#workout').find('#subheaderWorkout').text(data.subheader)
+            $('#workout').find('#textWorkout').html(data.text)
+            if( data.sponsor != ''){
+                if($('#workout').find("#sponsorWorkout").length > 0){
+                    $('#workout').find("#sponsorWorkout").css("background-image", "url(" + data.sponsor + ")")
+                }else{
+                    let $item = $(
+                        '<div id="sponsorWorkout" class="">' +
+                        '</div>'
+                    )
+                    $('#workout').append($item)
+                    $("#sponsorWorkout").css("background-image", "url(" + data.sponsor + ")")
+                }
+            }else{
+                $('#workout').find("#sponsorWorkout").remove()
+            }
+            changeClass('#workout', data.position)
+            $('#workout').slideDown(1000)
+
+        }else{
+            let $item = $(
+                '<div id="workout" class="textArea">'+
+                    '<div class="first">'+
+                        '<div class="logo_event">'+
+                        '</div>'+
+                        '<div class="headerSubheader">' +
+                            '<div class="header">'+
+                                '<h4 id="headerWorkout">'+data.header+'</h4>' +
+                            '</div>' +
+                            '<div class="subheader">'+
+                                '<h5 id="subheaderWorkout">'+data.subheader+'</h5>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="second">'+
+                        '<div id="textWorkout">'+data.text+'</div>' +
+                    '</div>' +
+                    '<div id="sponsorWorkout" class="">'+
+                    '</div>'+
+                '</div>'
+            )
+
+            $item.hide()
+            $root.append($item);
+            
+            $(".logo_event").css("background-image", "url(" + eventLogo + ")")
+
+            if( data.sponsor != ''){
+                console.log('added ')
+                $("#sponsorWorkout").css("background-image", "url(" + data.sponsor + ")")
+            }else{
+                $('#workout').find("#sponsorWorkout").remove()
+            }
+
+            changeClass('#workout', data.position)
+
+            $item.slideDown(1000)
+        }
+
+    }else{
+
+        $root.find('#workout').slideUp(1000)
     }
 
 }

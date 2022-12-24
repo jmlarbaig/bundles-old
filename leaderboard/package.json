@@ -56,6 +56,11 @@
         "file": "commentator.html",
         "width": 1920,
         "height": 1080
+      },
+      {
+        "file": "sk.html",
+        "width": 1920,
+        "height": 1080
       }
     ]
   },

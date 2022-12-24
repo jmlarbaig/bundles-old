@@ -49,11 +49,20 @@
         "workspace":"LowerThird Workspace"
       },
       {
-        "name": "qrCodeLowerthird",
-        "title": "QRCode Lowerthird",
-        "file": "qrCodeLowerthird.html",
+        "name": "WorkoutsLowerthird",
+        "title": "Workout Lowerthird",
+        "file": "workoutLowerthird.html",
         "fullbleed": false,
-        "width": 2,
+        "width": 3,
+        "headerColor": "#525F78",
+        "workspace":"LowerThird Workspace"
+      },
+      {
+        "name": "Configuration",
+        "title": "Configuration Lowerthird",
+        "file": "configuration.html",
+        "fullbleed": false,
+        "width": 3,
         "headerColor": "#525F78",
         "workspace":"LowerThird Workspace"
       }
@@ -81,6 +90,11 @@
       },
       {
         "file": "waiting.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "workout.html",
         "width": 1920,
         "height": 1080
       }

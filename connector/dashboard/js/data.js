@@ -31,6 +31,44 @@ function createDataView(){
 
         createTextArea(newValue, $('#d_athletes'))
     })
+
+    Divisions.on('change',(newValue, oldValue)=>{
+
+        createTextArea(newValue, $('#divisionCC'))
+    })
+
+    WorkoutInfos.on('change',(newValue, oldValue)=>{
+
+        createTextArea(newValue, $('#workoutCC'))
+    })
+
+    listWarmpUp.on('change',(newValue, oldValue)=>{
+
+        createTextArea(newValue, $('#warmupCC'))
+    })
+
+    listCis.on('change',(newValue, oldValue)=>{
+
+        createTextArea(newValue, $('#cis'))
+    })
+
+    //
+
+    AttributionLane.on('change',(newValue, oldValue)=>{
+
+        createTextArea(newValue, $('#AttributionLane'))
+    })
+
+    HeatResults.on('change',(newValue, oldValue)=>{
+
+        createTextArea(newValue, $('#HeatResults'))
+    })
+
+    OSDivisionWorkout.on('change',(newValue, oldValue)=>{
+
+        createTextArea(newValue, $('#OSDivisionWorkout'))
+    })
+
 }
 
 function createRow(data, $root){

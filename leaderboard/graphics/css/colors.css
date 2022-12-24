@@ -36,3 +36,28 @@
     background-color: rgb(237, 237, 237);
     color: black;
 }
+
+.cent{
+    background-color: rgb(13, 196, 17);
+    color: rgb(255, 255, 255);
+}
+
+.soixantequinze{
+    background-color: rgb(185, 209, 32);
+    color: rgb(255, 255, 255);
+}
+
+.cinquante{
+    background-color: rgb(210, 127, 32);
+    color: rgb(255, 255, 255);
+}
+
+.vingtcinq{
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+.zero{
+    background-color: rgb(170, 170, 170);
+    color: white;
+}

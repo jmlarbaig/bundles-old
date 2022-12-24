@@ -1,5 +1,3 @@
-const statics = nodecg.Replicant('statics', 'connector');
-// const dynamics = nodecg.Replicant('dynamics', 'connector');
 
 const UrlChange = nodecg.Replicant('UrlChange');
 const UrlChange_internal = nodecg.Replicant('UrlChange_internal')
@@ -65,7 +63,7 @@ eventInfos.on('change',(value)=>{
 function actualiser(){
 
     const elements = document.querySelectorAll('input[type=checkbox]');
-    console.log(elements)
+
     var data ={};
     elements.forEach( el => {
         data[el.id] = el.checked

@@ -23,10 +23,14 @@ function resetHeat(data){
             case 'commentator':
                 $item = styleHeat_TV(data)
             break;
+            case 'sk':
+                $item = styleHeat_TV(data)
+            break;
         }
 
-
-        setupLeaderboard.value.heat != true ? $(".heat").hide() : "";
+        if(overlay.includes('overlay')){
+            setupLeaderboard.value.heat != true ? $("#box_heat").hide() : "";
+        }
         
         $list.append($item);
 

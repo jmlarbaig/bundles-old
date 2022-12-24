@@ -1,9 +1,13 @@
 
 
+    const sponsors = nodecg.Replicant('assets:sponsorCC')
+    const eventInfos = nodecg.Replicant('eventInfos', 'connector')
     const Divisions = nodecg.Replicant('Divisions', 'connector')
     const Workouts = nodecg.Replicant('WorkoutInfos', 'connector')
     const WorkoutsDivision = nodecg.Replicant('WorkoutsDivision', 'connector')
     const Heats = nodecg.Replicant('HeatsWorkout', 'connector')
+    const configForCC = nodecg.Replicant('configForCC')
+
     
     let selectedDivision;
     let workoutHeatSelected;
@@ -87,6 +91,16 @@
         }
     }
 
+    sponsors.on('change', (newValue)=>{
+        if(newValue.length > 0){
+            createOptionsSponsors(newValue)
+        }
+    })
+
+    eventInfos.on('change', (newValue, oldValue) => {
+        
+    })
+
     Divisions.on('change', (newValue)=> {
         if(newValue != undefined && newValue.length > 0){
             loadOptionDivisions(newValue);
@@ -111,6 +125,18 @@
         }
     })
 
+    const sponsorForCC = nodecg.Replicant('sponsorForCC')
+
+    let _configSponsor = {
+       'type':'',
+       'url':''
+    }   
+
+    let _configForCC = {
+        'type':'',
+        'country':true,
+        'affiliation':true
+    }
     
     $(document).ready(function(){
         $("#division-select").change(function(){
@@ -135,4 +161,32 @@
             num_heats = 10
             nodecg.sendMessageToBundle('heat_result', 'connector', {workoutHeatSelected, heatSelected, num_heats})
         });
+
+        $("[name='sponsor']").change(function(){
+
+            let id = $(this)[0].id.replace('sponsor-','').replace('-select','')
+
+            let dataToSend = Object.assign({}, _configSponsor)
+
+            dataToSend.type = id
+            dataToSend.url = $(this).children("option:selected").val();
+        
+            sponsorForCC.value = dataToSend
+        });
+
+        $("[type=checkbox").change(()=>{
+
+            let name = event.target.name;
+
+            console.log(name, $('#country-'+name).is(":checked") , $('#affiliation-'+name).is(":checked") )
+
+            let dataToSend = Object.assign({}, _configForCC)
+
+            dataToSend.type = name
+            dataToSend.country = $('#country-'+name).is(":checked")
+            dataToSend.affiliation =  $('#affiliation-'+name).is(":checked") 
+
+            configForCC.value = dataToSend
+        })
     });
+

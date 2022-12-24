@@ -27,17 +27,17 @@
 </head>
 <body>
 	<div class=''>
-		<div id="waitingDiv" class="waiting">
+		<div id="waitingDiv" class="waiting box">
 			<h4>Waiting Lowerthird</h4>
-			<label for="localisation">LOCALISATION</label>
-			<input type="text" class="switch_1" id="localisation" />
-			<label for="nextEvent">NEXT EVENT</label>
+			<label for="nextEvent">HEADER</label>
 			<input type="text" class="switch_1" id="nextEvent" />
-			<label for="qrcode">URL Qr Code</label>
+			<label for="localisation">SUB HEADER</label>
+			<input type="text" class="switch_1" id="localisation" />
+			<label for="qrcode">URL QR CODE</label>
 			<input type="text" class="switch_1" id="qrcode" />
-			<label for="sponsor">Sponsor</label>
+			<label for="sponsor">SPONSOR</label>
 			<select id="sponsor" class="sponsor"></select>
-			<label for="position">Position</label>
+			<label for="position">POSITION</label>
 			<select id="position" class="position">
 				<option value="top_left">Top Left</option>
 				<option value="top_center">Top Center</option>
@@ -50,6 +50,11 @@
 				<input type="checkbox" id="waitingCheckbox" onclick="affichageWaitingLowerthird()"/>
 				<span class="toogle"></span>
 			</div> 
+
+			<div class='parameters'>			
+				<button type="button" id="resetWaiting" class="button-27" onclick="resetParameters()" style="background-color:grey"> RESET PARAMETERS </button>
+				<button type="button" id="saveWaiting" class="button-27" onclick="saveParameters()"> SAVE PARAMETERS </button>
+			</div>
 		</div>
 	</div>	
 

@@ -1,44 +1,66 @@
 :root {
     --main-color: rgba(0,0,0,0.9);
     --second-color: #a01111;
-
-
-    --finish-color: #bc9d11;
-    --firstRank-color: #a01111;
-    --secondRank-color: rgba(255,255,255,1);
-    --thirdRank-color: rgba(255,255,255,1);
-
-    --transparence: 100%;
   }
 
+body{
+    background-color: var(--main-color);
+}
 
-.logoBody{
+.box_logo{
+    opacity: 80%;
+    filter: blur(50px);
     position: absolute;
-    z-index: -1;
-    top : 20%;
-    right: 27%;
-    width: 25%;
-    opacity: var(--transparence);
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat:repeat-x;
+    background-size: cover;
+    background-clip: padding-box;
 }
 
-@font-face {
-    font-family: "bebas";
-    src: url("../fonts/BebasNeue.otf");
+.logo{
+    background-size: contain;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    top:100px;
+    left: 50%;
+    -webkit-transform: translate( -50%);
+    transform: translate( -50%);
 }
 
-@font-face {
-    font-family: "strasua";
-    src: url("../fonts/strasua.ttf");
+.box_chrono{
+    position: absolute;
+    top:30%;
+    left: 50%;
+    -webkit-transform: translate( -50%);
+    transform: translate( -50%);
+    text-align: center;
 }
 
-@font-face {
-    font-family: "oswald";
-    src: url("../fonts/Oswald-Regular.ttf");
+.chrono{
+    font-size: 10rem;
 }
 
-@font-face {
-    font-family: "montserrat";
-    src: url("../fonts/Montserrat-Bold.ttf");
+#cap{
+    border-radius: 10px;
+    font-size: 5rem;
+    background-color: black;
+    color: white;
 }
 
-
+.mainSponsor{
+    background-size: contain;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-position: center;
+    background-repeat: no-repeat;
+    bottom:100px;
+    left: 50%;
+    -webkit-transform: translate( -50%);
+    transform: translate( -50%);
+}

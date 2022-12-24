@@ -4,7 +4,7 @@
 
 .presentator{
     position: relative;
-    background-color: var(--main_color);
+    background-color: var(--back_color);
     width: fit-content;
     padding: 0px 20px;
     margin: 10px 0px;
@@ -30,10 +30,10 @@
     font-size: 1.6em;
     font: 800;
     padding: 5px;
-    background: linear-gradient(90deg,var(--second_color) 0%, var(--main_color) 84%);;
-    color: var(--tx_second_color);
+    background: linear-gradient(90deg,var(--header_color) 0%, var(--header_color) 84%);;
+    color: var(--tx_header_color);
     text-transform: uppercase;
-
+    font-size: var(--ft_size_subheader);
 }
 
 .function{
@@ -41,19 +41,19 @@
     font: 600;
     padding: 5px;
     padding-bottom: 10px;
-    background-color: var(--main_color);
-    color: var(--tx_main_color);
+    background-color: var(--subheader_color);
+    color: var(--tx_subheader_color);
     text-transform: uppercase;
     border-bottom: solid white 2px;
     margin: 5px 0px;
+    font-size: var(--ft_size_content);
 }
 
 .eventName{
     font-size: 0.8em;
     font: 200;
     padding: 10px;
-    background-color: var(--main_color);
-    color: var(--tx_main_color);
+    color: white;
     text-transform: uppercase;
     text-align: center;
 }
@@ -61,4 +61,12 @@
 .presentator .qrCode{
     width: 100px;
     height: 100px;
+}
+
+.sponsor{
+    width: 150px;
+    margin: auto;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

@@ -1,13 +1,23 @@
 :root {
     --bg__color: rgba(0,0,0,0);
 
-    --main_color: rgba(0,0,0,0.9);
-    --second_color: black;
-
-    --tx_main_color: white;
-    --tx_second_color: white;
 
     --font-select:'Typographica';
+
+    --back_color: white;
+    --header_color: white;
+    --tx_header_color: white;
+    --ft_size_header: 30px;
+
+    --subheader_color: white;
+    --tx_subheader_color: white;
+    --ft_size_subheader: 20px;
+
+    --content_color: white;
+    --tx_content_color: white;
+    --ft_size_content: 20px;
+    --sponsor_color: white;
+    --ft_height_sponsor : 100px;
 
     }
 
@@ -90,14 +100,6 @@
         height: 100px;
         background-position: center;
         background-size: contain;
-        background-repeat: no-repeat;
-    }
-
-    .sponsor{
-        width: 100px;
-        height: 100px;
-        background-position: center;
-        background-size: cover;
         background-repeat: no-repeat;
     }
 

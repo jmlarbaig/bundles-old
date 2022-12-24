@@ -22,8 +22,8 @@ function updateFront(data){
                             '<option value="affiliation">Affiliation</option>' +
                             '<option value="athletes">Athlete(s)</option>' +
                             // '<option value="benchmarks">Benchmarck</option>' +
-                            '<option value="wods">Wod results</option>' +
-                            '<option value="overall">X overall standing after X events</option>' +
+                            // '<option value="wods">Wod results</option>' +
+                            // '<option value="overall">X overall standing after X events</option>' +
                         '</select>' +
                     '</div>' +
                     '<div class="input-checkbox">' +
@@ -42,7 +42,8 @@ function updateFront(data){
             );
             $tab.append($item);
 
-            if (val.workoutRank.length > 0){
+            if (val.workoutRank != undefined){
+                $item.find('#subtype'+val.lane).append('<option value="wods">Wod results</option>')
                 updateFrontWorkout(val.workoutRank, val.lane)
             }
 

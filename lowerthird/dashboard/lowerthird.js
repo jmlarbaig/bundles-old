@@ -24,16 +24,31 @@
         'colorHeader':'',
         'colorSubHeader':'',
         'text':'',
-        'position':'bottom_left'
+        'position':'bottom_left',
+        'sponsor':''
+    }
+
+    const _configWorkout = {
+        'type':'workout',
+        'header':'',
+        'subheader':'',
+        'colorHeader':'',
+        'colorSubHeader':'',
+        'text':'',
+        'position':'bottom_left',
+        'sponsor':''
     }
 
     const sponsorLower = nodecg.Replicant('assets:sponsorsLowerThirds')
     const codePromo = nodecg.Replicant('assets:codePromo', 'connector')
 
-    const LowerThirdConfig = nodecg.Replicant('LowerThirdConfig')
+    const LowerThirdPres = nodecg.Replicant('LowerThirdPres')
+    const LowerThirdWaiting = nodecg.Replicant('LowerThirdWaiting')
+    const LowerThirdFree = nodecg.Replicant('LowerThirdFree')
     const lowerThirdData = nodecg.Replicant('lowerThirdData');
+    const lowerThirdConfig = nodecg.Replicant('lowerThirdConfig');
     
-
+    const WorkoutInfos = nodecg.Replicant('WorkoutInfos', 'connector');
 
     // Initialisation du choix de la vue
     
@@ -44,6 +59,9 @@
         overlay = ch[ch.length-1].replace('.html','')
 
         switch(overlay){
+            case 'workoutLowerthird':
+                document.getElementById('workoutDiv').addEventListener("input", affichageWorkoutLowerthird, false);
+                break;
             case 'freeLowerthird':
                 document.getElementById('freeDiv').addEventListener("input", affichageFreeLowerthird, false);
                 break;
@@ -53,6 +71,59 @@
             case 'waitingLowerthird':
                 document.getElementById('waitingDiv').addEventListener("input", affichageWaitingLowerthird, false);
                 break;
+        }
+
+        $("#workout-select").change(function(){
+            selectedWorkout = $(this).children("option:selected").val();
+            for (let workout of WorkoutInfos.value){
+                if(workout.id == selectedWorkout){
+                    $('#header').val(workout.name)
+                    myContentWorkout.setContent(workout.description);
+                    break;
+                }
+            }
+        });
+
+        if(overlay == 'configuration'){
+            console.log($("input"))
+            $("input").change(saveConfig)
+        }
+
+
+        nodecg.readReplicant('LowerThirdFree', (value)=>{
+            console.log(value)
+            console.log(overlay)
+            if(overlay == 'freeLowerthird'){
+                $("#header").val(value.header);
+                $("#subheader").val(value.subheader);
+                myContent.setContent(value.text);
+                $("#position").val(value.position);
+                $("#sponsor").val(value.sponsor);
+            }
+        })
+    
+        nodecg.readReplicant('LowerThirdPres', (value)=>{
+            if(overlay == 'presentatorLowerthird'){
+                value.forEach((element, i) => {
+                    addItem(element)
+                })
+            }
+        })
+    
+        nodecg.readReplicant('LowerThirdWaiting', (value)=>{
+            if(overlay == 'waitingLowerthird'){
+                $("#localisation").val(value.localisation);
+                $("#nextEvent").val(value.nextEvent);
+                $("#qrcode").val(value.qrcode);
+                $("#position").val(value.position);
+                $("#sponsor").val(value.sponsor);
+            }
+        })
+    })
+
+    WorkoutInfos.on('change', (newValue, oldValue)=>{
+        if(newValue != undefined && JSON.stringify(newValue) != JSON.stringify(oldValue)){
+            createOptionWorkout(newValue)
         }
     })
 
@@ -116,20 +187,15 @@
         dataToSend.localisation = $("#localisation").val();
         dataToSend.nextEvent = $("#nextEvent").val();
         dataToSend.qrcode = $("#qrcode").val();
-        dataToSend.sponsors = $("#sponsors").val();
+        dataToSend.sponsor = $("#sponsor").val();
         dataToSend.position = $("#position").val();
 
         lowerThirdData.value = dataToSend
     }
 
-    nodecg.readReplicant('LowerThirdConfig', (value)=>{
-        value.forEach((element, i) => {
-            addItem(element)
-        })
-    })
-
     function affichageFreeLowerthird(){
 
+        console.log('free')
         if(event.target.id.includes('freeCheckbox')){
             $('#freeCheckbox').attr("disabled", true);
             setTimeout(()=>{
@@ -144,36 +210,76 @@
         dataToSend.subheader = $("#subheader").val();
         dataToSend.text = myContent.getContent();
         dataToSend.position = $("#position").val();
+        dataToSend.sponsor = $("#sponsor").val();
 
         lowerThirdData.value = dataToSend
     }
 
+    function affichageWorkoutLowerthird(){
+
+        console.log('workout')
+
+        if(event.target.id.includes('workoutCheckbox')){
+            $('#workoutCheckbox').attr("disabled", true);
+            setTimeout(()=>{
+                $('#workoutCheckbox').removeAttr("disabled");
+            }, 1000)
+        }
+
+        let dataToSend = Object.assign({}, _configWorkout)
+
+        dataToSend.checked = $("#workoutCheckbox").is(':checked');
+        dataToSend.header = $("#header").val();
+        dataToSend.subheader = $("#subheader").val();
+        dataToSend.text = myContentWorkout.getContent();
+        dataToSend.position = $("#position").val();
+        dataToSend.sponsor = $("#sponsor").val();
+
+        lowerThirdData.value = dataToSend
+    }
+
+
     tinymce.init({
-        selector: 'textarea#textFree',  // change this value according to your HTML
+        selector: 'textarea',  // change this value according to your HTML
         menubar: false,
         plugins: "link image code",
         toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | code',
         init_instance_callback: function (editor) {
             editor.on('input', function (e) {
-                // $('#exemple').html(myContent.getContent())
-                // affichageWaitingLowerthird()
-                let dataToSend = Object.assign({}, _configFree)
-
-                dataToSend.checked = $("#freeCheckbox").is(':checked');
-                dataToSend.header = $("#header").val();
-                dataToSend.subheader = $("#subheader").val();
-                dataToSend.text = myContent.getContent();
-                dataToSend.position = $("#position").val();
-        
-                lowerThirdData.value = dataToSend
+                switch(editor.id){
+                    case 'textFree':
+                        affichageFreeLowerthird();
+                        break;
+                    case 'textWorkout':
+                        affichageWorkoutLowerthird();
+                        break;
+                }
             });
         }
     });
 
 
     var myContent;
+    var myContentWorkout;
 
     tinymce.on('AddEditor', function(e) {
         console.log('Added editor with id: ' + e.editor.id);
         myContent = tinymce.get("textFree");
+        myContentWorkout = tinymce.get("textWorkout");
     });
+
+    let config = {}
+
+    nodecg.readReplicant('lowerThirdConfig',(value)=>{
+        console.log(value)
+        Object.keys(value).forEach((element, index)=>{
+            config[element] = value[element]
+            console.log(value[element])
+            $('#'+element).val(value[element])
+        })
+    })
+
+    function saveConfig(){
+        config[$(this).attr("id")] = $(this).val()
+        lowerThirdConfig.value = config;
+    }

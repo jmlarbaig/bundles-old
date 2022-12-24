@@ -12,7 +12,7 @@ module.exports = (nodecg, ip_ntp) =>{
     let ip_adresse;
     let _ip_ntp;
 
-    var mqttTools = require('./mqttTools')(nodecg)
+    let mqttTools = require('./mqttTools')(nodecg)
 
     nodecg.listenFor('updateNTP', (value, ack)=>{
         console.log(value)
