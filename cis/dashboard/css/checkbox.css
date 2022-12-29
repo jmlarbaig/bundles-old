@@ -2,11 +2,12 @@
 
 .input-checkbox
 {
+  align-items: center;
   width:60px;
   height:20px;
   background: rgb(200,200,200) ;
   position:relative;
-  margin-top:20px;
+  margin:20px auto;
 }
 
 .input-checkbox input{

@@ -3,6 +3,7 @@
 
     const lowerThirdData = nodecg.Replicant('lowerThirdData', 'lowerthird')
 
+
     let listeCurrentHeat;
 
     listCis.on('change', (newValue, oldValue)=>{
@@ -11,6 +12,7 @@
             updateFront(newValue)
         }
     })
+
 
     const TopScore = nodecg.Replicant('TopScore', 'connector')
 
@@ -35,3 +37,22 @@
         }
     })
     
+    const listWarmpUp = nodecg.Replicant('listWarmpUp', 'connector');
+
+    let listOverall = []
+
+    listWarmpUp.on('change', (newValue, oldValue)=>{
+        if(newValue != undefined && JSON.stringify(newValue) != JSON.stringify(oldValue)){
+            let participantsHeat = newValue.warmUp[0].wod.participants
+            let stations = newValue.warmUp[0].heat.stations
+            for(let station of stations){
+                let data = participantsHeat.find( element => element.id === station.participantId)
+                listOverall[station.station] = {}
+                listOverall[station.station].oR = data.rank
+                listOverall[station.station].oP = data.points
+
+                $('#overallPoints_'+station.station).text( 'Overall Points : ' + data.points)
+                $('#overallRank_'+station.station).text('Overall Rank : ' + data.rank)
+            }
+        }
+    })

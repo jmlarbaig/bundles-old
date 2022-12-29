@@ -59,12 +59,18 @@
 
     lowerThirdConfig.on('change', (newValue,oldValue)=>{
         Object.keys(newValue).forEach((color, index) => {
-            console.log(color.includes('ft'))
-            console.log(newValue[color])
             if(color.includes('ft')){
                 root.style.setProperty("--"+ color, newValue[color] + 'px');
             }else{
                 root.style.setProperty("--"+ color, newValue[color]);
             }
         })
+    })
+
+    Colors.on('change', (newValue, oldValue) => {
+        
+        Object.keys(newValue).forEach((color) => {
+            root.style.setProperty("--"+ color, newValue[color] );
+        })
+        
     })

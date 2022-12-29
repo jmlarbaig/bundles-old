@@ -38,7 +38,7 @@
     position: absolute;
     top:0px;
     left:150px;
-    width: 1770px;
+    width: 1780px;
     height: 100px;
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(69,69,102,1) 18%, rgba(12,12,56,1) 35%, rgba(30,53,80,1) 66%, rgba(9,44,51,1) 100%);
@@ -48,7 +48,7 @@
 
 .header .box_heat .heat{
     display: inline-block;
-    width: 1770px;
+    width: 1780px;
     height: 100px;
 }
 

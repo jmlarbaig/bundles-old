@@ -60,6 +60,7 @@
     $('document').ready(()=>{
         let ch = document.location.pathname.split('/')
         overlay = ch[ch.length-1].replace('.html','')
+        console.log('ready')
     })
 
     let newHeat = false;
@@ -149,7 +150,7 @@
                 $('#oP_'+station.station).text(data.points)
                 $('#oR_'+station.station).text(data.rank)
             }
-            console.log('warmup : ', newValue)
+            // console.log('warmup : ', newValue)
         }
     })
 
@@ -181,7 +182,7 @@
         catch(e){
             console.log(e)
         }
-    }); 
+    });
 
     
     mainSponsors.on('change', (newValue)=> {
@@ -219,14 +220,14 @@
     setupLeaderboard.on('change', (newValue, oldValue)=>{
         Object.keys(newValue).forEach((params, index)=>{
             let authorize = newValue[params]
-            if(overlay ==  'leaderboard' || overlay == 'progression'){
-                if(params == 'lane' || params == 'flag' || params == 'affiliate' ){
+            if(overlay ==  'leaderboard' || overlay == 'progression' || overlay=='commentator' || overlay=='sk' ){
+                if(params != 'flag' && params != 'lane'){
                     authorize = true
                 }
             }
-            if(overlay=='commentator'){
-                authorize = true;
-            }
+            // if(overlay=='commentator' || overlay=='sk' ){
+            //     authorize = true;
+            // }
             switch(authorize){
                 case true:
                     $('.'+params).fadeIn(1000)
@@ -237,21 +238,7 @@
             }
         })
 
-        if(overlay == 'overlay_top'){
-            // setTimeout(()=>{
-            //     let widthCalc =  ($('.athlete').width() + 10) * 5
 
-            //     if( widthCalc > 1680){
-            //         widthCalc =  ($('.athlete').width() + 10) * 4
-            //         if(widthCalc > 1680){
-            //             widthCalc =  ($('.athlete').width() + 10) * 3
-            //         }
-            //     }
-        
-            //         $('.leaderboard').css('width', 'calc(' + widthCalc + 'px)')
-
-            // }, 1500)
-        }
         if(overlay == 'overlay_side' || overlay == 'overlay_top'){
             if(newValue.lowerthird){
                 $(function(){
@@ -261,10 +248,13 @@
                         let $item = $('<iframe id="lower" src="../../lowerthird/graphics/lowerthirds.html" frameBorder="0"></iframe>')
                         $item.hide()
                         $("#frame").append($item)
+                        setTimeout(()=>{
+                            $item.show()
+                        }, 100)
                     }
                 });
             }else{
-                $("#frame").find('#lower').slideUp()
+                $("#frame").find('#lower').hide()
             }
             if(newValue.attributionLane){
                 $(function(){

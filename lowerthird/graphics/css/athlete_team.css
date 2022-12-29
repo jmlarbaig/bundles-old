@@ -3,11 +3,10 @@
 }
 
 .athlete{
-    position: relative;
     background-color: var(--back_color);
     /* width: fit-content; */
     min-width: 650px;
-    padding: 0px 20px;
+    /* padding: 0px 20px; */
     margin: 10px 0px;
     display: flex;
     flex-direction: row;
@@ -20,15 +19,13 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    border-left: solid 2px white;
+    /* border-left: solid 2px white; */
 }
 
 .firstAth{
     font-size: 1.6em;
     font: 800;
-    padding: 5px;
-    margin-top: 10px;
-    margin-left: 20px;
+    padding: 10px 20px;
     background: var(--header_color) ;
     color: var(--tx_header_color);
     text-transform: uppercase;
@@ -37,13 +34,13 @@
 }
 
 .subtype{
-    margin-top:5px;
     padding: 10px 20px;
     background: linear-gradient(90deg, var(--subheader_color) 0%, var(--subheader_color) 50%, var(--subheader_color) 100%);
     color: var(--tx_subheader_color);
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
     font-size: var(--ft_size_subheader);
+    border-radius: 10px 0px 10px 0px;
 }
 
 .affiliation{

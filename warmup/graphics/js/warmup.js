@@ -1,6 +1,25 @@
 function updateTimer(){
     var today = new Date();
-    $("#time").text(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds())
+
+    let hour = today.getHours()
+    let min =  today.getMinutes()
+    let sec = today.getSeconds()
+
+    if(hour < 9){
+        hour = "0"+hour
+    }
+    if(min < 9){
+        min = "0"+min
+    }
+    if(sec < 9){
+        sec = "0"+sec
+    }
+
+    let ti = hour + ":" + min + ":" + sec;
+
+    $("#time").text(ti)
+
+    return ti;
 }
 
 function resetHeader(eventName){
@@ -8,8 +27,7 @@ function resetHeader(eventName){
     var $tab = $("#header1")
     $tab.find(".header_").remove();
 
-    var today = new Date();
-    today = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
+    let today = updateTimer()
 
     var $item = $(
         '<div class="header_">' +

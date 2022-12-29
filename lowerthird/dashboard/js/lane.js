@@ -35,22 +35,3 @@ function resetLane(data){
         console.log(e)
     }
 }
-
-async function affichageLane() {
-    laneInfos.value = currentHeat.participants.find(elt => elt.id == 
-        participantsCurrentHeats.stations.find(element => element.station == event.target.id).participantId);
-
-        // console.log(participantsCurrentHeats.stations.find(element => element.station == event.target.id))
-
-    laneInfos.value.avatarPath = (participantsCurrentHeats.stations.find(element => element.station == event.target.id).avatarPath);
-    laneInfos.value.aff = participantsCurrentHeats.stations.find(element => element.station == event.target.id).affiliate;
-    
-    // console.log("lane infos = ", laneInfos.value)
-
-    laneShow.value = true;
-    $(".button_lane").attr('disabled', true);
-    setTimeout(function(){ 
-        $(".button_lane").attr('disabled', false);
-        laneShow.value = false; 
-    }, 4000);
-}

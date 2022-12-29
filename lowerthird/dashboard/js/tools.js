@@ -121,9 +121,22 @@ function createOptionWorkout(data){
     $("#workout-select option").remove()
 
     $("#workout-select").append('<option value=0>-- Please Choose Workout --</option>')
+    
+    let wod = []
 
     for(let workout of data){
         $("#workout-select").append('<option value='+ workout.id +'>' + workout.name + '</option>');
+        wod[workout.id] = {}
+        wod[workout.id].title = workout.name
+        wod[workout.id].description = workout.description
+
+        if(lowerThirdWodConfig.value != undefined && lowerThirdWodConfig.value[workout.id] == null){
+            lowerThirdWodConfig.value[workout.id] = wod[workout.id]
+        }
+    }
+
+    if(lowerThirdWodConfig.value == undefined){
+        lowerThirdWodConfig.value = wod
     }
 
 }

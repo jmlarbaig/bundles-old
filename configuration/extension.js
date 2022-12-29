@@ -3,7 +3,6 @@
 const colorFile = __dirname + '/colorDefaut.json'
 
 const fs = require('fs');
-const path = require('path');
 
 module.exports = function (nodecg) {
 

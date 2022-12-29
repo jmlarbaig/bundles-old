@@ -96,36 +96,16 @@ setupLeaderboard.on('change', (newValue, oldValue)=>{
     })
 })
 
-function affichage_leaderboardTV(){
-    UrlChange.value  = "http://"+ipAddress.value+":9090/bundles/leaderboard-tv/graphics/index.html"
-}
+$('document').ready(()=>{
+    document.getElementById('attributionLane').addEventListener("input", uncheckedParameters, false);
+    document.getElementById('heatResults').addEventListener("input", uncheckedParameters, false);
+    document.getElementById('overallStandingDivwod').addEventListener("input", uncheckedParameters, false);
+})
 
-function affichage_ProgressView(){
-    UrlChange.value  = "http://"+ipAddress.value+":9090/bundles/progress-view/graphics/index.html"
+function uncheckedParameters(){
+    if($(this).is(':checked')){
+        for(let item of $('#checkboxLeaderboard').find('input[type=checkbox]')){
+            $(item).prop('checked', false);
+        }
+    }
 }
-
-function affichage_VideoView(){
-    UrlChange.value  = "http://"+ipAddress.value+":9090/bundles/video/graphics/index.html"
-}
-
-function affichage_TimerView(){
-    UrlChange.value  = "http://"+ipAddress.value+":9090/bundles/timer2/graphics/index.html"
-}
-
-function affichage_PersonnalUrl(){
-    let url = document.getElementById("text_url").value;
-    UrlChange.value  = url
-}
-
-function affichage_AttributeLane(){
-    UrlChange_internal.value  = "http://"+ipAddress.value+":9090/bundles/attribute-lane/graphics/transition.html"
-}
-
-function affichage_Leaderoard(){
-    UrlChange_internal.value  = "http://"+ipAddress.value+":9090/bundles/leaderboard/graphics/index.html"
-}
-
-function affichage_AtributeResult(){
-    // UrlChange.value  = "http://"+ipAddress.value+":9090/bundles/video/graphics/index.html"
-}
-

@@ -661,3 +661,15 @@ p+ol,p+ul {
 .pdf-footer__dscr.text-right {
     margin-top: 20px
 }
+
+input[type=text]{
+    margin: 10px auto;
+    height: 40px;
+    width: 100%;
+}
+
+select{
+    margin: 10px auto;
+    height: 40px;
+    width: 100%;
+}

@@ -87,7 +87,7 @@ function createModal (data){
         $modal.find('#athletes').append($athlete)
         $athlete.find('#'+accountId).css('background-image','url('+ avatarPath +')')
 
-        if(benchmarks.length > 0){
+        if( benchmarks != undefined && benchmarks.length > 0){
             Object.values(benchmarks).forEach((benchmarks, index)=>{
                 let $benchmarks = $(
                     '<div class="benchmark">' +
@@ -96,7 +96,7 @@ function createModal (data){
                 $modal.find('#benchmarks_'+accountId).append($benchmarks)
             })
         }
-        if(latestEvents.length > 0){
+        if(latestEvents != undefined && latestEvents.length > 0){
             Object.values(latestEvents).forEach((event, index)=>{
                 let $event = $(
                     '<div class="events">' +
@@ -105,7 +105,7 @@ function createModal (data){
                 $modal.find('#events_'+accountId).append($event)
             })
         }
-        if(sponsors.length > 0){
+        if( sponsors != undefined && sponsors.length > 0){
             Object.values(sponsors).forEach((sponsor, index)=>{
                 let $sponsors = $(
                         '<div class="sponsors">' +

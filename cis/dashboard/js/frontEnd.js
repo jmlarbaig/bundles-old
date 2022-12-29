@@ -6,36 +6,43 @@ function updateFront(data){
     
     Object.values(data).forEach(( val, index ) => {
         if(val != null ){
+            let O_points = val.overallPoints
+            let O_rank = val.overallStanding
+
+            if (listOverall[data.lane] != undefined){
+                O_points = listOverall[data.lane].oP
+                O_rank = listOverall[data.lane].oR
+            }
+
             let $item = $( 
-                '<div class="cueCardParents" >' + 
+                '<div class="cueCardParents" id="card_'+ val.lane +'" >' + 
                     '<h3 class="lane name">#'+ val.lane +" - "+ val.displayName +'</h3>' + 
                     '<div> '+
-                        '<span class="lane name" id="overallRank_'+val.lane+'">Overall Rank : '+ val.overallStanding +' </span> '+
-                        '<span class="lane name" id="overallPoints_'+val.lane+'"> Overall Points : '+ val.overallPoints +'</span>' + 
+                        '<span class="lane name" id="overallRank_'+val.lane+'">Overall Rank : '+ O_rank +' </span> '+
+                        // '<span class="lane name" id="overallPoints_'+val.lane+'"> Overall Points : '+ O_points +'</span>' + 
                     '</div>' +
                     '<div> '+
                         '<h4> Lowerthird selection </h4>' +
                     '</div>' +
-                    '<div> '+
+                    '<div id="divSubType'+val.lane+'"> '+
                         '<label for="position">Choose your lowerthirds</label>' +
                         '<select id="subtype'+val.lane+'" class="subtype">' +
+                            '<option value="affiliation">-- Please choose option --</option>' +
                             '<option value="affiliation">Affiliation</option>' +
                             '<option value="athletes">Athlete(s)</option>' +
-                            // '<option value="benchmarks">Benchmarck</option>' +
-                            // '<option value="wods">Wod results</option>' +
-                            // '<option value="overall">X overall standing after X events</option>' +
+                            '<option value="overall">X overall standing after X events</option>' +
+                            '<option value="free">Manual Entry</option>' +
                         '</select>' +
+                    '</div>' +
+                    '<div>' +
+                        '<input type="text" id="textLower_' + val.lane + '" class="textLower"/>' + 
                     '</div>' +
                     '<div class="input-checkbox">' +
                         '<input type="checkbox" id="ath_' + val.lane + '" onclick="askAffichage()"/>' + 
                         '<span class="toogle"></span>' +
                     '</div>' +
-                    // '<button class="button_lane" style="width:100%" onclick="affichageLane()" id='+val.lane+'>' + "Afficher DATA TEAM" + '</button>' +
                     '<br>'+'<br>'+
-                    // '<button class="button_lane" style="width:100%" onclick="affichageAthDetails()" id='+val.lane+'>' + "Afficher Data team + Athlètes" + '</button>' +
                     '<div class="cards-list workout_list" id="workouts_'+ val.lane+'"/>' +
-
-                    // '<button class="button_lane" style="width:100%" onclick="affichageWod()" id='+val.lane+'>' + "Afficher DATA WOD" + '</button>' +
                     '<br>'+'<br>'+
                     '<div class="cards-list" id="cards_'+val.lane+'"/>' +
                 '</div>'
@@ -76,8 +83,6 @@ function updateFront(data){
                                 '<div class="card__info__weight" id="weight">' + weight +
                                 '</div>' +
                             '</div>' +
-
-                            '<button class="button_lane" style="width:100%" onclick="affichageAthDetails()" id=Lower_ath_'+val.lane+'_aht_'+ key +'>' + "Afficher Lower third détails" + '</button>' +
                         '</div>' +
                     '</div>'
                 );
@@ -86,10 +91,99 @@ function updateFront(data){
 
             })
 
+
+            $('#subtype'+val.lane).on('change', function(){
+                let lane = parseInt(this.id.replace('subtype', ''))
+                let option = $(this).val()
+                removeWorkoutsOptions(lane)
+                switch(option){
+                    case'athletes' :
+                        $('#textLower_' + lane).val('')
+                    break;
+                    case'overall' :
+                        createOverall(data[lane], lane)
+                    break;
+                    case'affiliation' :
+                        createAffiliation(data[lane], lane)
+                    break;
+                    case'wods' :
+                        createWorkoutsOptions(data[lane], lane)
+                    break;
+                    case'free' :
+                        $('#textLower_' + lane).val('')
+                    break;
+                }
+            })
+
+            $('#card_'+val.lane).on('change', function(){
+                askAffichage()
+            })
+
+
+            $('#textLower_'+val.lane).on('input', function(){
+                askAffichage()
+            })
+
         }
     })
 }
 
+function createOverall(data, lane){
+
+    let text = 'NO OVERALL'
+    console.log(data)
+
+    if (data != undefined){
+        let WorkoutNumber = 0
+        if(data.workoutRank  != null && data.workoutRank  != undefined ){
+            WorkoutNumber = data.workoutRank.length
+        }
+        text = data.overallStanding + '° Overall after ' + WorkoutNumber + ' event';
+    }
+    
+    $('#textLower_' + lane).val(text)
+}
+
+function createAffiliation(data, lane){
+
+    let text = 'INDEPENDANT'
+
+    if (data != undefined){
+        text = 'FROM ' + data.affiliate
+    }
+    
+    $('#textLower_' + lane).val(text)
+}
+
+function createWorkoutsOptions(data, lane){
+
+    let $select = $('<select id="subwod'+lane+'" class="subwod"><option value="0">-- Please choose workout</option></select>')
+    $('#divSubType'+lane).after($select)
+
+    if (data != undefined){        
+        if(data.workoutRank  != null && data.workoutRank  != undefined ){
+            data.workoutRank.forEach((wod, index)=>{
+                $select.append('<option value="wod_'+ index +'">'+ wod.name.toUpperCase() +'</option>')
+            })
+        }
+    }
+
+    $('#subwod'+lane).on('change', function(){
+        let text = 'WORKOUT RESULT'
+        let lane = parseInt(this.id.replace('subwod', ''))
+        let option = parseInt($(this).val().replace('wod_', ''))
+
+        let dataWorkout = data.workoutRank[option]
+
+        text = dataWorkout.rank + '° RANK AT ' + dataWorkout.name + ' ('+ dataWorkout.result +' PTS) '
+        
+        $('#textLower_' + lane).val(text)
+    })
+}
+
+function removeWorkoutsOptions(lane){
+    $('#card_'+lane).find('.subwod').remove()
+}
 
 function updateFrontWorkout(workouts, lane){
 

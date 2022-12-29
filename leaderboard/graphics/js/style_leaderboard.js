@@ -140,9 +140,9 @@ function leaderboardTV(data){
     $item.find(".score").hide();
     $item.find(".popup").hide();
     !setupLeaderboard.value.flag ? $item.find(".flag").hide() : "" ;
-    !setupLeaderboard.value.lane ? $item.find(".lane").hide() : "" ;
+    // !setupLeaderboard.value.lane ? $item.find(".lane").hide() : "" ;
     !setupLeaderboard.value.lane ? $item.find(".rank").text(data.lane) : "" ;
-    !setupLeaderboard.value.affiliate ? $item.find(".affiliate").hide() : "" ;
+    // !setupLeaderboard.value.affiliate ? $item.find(".affiliate").hide() : "" ;
     // $item.hide();
 
     return $item
@@ -183,9 +183,9 @@ function progressView(data){
     $item.find(".score").hide();
     $item.find(".popup").hide();
     !setupLeaderboard.value.flag ? $item.find(".flag").hide() : "" ;
-    !setupLeaderboard.value.lane ? $item.find(".lane").hide() : "" ;
+    // !setupLeaderboard.value.lane ? $item.find(".lane").hide() : "" ;
     !setupLeaderboard.value.lane ? $item.find(".rank").text(data.lane) : "" ;
-    !setupLeaderboard.value.affiliate ? $item.find(".affiliate").hide() : "" ;
+    // !setupLeaderboard.value.affiliate ? $item.find(".affiliate").hide() : "" ;
     // !setupLeaderboard.value.lane ? $item.find(".lane").hide() : "" ;
     // $item.hide();
 
@@ -204,19 +204,18 @@ function headerCommentator(divisions, indexDivision, repTarget){
                 '<div id="mvt" class="text-nowrap text-truncate text-left"></div>' +
                 '<div class="repTar text-nowrap text-truncate repTarget'+[indexDivision]+'">' + reps + '</div>' +
             '</div>'+
-            '<table>' +
+            '<table id="table'+ indexDivision +'" class="stripe row-border order-column" style="width:100%">' +
                 '<thead>'+
                     '<tr>'+
-                        '<th fixed-side scope="col" class="lane box">LANE</th>' + 
-                        '<th scope="col" class="flag box">FLAG</th>' +
-                        '<th scope="col" class="box text-nowrap text-truncate text-left name">NAME</th>' + 
-                        '<th scope="col" class="box Orank">O. Points</th>' + 
-                        '<th scope="col" class="box Orank">O. Rank</th>' +
-                        '<th scope="col" class="box rank">Rank</th>' + 
-                        '<th scope="col" class="box stats statsHeader" id="statsHeader_'+indexDivision+'">' + '</th>'+
-                        '<th scope="col" class="box rounds text-nowrap text-truncate">Rounds</th>' + 
-                        '<th scope="col" class="box score align-items-xl-center">Scores</th>' +
-                        '<th scope="col" class="box popup text-nowrap text-truncate">Mouvement</th>' + 
+                        '<th scope="col" class="truncate lane box">LANE</th>' + 
+                        '<th scope="col" class="truncate flag box">FLAG</th>' +
+                        '<th scope="col" class="truncate box text-nowrap text-truncate text-left name">NAME</th>' + 
+                        '<th scope="col" class="truncate box Opoint">O. Points</th>' + 
+                        '<th scope="col" class="truncate box Orank">O. Rank</th>' +
+                        '<th scope="col" class="truncate box rank">Rank</th>' + 
+                        '<th scope="col" class="truncate box rounds text-nowrap text-truncate">Rounds</th>' + 
+                        '<th scope="col" class="truncate box score align-items-xl-center">Scores</th>' +
+                        '<th scope="col" class="truncate box popup text-nowrap text-truncate">Mouvement</th>' + 
                     '</tr>' +
                 '</thead>'+
                 '<tbody id="athletes" class="athletes">' +
@@ -232,26 +231,30 @@ function headerCommentator(divisions, indexDivision, repTarget){
 
 function createStatsHeader(iDiv){
 
-    var $stat_header = $('#statsHeader_'+iDiv);
-    $stat_header.find("tr").remove();
-
-    $stat_header.append('<tr id="'+ iDiv +'"></tr>')
+    let $stat_header = $('#table'+ iDiv);
 
     if(workouts.length >0){
         workouts[iDiv].mvt_id.forEach((id, index)=> {
-            
-            var $item_header = $(
-                '<td class="stats_name text-nowrap text-truncate">'+ (workouts[iDiv].mvt_reps[index] != 0 ? workouts[iDiv].mvt_reps[index] : '') + ' ' +workouts[iDiv].mvt_names[index]+' </td>'
-                // '<div class="mvt_id'+id+' "></div>'
-            )
-            $stat_header.find('#'+iDiv).append($item_header);
+            if(index == 0){
+                let $item_header = $(
+                    '<td class="stats_name text-nowrap text-truncate" id="header_stats_'+ index +'">'+ (workouts[iDiv].mvt_reps[index] != 0 ? workouts[iDiv].mvt_reps[index] : '') + ' ' +workouts[iDiv].mvt_names[index]+' </td>'
+                    // '<div class="mvt_id'+id+' "></div>'
+                )
+                $stat_header.find('.rank').after($item_header)
+            }else{
+                let $item_header = $(
+                    '<td class="stats_name text-nowrap text-truncate" id="header_stats_'+ index +'">'+ (workouts[iDiv].mvt_reps[index] != 0 ? workouts[iDiv].mvt_reps[index] : '') + ' ' +workouts[iDiv].mvt_names[index]+' </td>'
+                    // '<div class="mvt_id'+id+' "></div>'
+                )
+                $stat_header.find('#header_stats_'+(index-1)).after($item_header)
+            }
         })
     }
     else{
-        var $item_header = $(
-            '<div class="stats_name text-nowrap text-truncate"></div>'
+        let $item_header = $(
+            '<td class="stats_name text-nowrap text-truncate"></td>'
         )
-        $stat_header.append($item_header);
+        $stat_header.find('.rank').after($item_header)
     }
 }
 
@@ -259,7 +262,7 @@ function commentator(data){
 
     let name = treatDisplayName(data.displayName);
     let flag = data.countryCode != "LOGO" ? ("https://flagcdn.com/"+ data.countryCode.toLowerCase()+'.svg') : (logoEvent.value[0].url) ;
-    var affiliate_team =  data.affiliate != undefined ?  data.affiliate : '-'
+    let affiliate_team =  data.affiliate != undefined ?  data.affiliate : '-'
 
     let O_points = data.overallPoints
     let O_rank = data.rank
@@ -271,21 +274,15 @@ function commentator(data){
 
     let $item = $( 
         '<tr class="athlete" id="aht'+data.lane+'">' + 
-            '<td class="lane">'+ data.lane + '</td>' + 
+            '<td class="truncate lane">'+ data.lane + '</td>' + 
             '<td class="flag">' + '<div class="box_flag"> </div> ' + '</td>' +
-            '<td class="text-nowrap text-truncate text-left name" onclick="affichageStats()" id="showStats_'+ data.lane +'">' + name + '</td>' + 
-            '<td class="Orank" id="oP_'+ data.lane +'">' + O_points + '</td>' + 
-            '<td class="Orank" id="oR_'+ data.lane +'">' + O_rank + '</td>' +
-            '<td class="rank">' + data.CurrentRank  + '</td>' + 
-            '<td class="stats" id="athlete_stats_'+ data.lane+'">' + '</td>'+
-            // '<td class="circle_progress">' +
-            //     '<svg>' +
-            //         '<circle cx="10" cy="50%" r="5px" fill="#aeaeae" class="circle" id="' + athletes_tdison[key][i].lane+'"/>' +
-            //     '</svg>' +
-            // '</td>' +
-            '<td class="rounds text-nowrap text-truncate"></td>' + 
-            '<td class="score align-items-xl-center">' + data.score_abs + '</td>' +
-            '<td class="popup text-nowrap text-truncate"></td>' + 
+            '<td class="truncate name" onclick="affichageStats()" id="showStats_'+ data.lane +'">' + name + '</td>' + 
+            '<td class="truncate Opoint" id="oP_'+ data.lane +'">' + O_points + '</td>' + 
+            '<td class="truncate Orank" id="oR_'+ data.lane +'">' + O_rank + '</td>' +
+            '<td class="truncate rank">' + parseInt(data.CurrentRank)  + '</td>' + 
+            '<td class="truncate rounds text-nowrap text-truncate"></td>' + 
+            '<td class="truncate score align-items-xl-center">' + data.score_abs + '</td>' +
+            '<td class="truncate popup text-nowrap text-truncate"></td>' + 
         '</tr>'
     );
 
@@ -298,23 +295,30 @@ function commentator(data){
 
 function createStats( data, iDiv){
 
-    let $stats = $('#athlete_stats_'+data.lane);
-    $stats.find("td").remove();
+    let $stats = $('#aht'+data.lane);
 
     let $stat;
+    // let $substats = $('<td>-</td>');
 
     if( workouts.length > 0){
         workouts[iDiv].mvt_id.forEach((id, index)=> {
-            $stat = $('');
-            $stat = $(
-                '<td class="mvt_id mvt_id_'+ index +'" id="mvt_id_'+ id +'_'+ data.lane +'">-</td>'
-            )
-            $stats.append($stat)
+            if(index == 0){
+                $stat = $(
+                    '<td class="mvt_id mvt_id_'+ index +'" id="mvt_id_'+ id +'_'+ data.lane +'">-</td>'
+                )
+                $stats.find('.rank').after($stat)
+            }else{
+                $stat = $(
+                    '<td class="mvt_id mvt_id_'+ index +'" id="mvt_id_'+ id +'_'+ data.lane +'">-</td>'
+                )
+                $stats.find('#mvt_id_'+ (id-1) +'_'+ data.lane).after($stat)
+            }
         })
     }else{
         $stat = $('');
-        $stats.append($stat)
+        $stats.find('.rank').after($stat)
     }
+
 
 }
 

@@ -47,9 +47,9 @@
     const LowerThirdFree = nodecg.Replicant('LowerThirdFree')
     const lowerThirdData = nodecg.Replicant('lowerThirdData');
     const lowerThirdConfig = nodecg.Replicant('lowerThirdConfig');
+    const lowerThirdWodConfig = nodecg.Replicant('lowerThirdWodConfig', { defaultValue: []});
     
     const WorkoutInfos = nodecg.Replicant('WorkoutInfos', 'connector');
-
     // Initialisation du choix de la vue
     
     let overlay=''
@@ -75,11 +75,18 @@
 
         $("#workout-select").change(function(){
             selectedWorkout = $(this).children("option:selected").val();
-            for (let workout of WorkoutInfos.value){
-                if(workout.id == selectedWorkout){
-                    $('#header').val(workout.name)
-                    myContentWorkout.setContent(workout.description);
-                    break;
+            // console.log(selectedWorkout)
+            // console.log(lowerThirdWodConfig.value[selectedWorkout])
+            if(lowerThirdWodConfig.value[selectedWorkout] != null){
+                $('#header').val(lowerThirdWodConfig.value[selectedWorkout].title)
+                myContentWorkout.setContent(lowerThirdWodConfig.value[selectedWorkout].description);
+            }else{
+                for (let workout of WorkoutInfos.value){
+                    if(workout.id == selectedWorkout){
+                        $('#header').val(workout.name)
+                        myContentWorkout.setContent(workout.description);
+                        break;
+                    }
                 }
             }
         });
@@ -217,8 +224,6 @@
 
     function affichageWorkoutLowerthird(){
 
-        console.log('workout')
-
         if(event.target.id.includes('workoutCheckbox')){
             $('#workoutCheckbox').attr("disabled", true);
             setTimeout(()=>{
@@ -236,6 +241,8 @@
         dataToSend.sponsor = $("#sponsor").val();
 
         lowerThirdData.value = dataToSend
+
+
     }
 
 
@@ -246,6 +253,16 @@
         toolbar: 'undo redo | styleselect | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | link image | code',
         init_instance_callback: function (editor) {
             editor.on('input', function (e) {
+                switch(editor.id){
+                    case 'textFree':
+                        affichageFreeLowerthird();
+                        break;
+                    case 'textWorkout':
+                        affichageWorkoutLowerthird();
+                        break;
+                }
+            });
+            editor.on('Change', function (e) {
                 switch(editor.id){
                     case 'textFree':
                         affichageFreeLowerthird();
@@ -272,14 +289,68 @@
 
     nodecg.readReplicant('lowerThirdConfig',(value)=>{
         console.log(value)
-        Object.keys(value).forEach((element, index)=>{
-            config[element] = value[element]
-            console.log(value[element])
-            $('#'+element).val(value[element])
-        })
+        if(overlay == 'configuration'){
+            Object.keys(value).forEach((element, index)=>{
+                config[element] = value[element]
+                console.log(value[element])
+                $('#'+element).val(value[element])
+            })
+        }
     })
 
+    // function saveConfig(){
+    //     config[$(this).attr("id")] = $(this).val()
+    //     lowerThirdConfig.value = config;
+    // }
+
     function saveConfig(){
-        config[$(this).attr("id")] = $(this).val()
-        lowerThirdConfig.value = config;
+
+        let data ={};
+        const elmColors = document.querySelectorAll('input[type=color]');
+        elmColors.forEach( el => {
+            data[el.id] = el.value
+        });
+    
+        const elmNumber = document.querySelectorAll('input[type=number]');
+        elmNumber.forEach( el => {
+            data[el.id] = (el.value || 0)
+        });
+    
+        // const elmCheck = document.querySelectorAll('input[type=checkbox]');
+        // elmCheck.forEach( el => {
+        //     data[el.id] = el.checked
+        // });
+    
+        // const elmSelect = document.querySelectorAll('select');
+        // elmSelect.forEach( el => {
+        //     data[el.id] = el.value
+        // });
+        
+        console.log(data)
+        lowerThirdConfig.value = data;
+
+        nodecg.sendMessage('configOverwrite', data);
+    }
+
+    function saveWorkoutConfig(){
+
+        let id = $('#workout-select').children("option:selected").val();
+
+        if(lowerThirdWodConfig.value[id] != null){
+            lowerThirdWodConfig.value[id].title = $("#header").val();
+            lowerThirdWodConfig.value[id].description = myContentWorkout.getContent();
+        }
+    }
+
+    function resetWorkoutConfig(){
+
+        let selectedWorkout = $('#workout-select').children("option:selected").val();
+
+        for (let workout of WorkoutInfos.value){
+            if(workout.id == selectedWorkout){
+                $('#header').val(workout.name)
+                myContentWorkout.setContent(workout.description);
+                break;
+            }
+        }
     }

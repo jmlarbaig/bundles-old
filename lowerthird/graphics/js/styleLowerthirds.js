@@ -4,24 +4,36 @@ function createPresentator(data){
     if (data.checked){
 
         if($root.find('#presentator_'+data.id).length>0){
-            $('#presentator_'+data.id).find('#name').text(data.name)
-            $('#presentator_'+data.id).find('#function').text(data.function)
+
+            let $presentator = $('#presentator_'+data.id)
+
+            $presentator.find('#name').text(data.name)
+            $presentator.find('#function').text(data.function)
             if( data.sponsor != ''){
-                if($('#presentator_'+data.id).find("#sponsorPresentator_"+ data.id).length > 0){
-                    $('#presentator_'+data.id).find("#sponsorPresentator_"+ data.id).css("background-image", "url(" + data.sponsor + ")")
+                if($presentator.find("#sponsorPresentator_"+ data.id).length > 0){
+                    $presentator.find("#sponsorPresentator_"+ data.id).css("background-image", "url(" + data.sponsor + ")")
                 }else{
                     let $item = $(
                         '<div id="sponsorPresentator_'+ data.id +'" class="sponsor">'+
                         '</div>' 
                     )
-                    $('#presentator_'+data.id).append($item)
-                    $('#presentator_'+data.id).find("#sponsorPresentator_"+ data.id).css("background-image", "url(" + data.sponsor + ")")
+                    $presentator.find(".details").after($item)
+                    $presentator.find("#sponsorPresentator_"+ data.id).css("background-image", "url(" + data.sponsor + ")")
                 }
             }else{
-                $('#presentator_'+data.id).find("#sponsorPresentator_"+ data.id).remove()
+                $presentator.find("#sponsorPresentator_"+ data.id).remove()
             }
+
+            if( data.qrcode != ''){
+                $presentator.find("#qrCode"+ data.id).empty();
+                $presentator.find("#qrCode"+ data.id).show()
+                generateQrCode(data.qrcode, $presentator.find("#qrCode"+ data.id), 100, 100)
+            }else{
+                $presentator.find("#qrCode"+ data.id).hide()
+            }
+
             changeClass('.headPresentator', data.position)
-            $('#presentator_'+data.id).slideDown(1000)
+            $presentator.slideDown(1000)
         }else{
 
             let $item = $(
@@ -61,9 +73,6 @@ function createPresentator(data){
 
             if( data.qrcode != ''){
                 generateQrCode(data.qrcode, $item.find("#qrCode"+data.id), 100, 100)
-                // $("#qrCode"+data.id).css("background-image", "url(" + data.sponsor + ")")
-            }else{
-                $("#qrCode"+data.id).remove()
             }
 
             changeClass('.headPresentator', data.position)
@@ -87,7 +96,7 @@ function createWaiting(data){
         if($root.find('#waiting').length>0){
             $('#waiting').find('#nextEvent').text(data.nextEvent)
             $('#waiting').find('#localisation').text(data.localisation)
-            $('#waiting').find('#qrcode').html(data.qrcode)
+
             if( data.sponsor != ''){
                 if($('#waiting').find("#sponsorWaiting").length > 0){
                     $('#waiting').find("#sponsorWaiting").css("background-image", "url(" + data.sponsor + ")")
@@ -96,12 +105,21 @@ function createWaiting(data){
                         '<div id="sponsorWaiting" class="sponsor">' +
                         '</div>'
                     )
-                    $('#waiting').append($item)
+                    $('#waiting').find(".detailsWaiting").after($item)
                     $("#sponsorWaiting").css("background-image", "url(" + data.sponsor + ")")
                 }
             }else{
                 $('#waiting').find("#sponsorWaiting").remove()
             }
+
+            if( data.qrcode != ''){
+                $('#waiting').find("#qrCode").empty();
+                $('#waiting').find("#qrCode").show()
+                generateQrCode(data.qrcode, $('#waiting').find("#qrCode"), 100, 100)
+            }else{
+                $('#waiting').find("#qrCode").hide()
+            }
+
             changeClass('#waiting', data.position)
             $('#waiting').slideDown(1000)
         }else{
@@ -134,7 +152,6 @@ function createWaiting(data){
             $(".logo_event").css("background-image", "url(" + eventLogo + ")")
             
             if( data.sponsor != ''){
-                console.log(data.sponsor)
                 $("#sponsorWaiting").css("background-image", "url(" + data.sponsor + ")")
             }else{
                 $("#sponsorWaiting").remove()
@@ -142,9 +159,6 @@ function createWaiting(data){
 
             if( data.qrcode != ''){
                 generateQrCode(data.qrcode, $item.find("#qrCode"), 100, 100)
-                // $("#qrCode"+data.id).css("background-image", "url(" + data.sponsor + ")")
-            }else{
-                $("#qrCode").remove()
             }
 
             changeClass('#waiting', data.position)
@@ -307,23 +321,27 @@ function createWorkout(data){
 
 function createAthleteLowerthird(infos){
 
-    const { lane, data, checked, subtype, position } = infos
+    const { lane, displayName, text, data, checked, subtype, position } = infos
 
     if (checked){
 
         if($root.find('#athlete_'+lane).length>0){
-            // $('#athlete_'+data.id).find('#name').text(data.name)
-            // $('#athlete_'+data.id).find('#function').text(data.function)
+            $('#athlete_'+lane).find('#name').text(displayName)
+            if(subtype == 'athletes'){
+                createAthletes(data, lane)
+            }else{
+                createSubType(text, lane)
+            }
+            changeClass('#headAthletes', position)
+            $('#athlete_'+lane).slideDown(1000)
         }else{
-
             let $item = $(
                 '<div id="athlete_'+ lane +'" class="athlete">'+
                     '<div class="logo_event">'+
                     '</div>'+
                     '<div class="detailsAth">'+
                         '<div class="firstAth">'+
-                            '<span id="lane">#'+lane+' - </span>' +
-                            '<span id="name">'+data.displayName+'</span>' +
+                            '<div id="name">'+ displayName+'</div>' +
                         '</div>' +
                         '<div class="subtype">'+
                         '</div>'+
@@ -335,23 +353,13 @@ function createAthleteLowerthird(infos){
             $root.find('#headAthletes').append($item);
             
             $(".logo_event").css("background-image", "url(" + eventLogo + ")")
-            console.log(data)
-            switch(subtype){
-                case 'affiliation':
-                    createAffiliation(data, lane)
-                    break;
-                case 'athletes':
-                    createAthletes(data, lane)
-                    break;
-                case 'benchmarks':
-                    createBenchmarks(data, lane)
-                    break;
-                case 'wods':
-                    createWods(data, lane)
-                    break;
-                case 'overall':
-                    createOverall(data, lane)
-                    break;
+            // console.log(data)
+
+
+            if(subtype == 'athletes'){
+                createAthletes(data, lane)
+            }else{
+                createSubType(text, lane)
             }
 
             changeClass('#headAthletes', position)
@@ -362,27 +370,21 @@ function createAthleteLowerthird(infos){
     }else{
         $root.find('#athlete_'+lane).slideUp(1000)
 
-        setTimeout(()=>{
-            $root.find('#athlete_'+lane).remove()
-        }, 1000)
+        // setTimeout(()=>{
+        //     $root.find('#athlete_'+lane).remove()
+        // }, 1000)
     }
 
 }
 
-function createAffiliation(data, lane){
-    const {affiliate} = data
-
-    let aff = 'Independant'
-
-    if(affiliate != '' && affiliate != null){
-        aff = affiliate
-    }
-
+function createSubType(text, lane){
+    let $subAth = $root.find('#athlete_'+lane + ' .subtype');
+    $subAth.find('.sub').remove()
     let $subItem = $(
-        '<div class="affiliation">FROM ' + aff + '</div>'
+        '<div class="sub">' + text + '</div>'
     )
 
-    $root.find('#athlete_'+lane + ' .subtype').append($subItem)
+    $subAth.append($subItem)
 }
 
 
@@ -391,6 +393,7 @@ function createAthletes(data, lane){
 
 
     let $subAth = $root.find('#athlete_'+lane + ' .subtype');
+    $subAth.find('.sub').remove()
 
     ath.forEach((athlete, index)=>{
         const {fullName, age, crossfitAffiliateName, avatarPath, instagram} = athlete
@@ -402,7 +405,7 @@ function createAthletes(data, lane){
         }
 
         let $subItem = $(
-            '<div class="ath">' + 
+            '<div class="sub">' + 
                 '<div class="avatar" id="avatar'+ lane + '_'+index +'" ></div>' +
                 '<h4 class="fullName" >' + fullName + '</h4>' +
                 '<span class="affiliateAth"> / ' + aff + '</span>' +
@@ -417,50 +420,4 @@ function createAthletes(data, lane){
                 $("#avatar"+ lane + '_'+index).css("background-image", "url(" + (eventLogo) + ")")
             }
     })
-}
-
-function createBenchmarks(data, lane){
-    const {ath} = data
-
-    let $subItem = $(
-        '<div>' + ath + '</div>'
-    )
-
-    $root.find('#athlete_'+lane + ' .subtype').append($subItem)
-}
-
-function createWods(data, lane){
-    const {workoutRank} = data
-
-    let $subRoot = $('#athlete_'+lane + ' .subtype')
-
-    workoutRank.forEach((element, index) =>{
-        console.log(element)
-        let $subItem = $(
-            '<div class="wod">' + 
-                '<span class="wodName">' + 
-                    element.name + 
-                '</span>' +
-                '<div class="wodRank">' + 
-                    element.rank + " RANK" +
-                '</div>' +
-            '</div>'
-        )
-        $subRoot.append($subItem);
-    })
-
-    $subRoot.addClass('wods');
-
-}
-
-function createOverall(data, lane){
-    const {overallPoints, overallStanding, workoutRank} = data
-
-    let numberEvents = workoutRank.length
-
-    let $subItem = $(
-        '<h4 class="overall"> RANKING ' + overallStanding + ' OVERALL AFTER ' + numberEvents + ' EVENTS</h4>'
-    )
-
-    $root.find('#athlete_'+lane + ' .subtype').append($subItem)
 }

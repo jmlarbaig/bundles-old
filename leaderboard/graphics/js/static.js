@@ -75,7 +75,11 @@ function resetLeaderboard(newData){
         // console.log("Static Data = ", staticData)
         // ! On prend le tableau
 
-        setupLeaderboard.value.leaderboards != true ?  $(".leaderboards").hide() : ""
+        console.log(overlay != 'commentator')
+        if(overlay == 'overlay_top' || overlay == 'overlay_side'){
+            setupLeaderboard.value.leaderboards != true ?  $(".leaderboards").hide() : ""
+        }
+
         
         var $tab = $(".leaderboards")
         $tab.find(".leaderboard").remove();
@@ -187,7 +191,7 @@ function resetLeaderboard(newData){
                     if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
                     if(overlay === 'overlay_top') {height_tot = height_top} else {(height_tot +=  elementAth.$item.height()) }
                     
-                    if(overlay !== 'commentator' || overlay != 'sk'){
+                    if(overlay != 'commentator' && overlay != 'sk'){
                         $("#leaderboard"+ indexDivision + " #athletes").height(height_tot)
                         $("#leaderboard"+ indexDivision).height(height_tot + $("#leaderboard"+indexDivision + " .header").height())
                     }
@@ -199,6 +203,24 @@ function resetLeaderboard(newData){
                 }, 1000)
 
             })
+
+            
+            if(overlay == 'commentator'){
+                setTimeout(()=>{
+        
+                        $("#leaderboard"+ indexDivision +" #table"+ indexDivision).DataTable( {
+                            scrollY:        "auto",
+                            scrollX:        true,
+                            scrollCollapse: true,
+                            paging:         false,
+                            fixedColumns:   {
+                                left: 3,
+                                right: 2
+                            }
+                        } );
+
+                },100)
+            }
 
 
         })

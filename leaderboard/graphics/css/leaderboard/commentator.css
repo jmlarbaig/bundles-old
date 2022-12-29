@@ -44,20 +44,9 @@
 .leaderboard #mvt{
     width: 70%;
     text-transform: capitalize;
-
 }
 
-/* .leaderboard .mvt_id:nth-child(odd){
-    background-color: white;
-    color: black;
-}
-
-.leaderboard .mvt_id:nth-child(even){
-    background-color: grey;
-    color: white;
-} */
-
-.leaderboard #mvt span:nth-child(1){
+.leaderboard #mvt span:first-child{
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     -ms-transition-duration: 0.7s;
@@ -72,143 +61,99 @@
     background-color: var(--second_color);
 }
 
-.leaderboard table{
-	position:relative;
-    width: 100%;
-    overflow: hidden;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-top: 1px solid grey;
-}
-
-.fixed-side{
-    visibility:visible;
-}
-
-.leaderboard tbody th{
-
-}
-
-.leaderboard .stats{
-    overflow-x: scroll;
-    max-width: 200px;
-}
-
-
-.leaderboard .stats td{
-    border: 1px solid grey;
-    white-space: nowrap;
-    border-top-width: 0px;
+th, td { 
+    white-space: nowrap; 
     text-align: center;
-    width: 75px;
-    max-width: 75px;
-    min-width: 75px;
-}
-
-.leaderboard .athletes {
-    font-weight: 900;
-    font-size: 24px;  
-    -moz-transition-duration: 0.7s;
-    -webkit-transition-duration: 0.7s;
-    -ms-transition-duration: 0.7s;
-}
-
-.leaderboard .athlete{
     text-transform: uppercase;
-    -moz-transition-duration: 0.7s;
-    -webkit-transition-duration: 0.7s;
-    -ms-transition-duration: 0.7s;
+}
+div.dataTables_wrapper {
+    border-collapse: collapse;
+    font-size: 24px;
+    width: 100%;
+    margin: auto;
 }
 
- td{
-    -webkit-box-shadow: inset -30px 0px 32px -16px rgba(0,0,0,0.63); 
-    box-shadow: inset -30px 0px 32px -16px rgba(0,0,0,0.63);
-}
 
-.leaderboard .lane{
-    visibility:visible;
-    width: 50px;
-    text-align: center;
-    filter: blur(0px);
-}
-
-.leaderboard .name {
-    visibility:visible;
-    text-align: center;
-    padding: 5px 5px;
-    text-align: left;
-    width: 10%;   
-    max-width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.leaderboard .name:hover {
-    cursor: pointer;
-    background-color: rgb(137, 137, 137);
-    color: rgb(237, 237, 237);
-}
-
-.leaderboard .affiliate {
-    padding: 5px 5px;
-    text-align: left;
-    width: 10%;   
-    max-width: 200px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-}
-
-.leaderboard .Orank{
-    width: 50px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-}
-
-.leaderboard .rank{
-    width: 50px;
-    text-align: center;
-    border-right: 2px solid white;
-}
-
-.leaderboard .score {
-    visibility:visible;
+.lane{
+    background-color: white;
+    z-index: 10;
     width: 100px;
-    text-align: center;
 }
 
-.leaderboard .popup {
-    visibility:visible;
-    text-align: center;
-    width: 200px;
-}
-
-.leaderboard .flag {
-    text-align: center;
-    width: 60px;
-    max-width: 60px;
-}
-
-.leaderboard .flag .box_flag {
+.flag{
+    background-color: white;
+    z-index: 10;
     width: 30px;
-    margin: auto;   
     height: 30px;
-    border-radius: 50%;
+}
+
+.box_flag{
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+}
+
+.name{
+    background-color: white;
+    z-index: 10;
+    text-align: left;
+    width: 200px;
+    max-width: 200px;
+}
+
+.name:hover{
+    background-color: grey;
+    color: white;
+    cursor: pointer;
+}
+
+
+.Opoint{
+    width: 70px;
+    max-width: 70px;
+}
+
+.Orank{
+    width: 70px;
+    max-width: 70px;
+}
+
+.rank{
+    width: 70px;
+    max-width: 70px;
+}
+
+thead .score{
+    background-color: white;
+}
+
+.score{
+    z-index: 10;
+    width: 150px;
+    max-width: 150px;
+}
+
+.popup{
+    background-color: white;
+    z-index: 10;
+    width: 250px;
+    max-width: 250px;
 }
 
 .rounds{
-    text-align: center;
     background-color: white;
 }
 
 .bestStat{
     background-color: green;
     color: white;
+}
+
+.truncate{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
