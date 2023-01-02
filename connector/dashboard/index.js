@@ -23,6 +23,10 @@ let data = []
         if(overlay == 'data'){
             createDataView();
         }
+
+        if(overlay == 'kairos'){
+            createKairosView();
+        }
     })
 
 

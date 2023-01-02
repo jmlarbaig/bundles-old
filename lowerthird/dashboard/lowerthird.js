@@ -128,6 +128,23 @@
         })
     })
 
+    const listWarmpUp = nodecg.Replicant('listWarmpUp', 'connector');
+
+    let listOverall = []
+
+    listWarmpUp.on('change', (newValue, oldValue)=>{
+        if(overlay=='athlete'){
+            if(newValue != undefined && JSON.stringify(newValue) != JSON.stringify(oldValue)){
+                console.log('List WarmUp',newValue)
+                let participantsHeat = newValue.warmUp[0].wod.participants
+                let stations = newValue.warmUp[0].heat.stations
+                for(let station of stations){
+                    let data = participantsHeat.find( element => element.id === station.participantId)
+                }
+            }
+        }
+    })
+
     WorkoutInfos.on('change', (newValue, oldValue)=>{
         if(newValue != undefined && JSON.stringify(newValue) != JSON.stringify(oldValue)){
             createOptionWorkout(newValue)
@@ -354,3 +371,4 @@
             }
         }
     }
+    

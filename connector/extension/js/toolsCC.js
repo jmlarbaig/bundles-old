@@ -248,6 +248,7 @@ module.exports = (nodecg, Connected) => {
                     let participantId = parseInt(listeCurrentHeat[val.lane].ath[0]['Participant ID'])
 
                     cc.loadParticpantId(idEvent, participantId).then((result)=>{
+                        
                         // console.log(result)
                         listeCurrentHeat[val.lane].overallStanding = result.overallStanding
                         listeCurrentHeat[val.lane].qualifierRank = result.qualifierRank

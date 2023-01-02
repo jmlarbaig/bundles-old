@@ -100,13 +100,23 @@ function updateDynamics(newScoring, status){
                             elemAth[i].$item.find(".popup").show();
                             elemAth[i].$item.find(".score").text('FIN')
                             elemAth[i].$item.find(".popup").text(result.toString().slice(result.length - 9, result.length - 8) != "0" ? result = result.toString().slice(result.length -8, result.length) : result.toString().slice(result.length - 7, result.length - 6) != "0" ? result = result.toString().slice(result.length -7, result.length)  : result = result.toString().slice(result.length -6, result.length));
+                            if(overlay== 'progression'){
+                                $('#circle'+elemAth[i].lane).css("transform","translateX(95%)");
+                            }
                         }
                     } else if(status == "T"){
-                        if (elemAth[i].status != "F"){
-                            let _r = (elemAth[i].result || ('CAP ' +elemAth[i].score_abs)).toString()
-                            elemAth[i].$item.find(".score").text('TC');
-                            elemAth[i].$item.find(".popup").show();
-                            elemAth[i].$item.find(".popup").text( _r);
+                        var result = elemAth[i].result;
+                        elemAth[i].$item.find(".popup").show();
+                        elemAth[i].$item.find(".score").text('FIN')
+                        if (elemAth[i].status == "F" ){
+                            elemAth[i].$item.find(".popup").text(result.toString().slice(result.length - 9, result.length - 8) != "0" ? result = result.toString().slice(result.length -8, result.length) : result.toString().slice(result.length - 7, result.length - 6) != "0" ? result = result.toString().slice(result.length -7, result.length)  : result = result.toString().slice(result.length -6, result.length));
+                            if(overlay== 'progression'){
+                                $('#circle'+elemAth[i].lane).css("transform","translateX(95%)");
+                            }
+                        }else if(elemAth[i].status == "T"){
+                            elemAth[i].$item.find(".popup").text(result);
+                        }else {
+                            elemAth[i].$item.find(".popup").text('CAP '+ elemAth[i].score_abs);
                         }
                     }
 
@@ -191,24 +201,23 @@ function updateDynamics(newScoring, status){
                             elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank first_rank other_rank', false)
                         }
 
-                        // if(overlay == 'overlay_top'){
-                        //     if(elemAth[i].CurrentRank > 2 ){
-                        //         let _lane = elemAth[i].lane;
-                        //         setTimeout(()=>{
-                        //             for(let ath of elemAth){
-                        //                 if(ath.lane === _lane){
-                        //                     ath.$item.fadeOut(1000);
-                        //                     setTimeout(()=>{
-                        //                         ath.$item.remove();
-                        //                         reposition("#leaderboard"+ key, elemAth);
-                        //                     }, 2000)
-                        //                     break;
-                        //                 }
-                        //             }
-
-                        //         }, 5000)
-                        //     }
-                        // }
+                        if(overlay == 'overlay_top'){
+                            if(elemAth[i].CurrentRank > 1 ){
+                                let _lane = elemAth[i].lane;
+                                setTimeout(()=>{
+                                    for(let ath of elemAth){
+                                        if(ath.lane === _lane){
+                                            ath.$item.fadeOut(1000);
+                                            setTimeout(()=>{
+                                                ath.$item.remove();
+                                                reposition("#leaderboard"+ key, elemAth);
+                                            }, 2000)
+                                            break;
+                                        }
+                                    }
+                                }, 5000)
+                            }
+                        }
                     }
 
                     if(overlay == 'commentator'){
@@ -253,6 +262,7 @@ function updateDynamics(newScoring, status){
                     $("#leaderboard"+ key + " #athletes").height(height_tot)
                     $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height() + 15)
                 }
+
                 // $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height()+15)
                 // if ($("#leaderboard"+ key +" .athletes").find(".powered").length < 1){
                 //     var $item = $( 

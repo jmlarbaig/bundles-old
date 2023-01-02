@@ -40,7 +40,22 @@
     text-align: left;
     text-transform: uppercase;
     font-size: var(--ft_size_subheader);
-    border-radius: 10px 0px 10px 0px;
+    border-radius: 0px 0px 10px 0px;
+}
+
+.sub{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sub ul{
+    padding-left: 0ch;
+    margin-bottom: 0px;
+}
+
+.sub li::before{
+    content: '\21E2 ' ;
 }
 
 .affiliation{

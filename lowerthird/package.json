@@ -58,6 +58,15 @@
         "workspace":"LowerThird Workspace"
       },
       {
+        "name": "AthleteLowerthird",
+        "title": "Athlete Free Lowerthird",
+        "file": "athlete.html",
+        "fullbleed": false,
+        "width": 3,
+        "headerColor": "#525F78",
+        "workspace":"LowerThird Workspace"
+      },
+      {
         "name": "Configuration",
         "title": "Configuration Lowerthird",
         "file": "configuration.html",

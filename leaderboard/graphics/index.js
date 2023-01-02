@@ -244,13 +244,13 @@
                 $(function(){
                     if($("#frame").find('#lower').length > 0){
                         $("#frame").find('#lower').show()
-                    }else{                    
+                        $("#lower").contents().find('body').css('background','transparent')
+                    }else{                 
                         let $item = $('<iframe id="lower" src="../../lowerthird/graphics/lowerthirds.html" frameBorder="0"></iframe>')
                         $item.hide()
                         $("#frame").append($item)
-                        setTimeout(()=>{
-                            $item.show()
-                        }, 100)
+                        $item.contents().find('body').css('background','transparent')
+                        $item.show()
                     }
                 });
             }else{

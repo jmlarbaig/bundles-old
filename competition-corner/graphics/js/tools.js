@@ -7,6 +7,9 @@ async function resetAttrLane(dataCC){
     if(dataCC.backgroundImage != null){
       $('.headerLogo').removeClass('header-without-background')
       $('.headerLogo').css('background-image','url('+ dataCC.backgroundImage +')')
+    }else{
+      $('.headerLogo').addClass('header-without-background')
+      $('.headerLogo').css('background-image','none')
     }
   
     athletes = dataCC.participants
@@ -22,9 +25,14 @@ async function resetAttrLane(dataCC){
     $('#heatName').text(dataCC.heatName)
     $('#workoutName').text(dataCC.workoutName)
 
+    console.log(dataCC)
+
     if(dataCC.backgroundImage != null){
       $('.headerLogo').removeClass('header-without-background')
       $('.headerLogo').css('background-image','url('+ dataCC.backgroundImage +')')
+    }else{
+      $('.headerLogo').addClass('header-without-background')
+      $('.headerLogo').css('background-image','none')
     }
   
     athletes = dataCC.participants
@@ -41,11 +49,15 @@ async function resetAttrLane(dataCC){
     $('#heatName').text(dataCC.divisionName)
     $('#workoutName').text(dataCC.workoutName)
 
+
     if(dataCC.backgroundImage != null){
       $('.headerLogo').removeClass('header-without-background')
       $('.headerLogo').css('background-image','url('+ dataCC.backgroundImage +')')
+    }else{
+      $('.headerLogo').addClass('header-without-background')
+      $('.headerLogo').css('background-image','none')
     }
-  
+    
     athletes = dataCC.athletesResults
     maximumAthlete = athletes.length;
   

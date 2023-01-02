@@ -61,6 +61,8 @@
     background-position: center;
     margin: auto;
     height: var(--ft_height_sponsor);
+    background-origin: content-box;
+    padding: 10px;
 }
 
 #sponsorFree{
@@ -70,4 +72,6 @@
     background-position: center;
     margin: auto;
     height: var(--ft_height_sponsor);
+    background-origin: content-box;
+    padding: 10px;
 }

@@ -27,7 +27,7 @@ function createPresentator(data){
             if( data.qrcode != ''){
                 $presentator.find("#qrCode"+ data.id).empty();
                 $presentator.find("#qrCode"+ data.id).show()
-                generateQrCode(data.qrcode, $presentator.find("#qrCode"+ data.id), 100, 100)
+                generateQrCode(data.qrcode, $presentator.find("#qrCode"+ data.id), 110, 110)
             }else{
                 $presentator.find("#qrCode"+ data.id).hide()
             }
@@ -48,9 +48,9 @@ function createPresentator(data){
                             '<div class="function">'+
                                 '<span id="function">'+data.function+'</span>' +
                             '</div>' +
-                            '<div class="eventName">'+
-                                '<span>'+infos.eventName+'</span>' +
-                            '</div>' +
+                            // '<div class="eventName">'+
+                            //     '<span>'+infos.eventName+'</span>' +
+                            // '</div>' +
                         '</div>' +
                     '</div>' +
                     '<div id="sponsorPresentator_'+ data.id +'" class="sponsor">'+
@@ -72,7 +72,7 @@ function createPresentator(data){
             }
 
             if( data.qrcode != ''){
-                generateQrCode(data.qrcode, $item.find("#qrCode"+data.id), 100, 100)
+                generateQrCode(data.qrcode, $item.find("#qrCode"+data.id), 110, 110)
             }
 
             changeClass('.headPresentator', data.position)
@@ -115,7 +115,7 @@ function createWaiting(data){
             if( data.qrcode != ''){
                 $('#waiting').find("#qrCode").empty();
                 $('#waiting').find("#qrCode").show()
-                generateQrCode(data.qrcode, $('#waiting').find("#qrCode"), 100, 100)
+                generateQrCode(data.qrcode, $('#waiting').find("#qrCode"), 130, 130)
             }else{
                 $('#waiting').find("#qrCode").hide()
             }
@@ -135,9 +135,9 @@ function createWaiting(data){
                         '<div class="localisation">'+
                             '<div id="localisation">'+data.localisation+'</div>' +
                         '</div>' +
-                        '<div class="eventName">'+
-                            '<h6>'+infos.eventName+'</h6>' +
-                        '</div>' +
+                        // '<div class="eventName">'+
+                        //     '<h6>'+infos.eventName+'</h6>' +
+                        // '</div>' +
                     '</div>' +
                     '<div id="sponsorWaiting" class="sponsor">'+
                     '</div>'+
@@ -158,7 +158,7 @@ function createWaiting(data){
             }
 
             if( data.qrcode != ''){
-                generateQrCode(data.qrcode, $item.find("#qrCode"), 100, 100)
+                generateQrCode(data.qrcode, $item.find("#qrCode"), 130, 130)
             }
 
             changeClass('#waiting', data.position)
@@ -393,7 +393,11 @@ function createAthletes(data, lane){
 
 
     let $subAth = $root.find('#athlete_'+lane + ' .subtype');
-    $subAth.find('.sub').remove()
+    $subAth.find('ul').remove()
+
+    $subAth.append('<ul></ul>')
+
+    
 
     ath.forEach((athlete, index)=>{
         const {fullName, age, crossfitAffiliateName, avatarPath, instagram} = athlete
@@ -405,13 +409,13 @@ function createAthletes(data, lane){
         }
 
         let $subItem = $(
-            '<div class="sub">' + 
-                '<div class="avatar" id="avatar'+ lane + '_'+index +'" ></div>' +
-                '<h4 class="fullName" >' + fullName + '</h4>' +
-                '<span class="affiliateAth"> / ' + aff + '</span>' +
-            '</div>'
+            '<li class="sub">' +  fullName + '</li>'
+            //     // '<div class="avatar" id="avatar'+ lane + '_'+index +'" ></div>' +
+            //     '<h4 class="fullName" >' + fullName + '</h4>' +
+            //     // '<span class="affiliateAth"> / ' + aff + '</span>' +
+            // '</li>'
         )
-            $subAth.append($subItem)
+            $subAth.find('ul').append($subItem)
             // if(instagram != ''){
             //     generateQrCode('https://www.instagram.com/'+instagram, $subItem.find('#avatar'+ lane + '_'+index))
             if(avatarPath != '' && avatarPath != null){

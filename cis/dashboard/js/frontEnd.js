@@ -175,7 +175,7 @@ function createWorkoutsOptions(data, lane){
 
         let dataWorkout = data.workoutRank[option]
 
-        text = dataWorkout.rank + '° RANK AT ' + dataWorkout.name + ' ('+ dataWorkout.result +' PTS) '
+        text = dataWorkout.rank + '° RANK AT ' + dataWorkout.name + ' (' + dataWorkout.result +') '
         
         $('#textLower_' + lane).val(text)
     })

@@ -31,6 +31,15 @@
         "workspace":"Main Workspace"
       },
       {
+        "name": "kairos",
+        "title": "Kairos Panel",
+        "file": "kairos.html",
+        "width": 3,
+        "fullbleed": false,
+        "headerColor": "#525F78",
+        "workspace":"Main Workspace"
+      },
+      {
         "name": "Data",
         "title": "Data",
         "file": "data.html",

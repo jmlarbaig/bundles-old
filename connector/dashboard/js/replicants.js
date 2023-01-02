@@ -43,3 +43,8 @@ const listCis = nodecg.Replicant('CIS', { defaultValue: {}, persistent: true })
 
 // State Connection Replicant
 const Connected = nodecg.Replicant('Connected');
+
+// Value from MQTT Kairos
+const divisionMQTT = nodecg.Replicant('divisionMQTT')
+const workoutsMQTT = nodecg.Replicant('workoutsMQTT')
+const heatMQTT = nodecg.Replicant('heatMQTT')

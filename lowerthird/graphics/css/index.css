@@ -84,7 +84,7 @@
 
 
     body{
-        background-color: var(--bg__color);
+        background-color: transparent;
         font-family: var(--font-select);
     }
 
@@ -97,12 +97,48 @@
 
     .logo_event{
         margin: 0px 20px;
+        width: 70px;
+        height: 70px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    #waiting .logo_event{
+        margin: 0px 20px;
         width: 100px;
         height: 100px;
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
     }
+
+    .sponsor{
+        width: 100px;
+        height: 100px;
+        margin: 0px 10px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    #waiting .sponsor{
+        background-color: var(--sponsor_color);
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: var(--ft_height_sponsor);
+        margin: 0px 20px;
+    }
+    
+    .qrCode{
+        position: relative;
+        top:-10px;
+        width: 100px;
+        height: 100px;
+    }
+
+
 
     /* Positions */
 

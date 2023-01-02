@@ -1651,6 +1651,7 @@ input[type=radio]:disabled:checked+label:after {
 }
 
 .cc-table__header__logo-text {
+    width: 900px;
     color: #fff;
     font-family: "Roboto Condensed",sans-serif;
     font-size: 53px;

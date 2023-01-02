@@ -11,16 +11,12 @@
     border-radius: 10px 0px 10px 0px;
 }
 
-.logo_event{
-}
-
 .detailsWaiting{
     text-align: center;
     min-width: 500px;
     display: flex;
     flex-direction: column;
     margin: 10px;
-    padding: 0px 20px;
     border-left: solid 2px white;
 }
 
@@ -52,13 +48,4 @@
     padding: 10px;
     color: white;
     text-transform: uppercase;
-}
-
-.sponsor{
-    background-color: var(--sponsor_color);
-    margin: auto;
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: var(--ft_height_sponsor);
 }
