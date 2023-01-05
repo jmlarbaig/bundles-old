@@ -1,10 +1,18 @@
+let _workoutsFromMQTT;
+
 function createKairosView(){
     workoutsMQTT.on('change',(newValue, oldValue)=>{
-        // createOptionWorkout(newValue)
+        if(JSON.stringify(newValue) != JSON.stringify(oldValue)){
+            console.log(newValue)
+            _workoutsFromMQTT = newValue
+            createOptionWorkout(newValue)
+        }
     })
 
     $("#workoutsMqtt").on('change',  function(){
-        createOptionHeat(this.value)
+            console.log(this.value)
+        let workout = _workoutsFromMQTT.find(x => x.id === parseInt(this.value))
+        createOptionHeat(workout)
     })
 }
 
@@ -13,21 +21,20 @@ function createOptionWorkout(data){
     $("#workoutsMqtt option").remove()
 
     $("#workoutsMqtt").append('<option value=0>-- Please Choose Workout --</option>')
-    $("#workoutsMqtt").append('<option value=0>-- Please Choose Workout --</option>')
 
     for(let workout of data){
         $("#workoutsMqtt").append('<option value='+ workout.id +'>' + workout.name + '</option>');
     }
 }
 
-function createOptionHeat(id){
-    console.log(id)
+function createOptionHeat(workout){
+    console.log(workout)
     $("#heatsMqtt option").remove()
 
     $("#heatsMqtt").append('<option value=0>-- Please Choose Heat --</option>')
 
-    for(let heat of data){
-        $("#heatsMqtt").append('<option value='+ heat.heatId +'>' + heat.heatName + '</option>');
+    for(let i= 0; i< workout.heatId.length ; i++){
+        $("#heatsMqtt").append('<option value='+ workout.heatId[i] +'>' + workout.heatName[i] + '</option>');
     }
 }
 
@@ -52,16 +59,16 @@ function startChrono(){
     let data = {
         'minutes': 0,
         'secondes' : 0,
-        'type':''
+        'type':'time'
     }
 
-    data.type = heatInfos.value.type | 'time'
+    data.type = heatInfos.value[0].type
 
-    let timeCap = heatInfos.value.timeCap
+    let timeCap = heatInfos.value[0].timeCap
 
-    data.minutes = parseInt(timeCap.split(':')[1]) | 1
-    data.secondes = parseInt(timeCap.split(':')[2]) | 0
+    data.minutes = (timeCap.split(':')[1]) 
+    data.secondes = (timeCap.split(':')[2]) 
 
-    nodecg.sendMessage('change_heat', data)
+    nodecg.sendMessage('start_chrono', data)
 
 }

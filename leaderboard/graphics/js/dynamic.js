@@ -9,6 +9,7 @@ function updateDynamics(newScoring, status){
         Object.values(athletesDivision).forEach((elemAth, key) => {
 
             height_tot = 0;
+            let index = 0;
             
             if(newScoring[1].CurrentRank != null && newScoring[2].CurrentRank != null){
                 Object.keys(elemAth).forEach(i => {
@@ -80,7 +81,7 @@ function updateDynamics(newScoring, status){
                                     elemAth[i].$item.find(".score").text(Mvt_name[elemAth[i].lane].scoreAbsMvt + "/" + Mvt_name[elemAth[i].lane].repTarget);
                                 }
 
-                                let mvts = Mvt_name[elemAth[0].lane].arrayMvt.toString().replaceAll(',', ' - ').replaceAll('_', ' ')
+                                let mvts = Mvt_name[elemAth[index].lane].arrayMvt.toString().replaceAll(',', ' - ').replaceAll('_', ' ')
                                 $('#mvt').html(mvts)
                                 $('.mvt').html(mvts)
 
@@ -96,7 +97,8 @@ function updateDynamics(newScoring, status){
                                 elemAth[i].$item.find(".score").text(elemAth[i].score_abs)
                             }
                         } else if (elemAth[i].status == "F" ){
-                            var result = elemAth[i].result;
+                            index += 1;
+                            let result = elemAth[i].result;
                             elemAth[i].$item.find(".popup").show();
                             elemAth[i].$item.find(".score").text('FIN')
                             elemAth[i].$item.find(".popup").text(result.toString().slice(result.length - 9, result.length - 8) != "0" ? result = result.toString().slice(result.length -8, result.length) : result.toString().slice(result.length - 7, result.length - 6) != "0" ? result = result.toString().slice(result.length -7, result.length)  : result = result.toString().slice(result.length -6, result.length));
@@ -105,7 +107,7 @@ function updateDynamics(newScoring, status){
                             }
                         }
                     } else if(status == "T"){
-                        var result = elemAth[i].result;
+                        let result = elemAth[i].result;
                         elemAth[i].$item.find(".popup").show();
                         elemAth[i].$item.find(".score").text('FIN')
                         if (elemAth[i].status == "F" ){
@@ -200,23 +202,24 @@ function updateDynamics(newScoring, status){
                             elemAth[i].$item.find(".circle").toggleClass('circle finish_rank', true)
                             elemAth[i].$item.find(".circle").toggleClass('second_rank third_rank first_rank other_rank', false)
                         }
+                    }
 
-                        if(overlay == 'overlay_top'){
-                            if(elemAth[i].CurrentRank > 1 ){
-                                let _lane = elemAth[i].lane;
+                    if(overlay == 'overlay_top'){
+                        if(elemAth[i].result != "" && status != "T" && elemAth[i].status == 'F'){
+                            if(elemAth[i].CurrentRank > 1 && elemAth[i].$item.is(':visible') ){
                                 setTimeout(()=>{
-                                    for(let ath of elemAth){
-                                        if(ath.lane === _lane){
-                                            ath.$item.fadeOut(1000);
-                                            setTimeout(()=>{
-                                                ath.$item.remove();
-                                                reposition("#leaderboard"+ key, elemAth);
-                                            }, 2000)
-                                            break;
-                                        }
-                                    }
+                                    elemAth[i].$item.fadeOut(1000);
                                 }, 5000)
-                            }
+                            }        
+                        }else if(status == 'T' && elemAth[i].$item.is(':hidden')){
+                            setTimeout(()=>{
+                                elemAth[i].$item.fadeIn(1000)
+                            },3000)
+                        }
+
+                        if(status == 'T'){
+                            $('#mvt').text('FINISH')
+                            $('.mvt').text('FINISH')
                         }
                     }
 
@@ -256,26 +259,12 @@ function updateDynamics(newScoring, status){
                 })
 
                 elemAth.sort(ascendingRank);
-                    reposition("#leaderboard"+ key, elemAth);
+                reposition("#leaderboard"+ key, elemAth);
 
                 if(overlay !== 'commentator'){
                     $("#leaderboard"+ key + " #athletes").height(height_tot)
                     $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height() + 15)
                 }
-
-                // $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height()+15)
-                // if ($("#leaderboard"+ key +" .athletes").find(".powered").length < 1){
-                //     var $item = $( 
-                //         '<div class="athlete powered" id="powered'+key+'">' + 
-                //             '<div class="img"><img src="./img/PRESTA/SK-logo.png" alt="" height=15></img></div>' + 
-                //             '<div class="text">POWERED BY</div>' + 
-                //             '<div class="img"><img src="./img/PRESTA/FV-logo.png" alt="" height=15 ></img></div>' + 
-                //         '</div>'
-                //     );
-                //     $("#leaderboard"+ key +" .athletes").append($item);
-                // }
-                // $("#powered"+key).css('top', $("#leaderboard"+ key).height() + 10 + 'px');
-
             }
             else{
                 overlay !== 'commentator' && $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height())

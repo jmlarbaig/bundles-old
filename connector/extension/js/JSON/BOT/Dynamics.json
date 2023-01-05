@@ -6,7 +6,7 @@
   "eventName": "Break-Out Throwdown - 4\u00e8me \u00e9dition 2022",
   "workoutName": "WOD 6 By TYCE",
   "heatName": "H16 RX FH",
-  "status": "W",
+  "status": "T",
   "athletes": [
     {
       "lane": 1,
@@ -88,8 +88,8 @@
       "score_rel": 95,
       "currentRound": 1,
       "tieBreak": "",
-      "status": "W",
-      "result": "",
+      "status": "F",
+      "result": "00:13:51.78",
       "currentMouvement": [
         {
           "mouvementName": "MU-BAR",
@@ -341,8 +341,8 @@
       "score_rel": -1,
       "currentRound": 1,
       "tieBreak": "",
-      "status": "W",
-      "result": "",
+      "status": "F",
+      "result": "00:13:51.78",
       "currentMouvement": [
         {
           "mouvementName": "MU-BAR",
@@ -491,8 +491,8 @@
       "score_rel": -1,
       "currentRound": 1,
       "tieBreak": "",
-      "status": "W",
-      "result": "",
+      "status": "F",
+      "result": "00:13:51.78",
       "currentMouvement": [
         {
           "mouvementName": "MU-BAR",
@@ -529,8 +529,8 @@
       "score_rel": -2,
       "currentRound": 1,
       "tieBreak": "",
-      "status": "W",
-      "result": "",
+      "status": "F",
+      "result": "00:13:51.78",
       "currentMouvement": [
         {
           "mouvementName": "MU-BAR",

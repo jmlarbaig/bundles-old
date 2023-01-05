@@ -27,7 +27,8 @@
                     $('#aht'+minos.ip).find('.score').text(minos.ip)
                     $('#aht'+minos.ip).find('.popup').text(minos.battery + ' %')
                     $('#aht'+minos.ip).find('.state').text(minos.status)
-                    $('#aht'+minos.ip).find('.timeAth').text(msToTimeSK(minos.time))
+                    // $('#aht'+minos.ip).find('.timeAth').text(msToTimeSK(minos.time))
+                    $('#aht'+minos.ip).find('.timeAth').text(minos.signal)
                     BatteryLevel(minos.ip, minos.battery)
                     if(tableOfMinos[minos.ip] !=  null){
                         clearTimeout(tableOfMinos[minos.ip])

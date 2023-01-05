@@ -23,7 +23,7 @@ eventInfos.on('change',(value)=>{
         let $event = $("#box_event");
         $event.find('#event').remove();
     
-        let $heat = $("#box_heat");
+        let $heat = $("#box_header_heat");
         $heat.find('#heat').remove();
     
         let $workout = $("#box_workout");
@@ -70,17 +70,14 @@ function actualiser(){
     });
     console.log(data)
 
-    // Object.keys(setupLeaderboard.value).forEach((e, i)=>{
-    //     console.log(e)
-    //     setupLeaderboard.value[e] = document.getElementById(e).checked
-    // })
-
     nodecg.sendMessage('setupFile', data);
 }
 
 nodecg.readReplicant('setupLeaderboard', (value)=>{
     try{
+        console.log(value)
         Object.keys(value).forEach((e, i)=>{
+            console.log(document.getElementById(e))
             document.getElementById(e).checked = value[e];
         })
     }catch(err){
@@ -90,9 +87,7 @@ nodecg.readReplicant('setupLeaderboard', (value)=>{
 
 setupLeaderboard.on('change', (newValue, oldValue)=>{
     Object.keys(newValue).forEach((e, i)=>{
-        // if(newValue[e] != oldValue[e]){
-            document.getElementById(e).checked = newValue[e];
-        // }
+        document.getElementById(e).checked = newValue[e];
     })
 })
 

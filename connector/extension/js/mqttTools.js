@@ -69,10 +69,12 @@ module.exports = (nodecg) => {
         });
 
         client.on('message', function (topic, message) {
-            // console.log(topic)
-            // console.log(message.toString())
+            console.log(topic)
+            console.log(message)
 
-            if (_topic.includes('eventDescription')){
+            message = message.toString()
+
+            if (topic.includes('eventDescription')){
                 _eventId = JSON.parse(message.toString()).id;
                 client.subscribe(`kairos/${_eventId}/nextHeat`);
                 client.subscribe(`kairos/${_eventId}/timer`);
@@ -88,9 +90,9 @@ module.exports = (nodecg) => {
                 getCurrentHeat();
                 getHeatStatus();
 
-            }else if(_topic.includes('workouts')){
+            }else if(topic.includes('workouts')){
                 if(lastWorkouts != message){
-                    let wods = JSON.parse(message);
+                    let wods = JSON.parse(message.toString());
                     _workouts = []
                     _division = []
                     _currentHeat = {}
@@ -99,18 +101,16 @@ module.exports = (nodecg) => {
                     }
                     workoutsMQTT.value = _workouts
                 }
-            }else if(_topic.includes('nextHeat')){
-                if (lastDiv != message) {
-                    let heats = JSON.parse(message);
-                    for( let heat of heats){
-                        _division.push(heat)
-                    }
-                    divisionMQTT.value = _division
-                }
-            }else if(_topic.includes('currentHeat')){
+            // }else if(topic.includes('nextHeat')){
+            //     if (lastDiv != message) {
+            //         console.log(message.toString())
+            //         let heats = message.toString();
+            //         divisionMQTT.value = _division
+            //     }
+            }else if(topic.includes('currentHeat')){
                 if (message != '{}') {
                     if (message != receivedHeats) {
-                        receivedHeats = message;
+                        receivedHeats = message.toString();
                     } 
                     _currentHeat = JSON.parse(receivedHeats)
                     heatMQTT.value = _currentHeat
@@ -148,6 +148,7 @@ module.exports = (nodecg) => {
                 minos.lane = parseInt(mes[1])
                 minos.type = parseInt(mes[2], 2)
                 minos.battery = parseInt(mes[3])
+                minos.signal = (mes[4] | 'No Data')
 
                 tableOfMinosOnFloor[minos.ip] = minos ;
 
@@ -203,6 +204,8 @@ module.exports = (nodecg) => {
 
     function getListCurrentHeat( workoutId, heatId){
         if (client.connected) {
+            console.log(workoutId)
+            console.log(heatId)
             client.publish(`kairos/${_eventId}/nextHeat`, `${workoutId},${heatId}`);
         }
     }
@@ -210,7 +213,7 @@ module.exports = (nodecg) => {
     function startChrono( minutes, secondes, type){
 
         let epochTime = Date.now()
-        let _time = `${minute}.${secondes}`;
+        let _time = `${minutes}.${secondes}`;
         let timer = '';
 
         switch (type) {
@@ -223,7 +226,7 @@ module.exports = (nodecg) => {
             default:
               timer = `+${_time}`;
               break;
-          }
+        }
 
         if (client.connected) {
             client.publish(`kairos/timer`, `${timer};${4 * 1000};${epochTime}`);
@@ -237,6 +240,7 @@ module.exports = (nodecg) => {
     })
 
     nodecg.listenFor('change_heat', (value) => {
+        console.log(value)
         getListCurrentHeat(value.workoutId, value.heatId)
     })
 
@@ -265,7 +269,8 @@ module.exports = (nodecg) => {
         'lane':0,
         'battery':0,
         'status':0,
-        'time':0
+        'time':0,        
+        'signal':0
     }
 
 

@@ -45,7 +45,8 @@ module.exports = function (nodecg) {
             console.error(err)
           }
 	}else{
-        console.log('NO')
+        console.log("Creating the file")
+        fs.writeFileSync(setupFile, "{}");
     }
 
     nodecg.listenFor('setupFile', (value, ack) =>{
@@ -57,5 +58,4 @@ module.exports = function (nodecg) {
             setupLeaderboard.value = value
     })
 
-	nodecg.log.info(`Bundle "${__filename}" is initialized.`);
 };

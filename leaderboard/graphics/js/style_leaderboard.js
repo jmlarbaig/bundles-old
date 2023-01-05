@@ -341,7 +341,7 @@ function headerScoringKairos(divisions, indexDivision, repTarget){
                         '<th fixed-side scope="col" class="state box">STATE</th>' + 
                         '<th scope="col" class="box score align-items-xl-center">IP</th>' +
                         '<th scope="col" class="box popup text-nowrap text-truncate">BATTERY</th>' +
-                        '<th fixed-side scope="col" class="timeAth box">TIME</th>' +  
+                        '<th fixed-side scope="col" class="timeAth box">SIGNAL</th>' +  
                         '<th scope="col" class="flag box">FLAG</th>' +
                         '<th scope="col" class="box text-nowrap text-truncate text-left name">NAME</th>' + 
                     '</tr>' +

@@ -15,7 +15,11 @@ module.exports = function (nodecg) {
         catch (err) {
             console.error(err)
           }
-	}
+	}else{
+        console.log("Creating the file")
+        fs.writeFileSync(file, "{}");
+    }
+
 
     nodecg.listenFor('configOverwrite', (value, ack) =>{
 
@@ -26,6 +30,6 @@ module.exports = function (nodecg) {
             })
             lowerThirdConfig.value = value
     })
-	nodecg.log.info(`"${__filename}" is initialized.`);
+
 
 };

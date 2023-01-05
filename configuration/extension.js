@@ -15,7 +15,10 @@ module.exports = function (nodecg) {
         catch (err) {
             console.error(err)
           }
-	}
+	}else{
+        console.log("Creating the file")
+        fs.writeFileSync(colorFile, JSON.stringify(Colors.value));
+    }
 
     nodecg.listenFor('colorOverwrite', (value, ack) =>{
 
@@ -27,5 +30,4 @@ module.exports = function (nodecg) {
             Colors.value = value
     })
 
-	nodecg.log.info(`Bundle "${__filename}" is initialized.`);
 };

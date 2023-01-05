@@ -165,7 +165,7 @@ function reposition(leaderboard, athletes) {
 }
 
 function repoLeft(lead_, aths_) {
-    var y = 0;
+    let y = 0;
     let margin = 0
     Object.values(aths_).forEach(elm => {
         if(elm.$item.css('margin') != ''){
@@ -175,7 +175,11 @@ function repoLeft(lead_, aths_) {
         }
         if(elm.$item.find(lead_) != undefined){
             elm.$item.css("left", y + "px");
-            y += elm.$item.width() + margin;
+            if(elm.$item.is(':hidden')){
+                y += 0 + margin
+            }else{
+                y += elm.$item.width() + margin;
+            }
         }
     })
 }  

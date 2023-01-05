@@ -45,7 +45,10 @@ module.exports = function (nodecg) {
         catch (err) {
             console.error(err)
           }
-	}
+	}else{
+        console.log("Creating the file")
+        fs.writeFileSync(pkgPath, "{}");
+    }
 
     function writeConfig(value){
         let data = JSON.stringify(value, undefined, 4);
@@ -82,6 +85,6 @@ module.exports = function (nodecg) {
     })
 
 
-	nodecg.log.info(`Bundle "${__filename}" is initialized.`);
+	nodecg.log.info(`bundle\'s ${__filename} init!`);
         
 };
