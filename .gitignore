@@ -1,0 +1,12 @@
+node_modules
+coverage
+bower_components
+
+/connector/extension/connectionFile.json
+/connector/extension/connectionFileCC.json
+
+/configuration/colorDefaut.json
+
+/leaderboard/setupFile.json
+
+/lowerthird/configDefault.json
