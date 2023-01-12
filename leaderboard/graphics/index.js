@@ -52,6 +52,13 @@
     const TopScore = nodecg.Replicant('TopScore', 'connector')
     const listWarmpUp = nodecg.Replicant('listWarmpUp', 'connector');
 
+    const manualChrono = nodecg.Replicant('manualChrono')
+
+    // Value from MQTT Kairos
+    // const divisionMQTT = nodecg.Replicant('divisionMQTT')
+    const workoutsMQTT = nodecg.Replicant('workoutsMQTT', 'connector')
+    const heatMQTT = nodecg.Replicant('heatMQTT', 'connector')
+
 
     // Initialisation du choix de la vue
     
@@ -61,6 +68,9 @@
         let ch = document.location.pathname.split('/')
         overlay = ch[ch.length-1].replace('.html','')
         console.log('ready')
+        if(overlay == 'sk'){
+            createKairosView();
+        }
     })
 
     let newHeat = false;
@@ -82,11 +92,16 @@
 
     let tc
     let heat = {}
+    let heatSize = 0;
 
     heatInfos.on('change', (newValue, oldValue)=>{
         if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
             heat = typeWorkout(newValue)
             showTime(heat.timecap)
+            if(overlay == 'sk'){
+                $('#timeCapKairos').text(newValue[0].timeCap)
+                heatSize = newValue[0].heatsSize
+            }
         }
     })
 
@@ -114,23 +129,81 @@
 
     statusHeat.on('change', (newValue, oldValue)=>{
         if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
-            if( newValue.NtpTimeStart !== ntpStartTime){
-                ntpStartTime = newValue.NtpTimeStart
-                startTime = timeToDateTime(ntpStartTime);
-                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
+            if(!setupLeaderboard.value.manualChrono){
+                $(".chrono").find('#cap').text("CAP "+ tc[1] + "'");
+                if( newValue.NtpTimeStart !== ntpStartTime){
+                    ntpStartTime = newValue.NtpTimeStart
+                    startTime = timeToDateTime(ntpStartTime);
+                    endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
+                    if(timerLaunch != null){
+                        clearInterval(timerLaunch)
+                        timerLaunch = null;
+                    }
+                    newHeat = false
+                    timerLaunch = setInterval(updateTime, 500);
+                }
+            }else{
                 if(timerLaunch != null){
                     clearInterval(timerLaunch)
                     timerLaunch = null;
                 }
-                newHeat = false
-                timerLaunch = setInterval(updateTime, 500);
             }
             statusWorkout = newValue.status
+            if(overlay == 'sk'){
+                switch(newValue.status){
+                    case '0':
+                        $('.stateTimer').css('background-color', 'white')
+                        $('.stateTimer').css('color', 'black')
+                        $('#stateTimer').text('HEAT LOADED, VERIFY IF THIS THE GOOD HEAT')
+                        break;
+                    case 'W':
+                        $('.stateTimer').css('background-color', 'green')
+                        $('.stateTimer').css('color', 'white')
+                        $('#stateTimer').text('HEAT LAUNCHED')
+                        break;
+                    case 'T':
+                        $('.stateTimer').css('background-color', 'orange')
+                        $('.stateTimer').css('color', 'black')
+                        $('#stateTimer').text('HEAT FINISHED')
+                        break;
+                }
+            }
+        }
+    })
+
+    manualChrono.on('change', (newValue, oldValue)=>{
+        if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
+            if(setupLeaderboard.value.manualChrono){
+                $(".chrono").find('#cap').text('CAP '+newValue.timecap + "'");
+                switch(newValue.launchedTimer){
+                    case 'start':
+                        ntpStartTime = newValue.timer
+                        startTime = timeToDateTime(ntpStartTime);
+                        endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(newValue.timecap));
+                        if(timerLaunch != null){
+                            clearInterval(timerLaunch)
+                            timerLaunch = null;
+                        }
+                        newHeat = false
+                        timerLaunch = setInterval(updateTime, 500);
+                        break;
+                    case 'stop':
+                        if(timerLaunch != null){
+                            clearInterval(timerLaunch)
+                            timerLaunch = null;
+                        }
+                        break;
+                    case 'reset':
+                        endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(newValue.timecap));
+                        resetTimer()
+                        break;
+                }
+            }
         }
     })
 
     d_athletes.on('change', (newValue, oldValue)=>{
-        if(overlay != 'sk' && newValue != undefined){
+        if(overlay != 'sk' && newValue != undefined && statusWorkout != 0){
             updateDynamics(newValue, statusWorkout);
         }
     })
@@ -239,6 +312,27 @@
         })
 
 
+        if(!newValue.manualChrono){
+            if( statusHeat.value != undefined && statusHeat.value.NtpTimeStart !== undefined){
+                ntpStartTime = statusHeat.value.NtpTimeStart
+                startTime = timeToDateTime(ntpStartTime);
+                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
+                
+                if(timerLaunch != null){
+                    clearInterval(timerLaunch)
+                    timerLaunch = null;
+                }
+                timerLaunch = setInterval(updateTime, 500);
+            }
+        }else{
+            if(timerLaunch != null){
+                clearInterval(timerLaunch)
+                timerLaunch = null;
+                resetTimer();
+            }
+        }
+
+
         if(overlay == 'overlay_side' || overlay == 'overlay_top'){
             if(newValue.lowerthird){
                 $(function(){
@@ -324,6 +418,100 @@
         })
         
     })
+
+    function createKairosView(){
+        workoutsMQTT.on('change',(newValue, oldValue)=>{
+            console.log('workoutsMQTT ',newValue)
+            if(JSON.stringify(newValue) != JSON.stringify(oldValue)){
+                _workoutsFromMQTT = newValue
+                createOptionWorkout(newValue)
+            }
+        })
+    
+        $("#workoutsMqtt").on('change',  function(){
+                console.log(this.value)
+            let workout = _workoutsFromMQTT.find(x => x.id === parseInt(this.value))
+            createOptionHeat(workout)
+        })
+    }
+    
+    
+    function createOptionWorkout(data){
+        $("#workoutsMqtt option").remove()
+    
+        $("#workoutsMqtt").append('<option value=0>-- Please Choose Workout --</option>')
+    
+        for(let workout of data){
+            $("#workoutsMqtt").append('<option value='+ workout.id +'>' + workout.name + '</option>');
+        }
+    }
+    
+    function createOptionHeat(workout){
+        console.log(workout)
+        $("#heatsMqtt option").remove()
+    
+        $("#heatsMqtt").append('<option value=0>-- Please Choose Heat --</option>')
+    
+        for(let i= 0; i< workout.heatId.length ; i++){
+            $("#heatsMqtt").append('<option value='+ workout.heatId[i] +'>' + workout.heatName[i] + '</option>');
+        }
+    }
+
+    function changeHeat(){
+        let data = {
+            'workoutId': 0,
+            'heatId' : 0
+        }
+    
+        data.workoutId = $('#workoutsMqtt').val()
+        data.heatId = $('#heatsMqtt').val()
+
+        console.log(data)
+    
+        nodecg.sendMessageToBundle('change_heat', 'connector', data)
+
+        $('#changeHeat').css('background-color', 'green')
+        $('#changeHeat').css('color', 'white')
+        setTimeout(()=>{
+            $('#changeHeat').css('background-color', 'white')
+            $('#changeHeat').css('color', 'black')
+        },3000)
+    
+    }
+    
+    
+    function startChrono(){
+        let data = {
+            'minutes': 0,
+            'secondes' : 0,
+            'type':'time',
+            'count':5
+        }
+    
+        data.type = heatInfos.value[0].type
+        data.count = $('#countTimer').val()
+    
+        let timeCap = heatInfos.value[0].timeCap
+    
+        data.minutes = parseInt(timeCap.split(':')[1]) 
+        data.secondes = parseInt(timeCap.split(':')[2]) 
+    
+
+        console.log(data)
+
+        nodecg.sendMessageToBundle('start_chrono', 'connector', data)
+
+
+        $('#startChrono').css('background-color', 'green')
+        $('#startChrono').css('color', 'white')
+        setTimeout(()=>{
+            $('#startChrono').css('background-color', 'white')
+            $('#startChrono').css('color', 'black')
+        },3000)
+    
+    }
+    
+    
 
 
     const videoInfos = nodecg.Replicant('videoInfos', 'leaderboard')

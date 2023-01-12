@@ -120,6 +120,8 @@ module.exports = (nodecg, cc) => {
 				}
 				
 				listWarmpUp.value = obeject
+
+                nodecg.sendMessage('update_CIS', obeject.warmUp[0])
 			}
 		}
 		catch(e){

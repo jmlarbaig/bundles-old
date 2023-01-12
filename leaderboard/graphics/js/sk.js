@@ -2,6 +2,7 @@
     const dataMinos = nodecg.Replicant('dataMinos','connector')
 
     let tableOfMinos = []
+    let minosOnFloor = 0;
 
     dataMinos.on('change', (newValue, oldValue)=>{
         // if(JSON.stringify(newValue) != JSON.stringify(oldValue)){
@@ -9,9 +10,9 @@
                 if(minos != null){
                     console.log(minos)
                     if($('#aht'+minos.ip).length == 0){
-                        console.log(minos.ip)
+                        // console.log(minos.ip)
                         let $item = $( 
-                            '<tr class="athlete zero" id="aht'+minos.ip+'">' + 
+                            '<tr class="athlete counter zero" id="aht'+minos.ip+'">' +
                                 '<td class="lane"></td>' +
                                 '<td class="state"></td>' + 
                                 '<td class="score align-items-xl-center"></td>' +
@@ -34,8 +35,10 @@
                         clearTimeout(tableOfMinos[minos.ip])
                         tableOfMinos[minos.ip] = null
                     }
+                    $('#heatSize').text(`${$('.counter').length} Counter/${heatSize} Athletes`)
                     tableOfMinos[minos.ip] = setTimeout(()=>{
                         $('#aht'+minos.ip).remove()
+                        $('#heatSize').text(`${$('.counter').length} Counter/${heatSize} Athletes`)
                     }, 5000)
                 }
             })

@@ -169,3 +169,36 @@ let data = []
             $('#led_MQTT').removeClass('led-green')
         }
     })
+
+    statusHeat.on('change', (newValue, oldValue)=>{
+        console.log(newValue)
+        if(overlay == 'kairos'){
+            if(JSON.stringify(newValue) != JSON.stringify(oldValue)){
+                switch(newValue.status){
+                    case '0':
+                        $('.stateTimer').css('background-color', 'white')
+                        $('.stateTimer').css('color', 'black')
+                        $('#stateTimer').text('HEAT LOADED, VERIFY IF THIS THE GOOD HEAT')
+                        break;
+                    case 'W':
+                        $('.stateTimer').css('background-color', 'green')
+                        $('.stateTimer').css('color', 'white')
+                        $('#stateTimer').text('HEAT LAUNCHED')
+                        break;
+                    case 'T':
+                        $('.stateTimer').css('background-color', 'orange')
+                        $('.stateTimer').css('color', 'black')
+                        $('#stateTimer').text('HEAT FINISHED')
+                        break;
+                }
+            }
+        }
+    })
+
+    heatInfos.on('change', (newValue, oldValue)=>{
+        if(overlay == 'kairos'){
+            if(JSON.stringify(newValue) != JSON.stringify(oldValue)){
+                $('#timeCapKairos').text(newValue[0].timeCap)
+            }
+        }
+    })

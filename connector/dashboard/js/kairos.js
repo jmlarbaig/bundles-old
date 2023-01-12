@@ -5,7 +5,9 @@ function createKairosView(){
         if(JSON.stringify(newValue) != JSON.stringify(oldValue)){
             console.log(newValue)
             _workoutsFromMQTT = newValue
-            createOptionWorkout(newValue)
+            if(newValue.length > 0){
+                createOptionWorkout(newValue)
+            }
         }
     })
 
@@ -59,16 +61,19 @@ function startChrono(){
     let data = {
         'minutes': 0,
         'secondes' : 0,
-        'type':'time'
+        'type':'time',
+        'count':5
     }
 
     data.type = heatInfos.value[0].type
+    data.count = $('#countTimer').val()
 
     let timeCap = heatInfos.value[0].timeCap
 
-    data.minutes = (timeCap.split(':')[1]) 
-    data.secondes = (timeCap.split(':')[2]) 
+    data.minutes = parseInt(timeCap.split(':')[1]) 
+    data.secondes = parseInt(timeCap.split(':')[2]) 
 
     nodecg.sendMessage('start_chrono', data)
 
 }
+

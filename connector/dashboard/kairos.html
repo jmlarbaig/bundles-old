@@ -30,20 +30,40 @@
 			<div class="input-form">
 				<label for="workoutsMqtt">Workout Selection</label>
 				<select id="workoutsMqtt" class="workouts">
-					<option value="0">PLEASE CHOOSE WORKOUT</option>
+					<option value="0">NO WORKOUT LOADED</option>
 				</select>
 			</div>
 			<div class="input-form">
 				<label for="heatsMqtt">Heat Selection</label>
 				<select id="heatsMqtt" class="heat">
-					<option value="0">PLEASE CHOOSE HEAT</option>
+					<option value="0">NO HEAT LOADED</option>
 				</select>
 			</div>
 			<div class="log-button">
 				<button type='button' id='changeHeat' onclick='changeHeat()'>Heat Changed </button>
 			</div>
+
+			<br>
+
+			<div class="box">
+				<label>Time Cap Workout</label>
+				<div id="timeCapKairos">00:00</div>
+			</div>
+
+			<div class="stateTimer box">
+				<label>State Heat</label>
+				<div id="stateTimer"></div>
+			</div>
+			
+
 			<div class="log-button">
 				<button type='button' id='startChrono' onclick='startChrono()'>Start Chrono </button>
+			</div>
+
+
+			<div class="box">
+				<label for="countTimer">Count before timer</label>
+				<input type="number" id="countTimer" value="11"></div>
 			</div>
 		</div>
 

@@ -1,6 +1,6 @@
 
 .leaderboards{
-    position: absolute;
+    position: relative;
     width: 100%;
     background-color: rgb(232, 232, 232);
     font-size: 1rem;

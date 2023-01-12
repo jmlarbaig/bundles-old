@@ -76,9 +76,9 @@ module.exports = (nodecg, Connected) => {
                     AttributionLane.value = lane
                 })
             }
-            if(value.athletes.length > 0 && athletesDataCC != null){
-                updateCIS(athletesDataCC, value.athletes)
-            }
+            // if(value.athletes.length > 0 && athletesDataCC != null){
+            //     updateCIS(athletesDataCC, value.athletes)
+            // }
             if(value != undefined){
                 warmup.updateWorkout(value)
             }
@@ -182,8 +182,12 @@ module.exports = (nodecg, Connected) => {
 
     nodecg.listenFor('liste_ath_cc_update', value => {
         athletesDataCC = value
-        if(athletesCurrentHeat != null && token.value != null){
-            updateCIS(value, athletesCurrentHeat)
+    })
+
+    nodecg.listenFor('update_CIS', value => {
+        console.log('updateCIS')
+        if(token.value != null){
+            updateCIS(athletesDataCC, value)
         }
     })
 
@@ -211,54 +215,60 @@ module.exports = (nodecg, Connected) => {
         }
     }
 
-    async function updateCIS(liste_cc, athletes){
+    async function updateCIS(liste_cc, warmUp){
         let listeCurrentHeat = []
         let listeCurrentHeat_ath = []
-        athletes.forEach(val => {  
-            if(val != undefined){
+        let listParticipants = warmUp.wod.participants
+        let athletesOfCurrentHeat = warmUp.heat.stations
+        athletesOfCurrentHeat.forEach(athlete => {  
+            if(athlete != undefined){
 
-                if (liste_cc.Team.hasOwnProperty(val.displayName) && !listeCurrentHeat.includes(val.lane)){
-                    // listeCurrentHeat[val.lane] = 1
-                    listeCurrentHeat[val.lane] = {'ath':[]}
-                    listeCurrentHeat[val.lane].ath = liste_cc.Team[val.displayName]
-                    listeCurrentHeat[val.lane].type = 'team'
-                    listeCurrentHeat[val.lane].lane = val.lane
-                    listeCurrentHeat[val.lane].displayName = val.displayName
-                    listeCurrentHeat[val.lane].countryCode = val.countryCode
-                    listeCurrentHeat[val.lane].affiliate = val.affiliate 
-                    listeCurrentHeat[val.lane].division = val.division
-                    listeCurrentHeat[val.lane].overallPoints = val.overallPoints 
-                    listeCurrentHeat[val.lane].rank = val.rank
+                listeCurrentHeat[athlete.station] = {}
+
+                listeCurrentHeat[athlete.station] = Object.assign({}, athlete)
+                listeCurrentHeat[athlete.station].lane = listeCurrentHeat[athlete.station].station
+                let moreDatas = listParticipants.find(x => x.id === athlete.participantId)
+
+                listeCurrentHeat[athlete.station].points = moreDatas.points
+                listeCurrentHeat[athlete.station].rank = moreDatas.rank
+                listeCurrentHeat[athlete.station].height = moreDatas.height
+                listeCurrentHeat[athlete.station].weight = moreDatas.weight
+                listeCurrentHeat[athlete.station].countryCode = moreDatas.countryCode
+                listeCurrentHeat[athlete.station].benchmarks = Object.assign({}, moreDatas.benchmarks)
+                listeCurrentHeat[athlete.station].age = moreDatas.age
+                
+                listeCurrentHeat[athlete.station].ath = []
+
+                if (liste_cc.Team.hasOwnProperty(athlete.participantName)){
+                    listeCurrentHeat[athlete.station].ath = liste_cc.Team[athlete.participantName]
+                    listeCurrentHeat[athlete.station].type = 'team'
                 }
-                else if (liste_cc.Individual.hasOwnProperty(val.displayName) && !listeCurrentHeat.includes(val.lane)){
-                    // listeCurrentHeat[val.lane].ath = 1
-                    listeCurrentHeat[val.lane] = {'ath':[]}
-                    listeCurrentHeat[val.lane].ath = liste_cc.Individual[val.displayName]
-                    listeCurrentHeat[val.lane].type = 'individual'
-                    listeCurrentHeat[val.lane].lane = val.lane
-                    listeCurrentHeat[val.lane].displayName = val.displayName
-                    listeCurrentHeat[val.lane].countryCode = val.countryCode
-                    listeCurrentHeat[val.lane].affiliate = val.affiliate 
-                    listeCurrentHeat[val.lane].division = val.division
-                    listeCurrentHeat[val.lane].overallPoints = val.overallPoints 
-                    listeCurrentHeat[val.lane].rank = val.rank
+                if (liste_cc.Individual.hasOwnProperty(athlete.participantName)){
+                    listeCurrentHeat[athlete.station].ath = liste_cc.Individual[athlete.participantName]
+                    listeCurrentHeat[athlete.station].type = 'individual'
                 }
+                
+                cc.loadParticpantId(idEvent, parseInt(athlete.participantId)).then((result)=>{
 
-                if(listeCurrentHeat[val.lane] != undefined){
-                    let participantId = parseInt(listeCurrentHeat[val.lane].ath[0]['Participant ID'])
+                    // console.log(result)
+                    // listeCurrentHeat[athlete.station].overallStanding = result.overallStanding
+                    listeCurrentHeat[athlete.station].qualifierRank = result.qualifierRank
+                    listeCurrentHeat[athlete.station].workoutRank = [{}]
+                    listeCurrentHeat[athlete.station].workoutRank = result.workoutRanks
+                    listeCurrentHeat[athlete.station].affiliate = result.affiliate
 
-                    cc.loadParticpantId(idEvent, participantId).then((result)=>{
-                        
-                        // console.log(result)
-                        listeCurrentHeat[val.lane].overallStanding = result.overallStanding
-                        listeCurrentHeat[val.lane].qualifierRank = result.qualifierRank
-                        listeCurrentHeat[val.lane].workoutRank = [{}]
-                        listeCurrentHeat[val.lane].workoutRank = result.workoutRanks
-                        listeCurrentHeat[val.lane].affiliate = result.affiliate
-    
-                        listeCurrentHeat_ath[val.lane] = {'ath_infos':[]}
-    
-                        listeCurrentHeat[val.lane].ath.forEach((ath, index)=>{
+                    if(listeCurrentHeat[athlete.station].type == 'individual'){
+                        listeCurrentHeat[athlete.station].ath[0] = {
+                            'First Name': result.firstName,
+                            'Last Name':result.lastName
+                        }
+                    }
+
+                    listeCurrentHeat_ath[athlete.station] = {'ath_infos':[]}
+
+
+                    if(listeCurrentHeat[athlete.station].ath.length > 0){
+                        listeCurrentHeat[athlete.station].ath.forEach((ath, index)=>{
                             let alias = (ath['First Name'].toLowerCase() + ' ' + ath['Last Name'].toLowerCase()).replaceAll(' ', '-')
     
                             let ath_infos = {}
@@ -267,16 +277,19 @@ module.exports = (nodecg, Connected) => {
                                 if(result.error == 'Athlete not found'){
                                     ath_infos.fullName = ath['First Name'] + ' ' + ath['Last Name'];
                                     ath_infos.crossfitAffiliateName = ath['Affiliate'];
-                                    listeCurrentHeat_ath[val.lane].ath_infos[index] = {...ath_infos}
+                                    listeCurrentHeat_ath[athlete.station].ath_infos[index] = {...ath_infos}
                                 }else{
-                                    listeCurrentHeat_ath[val.lane].ath_infos[index] = {...result}
+                                    listeCurrentHeat_ath[athlete.station].ath_infos[index] = {...result}
                                 }
-                                listeCurrentHeat[val.lane].ath = listeCurrentHeat_ath[val.lane].ath_infos;
+                                listeCurrentHeat[athlete.station].ath = listeCurrentHeat_ath[athlete.station].ath_infos;
+                                // console.log(listeCurrentHeat)
                                 listCis.value = listeCurrentHeat;
                             })
                         })
-                    })
-                }
+                    }else{
+                        listCis.value = listeCurrentHeat;
+                    }
+                })
             }
         })
     }

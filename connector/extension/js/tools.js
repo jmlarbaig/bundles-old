@@ -35,13 +35,15 @@ module.exports = (nodecg, ip_ntp) =>{
                 nowNtp.value = err
             }else{
                 let diff = date.getTime() - Date.now()
+                console.log('DATE NTP : ', date)
+                console.log('DATE MAC : ', Date.now())
+                console.log(diff)
                 timeNTP.value = diff
                 let object = {
                     'ip':ip,
                     'date':date
                 }
                 nowNtp.value = object
-                console.log(diff)
             }
         });
     }

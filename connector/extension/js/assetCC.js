@@ -43,6 +43,7 @@ module.exports = (nodecg) => {
                     }
                 });
 
+
                 Object.values(result.Athletes).forEach( ( val, index ) => {
                     ath[index] = Object.assign( {}, athletes_infos, val);
                     if (val.Format == "Team"){

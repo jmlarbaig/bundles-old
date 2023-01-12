@@ -6,20 +6,15 @@ function updateFront(data){
     
     Object.values(data).forEach(( val, index ) => {
         if(val != null ){
-            let O_points = val.overallPoints
-            let O_rank = val.overallStanding
-
-            if (listOverall[data.lane] != undefined){
-                O_points = listOverall[data.lane].oP
-                O_rank = listOverall[data.lane].oR
-            }
+            let O_points = val.points
+            let O_rank = val.rank
 
             let $item = $( 
                 '<div class="cueCardParents" id="card_'+ val.lane +'" >' + 
-                    '<h3 class="lane name">#'+ val.lane +" - "+ val.displayName +'</h3>' + 
+                    '<h3 class="lane name">#'+ val.lane +" - "+ val.participantName +'</h3>' + 
                     '<div> '+
                         '<span class="lane name" id="overallRank_'+val.lane+'">Overall Rank : '+ O_rank +' </span> '+
-                        // '<span class="lane name" id="overallPoints_'+val.lane+'"> Overall Points : '+ O_points +'</span>' + 
+                        '<span class="lane name" id="overallPoints_'+val.lane+'"> Overall Points : '+ O_points +'</span>' + 
                     '</div>' +
                     '<div> '+
                         '<h4> Lowerthird selection </h4>' +
@@ -27,9 +22,8 @@ function updateFront(data){
                     '<div id="divSubType'+val.lane+'"> '+
                         '<label for="position">Choose your lowerthirds</label>' +
                         '<select id="subtype'+val.lane+'" class="subtype">' +
-                            '<option value="affiliation">-- Please choose option --</option>' +
+                            '<option value="">-- Please choose option --</option>' +
                             '<option value="affiliation">Affiliation</option>' +
-                            '<option value="athletes">Athlete(s)</option>' +
                             '<option value="overall">X overall standing after X events</option>' +
                             '<option value="free">Manual Entry</option>' +
                         '</select>' +
@@ -48,6 +42,14 @@ function updateFront(data){
                 '</div>'
             );
             $tab.append($item);
+
+            if(val.type == "team"){
+                $item.find('#subtype'+val.lane).append('<option value="athletes">Athlete(s)</option>')
+            }
+
+            if(val.type == "individual" && val.benchmarks != undefined){
+                $item.find('#subtype'+val.lane).append('<option value="benchmark">Benchmark</option>')
+            }
 
             if (val.workoutRank != undefined){
                 $item.find('#subtype'+val.lane).append('<option value="wods">Wod results</option>')
@@ -96,9 +98,11 @@ function updateFront(data){
                 let lane = parseInt(this.id.replace('subtype', ''))
                 let option = $(this).val()
                 removeWorkoutsOptions(lane)
+                $('#textLower_' + lane).show()
+                $('#textLower_' + lane).val('')
                 switch(option){
                     case'athletes' :
-                        $('#textLower_' + lane).val('')
+                        $('#textLower_' + lane).hide()
                     break;
                     case'overall' :
                         createOverall(data[lane], lane)
@@ -111,6 +115,9 @@ function updateFront(data){
                     break;
                     case'free' :
                         $('#textLower_' + lane).val('')
+                    break;
+                    case'benchmark' :
+                        createBenchmarkOptions(data[lane], lane)
                     break;
                 }
             })
@@ -138,7 +145,7 @@ function createOverall(data, lane){
         if(data.workoutRank  != null && data.workoutRank  != undefined ){
             WorkoutNumber = data.workoutRank.length
         }
-        text = data.overallStanding + '° Overall after ' + WorkoutNumber + ' event';
+        text = data.rank + '° Overall after ' + WorkoutNumber + ' event';
     }
     
     $('#textLower_' + lane).val(text)
@@ -183,6 +190,67 @@ function createWorkoutsOptions(data, lane){
 
 function removeWorkoutsOptions(lane){
     $('#card_'+lane).find('.subwod').remove()
+    $('#card_'+lane).find('.benchmark').remove()
+}
+
+function createBenchmarkOptions(data, lane){
+
+    let $select = $('<select id="benchmark'+lane+'" class="benchmark"><option value="0">-- Please choose benchmark</option></select>')
+    $('#divSubType'+lane).after($select)
+
+    if (data != undefined){        
+        if(data.benchmarks  != null && data.benchmarks  != undefined ){
+            Object.keys(data.benchmarks).forEach((bench, index)=>{
+                $select.append('<option value="'+ bench +'">'+ bench.toUpperCase() + ':' + data.benchmarks[bench] +'</option>')
+            })
+        }
+    }
+
+    $('#benchmark'+lane).on('change', function(){
+        let text = 'BENCHMARK DATA'
+        let lane = parseInt(this.id.replace('benchmark', ''))
+        let option = $(this).val()
+
+        let firstText = option.toUpperCase()
+        let secondText = data.benchmarks[option] | 0;
+
+        switch (option){
+            case 'backsquat':
+                firstText = 'BACK SQUAT'
+                secondText = secondText + 'KG'
+            break;
+            case 'cleanJerk':
+                firstText = 'CLEAN & JERK'
+                secondText = secondText + 'KG'
+            break;
+            case 'crossfitTotal':
+                firstText = 'CROSSFIT TOTAL'
+                secondText = secondText + 'KG'
+            break;
+            case 'deadlift':
+                secondText = secondText + 'KG'
+            break;
+            case 'snatch':
+                secondText = secondText + 'KG'
+            break;
+            case 'fightgonebad':
+                firstText = 'FIGTH GONE BAD'
+            break;
+            case 'run5k':
+                firstText = 'RUN 5K'
+            break;
+            case 'sprint400m':
+                firstText = 'SPRINT 400M'
+            break;
+            case 'twoKRow':
+                firstText = '2K ROW'
+            break;
+        }
+
+        text = firstText + ' : ' + secondText
+        
+        $('#textLower_' + lane).val(text)
+    })
 }
 
 function updateFrontWorkout(workouts, lane){

@@ -332,7 +332,7 @@ function headerScoringKairos(divisions, indexDivision, repTarget){
             '<div class="header">'+
                 '<div class="text-nowrap text-truncate text-left division">' + divisions[indexDivision] + '</div>' +
                 '<div id="mvt" class="text-nowrap text-truncate text-left"></div>' +
-                '<div class="repTar text-nowrap text-truncate repTarget'+[indexDivision]+'">' + reps + '</div>' +
+                '<div class="text-nowrap text-truncate" id="heatSize">0 Minos/'+ (heatSize||0) +' Athletes</div>' +
             '</div>'+
             '<table>' +
                 '<thead>'+

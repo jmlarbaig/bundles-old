@@ -29,6 +29,15 @@
         "width":7,
         "headerColor": "#525F78",
         "workspace": "Main Workspace"
+      },
+      {
+        "name": "timer",
+        "title": "Manual Timer Control",
+        "file": "timer.html",
+        "fullbleed": false,
+        "width":3,
+        "headerColor": "#525F78",
+        "workspace": "Main Workspace"
       }
     ],
     "graphics": [

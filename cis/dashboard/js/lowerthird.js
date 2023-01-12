@@ -41,7 +41,7 @@ async function askAffichage() {
     dataToSend.checked = $('#ath_'+id).is(':checked');
     dataToSend.subtype = $('#subtype'+id).val();
     dataToSend.lane = id;
-    dataToSend.displayName = listeCurrentHeat[id].displayName;
+    dataToSend.displayName = listeCurrentHeat[id].participantName;
     dataToSend.data = listeCurrentHeat[id];
     dataToSend.text = $('#textLower_' + id).val();
 

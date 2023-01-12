@@ -114,7 +114,12 @@
         background-size: cover;
     }
 
+    .nobody{
+        background-color: var(--main_color);
+    }
+
     .screen{
+        overflow: hidden;
         height: 1080px;
         width: 1920px;
     }

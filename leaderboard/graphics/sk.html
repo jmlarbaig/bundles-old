@@ -35,7 +35,7 @@
 	<script src='js/time.js'></script>
 
 </head>
-<body>
+<body class="nobody">
 	<div class="header">
 
 		<div class="box_logo">
@@ -50,6 +50,48 @@
 			<div id="heat" class="heat"></div>
 		</div>
 
+	</div>
+
+	<div>
+		<div class="controlHeat">
+			<div class="col input-form">
+				<label for="workoutsMqtt">Workout Selection</label>
+				<select id="workoutsMqtt" class="workouts">
+					<option value="0">NO WORKOUT LOADED</option>
+				</select>
+			</div>
+			<div class="col input-form">
+				<label for="heatsMqtt">Heat Selection</label>
+				<select id="heatsMqtt" class="heat">
+					<option value="0">NO HEAT LOADED</option>
+				</select>
+			</div>
+			<div class="col log-button">
+				<button type='button' id='changeHeat' onclick='changeHeat()'>Heat Changed </button>
+			</div>
+
+			
+			<div class="col box">
+				<label>Time Cap Workout</label>
+				<div id="timeCapKairos">00:00</div>
+			</div>
+
+			<div class="col stateTimer box">
+				<label>State Heat</label>
+				<div id="stateTimer"></div>
+			</div>
+			
+
+			<div class="col log-button">
+				<button type='button' id='startChrono' onclick='startChrono()'>Start Chrono </button>
+			</div>
+
+
+			<div class="col">
+				<label for="countTimer">Count before timer</label>
+				<input type="number" id="countTimer" value="11"></div>
+			</div>
+		</div>
 	</div>
 
 	<div class="leaderboards" id="leaderboards"></div>

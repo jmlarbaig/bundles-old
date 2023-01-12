@@ -27,7 +27,7 @@ function updateTime(){
         else {
             chrono = msToTime(timeDiffStart );
         }
-    } else if (timeDiffStart < 0  && timeDiffStart > -5999 ){
+    } else if (timeDiffStart < 0  && timeDiffStart > -10999 ){
         $('#cap').fadeOut(1000)
         $(".box_chrono").css("background-color", "rgba(255,50,80,1)")
         $(".box_chrono").css("color", "rgb(255,255,255")
@@ -57,6 +57,14 @@ function updateTime(){
     }
     document.getElementById("time").innerHTML = chrono;
 
+}
+
+function resetTimer(){
+    $(".box_chrono").css("background-color", Clrs.chrono_color)
+    $(".box_chrono").css("color", Clrs.tx_chrono_color)
+    $(".chrono").css("background-color", Clrs.chrono_color)
+    $(".chrono").css("color", Clrs.tx_chrono_color)
+    document.getElementById("time").innerHTML = "00:00";
 }
 
 

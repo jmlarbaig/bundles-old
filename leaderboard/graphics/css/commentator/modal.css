@@ -35,41 +35,144 @@
     cursor: pointer;
   }
 
-  .modal .workouts{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    text-align: center;
-    margin: 40px 10px;
-  }
-
-  .modal .workouts .wod{
-    padding: 0px 10px ;
-  }
-
-
-  .modal .athlete{
-    display: flex;
-    flex-direction: column;
-  }
-
-  .modal .first{
+  .modal .box_infos{
     display: flex;
     flex-direction: row;
   }
 
-  .modal .details{
-    display: flex;
-    flex-direction: column;
-  }
-
-  .modal .avatar{
+  .modal .box_infos .avatar{
+    position: absolute;
     background-position: center;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
-    width: 100px;
-    height: 100px;
+    background-size: cover;
+    width: 40%;
+    height: 500px;
+    overflow: hidden;
+  }
+
+
+  .modal .infos{
+    position: relative;
+    width: 40%;
+    padding-left: 10px;
+    background-color: rgba(222, 222, 222, 0.774);
+    color: black;
+    margin: auto;
+  }
+
+  .modal .sup{
+    width: 50%;
+  }
+
+  .modal .workouts{
+    position: relative;
+    width: 100%;
+    text-align: left;
+    margin: 40px 10px;
+    border-spacing: 10px;
+    border-collapse: collapse;
+  }
+
+  .modal .wod{
+    padding: 10px;
+  }
+
+  .modal .workouts tr:nth-child(even){
+    background-color: #888;
+    color: white;
+  }
+
+  .modal .workouts tr:nth-child(odd){
+    background-color: rgb(232, 232, 232);
+    color: black;
+  }
+
+  .modal .events{
+    position: relative;
+    width: 100%;
+    text-align: left;
+    margin: 40px 10px;
+    border-spacing: 10px;
+    border-collapse: collapse;
+  }
+
+  .modal .events tr:nth-child(even){
+    background-color: #888;
+    color: white;
+  }
+
+  .modal .events tr:nth-child(odd){
+    background-color: rgb(232, 232, 232);
+    color: black;
+  }
+
+
+  .modal .athletes{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal .athlete{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .modal .first{
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal .athletes .first .avatar{
+    position: absolute;
+    background-position: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 45%;
+    height: 400px;
+    overflow: hidden;
+  }
+
+  .modal .second{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal .second .events{
+    width: 100%;
+  }
+
+  .modal .second .benchmarks{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .modal .second .benchmarks .benchmark{
+    margin: 10px 5px;
+  }
+
+  .modal .details{
+    background-color: rgba(136, 136, 136, 0.463);
+    color: white;
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal .box_infos .sup .benchmarks{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .modal .box_infos .sup .benchmarks .benchmark{
+    padding: 10px;
   }

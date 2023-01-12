@@ -14,7 +14,7 @@
       "type": "time",
       "description": "",
       "heatsSize": 20,
-      "timeCap": "00:01:00",
+      "timeCap": "00:12:00",
       "format": "individual",
       "scoreLabel": "",
       "createDate": "2022-09-07T05:29:09"
@@ -450,11 +450,101 @@
     },
     {
       "lane": 10,
-      "displayName": "FRAN  GRANADOSSSSSSSSS ",
+      "displayName": "FRAN  GRANADOS ",
       "rank": 1,
       "overallPoints": 290,
       "affiliate": "",
       "division": "Master +40 Male",
+      "countryCode": "ESP"
+    },
+    {
+      "lane": 11,
+      "displayName": "Valent\u00edn  Gonzalez ",
+      "rank": 8,
+      "overallPoints": 232,
+      "affiliate": "",
+      "division": "Master +45 Male",
+      "countryCode": "ESP"
+    },
+    {
+      "lane": 12,
+      "displayName": "Francisco Perez",
+      "rank": 6,
+      "overallPoints": 243,
+      "affiliate": "",
+      "division": "Master +45 Male",
+      "countryCode": "CRI"
+    },
+    {
+      "lane": 13,
+      "displayName": "Xavier Mart\u00ednez Torres",
+      "rank": 10,
+      "overallPoints": 215,
+      "affiliate": "",
+      "division": "Master +45 Male",
+      "countryCode": "ESP"
+    },
+    {
+      "lane": 14,
+      "displayName": "Jose Angel Martin",
+      "rank": 9,
+      "overallPoints": 0,
+      "affiliate": "",
+      "division": "Master +45 Male",
+      "countryCode": "ESP"
+    },
+    {
+      "lane": 15,
+      "displayName": "ALEXANDRE DETHOOR",
+      "rank": 7,
+      "overallPoints": 0,
+      "affiliate": "",
+      "division": "Master +45 Male",
+      "countryCode": "FRA"
+    },
+    {
+      "lane": 16,
+      "displayName": "JAIME COSME",
+      "rank": 4,
+      "overallPoints": 250,
+      "affiliate": "",
+      "division": "Master +45 Male",
+      "countryCode": "ESP"
+    },
+    {
+      "lane": 17,
+      "displayName": "Juan Jose Rubi\u00f1o",
+      "rank": 5,
+      "overallPoints": 248,
+      "affiliate": "",
+      "division": "Master +45 Male",
+      "countryCode": "ESP"
+    },
+    {
+      "lane": 18,
+      "displayName": "Julio Lozano Tejero",
+      "rank": 1,
+      "overallPoints": 0,
+      "affiliate": "",
+      "division": "Master +45 Male",
+      "countryCode": "ESP"
+    },
+    {
+      "lane": 19,
+      "displayName": "Joan Almirall Prat",
+      "rank": 3,
+      "overallPoints": 253,
+      "affiliate": "",
+      "division": "Master +45 Male",
+      "countryCode": "ESP"
+    },
+    {
+      "lane": 20,
+      "displayName": "Javier Garc\u00eda Hern\u00e1ndez ",
+      "rank": 2,
+      "overallPoints": 261,
+      "affiliate": "",
+      "division": "Master +45 Male",
       "countryCode": "ESP"
     }
   ],

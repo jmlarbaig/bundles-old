@@ -7,6 +7,7 @@
     let listeCurrentHeat;
 
     listCis.on('change', (newValue, oldValue)=>{
+        console.log(newValue)
         if(JSON.stringify(newValue) != JSON.stringify(oldValue)){
             listeCurrentHeat = newValue
             updateFront(newValue)
@@ -37,22 +38,22 @@
         }
     })
     
-    const listWarmpUp = nodecg.Replicant('listWarmpUp', 'connector');
+    // const listWarmpUp = nodecg.Replicant('listWarmpUp', 'connector');
 
-    let listOverall = []
+    // let listOverall = []
 
-    listWarmpUp.on('change', (newValue, oldValue)=>{
-        if(newValue != undefined && JSON.stringify(newValue) != JSON.stringify(oldValue)){
-            let participantsHeat = newValue.warmUp[0].wod.participants
-            let stations = newValue.warmUp[0].heat.stations
-            for(let station of stations){
-                let data = participantsHeat.find( element => element.id === station.participantId)
-                listOverall[station.station] = {}
-                listOverall[station.station].oR = data.rank
-                listOverall[station.station].oP = data.points
+    // listWarmpUp.on('change', (newValue, oldValue)=>{
+    //     if(newValue != undefined && JSON.stringify(newValue) != JSON.stringify(oldValue)){
+    //         let participantsHeat = newValue.warmUp[0].wod.participants
+    //         let stations = newValue.warmUp[0].heat.stations
+    //         for(let station of stations){
+    //             let data = participantsHeat.find( element => element.id === station.participantId)
+    //             listOverall[station.station] = {}
+    //             listOverall[station.station].oR = data.rank
+    //             listOverall[station.station].oP = data.points
 
-                $('#overallPoints_'+station.station).text( 'Overall Points : ' + data.points)
-                $('#overallRank_'+station.station).text('Overall Rank : ' + data.rank)
-            }
-        }
-    })
+    //             $('#overallPoints_'+station.station).text( 'Overall Points : ' + data.points)
+    //             $('#overallRank_'+station.station).text('Overall Rank : ' + data.rank)
+    //         }
+    //     }
+    // })

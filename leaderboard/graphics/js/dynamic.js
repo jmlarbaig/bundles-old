@@ -17,7 +17,7 @@ function updateDynamics(newScoring, status){
                     elemAth[i] = Object.assign( {}, elemAth[i],fetchNewData(newScoring, elemAth[i].lane));
                     elemAth[i].$item.find(".rank").text(elemAth[i].CurrentRank);
                     
-                    if( status == "W" || status == "0"){
+                    if( status == "W" || status == "R"){
 
                         !elemAth[i].$item.find(".score").is(':visible') && elemAth[i].$item.find(".score").show();
 
@@ -263,6 +263,8 @@ function updateDynamics(newScoring, status){
 
                 if(overlay !== 'commentator'){
                     $("#leaderboard"+ key + " #athletes").height(height_tot)
+                    console.log(height_tot)
+                    console.log($("#leaderboard"+key + " .header").height())
                     $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height() + 15)
                 }
             }

@@ -69,8 +69,8 @@ module.exports = (nodecg) => {
         });
 
         client.on('message', function (topic, message) {
-            console.log(topic)
-            console.log(message)
+            // console.log(topic)
+            // console.log(message)
 
             message = message.toString()
 
@@ -148,7 +148,7 @@ module.exports = (nodecg) => {
                 minos.lane = parseInt(mes[1])
                 minos.type = parseInt(mes[2], 2)
                 minos.battery = parseInt(mes[3])
-                minos.signal = (mes[4] | 'No Data')
+                minos.signal = (mes[4])
 
                 tableOfMinosOnFloor[minos.ip] = minos ;
 
@@ -210,10 +210,11 @@ module.exports = (nodecg) => {
         }
     }
 
-    function startChrono( minutes, secondes, type){
+    function startChrono( minutes, secondes, type, count){
 
         let epochTime = Date.now()
-        let _time = `${minutes}.${secondes}`;
+        let _s = (minutes*60)+secondes;
+        let _time = `${_s}.0`;
         let timer = '';
 
         switch (type) {
@@ -229,7 +230,7 @@ module.exports = (nodecg) => {
         }
 
         if (client.connected) {
-            client.publish(`kairos/timer`, `${timer};${4 * 1000};${epochTime}`);
+            client.publish(`kairos/timer`, `${timer};${count * 1000};${epochTime}`);
         }
     }
 
@@ -240,12 +241,15 @@ module.exports = (nodecg) => {
     })
 
     nodecg.listenFor('change_heat', (value) => {
-        console.log(value)
-        getListCurrentHeat(value.workoutId, value.heatId)
+        if(client != undefined){
+            getListCurrentHeat(value.workoutId, value.heatId)
+        }
     })
 
     nodecg.listenFor('start_chrono', (value) => {
-        startChrono(value.minutes, value.secondes, value.type)
+        if(client != undefined){
+            startChrono(value.minutes, value.secondes, value.type, value.count)
+        }
     })
 
     nodecg.listenFor('request_minos', (lane) => {
@@ -270,7 +274,7 @@ module.exports = (nodecg) => {
         'battery':0,
         'status':0,
         'time':0,        
-        'signal':0
+        'signal':''
     }
 
 
