@@ -81,20 +81,40 @@ module.exports = (nodecg) => {
             message = message.toString()
 
             if (topic.includes('eventDescription')){
-                _eventId = JSON.parse(message.toString()).id;
-                client.subscribe(`kairos/${_eventId}/nextHeat`);
-                client.subscribe(`kairos/${_eventId}/timer`);
-                client.subscribe(`kairos/eventId`);
-                client.subscribe(`kairos/${_eventId}/currentHeat`);
-                client.subscribe(`kairos/${_eventId}/heat_status`);
-                client.subscribe(`kairos/${_eventId}/currentDiv`);
-                client.subscribe(`kairos/${_eventId}/workouts`);
-                client.subscribe(`kairos/${_eventId}/nextHeat`);
-                client.subscribe(`kairos/${_eventId}/request`);
+                if(message != ""){
+                    _eventId = JSON.parse(message.toString()).id;
+                    // client.subscribe(`kairos/${_eventId}/nextHeat`);
+                    // client.subscribe(`kairos/${_eventId}/timer`);
+                    // client.subscribe(`kairos/eventId`);
+                    // client.subscribe(`kairos/${_eventId}/currentHeat`);
+                    // client.subscribe(`kairos/${_eventId}/heat_status`);
+                    // client.subscribe(`kairos/${_eventId}/currentDiv`);
+                    // client.subscribe(`kairos/${_eventId}/workouts`);
+                    // client.subscribe(`kairos/${_eventId}/nextHeat`);
+                    // client.subscribe(`kairos/${_eventId}/request`);
+    
+                    // getListWorkouts();
+                    // getCurrentHeat();
+                    // getHeatStatus();
+                }else{
+                    client.publish('kairos/request', 'eventId')
+                }
 
-                getListWorkouts();
-                getCurrentHeat();
-                getHeatStatus();
+                setTimeout(()=>{
+                    client.subscribe(`kairos/${_eventId}/nextHeat`);
+                    client.subscribe(`kairos/${_eventId}/timer`);
+                    client.subscribe(`kairos/eventId`);
+                    client.subscribe(`kairos/${_eventId}/currentHeat`);
+                    client.subscribe(`kairos/${_eventId}/heat_status`);
+                    client.subscribe(`kairos/${_eventId}/currentDiv`);
+                    client.subscribe(`kairos/${_eventId}/workouts`);
+                    client.subscribe(`kairos/${_eventId}/nextHeat`);
+                    client.subscribe(`kairos/${_eventId}/request`);
+    
+                    getListWorkouts();
+                    getCurrentHeat();
+                    getHeatStatus();
+                }, 2000)
 
             }else if(topic.includes('workouts')){
                 if(lastWorkouts != message){
@@ -227,13 +247,20 @@ module.exports = (nodecg) => {
 
     function getHeatStatus(){
         if (client.connected) {
-            client.publish(`kairos/${_eventId}/timer`, '');
+            if(_eventId == undefined && _eventId != 0){
+                client.publish('kairos/request', 'eventId')
+                setTimeout(()=>{
+                    client.publish(`kairos/${_eventId}/timer`, '');
+                }, 2000)
+            }else{
+                client.publish(`kairos/${_eventId}/timer`, '');
+            }
         }
     }
 
     function getListCurrentHeat( workoutId, heatId){
         if (client.connected) {
-            if(_eventId == undefined){
+            if(_eventId == undefined && _eventId != 0){
                 client.publish('kairos/request', 'eventId')
                 setTimeout(()=>{
                     client.publish(`kairos/${_eventId}/nextHeat`, `${workoutId},${heatId}`);
