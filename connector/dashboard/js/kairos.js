@@ -51,6 +51,7 @@ function changeHeat(){
 
     data.workoutId = $('#workoutsMqtt').val()
     data.heatId = $('#heatsMqtt').val()
+    resetChrono()
 
     nodecg.sendMessage('change_heat', data)
 
@@ -77,3 +78,11 @@ function startChrono(){
 
 }
 
+function resetChrono(){
+    nodecg.sendMessageToBundle('reset_timer', 'leaderboard')
+    nodecg.sendMessage('reset_chrono_heat')
+}
+
+function reloadWorkout(){
+    nodecg.sendMessage('reloadWorkout')
+}

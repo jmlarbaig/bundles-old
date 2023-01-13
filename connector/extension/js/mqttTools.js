@@ -21,10 +21,13 @@ module.exports = (nodecg) => {
     let _workouts = []
     let _division = []
     let _currentHeat = {}
+    let chrono = '';
+    let countdown = 10000;
 
     let receivedHeats;
     let lastWorkouts;
     let lastDiv;
+    let launchTimer = null;
 
     function connectionMQTT(ip_broker){   
         if (client == null){
@@ -50,6 +53,9 @@ module.exports = (nodecg) => {
             client.subscribe('kairos/Minos');
             client.subscribe('kairos/+/SCORE');
             client.subscribe('kairos/+/eventDescription');
+            client.subscribe('kairos/request');
+            client.subscribe('kairos/timer');
+            client.subscribe(`kairos/+/heat_start_time`);
             getEvent()
         })
 
@@ -84,7 +90,6 @@ module.exports = (nodecg) => {
                 client.subscribe(`kairos/${_eventId}/workouts`);
                 client.subscribe(`kairos/${_eventId}/nextHeat`);
                 client.subscribe(`kairos/${_eventId}/request`);
-                client.subscribe(`kairos/${_eventId}/heat_start_time`);
 
                 getListWorkouts();
                 getCurrentHeat();
@@ -115,6 +120,25 @@ module.exports = (nodecg) => {
                     _currentHeat = JSON.parse(receivedHeats)
                     heatMQTT.value = _currentHeat
                 }
+            }else if(topic.includes('request')){
+                console.log('asking for chrono')
+                console.log(message)
+                if(message == 'heatChrono'){
+                    launchTimer = setTimeout(()=>{
+                        let epoch = Date.now()
+                        let chronoForPublish = `00:${msToTime(epoch - chrono - countdown + 1000)}.0`;
+                        client.publish(`kairos/${_eventId}/chronoHeat`, `${chronoForPublish};${epoch}`)
+                    }, 2000)}
+            }else if(topic.includes('timer')){
+                console.log('timer')
+                console.log(message)
+                if(message != ''){
+                    chrono = message.split(';')[2]
+                    countdown = parseInt(message.split(';')[1])
+                }
+            }else if(topic.includes('chronoHeat')){
+                clearTimeout(launchTimer)
+                launchTimer = null;
             }
 
             if(topic.includes("ERG")){
@@ -210,6 +234,18 @@ module.exports = (nodecg) => {
         }
     }
 
+    function msToTime(s) {
+        var ms = s % 1000;
+        s = (s - ms) / 1000;
+        var secs = s % 60;
+        s = (s - secs) / 60;
+        var mins = s % 60;
+        var hrs = (s - mins) / 60;
+        if (secs<10) { secs = '0' + secs}
+        if (mins<10) { mins = '0' + mins}
+        return mins + ':' + secs ;
+    }
+
     function startChrono( minutes, secondes, type, count){
 
         let epochTime = Date.now()
@@ -242,6 +278,7 @@ module.exports = (nodecg) => {
 
     nodecg.listenFor('change_heat', (value) => {
         if(client != undefined){
+            
             getListCurrentHeat(value.workoutId, value.heatId)
         }
     })
@@ -249,6 +286,12 @@ module.exports = (nodecg) => {
     nodecg.listenFor('start_chrono', (value) => {
         if(client != undefined){
             startChrono(value.minutes, value.secondes, value.type, value.count)
+        }
+    })
+
+    nodecg.listenFor('reset_chrono_heat', (value) => {
+        if(client != undefined){
+            client.publish('kairos/timer','0')
         }
     })
 
@@ -262,6 +305,12 @@ module.exports = (nodecg) => {
             }
             client.publish('kairos/Minos/AYTRequest', message )
         }
+    })
+
+    nodecg.listenFor('reloadWorkout', ()=>{
+        getListWorkouts();
+        getCurrentHeat();
+        getHeatStatus();
     })
 
     let tableOfMinosOnFloor = []

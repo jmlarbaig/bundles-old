@@ -48,6 +48,19 @@ module.exports = (nodecg, ip_ntp) =>{
         });
     }
 
+    nodecg.listenFor('ntpTime',(value, ack)=>{
+        console.log(ip_ntp)
+        ntpClient.getNetworkTime(ip_ntp, 123, function(err, date) {
+            if(err) {
+                // nowNtp.value = err
+            }else{
+                if (ack && !ack.handled) {
+                    ack(null, date);
+                }
+            }
+        });
+    })
+
 
     function changeIpAdresse(){
         ip_adresse = ip.address() // my ip address

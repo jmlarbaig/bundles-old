@@ -83,6 +83,8 @@
                 resetHeat(newValue);
                 if (newValue.heatId != heat.heatId){
                     newHeat = true;
+                    best = []
+                    bestPerf = []
                 }else{
                     newHeat = false
                 }
@@ -155,6 +157,11 @@
                         $('.stateTimer').css('background-color', 'white')
                         $('.stateTimer').css('color', 'black')
                         $('#stateTimer').text('HEAT LOADED, VERIFY IF THIS THE GOOD HEAT')
+                        break;
+                    case 'R':
+                        $('.stateTimer').css('background-color', 'orange')
+                        $('.stateTimer').css('color', 'white')
+                        $('#stateTimer').text('STANDBY')
                         break;
                     case 'W':
                         $('.stateTimer').css('background-color', 'green')
@@ -468,6 +475,7 @@
 
         console.log(data)
     
+        resetChrono()
         nodecg.sendMessageToBundle('change_heat', 'connector', data)
 
         $('#changeHeat').css('background-color', 'green')
@@ -511,6 +519,14 @@
     
     }
     
+    function resetChrono(){
+        nodecg.sendMessage('reset_timer')
+        nodecg.sendMessageToBundle('reset_chrono_heat', 'connector')
+    }
+    
+    function reloadWorkout(){
+        nodecg.sendMessageToBundle('reloadWorkout', 'connector')
+    }
     
 
 
@@ -534,4 +550,12 @@
                 $('#video').fadeOut(1000)
                 break;
         }
+    })
+
+    nodecg.listenFor('reset_timer', ()=>{
+        if(timerLaunch != null){
+            clearInterval(timerLaunch)
+            timerLaunch = null;
+        }
+        resetTimer()
     })

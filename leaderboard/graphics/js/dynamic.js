@@ -21,7 +21,7 @@ function updateDynamics(newScoring, status){
 
                         !elemAth[i].$item.find(".score").is(':visible') && elemAth[i].$item.find(".score").show();
 
-                        if( elemAth[i].status == "W" || elemAth[i].status == "0" ){
+                        if( elemAth[i].status == "W" ){
 
                             if(workouts.length > 0 && auth[elemAth[i].division] && elemAth[i].result == ""){
                                     
@@ -229,26 +229,31 @@ function updateDynamics(newScoring, status){
                         }
                         Object.values(elemAth[i].log_mvt[0]).forEach((time, index)=>{
 
-                            elemAth[i].$item.find("#mvt_id_"+index+"_"+elemAth[i].lane).text(time)
+                            if( time != '00:00.0'){
+                                if(elemAth[i].$item.find("#mvt_id_"+index+"_"+elemAth[i].lane).text() == '-'){
 
-                            let secondes = time.split(':').map(Number)
-                            let min = secondes[0]*60;
-                            let total = secondes[1] + min
+                                    let secondes = time.split(':').map(Number)
+                                    let min = secondes[0]*60;
+                                    let total = secondes[1] + min
 
-                            bestPerf[elemAth[i].lane][index] = total
+                                    if(total > 3){
+                                        elemAth[i].$item.find("#mvt_id_"+index+"_"+elemAth[i].lane).text(time)
+                                        bestPerf[elemAth[i].lane][index] = total
+            
+                                        if(best[index] == undefined){
+                                            best[index] = total
+                                        }
+            
+                                        if(bestPerf[elemAth[i].lane][index] <= best[index]){
+                                            best[index] = bestPerf[elemAth[i].lane][index]
+                                            
+                                            $('#leaderboard'+key).find('.mvt_id_'+index).removeClass('bestStat');
+                                            elemAth[i].$item.find("#mvt_id_"+index+"_"+elemAth[i].lane).addClass('bestStat');
+                                        }
 
-
-                            if(best[index] == undefined){
-                                best[index] = total
+                                    }
+                                }
                             }
-
-                            if(bestPerf[elemAth[i].lane][index] <= best[index]){
-                                best[index] = bestPerf[elemAth[i].lane][index]
-                                
-                                $('#leaderboard'+key).find('.mvt_id_'+index).removeClass('bestStat');
-                                elemAth[i].$item.find("#mvt_id_"+index+"_"+elemAth[i].lane).addClass('bestStat');
-                            }
-
                         })
                     }
 
@@ -271,8 +276,8 @@ function updateDynamics(newScoring, status){
             else{
                 overlay !== 'commentator' && $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height())
 
-                elemAth.sort(ascendingLane);
-                reposition("#leaderboard"+ key, elemAth);
+                // elemAth.sort(ascendingLane);
+                // reposition("#leaderboard"+ key, elemAth);
 
             }
 

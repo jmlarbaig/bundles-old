@@ -19,6 +19,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" href="css/connector.css">
+	<link rel="stylesheet" href="css/button.css">
 	<script src='./js/replicants.js'></script>
 	<script src="./js/tools.js"></script>
 	<script src='./js/kairos.js'></script>
@@ -27,20 +28,27 @@
 <body>
 	<div class="container">
 		<div class="col box">
+
+			<div class="log-button">
+				<button type='button'  id='reloadWorkouts' onclick='reloadWorkout()'>Reload Workout </button>
+			</div>
+
 			<div class="input-form">
 				<label for="workoutsMqtt">Workout Selection</label>
 				<select id="workoutsMqtt" class="workouts">
 					<option value="0">NO WORKOUT LOADED</option>
 				</select>
 			</div>
+
 			<div class="input-form">
 				<label for="heatsMqtt">Heat Selection</label>
 				<select id="heatsMqtt" class="heat">
 					<option value="0">NO HEAT LOADED</option>
 				</select>
 			</div>
+
 			<div class="log-button">
-				<button type='button' id='changeHeat' onclick='changeHeat()'>Heat Changed </button>
+				<button type='button' id='changeHeat' onclick='changeHeat()'>Change Heat</button>
 			</div>
 
 			<br>
@@ -63,10 +71,15 @@
 
 			<div class="box">
 				<label for="countTimer">Count before timer</label>
-				<input type="number" id="countTimer" value="11"></div>
+				<input type="number" id="countTimer" value="11"/>
+			</div>
+
+
+			<div class="log-button">
+				<button type='button' id='resetChrono' onclick='resetChrono()'>Reset Chrono </button>
 			</div>
 		</div>
-
+		
 </body>
 	<script src="index.js"></script>
 
