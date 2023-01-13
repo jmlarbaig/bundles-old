@@ -84,6 +84,7 @@ module.exports = (nodecg) => {
                 _eventId = JSON.parse(message.toString()).id;
                 client.subscribe(`kairos/${_eventId}/nextHeat`);
                 client.subscribe(`kairos/${_eventId}/timer`);
+                client.subscribe(`kairos/eventId`);
                 client.subscribe(`kairos/${_eventId}/currentHeat`);
                 client.subscribe(`kairos/${_eventId}/heat_status`);
                 client.subscribe(`kairos/${_eventId}/currentDiv`);
@@ -139,6 +140,10 @@ module.exports = (nodecg) => {
             }else if(topic.includes('chronoHeat')){
                 clearTimeout(launchTimer)
                 launchTimer = null;
+            }else if(topic.includes('eventId')){
+                if(message != undefined){
+                    _eventId = message
+                }
             }
 
             if(topic.includes("ERG")){
@@ -228,9 +233,14 @@ module.exports = (nodecg) => {
 
     function getListCurrentHeat( workoutId, heatId){
         if (client.connected) {
-            console.log(workoutId)
-            console.log(heatId)
-            client.publish(`kairos/${_eventId}/nextHeat`, `${workoutId},${heatId}`);
+            if(_eventId == undefined){
+                client.publish('kairos/request', 'eventId')
+                setTimeout(()=>{
+                    client.publish(`kairos/${_eventId}/nextHeat`, `${workoutId},${heatId}`);
+                }, 2000)
+            }else{
+                client.publish(`kairos/${_eventId}/nextHeat`, `${workoutId},${heatId}`);
+            }
         }
     }
 
@@ -311,6 +321,12 @@ module.exports = (nodecg) => {
         getListWorkouts();
         getCurrentHeat();
         getHeatStatus();
+    })
+
+    nodecg.listenFor('reloadWorkoutFromHermes', ()=>{
+     if(client.connected){
+        client.publish('kairos/command', 'Ask Reload Workouts' )
+     }
     })
 
     let tableOfMinosOnFloor = []

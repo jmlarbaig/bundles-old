@@ -86,3 +86,7 @@ function resetChrono(){
 function reloadWorkout(){
     nodecg.sendMessage('reloadWorkout')
 }
+
+function reloadWorkoutHermes(){
+    nodecg.sendMessage('reloadWorkoutFromHermes')
+}
