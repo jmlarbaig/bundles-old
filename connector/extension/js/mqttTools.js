@@ -51,11 +51,17 @@ module.exports = (nodecg) => {
             Mqtt_connected.value = {connected:true, error:''};
             client.subscribe('kairos/+/ERG/#');
             client.subscribe('kairos/Minos');
-            client.subscribe('kairos/+/SCORE');
-            client.subscribe('kairos/+/eventDescription');
+            // client.subscribe('kairos/+/SCORE');
+            // client.subscribe('kairos/+/eventDescription');
             client.subscribe('kairos/request');
             client.subscribe('kairos/timer');
-            client.subscribe(`kairos/+/heat_start_time`);
+            // client.subscribe(`kairos/+/heat_start_time`);
+            // client.subscribe(`kairos/+/nextHeat`);
+            client.subscribe(`kairos/eventId`);
+            client.subscribe(`kairos/+/currentHeat`);
+            // client.subscribe(`kairos/+/heat_status`);
+            // client.subscribe(`kairos/+/currentDiv`);
+            client.subscribe(`kairos/+/workouts`);
             getEvent()
         })
 
@@ -75,46 +81,20 @@ module.exports = (nodecg) => {
         });
 
         client.on('message', function (topic, message) {
-            // console.log(topic)
-            // console.log(message)
-
+            console.log('Heure de la requete :', msToTime(Date.now()))
             message = message.toString()
+            console.log(topic)
 
-            if (topic.includes('eventDescription')){
-                if(message != ""){
-                    _eventId = JSON.parse(message.toString()).id;
-                    // client.subscribe(`kairos/${_eventId}/nextHeat`);
-                    // client.subscribe(`kairos/${_eventId}/timer`);
-                    // client.subscribe(`kairos/eventId`);
-                    // client.subscribe(`kairos/${_eventId}/currentHeat`);
-                    // client.subscribe(`kairos/${_eventId}/heat_status`);
-                    // client.subscribe(`kairos/${_eventId}/currentDiv`);
-                    // client.subscribe(`kairos/${_eventId}/workouts`);
-                    // client.subscribe(`kairos/${_eventId}/nextHeat`);
-                    // client.subscribe(`kairos/${_eventId}/request`);
-    
-                    // getListWorkouts();
-                    // getCurrentHeat();
-                    // getHeatStatus();
-                }else{
-                    client.publish('kairos/request', 'eventId')
-                }
 
-                setTimeout(()=>{
-                    client.subscribe(`kairos/${_eventId}/nextHeat`);
-                    client.subscribe(`kairos/${_eventId}/timer`);
-                    client.subscribe(`kairos/eventId`);
-                    client.subscribe(`kairos/${_eventId}/currentHeat`);
-                    client.subscribe(`kairos/${_eventId}/heat_status`);
-                    client.subscribe(`kairos/${_eventId}/currentDiv`);
-                    client.subscribe(`kairos/${_eventId}/workouts`);
-                    client.subscribe(`kairos/${_eventId}/nextHeat`);
-                    client.subscribe(`kairos/${_eventId}/request`);
+            if (topic.includes('eventId')){
+                if(message != "" && _eventId != parseInt(message)){
+                    _eventId = parseInt(message);
+                    console.log(_eventId)
     
                     getListWorkouts();
                     getCurrentHeat();
                     getHeatStatus();
-                }, 2000)
+                }
 
             }else if(topic.includes('workouts')){
                 if(lastWorkouts != message){
@@ -142,8 +122,6 @@ module.exports = (nodecg) => {
                     heatMQTT.value = _currentHeat
                 }
             }else if(topic.includes('request')){
-                console.log('asking for chrono')
-                console.log(message)
                 if(message == 'heatChrono'){
                     launchTimer = setTimeout(()=>{
                         let epoch = Date.now()
@@ -151,8 +129,6 @@ module.exports = (nodecg) => {
                         client.publish(`kairos/${_eventId}/chronoHeat`, `${chronoForPublish};${epoch}`)
                     }, 2000)}
             }else if(topic.includes('timer')){
-                console.log('timer')
-                console.log(message)
                 if(message != ''){
                     chrono = message.split(';')[2]
                     countdown = parseInt(message.split(';')[1])
@@ -248,11 +224,6 @@ module.exports = (nodecg) => {
     function getHeatStatus(){
         if (client.connected) {
             if(_eventId == undefined && _eventId != 0){
-                client.publish('kairos/request', 'eventId')
-                setTimeout(()=>{
-                    client.publish(`kairos/${_eventId}/timer`, '');
-                }, 2000)
-            }else{
                 client.publish(`kairos/${_eventId}/timer`, '');
             }
         }
