@@ -63,6 +63,8 @@ module.exports = (nodecg) => {
             // client.subscribe(`kairos/+/currentDiv`);
             client.subscribe(`kairos/+/workouts`);
             getEvent()
+            getListWorkouts();
+            getCurrentHeat();
         })
 
         client.on('disconnect', () => {
@@ -89,10 +91,6 @@ module.exports = (nodecg) => {
             if (topic.includes('eventId')){
                 if(message != "" && _eventId != parseInt(message)){
                     _eventId = parseInt(message);
-                    console.log(_eventId)
-    
-                    getListWorkouts();
-                    getCurrentHeat();
                     getHeatStatus();
                 }
 
@@ -125,13 +123,18 @@ module.exports = (nodecg) => {
                 if(message == 'heatChrono'){
                     launchTimer = setTimeout(()=>{
                         let epoch = Date.now()
-                        let chronoForPublish = `00:${msToTime(epoch - chrono - countdown + 1000)}.0`;
-                        client.publish(`kairos/${_eventId}/chronoHeat`, `${chronoForPublish};${epoch}`)
+                        //TODO Changemnt du NaN NaN 
+                        if(chrono){
+                            let chronoForPublish = `00:${msToTime(epoch - chrono - countdown + 1000)}.0`;
+                            client.publish(`kairos/${_eventId}/chronoHeat`, `${chronoForPublish};${epoch}`)
+                        }
                     }, 2000)}
             }else if(topic.includes('timer')){
                 if(message != ''){
-                    chrono = message.split(';')[2]
-                    countdown = parseInt(message.split(';')[1])
+                    if(message != '0'){
+                        chrono = message.split(';')[2]
+                        countdown = parseInt(message.split(';')[1])
+                    }
                 }
             }else if(topic.includes('chronoHeat')){
                 clearTimeout(launchTimer)
