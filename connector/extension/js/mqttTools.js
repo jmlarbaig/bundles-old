@@ -121,6 +121,10 @@ module.exports = (nodecg) => {
                 }
             }else if(topic.includes('request')){
                 if(message == 'heatChrono'){
+                    if (launchTimer != null){
+                        clearTimeout(launchTimer)
+                        launchTimer = null;
+                    }
                     launchTimer = setTimeout(()=>{
                         let epoch = Date.now()
                         //TODO Changemnt du NaN NaN 
@@ -139,10 +143,6 @@ module.exports = (nodecg) => {
             }else if(topic.includes('chronoHeat')){
                 clearTimeout(launchTimer)
                 launchTimer = null;
-            }else if(topic.includes('eventId')){
-                if(message != undefined){
-                    _eventId = message
-                }
             }
 
             if(topic.includes("ERG")){
