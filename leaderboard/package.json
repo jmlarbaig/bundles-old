@@ -38,6 +38,15 @@
         "width":3,
         "headerColor": "#525F78",
         "workspace": "Main Workspace"
+      },
+      {
+        "name": "adjusttimer",
+        "title": "Adjust Timer",
+        "file": "adjustTimer.html",
+        "fullbleed": false,
+        "width":3,
+        "headerColor": "#525F78",
+        "workspace": "Main Workspace"
       }
     ],
     "graphics": [
@@ -68,6 +77,16 @@
       },
       {
         "file": "sk.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "echo.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "lane.html",
         "width": 1920,
         "height": 1080
       }

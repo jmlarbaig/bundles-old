@@ -124,6 +124,10 @@
         width: 1920px;
     }
 
+    .laneBody{
+        background-color: transparent;
+    }
+
     .frame{
         background-color: transparent;
     }

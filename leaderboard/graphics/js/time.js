@@ -1,18 +1,19 @@
 function updateTime(){
 
-
     let Ft_Ap = setupLeaderboard.value.fortimeAmrap;
 
-    let timer = Date.now() + (timeNTP.value||0)
+    let timer = parseInt(timerNTP.value) + (adjustT.value || 0)
 
     if(newHeat){
         timer = endTime
+        adjustT.value = 0
     }
 
     let timeDiffStart = timer - startTime;
-    let timeDiffTimeCap = timer - endTime;
+    let timeDiffTimeCap = timer - endTime ;
 
     let timeDiffEnd = endTime - timer;
+
 
     $(".box_chrono").css("background-color", Clrs.chrono_color)
     $(".box_chrono").css("color", Clrs.tx_chrono_color)

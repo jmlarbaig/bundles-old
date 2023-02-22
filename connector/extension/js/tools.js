@@ -7,8 +7,9 @@ const ip = require('ip');
 module.exports = (nodecg, ip_ntp) =>{
 
     const ipAddress = nodecg.Replicant('ipAddress')
-    const timeNTP = nodecg.Replicant('timeNTP')
     const nowNtp = nodecg.Replicant('nowNtp')
+    const timerNTP = nodecg.Replicant('timerNTP')
+    let diffNTP = 0
     let ip_adresse;
     let _ip_ntp;
 
@@ -34,11 +35,7 @@ module.exports = (nodecg, ip_ntp) =>{
             if(err) {
                 nowNtp.value = err
             }else{
-                let diff = date.getTime() - Date.now()
-                console.log('DATE NTP : ', date)
-                console.log('DATE MAC : ', Date.now())
-                console.log(diff)
-                timeNTP.value = diff
+                diffNTP = date.getTime() - Date.now()
                 let object = {
                     'ip':ip,
                     'date':date
@@ -46,6 +43,10 @@ module.exports = (nodecg, ip_ntp) =>{
                 nowNtp.value = object
             }
         });
+    }
+
+    function timer(){
+        timerNTP.value = Date.now() - diffNTP
     }
 
     nodecg.listenFor('ntpTime',(value, ack)=>{
@@ -100,6 +101,7 @@ module.exports = (nodecg, ip_ntp) =>{
     changeIpAdresse()
 
     setInterval(checkIpKairos, 1000);
+    setInterval( timer, 1000)
 
     console.log('submodule ', __filename, ' is init')
 }

@@ -50,6 +50,9 @@ function typeWorkout(data){
     else{
         timecap = "0'"+ tc[2];
     }
+    if(ntpStartTime != undefined){
+        endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1] || 0));
+    }
 
     return ({typeWod, formatWod, timecap, heatId})
 }

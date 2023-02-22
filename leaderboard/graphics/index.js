@@ -1,33 +1,32 @@
     
     // initialization
-    var athlete;
-    var athletes;
-    var timerId;
-    var timecapNTP = [];
-    var startTimeNTP;
-    var heatId ;
-    var heat_Name;
-    var heatName;
-    var resetVar = false;
-    var athletes_final = new Array();
-    var timerInterval= null;
-    var dataTime;
-    var athletesDivison;
+    let athlete;
+    let athletes;
+    let timerId;
+    let timecapNTP = [];
+    let startTimeNTP;
+    let heatId ;
+    let heat_Name;
+    let heatName;
+    let resetVar = false;
+    let athletes_final = new Array();
+    let timerInterval= null;
+    let dataTime;
+    let athletesDivison;
     let Mvt_name = []
-
     let height_top = 150;
-
     let root = document.documentElement;
-
     let Clrs = {}
-
     let chrono;
 
 
-    var showDrapeau;
+    let showDrapeau;
 
+    const timerNTP = nodecg.Replicant('timerNTP', 'connector')
     const setupLeaderboard = nodecg.Replicant('setupLeaderboard')
     const Colors = nodecg.Replicant('Colors', 'configuration');
+
+    const adjustT = nodecg.Replicant('adjustT')
     
     const logoEvent = nodecg.Replicant('assets:logoEvent','connector')
     const mainSponsors = nodecg.Replicant('assets:mainSponsor', 'connector')
@@ -59,6 +58,7 @@
     const workoutsMQTT = nodecg.Replicant('workoutsMQTT', 'connector')
     const heatMQTT = nodecg.Replicant('heatMQTT', 'connector')
 
+    let laneEcho =0
 
     // Initialisation du choix de la vue
     
@@ -67,9 +67,12 @@
     $('document').ready(()=>{
         let ch = document.location.pathname.split('/')
         overlay = ch[ch.length-1].replace('.html','')
-        console.log('ready')
+        console.log(overlay)
         if(overlay == 'sk'){
             createKairosView();
+        }else if(overlay.includes('echo')|| overlay.includes('lane')){
+            laneEcho = parseInt(window.location.search.replace('?lane=', ''))
+            console.log(laneEcho)
         }
     })
 
@@ -136,7 +139,7 @@
                 if( newValue.NtpTimeStart !== ntpStartTime){
                     ntpStartTime = newValue.NtpTimeStart
                     startTime = timeToDateTime(ntpStartTime);
-                    endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
+                    endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt( tc.length ? tc[1] : 0));
                     if(timerLaunch != null){
                         clearInterval(timerLaunch)
                         timerLaunch = null;
@@ -294,7 +297,7 @@
         }
     })
 
-    var eventName
+    let eventName
 
     // Congifuration et setup
     setupLeaderboard.on('change', (newValue, oldValue)=>{
@@ -322,8 +325,8 @@
         if(!newValue.manualChrono){
             if( statusHeat.value != undefined && statusHeat.value.NtpTimeStart !== undefined){
                 ntpStartTime = statusHeat.value.NtpTimeStart
-                startTime = timeToDateTime(ntpStartTime);
-                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
+                startTime = timeToDateTime(ntpStartTime)
+                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]))
                 
                 if(timerLaunch != null){
                     clearInterval(timerLaunch)
@@ -533,8 +536,8 @@
     const videoInfos = nodecg.Replicant('videoInfos', 'leaderboard')
     const videoShow = nodecg.Replicant('videoShow', 'leaderboard')
 
-    var videocontainer = document.getElementById('video');
-    var videosource = document.getElementById('sourceVid');
+    let videocontainer = document.getElementById('video');
+    let videosource = document.getElementById('sourceVid');
 
     videoShow.on('change', (newValue)=>{
         switch(newValue){

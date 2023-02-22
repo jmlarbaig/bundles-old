@@ -14,7 +14,7 @@
       "type": "time",
       "description": "",
       "heatsSize": 15,
-      "timeCap": "00:08:00",
+      "timeCap": "00:01:00",
       "format": "team",
       "scoreLabel": "",
       "createDate": "2022-03-31T08:08:18"

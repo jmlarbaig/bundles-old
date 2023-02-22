@@ -57,7 +57,7 @@
             if( newValue.NtpTimeStart !== ntpStartTime){
                 ntpStartTime = newValue.NtpTimeStart
                 startTime = timeToDateTime(ntpStartTime);
-                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]));
+                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt( tc.length ? tc[1] : 0));
                 if(timerLaunch != null){
                     clearInterval(timerLaunch)
                     timerLaunch = null;

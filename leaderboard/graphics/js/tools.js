@@ -65,6 +65,9 @@ function typeWorkout(data){
         timecap = "0'"+ tc[2];
     }
 
+    if(ntpStartTime != undefined){
+        endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1] || 0));
+    }
     return ({typeWod, formatWod, timecap, heatId})
 }
 
@@ -226,10 +229,10 @@ function mvtIndexForTime(nbrReps, division){
                     while(res >= 0){
                         res =  (res - wod.mvt_reps[index])
                         // console.log("je suis à l'index : ", index)
-                        index++;
+                        if (res >= 0) {
+                            index++;
+                        }
                     }
-                    // console.log("je suis à l'index =", index-1 ," et l'id : ",wod.mvt_id[index-1], " donc ", wod.mvt_reps[index-1], wod.mvt_names[index-1])
-                    index = index -1;
                 }
             }
             else {
@@ -246,63 +249,50 @@ function mvtIndexForTime(nbrReps, division){
     return( {'scoreAbsMvt':res,'scoreRelMvt':res,'id':0,'repTarget':0, 'rounds':0, 'totalReps': wod.total_reps,'mvtNames':'WORKOUT','arrayMvt':['WORKOUTS']})
 }
 
-function mvtIndexAmrap(nbrReps, division, rounds){
+function mvtIndexAmrap(nbrReps, division){
     // console.log("AMRAP Nbr De reps = ", nbrReps, " & Division = ", division)
     let res = nbrReps;
     let index = 0;
-    let mvt;
     let repTarget;
-    let id;
     let arrayMvt = [];
     for (let wod of workouts){
         if (wod.division == division ){
-            if(nbrReps !=0){
-                    if (wod.mvt_reps[index] != 0 ){
-                        if (rounds > 1){
-                            nbrReps = nbrReps - (wod.total_reps*(rounds-1))
-                            var res_seuil = nbrReps
-                            // console.log(nbrReps)
+            let totalRep = wod.total_reps;
+            if(res !=0){
+                if( wod.mvt_reps[index] == 0){
+                    return( {'scoreAbsMvt':(wod.mvt_reps[index] + res) || res,'scoreRelMvt':res_seuil || res,'id':wod.mvt_id[index] || 0,'repTarget':'MAX' || res,'mvtNames':wod.mvt_names[index] || 'WORKOUT', 'rounds':(rounds + 1) || 1, 'totalReps': (wod.total_reps) || res, 'arrayMvt':arrayMvt || {}})
+                }else{
+                    if(totalRep != 0){
+                        rounds = Math.floor(res / totalRep) +1;
+                        if (rounds > 1) {
+                            res -= totalRep * (rounds - 1);
                         }
-                        if (nbrReps <= wod.mvt_reps[index] && rounds > 1){
-                            index = 0
-                        }
-                        while(nbrReps >= 0){
-                            nbrReps =  (nbrReps - wod.mvt_reps[index])
-                            // console.log("je suis à l'index : ", index)
-                            index++;
-                        }
-                        res = nbrReps
-                        var res2 = res
-                        // console.log("je suis à l'index =", index-1 ," et l'id : ",wod.mvt_id[index-1], " donc ", wod.mvt_reps[index-1], wod.mvt_names[index-1])
-                        index = index -1;
-                        repTarget = wod.mvt_reps[index]
+                    }else{
+                        rounds = 1;
                     }
-                    else{
-                        res2 != undefined ? res = nbrReps - res2 : res = (nbrReps - (wod.total_reps*rounds))
-                        index = wod.mvt_reps.length -1
-                        repTarget = 'MAX'
-                        // console.log("MAX : ", nbrReps)
-                        // console.log("MAX index : ", index)
+                    while (res >= 0) {
+                      res -= wod.mvt_reps[index];
+                      if (res >= 0) {
+                        index++;
+                      }
+                      if(wod.mvt_reps[index] == 0){
+                        break;
+                      }
                     }
-    
+                    repMvt = wod.mvt_reps[index] + res;
+                    repTarget = wod.mvt_reps[index] || 'MAX'
+                }
             }
             else {
-                index = 0
-                res = -wod.mvt_reps[index];
-                if (wod.mvt_reps[index] == 0 ){
-                    repTarget = 'MAX'
-                }else{
-                    repTarget = wod.mvt_reps[index]
-                }
-                if(rounds != 1){
-                    rounds = 0
-                }
+                rounds = 1;
+                repTarget = wod.mvt_reps[0] || 'MAX'
+                repMvt = 0;
             }
             for(let i = index; i < wod.mvt_names.length ; i++){
                 mvtToUP = wod.mvt_names[i].toLowerCase();
                 arrayMvt.push("<span>"+wod.mvt_names[i].toLowerCase()+"</span>")
             }
-            return( {'scoreAbsMvt':(wod.mvt_reps[index] + res) || nbrReps,'scoreRelMvt':res_seuil || nbrReps,'id':wod.mvt_id[index] || 0,'repTarget':repTarget || res,'mvtNames':wod.mvt_names[index] || 'WORKOUT', 'rounds':rounds || 0, 'totalReps': (wod.total_reps) || nbrReps, 'arrayMvt':arrayMvt || {}})
+            return( {'scoreAbsMvt':repMvt, 'scoreRelMvt': repMvt,'id':wod.mvt_id[index] || 0,'repTarget':repTarget || res,'mvtNames':wod.mvt_names[index] || 'WORKOUT', 'rounds':(rounds) || 0, 'totalReps': (wod.total_reps) || nbrReps, 'arrayMvt':arrayMvt || {}})
         }
     }
 }

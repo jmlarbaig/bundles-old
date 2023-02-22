@@ -381,3 +381,32 @@ function scoringKairos(data){
 
     return $item
 }
+
+
+// Lane 
+
+
+function laneOverlay(data){
+    let name = treatDisplayName(data.displayName);
+    let flag = data.countryCode != "LOGO" ? ("https://flagcdn.com/"+ data.countryCode.toLowerCase()+'.svg') : (logoEvent.value[0].url) ;
+
+
+    var $item = $( 
+        '<div class="athlete" id="aht'+ data.lane+'">' + 
+            '<div class="name">' + name + '</div>' + 
+            '<div class="rank initial_rank_top"></div>' + 
+            '<div class="popup_box">' +
+                '<div class="score initial_rank_top"></div>' +
+                '<div class="popup initial_rank_top">' + '</div>' +
+            '</div>' +
+        '</div>'
+    );
+
+    $item.find(".box_flag").css('background-image','url('+ flag +')')
+    $item.find(".popup").hide();
+    !setupLeaderboard.value.flag && $item.find(".flag").hide()
+    !setupLeaderboard.value.lane && $item.find(".lane").hide()
+    // $item.hide();
+
+    return $item
+}

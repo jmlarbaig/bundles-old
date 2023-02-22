@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const url = require('url')
 
 const setupFile = __dirname + '/setupFile.json'
 
@@ -30,6 +31,26 @@ module.exports = function (nodecg) {
 
     router.post('/logo', (req, res) => {
         showLogo.value = req.body.show
+    });
+
+    router.get('/echo/:id', (req, res) => {
+        let lane = req.params.id;
+        res.redirect(url.format({
+            pathname:"/bundles/leaderboard/graphics/echo.html",
+            query: {
+               "lane": lane,
+             }
+          }));
+    });
+
+    router.get('/lane:id', (req, res) => {
+        let lane = req.params.id;
+        res.redirect(url.format({
+            pathname:"/bundles/leaderboard/graphics/lane.html",
+            query: {
+               "lane": lane,
+             }
+          }));
     });
 
     nodecg.mount('/leaderboard', router);

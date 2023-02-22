@@ -25,7 +25,7 @@ function updateTime(){
         else {
             chrono = msToTime(timeDiffStart );
         }
-    } else if (timeDiffStart < 0  && timeDiffStart > -5999 ){
+    } else if (timeDiffStart < 0  && timeDiffStart > - ( 30 * 60 * 1000) ){
         $('#cap').fadeOut(1000)
         $(".box_chrono").css("color", "rgba(255,50,80,1)")
         chrono = msToTime(timeDiffStart).substring(4);

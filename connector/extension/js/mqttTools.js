@@ -138,6 +138,8 @@ module.exports = (nodecg) => {
                     if(message != '0'){
                         chrono = message.split(';')[2]
                         countdown = parseInt(message.split(';')[1])
+                    }else{
+                        chrono = 0;
                     }
                 }
             }else if(topic.includes('chronoHeat')){

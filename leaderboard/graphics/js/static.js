@@ -75,7 +75,6 @@ function resetLeaderboard(newData){
         // console.log("Static Data = ", staticData)
         // ! On prend le tableau
 
-        console.log(overlay != 'commentator')
         if(overlay == 'overlay_top' || overlay == 'overlay_side'){
             setupLeaderboard.value.leaderboards != true ?  $(".leaderboards").hide() : ""
         }
@@ -138,6 +137,9 @@ function resetLeaderboard(newData){
                 case 'sk':
                     $tabItem = headerScoringKairos(divisionsNames, indexDivision, repTarget)
                     break;
+                case 'lane':
+                    $tabItem = headerTop(indexDivision)
+                    break;
             }
 
             $tab.append($tabItem);
@@ -151,73 +153,83 @@ function resetLeaderboard(newData){
 
             let height_tot = 0;
 
-            Object.values(elementDiv).forEach((elementAth ,indexAthletes) => {
+                Object.values(elementDiv).forEach((elementAth ,indexAthletes) => {
 
-                let $item;
-                switch(overlay){
-                    case 'overlay_side':
-                        $item = overlaySide(elementAth)
-                    break;
-                    case 'overlay_top':
-                        $item = overlayTop(elementAth)
-                    break;
-                    case 'leaderboard':
-                        $item = leaderboardTV(elementAth)
-                    break;
-                    case 'progression':
-                        $item = progressView(elementAth)
-                    break;
-                    case 'commentator':
-                        $item = commentator(elementAth)
-                    break;
-                    case 'sk':
-                        $item = scoringKairos(elementAth)
-                    break;
-                }
-
-                elementAth.$item = $item;
-                elementAth.$item.hide()
-                elementAth.$item.show(500)
-                $list.append($item);
-
-                if(overlay == 'commentator'){
-                    createStats( elementAth, indexDivision);
-                }
-
-                
-                setTimeout(()=>{                    
-
-                    // Dans tous les cas, on prend la valeur height pour redéféinir les dimensions du leaderboard
-                    if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
-                    if(overlay === 'overlay_top') {height_tot = height_top} else {(height_tot +=  elementAth.$item.height()) }
-                    
-                    if(overlay != 'commentator' && overlay != 'sk'){
-                        $("#leaderboard"+ indexDivision + " #athletes").height(height_tot)
-                        $("#leaderboard"+ indexDivision).height(height_tot + $("#leaderboard"+indexDivision + " .header").height())
+                    console.log(elementAth)
+                    let $item;
+                    switch(overlay){
+                        case 'overlay_side':
+                            $item = overlaySide(elementAth)
+                            break;
+                        case 'overlay_top':
+                            $item = overlayTop(elementAth)
+                            break;
+                        case 'leaderboard':
+                            $item = leaderboardTV(elementAth)
+                            break;
+                        case 'progression':
+                            $item = progressView(elementAth)
+                            break;
+                        case 'commentator':
+                            $item = commentator(elementAth)
+                            break;
+                        case 'sk':
+                            $item = scoringKairos(elementAth)
+                            break;
+                        case 'lane':
+                            $item = overlayTop(elementAth)
+                            break;
                     }
 
-                    statusHeat.status == '0' && athletesDivision[indexDivision].sort(ascendingLane);
-                    
-                    reposition("#leaderboard"+ indexDivision, athletesDivision[indexDivision]);
+                    elementAth.$item = $item;
+                    elementAth.$item.hide()
+                    if(overlay == 'lane' && laneEcho == elementAth.lane){
+                        elementAth.$item.show(500)
+                        $list.append($item);
+                    }else{
+                        $list.append($item)
+                    }
 
-                }, 1000)
+                    if(overlay == 'commentator'){
+                        createStats( elementAth, indexDivision);
+                    }
 
-            })
+                    if(overlay != 'lane'){
+                        setTimeout(()=>{                    
 
+                            // Dans tous les cas, on prend la valeur height pour redéféinir les dimensions du leaderboard
+                            if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
+                            if(overlay === 'overlay_top') {height_tot = height_top} else {(height_tot +=  elementAth.$item.height()) }
+                            
+                            if(overlay != 'commentator' && overlay != 'sk'){
+                                $("#leaderboard"+ indexDivision + " #athletes").height(height_tot)
+                                $("#leaderboard"+ indexDivision).height(height_tot + $("#leaderboard"+indexDivision + " .header").height())
+                            }
+    
+                            statusHeat.status == '0' && athletesDivision[indexDivision].sort(ascendingLane);
+                            
+                            reposition("#leaderboard"+ indexDivision, athletesDivision[indexDivision]);
+    
+                        }, 1000)
+    
+                    }
+                })
             
             if(overlay == 'commentator'){
                 setTimeout(()=>{
+
+                    $.fn.dataTable.ext.errMode = 'none';
         
-                        $("#leaderboard"+ indexDivision +" #table"+ indexDivision).DataTable( {
-                            scrollY:        "auto",
-                            scrollX:        true,
-                            scrollCollapse: true,
-                            paging:         false,
-                            fixedColumns:   {
-                                left: 3,
-                                right: 2
-                            }
-                        } );
+                    $("#leaderboard"+ indexDivision +" #table"+ indexDivision).DataTable( {
+                        scrollY:        "auto",
+                        scrollX:        true,
+                        scrollCollapse: true,
+                        paging:         false,
+                        fixedColumns:   {
+                            left: 3,
+                            right: 2
+                        }
+                    } );
 
                 },100)
             }
