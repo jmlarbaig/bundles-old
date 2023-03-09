@@ -388,7 +388,13 @@ function scoringKairos(data){
 
 function laneOverlay(data){
     let name = treatDisplayName(data.displayName);
-    let flag = data.countryCode != "LOGO" ? ("https://flagcdn.com/"+ data.countryCode.toLowerCase()+'.svg') : (logoEvent.value[0].url) ;
+
+    console.log(data.countryCode)
+    let flag = (logoEvent.value[0].url);
+    console.log(!Object.is(data.countryCode, null))
+    if(!Object.is(data.countryCode, null)){
+        flag = data.countryCode != "LOGO" ? ("https://flagcdn.com/"+ data.countryCode.toLowerCase()+'.svg') : (logoEvent.value[0].url)
+    }
 
 
     var $item = $( 
