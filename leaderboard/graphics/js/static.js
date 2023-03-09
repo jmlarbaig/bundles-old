@@ -183,13 +183,8 @@ function resetLeaderboard(newData){
 
                     elementAth.$item = $item;
                     elementAth.$item.hide()
-                    if(overlay == 'lane' && laneEcho == elementAth.lane){
-                        elementAth.$item.show(500)
-                        $list.append($item);
-                    }else{
-                        $list.append($item)
-                        elementAth.$item.show(500)
-                    }
+                    elementAth.$item.show(500)
+                    $list.append($item);
 
                     if(overlay == 'commentator'){
                         createStats( elementAth, indexDivision);

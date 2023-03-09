@@ -2,7 +2,7 @@
     display: block;
     position:absolute;
     top:0px;
-    left:-10px;
+    left:0px;
 	width: 100%;
 	height: 100px;
     color: white;
@@ -37,7 +37,7 @@
     z-index: 10;
     position: absolute;
     top:0px;
-    left:150px;
+    left:0px;
 	width: 100%;
     height: 70px;
     background: rgb(2,0,36);
@@ -53,7 +53,7 @@
     margin: auto;
     padding-top: 5px;
     top:0px;
-    left:150px;
+    left:0px;
     width: 150px;
     height: 70px;
     color: white;

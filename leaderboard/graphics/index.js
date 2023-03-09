@@ -304,7 +304,7 @@
     setupLeaderboard.on('change', (newValue, oldValue)=>{
         Object.keys(newValue).forEach((params, index)=>{
             let authorize = newValue[params]
-            if(overlay ==  'leaderboard' || overlay == 'progression' || overlay=='commentator' || overlay=='sk' ){
+            if(overlay ==  'leaderboard' || overlay == 'progression' || overlay=='commentator' || overlay=='sk' || overlay == 'lane' ){
                 if(params != 'flag' && params != 'lane'){
                     authorize = true
                 }

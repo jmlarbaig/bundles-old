@@ -33,7 +33,7 @@ module.exports = function (nodecg) {
         showLogo.value = req.body.show
     });
 
-    router.get('/echo/:id', (req, res) => {
+    router.get('/echo:id', (req, res) => {
         let lane = req.params.id;
         res.redirect(url.format({
             pathname:"/bundles/leaderboard/graphics/echo.html",

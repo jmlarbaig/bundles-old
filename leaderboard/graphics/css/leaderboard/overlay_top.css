@@ -137,6 +137,8 @@
     -moz-transition-duration: 1s;
     -webkit-transition-duration: 1s;
     -ms-transition-duration: 1s;
+    padding-left: 10px  ;
+    padding-right: 10px  ;
 }
 
 .leaderboard .athletes .powered{

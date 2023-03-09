@@ -11,7 +11,7 @@ function updateDynamics(newScoring, status){
             height_tot = 0;
             let index = 0;
             
-            if(newScoring[1].CurrentRank != null && newScoring[2].CurrentRank != null){
+            if(newScoring[1].CurrentRank != null){
                 Object.keys(elemAth).forEach(i => {
 
                     elemAth[i] = Object.assign( {}, elemAth[i],fetchNewData(newScoring, elemAth[i].lane));
