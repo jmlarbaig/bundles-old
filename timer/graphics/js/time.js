@@ -28,7 +28,21 @@ function updateTime(){
     } else if (timeDiffStart < 0  && timeDiffStart > - ( 30 * 60 * 1000) ){
         $('#cap').fadeOut(1000)
         $(".box_chrono").css("color", "rgba(255,50,80,1)")
-        chrono = msToTime(timeDiffStart).substring(4);
+        let ch = msToTime(timeDiffStart).split(':');
+        let min = parseInt(ch[0].replace('0-', ''));
+        let sec = parseInt(ch[1].replace('0-',''));
+        let minS = min
+        let secS = sec
+
+        if(min <10){
+            minS = '0'+min;
+        }
+
+        if(sec <10){
+            secS = '0'+sec;
+        }
+
+        chrono = '-' + minS + ':'+ secS;
     } else {
         $('#cap').fadeOut(1000)
         if (heat.timecap != ''){

@@ -14,7 +14,7 @@
     let dataTime;
     let athletesDivison;
     let Mvt_name = []
-    let height_top = 150;
+    let height_top = 100;
     let root = document.documentElement;
     let Clrs = {}
     let chrono;
@@ -139,7 +139,8 @@
                 if( newValue.NtpTimeStart !== ntpStartTime){
                     ntpStartTime = newValue.NtpTimeStart
                     startTime = timeToDateTime(ntpStartTime);
-                    endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt( tc.length ? tc[1] : 0));
+                    endTime = timeToDateTime(ntpStartTime).setSeconds(( (parseInt( tc.length ? tc[1] : 0)* 60)) + (startTime.getSeconds() + parseInt( tc.length ? tc[2] : 0)));
+
                     if(timerLaunch != null){
                         clearInterval(timerLaunch)
                         timerLaunch = null;
@@ -326,7 +327,7 @@
             if( statusHeat.value != undefined && statusHeat.value.NtpTimeStart !== undefined){
                 ntpStartTime = statusHeat.value.NtpTimeStart
                 startTime = timeToDateTime(ntpStartTime)
-                endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1]))
+                endTime = timeToDateTime(ntpStartTime).setSeconds(( (parseInt( tc.length ? tc[1] : 0)* 60)) + (startTime.getSeconds() + parseInt( tc.length ? tc[0] : 0)));
                 
                 if(timerLaunch != null){
                     clearInterval(timerLaunch)

@@ -6,9 +6,13 @@ module.exports = (nodecg, cc) => {
     let WorkoutTab = [];
 
 	async function updateWorkout(data){
+
+		console.log(data)
         WorkoutTab = [];
 
         cc.loadWorkoutsPlanning(data.eventId).then((response)=>{
+
+			console.log(response)
 
             WorkoutTab = response.workouts;
 

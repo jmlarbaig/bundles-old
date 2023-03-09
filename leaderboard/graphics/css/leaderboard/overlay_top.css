@@ -3,13 +3,25 @@
     z-index: 10;
     position: absolute;
     font-size: 1rem;
-	height: 50px;
+	height: 20px;
     width: 1630px;
     top:100px;
     left: 290px;
 }
 
 .leaderboard:nth-child(1){
+    width: calc(1630px);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
+}
+
+.leaderboard:nth-child(2){
     width: calc(1630px);
     overflow: hidden;
     position: relative;

@@ -188,6 +188,7 @@ function resetLeaderboard(newData){
                         $list.append($item);
                     }else{
                         $list.append($item)
+                        elementAth.$item.show(500)
                     }
 
                     if(overlay == 'commentator'){
@@ -198,10 +199,11 @@ function resetLeaderboard(newData){
                         setTimeout(()=>{                    
 
                             // Dans tous les cas, on prend la valeur height pour redéféinir les dimensions du leaderboard
-                            if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
-                            if(overlay === 'overlay_top') {height_tot = height_top} else {(height_tot +=  elementAth.$item.height()) }
+                            // if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
+                            if(overlay === 'overlay_top') {height_tot = height_top} else {(height_tot +=  elementAth.$item.height() + 2) }
                             
                             if(overlay != 'commentator' && overlay != 'sk'){
+                                console.log('height tot ', height_tot)
                                 $("#leaderboard"+ indexDivision + " #athletes").height(height_tot)
                                 $("#leaderboard"+ indexDivision).height(height_tot + $("#leaderboard"+indexDivision + " .header").height())
                             }

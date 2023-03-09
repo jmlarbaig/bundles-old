@@ -1,10 +1,6 @@
 
 .leaderboards{
-    position: absolute;
     font-size: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     -ms-transition-duration: 0.7s;
@@ -21,6 +17,40 @@
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     -ms-transition-duration: 0.7s;
+}
+
+/* .leaderboard:nth-child(1){
+    top:var(--position_y_leaderboard);
+    left: var(--position_x_leaderboard);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    opacity: 92%;
+    width: 300px;
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
+} */
+
+/* .leaderboard:nth-child(2){
+    top:var(--position_y_leaderboard);
+    right: 130px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    opacity: 92%;
+    width: 300px;
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
+} */
+
+.leaderboard:nth-child(3){
+
+    display: none;
+}
+.leaderboard:nth-child(4){
+    display: none;
 }
 
 

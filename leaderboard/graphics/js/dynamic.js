@@ -262,19 +262,17 @@ function updateDynamics(newScoring, status){
                     if(overlay === 'overlay_top') {height_tot = height_top}else{(height_tot +=  elemAth[i].$item.height())}
 
                 })
-
                 elemAth.sort(ascendingRank);
                 reposition("#leaderboard"+ key, elemAth);
 
                 if(overlay !== 'commentator'){
                     $("#leaderboard"+ key + " #athletes").height(height_tot)
-                    console.log(height_tot)
                     console.log($("#leaderboard"+key + " .header").height())
                     $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height() + 15)
                 }
             }
             else{
-                overlay !== 'commentator' && $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height())
+                // overlay !== 'commentator' && $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height())
 
                 // elemAth.sort(ascendingLane);
                 // reposition("#leaderboard"+ key, elemAth);
