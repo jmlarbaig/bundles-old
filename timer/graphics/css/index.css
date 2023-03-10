@@ -7,6 +7,11 @@ body{
     background-color: var(--main-color);
 }
 
+@font-face {
+    font-family: "Digit";
+    src: url("../fonts/DS-DIGI.TTF");
+}
+
 .box_logo{
     opacity: 80%;
     filter: blur(50px);
@@ -34,15 +39,21 @@ body{
 
 .box_chrono{
     position: absolute;
-    top:30%;
+    top:35%;
     left: 50%;
     -webkit-transform: translate( -50%);
     transform: translate( -50%);
     text-align: center;
+    width: 35%;
+    border-radius: 15px;
+    background-color: var(--main-color);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .chrono{
-    font-size: 10rem;
+    font-size: 13rem;
+    font-family: "Digit";
+    margin: -50px 0px -50px 0px;
 }
 
 #cap{
@@ -59,7 +70,7 @@ body{
     height: 300px;
     background-position: center;
     background-repeat: no-repeat;
-    bottom:100px;
+    bottom:70px;
     left: 50%;
     -webkit-transform: translate( -50%);
     transform: translate( -50%);

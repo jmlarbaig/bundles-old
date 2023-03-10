@@ -21,7 +21,9 @@ function updateTime(){
     $(".chrono").css("color", Clrs.tx_chrono_color)
 
     if (timeDiffTimeCap < 0 && (timeDiffStart) > 0 ){
-        $('#cap').fadeIn(1000)
+        if(overlay != 'lane'){
+            $('#cap').fadeIn(1000)
+        }
         if(heat.typeWod == "amrap" || Ft_Ap ){
             chrono = msToTime(timeDiffEnd )
         }
@@ -29,7 +31,9 @@ function updateTime(){
             chrono = msToTime(timeDiffStart );
         }
     } else if (timeDiffStart < 0  && timeDiffStart > -( 30 * 60 * 1000) ){
-        $('#cap').fadeOut(1000)
+        if(overlay != 'lane'){
+            $('#cap').fadeOut(1000)
+        }
         $(".box_chrono").css("background-color", "rgba(255,50,80,1)")
         $(".box_chrono").css("color", "rgb(255,255,255")
         $(".chrono").css("background-color", "rgba(255,50,80,1)")
@@ -50,7 +54,9 @@ function updateTime(){
 
         chrono = '-' + minS + ':'+ secS;
     } else {
-        $('#cap').fadeOut(1000)
+        if(overlay != 'lane'){
+            $('#cap').fadeOut(1000)
+        }
         if (heat.timecap != ''){
             chrono = heat.timecap
         }

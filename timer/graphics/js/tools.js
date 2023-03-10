@@ -48,7 +48,7 @@ function typeWorkout(data){
         timecap = tc[1] + ":" + tc[2];
     }
     else{
-        timecap = "0'"+ tc[2];
+        timecap = "00:"+ tc[2];
     }
     if(ntpStartTime != undefined){
         endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1] || 0));
