@@ -31,7 +31,7 @@ body{
     height: 300px;
     background-position: center;
     background-repeat: no-repeat;
-    top:100px;
+    bottom: 300px;
     left: 50%;
     -webkit-transform: translate( -50%);
     transform: translate( -50%);
@@ -39,19 +39,19 @@ body{
 
 .box_chrono{
     position: absolute;
-    top:35%;
+    top:30px;
     left: 50%;
     -webkit-transform: translate( -50%);
     transform: translate( -50%);
     text-align: center;
-    width: 35%;
+    width: 50%;
     border-radius: 15px;
     background-color: var(--main-color);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .chrono{
-    font-size: 13rem;
+    font-size: 27rem;
     font-family: "Digit";
     margin: -50px 0px -50px 0px;
 }
@@ -70,8 +70,74 @@ body{
     height: 300px;
     background-position: center;
     background-repeat: no-repeat;
-    bottom:70px;
+    bottom:30px;
     left: 50%;
     -webkit-transform: translate( -50%);
     transform: translate( -50%);
+}
+
+@media (max-width: 1000px) {
+    .box_logo{
+        opacity: 80%;
+        filter: blur(50px);
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-position: center;
+        background-repeat:repeat-x;
+        background-size: cover;
+        background-clip: padding-box;
+    }
+    
+    .logo{
+        background-size: contain;
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background-position: center;
+        background-repeat: no-repeat;
+        bottom: 200px;
+        left: 50%;
+        -webkit-transform: translate( -50%);
+        transform: translate( -50%);
+    }
+    
+    .box_chrono{
+        position: absolute;
+        top:100px;
+        left: 50%;
+        -webkit-transform: translate( -50%);
+        transform: translate( -50%);
+        text-align: center;
+        width: 70%;
+        border-radius: 15px;
+        background-color: var(--main-color);
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+    
+    .chrono{
+        font-size: 5rem;
+        font-family: "Digit";
+        margin: -50px 0px -50px 0px;
+    }
+    
+    #cap{
+        border-radius: 10px;
+        font-size: 1rem;
+        background-color: black;
+        color: white;
+    }
+    
+    .mainSponsor{
+        background-size: contain;
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-position: center;
+        background-repeat: no-repeat;
+        bottom:30px;
+        left: 50%;
+        -webkit-transform: translate( -50%);
+        transform: translate( -50%);
+    }
 }

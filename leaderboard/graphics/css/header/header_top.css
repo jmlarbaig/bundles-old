@@ -19,7 +19,7 @@
     text-align: right;
     width: 150px;
     height: 150px;
-    background-color: rgb(234, 234, 234);
+    background-color: rgb(0, 0, 0);
     text-align: center;
 }
 
@@ -41,7 +41,7 @@
     width: 1780px;
     height: 100px;
     background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(69,69,102,1) 18%, rgba(12,12,56,1) 35%, rgba(30,53,80,1) 66%, rgba(9,44,51,1) 100%);
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(184, 140, 29) 18%, rgb(0, 0, 0) 35%, rgb(178, 135, 25) 66%, rgb(0, 0, 0) 100%);
     color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
