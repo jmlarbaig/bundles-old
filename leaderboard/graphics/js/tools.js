@@ -66,7 +66,9 @@ function typeWorkout(data){
     }
 
     if(ntpStartTime != undefined){
-        endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1] || 0));
+        // endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(tc[1] || 0));
+        var timecapIn = ((parseInt( tc.length ? parseInt(tc[1]) : 0)* 60) + parseInt( tc.length ? parseInt(tc[2]) : 0)) * 1000;
+        endTime = parseInt(ntpStartTime) + parseInt(timecapIn)
     }
     return ({typeWod, formatWod, timecap, heatId})
 }

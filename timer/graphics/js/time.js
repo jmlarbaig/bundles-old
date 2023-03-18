@@ -11,7 +11,6 @@ function updateTime(){
 
     let timeDiffStart = timer - startTime;
     let timeDiffTimeCap = timer - endTime;
-
     let timeDiffEnd = endTime - timer;
 
 
@@ -52,7 +51,7 @@ function updateTime(){
             chrono = "00:00"
         }
     }
-    if (timeDiffTimeCap > -30000 && timeDiffTimeCap < 0 ){
+    if (timeDiffTimeCap > -30000 && timeDiffTimeCap < 0 && timeDiffStart > 0){
         $(".box_chrono").css("color", "rgba(255,50,80,1)")
         if(heat.typeWod == "amrap" || Ft_Ap ){
             chrono = msToTime(timeDiffEnd)

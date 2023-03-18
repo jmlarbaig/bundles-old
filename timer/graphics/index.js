@@ -56,14 +56,16 @@
         if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
             if( newValue.NtpTimeStart !== ntpStartTime){
                 ntpStartTime = newValue.NtpTimeStart
-                startTime = timeToDateTime(ntpStartTime);
-                endTime = timeToDateTime(ntpStartTime).setSeconds(( (parseInt( tc.length ? tc[1] : 0)* 60)) + (startTime.getSeconds() + parseInt( tc.length ? tc[2] : 0)));
+                startTime = parseInt(ntpStartTime);
+                var timecapIn = ((parseInt( tc.length ? parseInt(tc[1]) : 0)* 60) + parseInt( tc.length ? parseInt(tc[2]) : 0)) * 1000;
+                console.log(timecapIn);
+                endTime = parseInt(startTime) + parseInt(timecapIn)
                 if(timerLaunch != null){
                     clearInterval(timerLaunch)
                     timerLaunch = null;
                 }
-                console.log(startTime)
-                console.log(endTime)
+                console.log('startTime : ', startTime)
+                console.log('endTime :' , endTime)
                 newHeat = false
                 timerLaunch = setInterval(updateTime, 500);
             }

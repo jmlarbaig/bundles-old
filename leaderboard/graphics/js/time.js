@@ -11,7 +11,6 @@ function updateTime(){
 
     let timeDiffStart = timer - startTime;
     let timeDiffTimeCap = timer - endTime ;
-
     let timeDiffEnd = endTime - timer;
 
 
@@ -30,7 +29,7 @@ function updateTime(){
         else {
             chrono = msToTime(timeDiffStart );
         }
-    } else if (timeDiffStart < 0  && timeDiffStart > -( 30 * 60 * 1000) ){
+    } else if (timeDiffStart < 0  && timeDiffStart > -( 60 * 60 * 1000) ){
         if(overlay != 'lane'){
             $('#cap').fadeOut(1000)
         }
@@ -64,7 +63,7 @@ function updateTime(){
             chrono = "00:00"
         }
     }
-    if (timeDiffTimeCap > -30000 && timeDiffTimeCap < 0 ){
+    if (timeDiffTimeCap > -30000 && timeDiffTimeCap < 0  && timeDiffStart > 0){
         $(".box_chrono").css("background-color", "rgba(255,50,80,1)")
         $(".box_chrono").css("color", "rgb(255,255,255")
         $(".chrono").css("background-color", "rgba(255,50,80,1)")
