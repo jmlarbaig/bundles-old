@@ -137,25 +137,34 @@ function resetLeaderboard(newData){
                 case 'sk':
                     $tabItem = headerScoringKairos(divisionsNames, indexDivision, repTarget)
                     break;
-                case 'lane':
-                    $tabItem = headerTop(indexDivision)
+                case 'versus':
+                    $tabItem = headerVersus(indexDivision)
                     break;
             }
 
-            $tab.append($tabItem);
+            if(overlay == "versus"){
+                indexDivision == 0 ? $tab.append($tabItem) : '';
+            }else{
+                $tab.append($tabItem);
+            }
+
 
             if(overlay == 'commentator'){
                 createStatsHeader(indexDivision);
             }
 
-            let $list = $("#leaderboard"+ indexDivision +" #athletes");
+            let $list;
+            if(overlay == "versus"){
+                $list = $("#leaderboard"+ indexDivision);
+            }else{
+                $list = $("#leaderboard"+ indexDivision +" #athletes");
+            }
             $list.find(".athlete").remove();
 
             let height_tot = 0;
 
                 Object.values(elementDiv).forEach((elementAth ,indexAthletes) => {
 
-                    console.log(elementAth)
                     let $item;
                     switch(overlay){
                         case 'overlay_side':
@@ -176,40 +185,47 @@ function resetLeaderboard(newData){
                         case 'sk':
                             $item = scoringKairos(elementAth)
                             break;
-                        case 'lane':
-                            $item = overlayTop(elementAth)
-                            break;
+                        case 'versus':
+                            $item = leaderboardVersus(elementAth)
                     }
 
                     elementAth.$item = $item;
                     elementAth.$item.hide()
-                    elementAth.$item.show(500)
-                    $list.append($item);
 
-                    if(overlay == 'commentator'){
-                        createStats( elementAth, indexDivision);
+                    if(overlay=="versus"){
+                        if(indexAthletes == 0 || indexAthletes == 1){
+                            elementAth.$item.show(500)
+                            $list.append($item);
+                        }
+                    }else{
+
+                        elementAth.$item.show(500)
+                        $list.append($item);
+    
+                        if(overlay == 'commentator'){
+                            createStats( elementAth, indexDivision);
+                        }
                     }
 
-                    if(overlay != 'lane'){
-                        setTimeout(()=>{                    
+                    setTimeout(()=>{                    
 
-                            // Dans tous les cas, on prend la valeur height pour redéféinir les dimensions du leaderboard
-                            // if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
-                            if(overlay === 'overlay_top') {height_tot = height_top} else {(height_tot +=  elementAth.$item.height() + 2) }
-                            
-                            if(overlay != 'commentator' && overlay != 'sk'){
-                                console.log('height tot ', height_tot)
-                                $("#leaderboard"+ indexDivision + " #athletes").height(height_tot)
-                                $("#leaderboard"+ indexDivision).height(height_tot + $("#leaderboard"+indexDivision + " .header").height())
-                            }
-    
-                            statusHeat.status == '0' && athletesDivision[indexDivision].sort(ascendingLane);
-                            
+                        // Dans tous les cas, on prend la valeur height pour redéféinir les dimensions du leaderboard
+                        // if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
+                        if(overlay === 'overlay_top') {height_tot = height_top} else {(height_tot +=  elementAth.$item.height() + 2) }
+                        
+                        if(overlay != 'commentator' && overlay != 'sk'){
+                            console.log('height tot ', height_tot)
+                            $("#leaderboard"+ indexDivision + " #athletes").height(height_tot)
+                            $("#leaderboard"+ indexDivision).height(height_tot + $("#leaderboard"+indexDivision + " .header").height())
+                        }
+
+                        statusHeat.status == '0' && athletesDivision[indexDivision].sort(ascendingLane);
+                        if(overlay != "versus"){
                             reposition("#leaderboard"+ indexDivision, athletesDivision[indexDivision]);
+                        }
+
+                    }, 1000)
     
-                        }, 1000)
-    
-                    }
                 })
             
             if(overlay == 'commentator'){

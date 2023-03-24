@@ -1,0 +1,106 @@
+.leaderboards{
+    position: relative;
+    top: 40px;
+}
+
+.leaderboard{
+    max-width: 1500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.5em;
+    margin: auto;
+
+}
+
+.athlete{
+    min-width: 670px;
+    display: flex;
+    height: 50px;
+}
+
+.athlete:nth-child(1){
+    flex-direction: row;
+    text-align: left;
+}
+
+.athlete:nth-child(2){
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.ath_detail{
+    display: flex;
+    flex-direction: column;
+}
+
+.athlete:nth-child(1) .triangle{
+    height : 0;
+    width : 0;
+    border-top : 50px solid var(--first_linear_gradient);
+    border-left : 40px solid transparent;
+}
+
+.athlete:nth-child(1) .ath_detail {
+    align-items: end;
+}
+
+.athlete:nth-child(2) .triangle{
+    height : 0;
+    width : 0;
+    border-top : 50px solid var(--first_linear_gradient);
+    border-right : 40px solid transparent;
+}
+
+.athlete:nth-child(2) .ath_detail {
+    align-items: start;
+}
+
+
+
+.ath{
+    border-radius: 5px;
+    z-index: 80;
+    background: linear-gradient(90deg, var(--first_linear_gradient) 0%, var(--second_linear_gradient)  18%, var(--first_linear_gradient) 35%, var(--second_linear_gradient)  66%, var(--first_linear_gradient) 100%);
+    color: white;
+    display: flex;
+    min-width: 640px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.athlete:nth-child(1) .ath_detail .ath{
+    flex-direction: row;
+}
+
+.athlete:nth-child(2) .ath_detail .ath{
+    flex-direction: row-reverse;
+}
+
+.ath .rank {
+    background-color: var(--second_color);
+    color: var(--tx_second_color);
+    padding: 10px;
+}
+
+.ath .name {
+    padding: 10px;
+    min-width: 450px;
+}
+
+.ath .score{
+    padding: 2px 10px;
+    margin: auto;
+    border-radius: 8px;
+}
+
+.ath_detail .popup{
+    z-index: 10;
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.66);
+    color: black;
+    padding: 5px;
+    text-align: center;
+    margin-right: 0px;
+    border-radius: 0px 0px 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}

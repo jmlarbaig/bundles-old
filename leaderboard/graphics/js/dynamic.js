@@ -60,12 +60,12 @@ function updateDynamics(newScoring, status){
                                                 elemAth[i].$item.find(".popup").show();
                                             }
                                             else{
-                                                elemAth[i].$item.find(".popup").hide();
+                                                overlay == "versus" && elemAth[i].$item.find(".popup").hide();
                                             }
                                         }
                                         else {
                                             if(Mvt_name[elemAth[i].lane].mvtNames == "" || Mvt_name[elemAth[i].lane].mvtNames.includes("Workout")){
-                                                elemAth[i].$item.find(".popup").hide();
+                                                overlay == "versus" && elemAth[i].$item.find(".popup").hide();
                                             }
                                             else{
                                                 if (heat.typeWod == 'amrap' && !Number.isNaN(Mvt_name[elemAth[i].lane].rounds)){
@@ -92,6 +92,10 @@ function updateDynamics(newScoring, status){
                                 }
 
                                 setupLeaderboard.value.scoreConfig && elemAth[i].$item.find(".score").text(elemAth[i].score_abs) 
+
+                                if(overlay == "versus"){
+                                    elemAth[i].$item.find(".popup").show();
+                                }
                             }
                             else{
                                 elemAth[i].$item.find(".score").text(elemAth[i].score_abs)
@@ -263,7 +267,9 @@ function updateDynamics(newScoring, status){
 
                 })
                 elemAth.sort(ascendingRank);
-                reposition("#leaderboard"+ key, elemAth);
+                if(overlay != "versus"){
+                    reposition("#leaderboard"+ key, elemAth);
+                }
 
                 if(overlay !== 'commentator'){
                     $("#leaderboard"+ key + " #athletes").height(height_tot)

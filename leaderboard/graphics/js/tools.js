@@ -98,7 +98,7 @@ function treatDisplayName(displayName){
     else{
         newName = displayName.toLowerCase().replace("crossfit","");
     }
-    return newName
+    return newName.toUpperCase();
 }
 
 let auth = {};

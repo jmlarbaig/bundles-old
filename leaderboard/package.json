@@ -89,6 +89,11 @@
         "file": "lane.html",
         "width": 1920,
         "height": 1080
+      },
+      {
+        "file": "versus.html",
+        "width": 1920,
+        "height": 1080
       }
     ]
   },

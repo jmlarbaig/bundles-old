@@ -416,3 +416,43 @@ function laneOverlay(data){
 
     return $item
 }
+
+
+
+
+// HEADER VERSUS
+
+function headerVersus(indexDivision){
+    let $headerTop = $(
+        '<div id="leaderboard'+ indexDivision +'" class="leaderboard">' +
+        '</div>'
+    );
+
+    return $headerTop
+}
+
+function leaderboardVersus(data){
+    let name = treatDisplayName(data.displayName);
+    let flag = data.countryCode != "LOGO" ? ("https://flagcdn.com/"+ data.countryCode.toLowerCase()+'.svg') : (logoEvent.value[0].url) ;
+
+
+    let $item = $( 
+        '<div class="athlete" id="aht'+ data.lane+'">' + 
+            '<div class="triangle"> </div>' +
+            '<div class="ath_detail">'+
+                '<div class="ath">' +
+                    '<div class="rank">'+ data.lane + '</div>' + 
+                    '<div class="name">' + name + '</div>' + 
+                    '<div class="score"></div>' +
+                '</div>' +
+                '<div class="popup">' + '</div>' +
+            '</div>'+
+        '</div>'
+    );
+    $item.find(".box_flag").css('background-image','url('+ flag +')')
+    $item.find(".popup").hide();
+    !setupLeaderboard.value.flag && $item.find(".flag").hide()
+    !setupLeaderboard.value.lane && $item.find(".lane").hide()
+
+    return $item
+}

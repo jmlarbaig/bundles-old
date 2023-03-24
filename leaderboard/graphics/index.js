@@ -72,7 +72,6 @@
             createKairosView();
         }else if(overlay.includes('echo')|| overlay.includes('lane')){
             laneEcho = parseInt(window.location.search.replace('?lane=', ''))
-            console.log(laneEcho)
         }
     })
 

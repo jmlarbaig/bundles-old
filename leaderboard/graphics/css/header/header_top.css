@@ -41,7 +41,7 @@
     width: 1780px;
     height: 100px;
     background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(184, 140, 29) 18%, rgb(0, 0, 0) 35%, rgb(178, 135, 25) 66%, rgb(0, 0, 0) 100%);
+    background: linear-gradient(90deg, var(--first_linear_gradient) 0%, var(--second_linear_gradient)  18%, var(--first_linear_gradient) 35%, var(--second_linear_gradient)  66%, var(--first_linear_gradient) 100%);
     color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
