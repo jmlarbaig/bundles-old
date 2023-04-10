@@ -14,9 +14,9 @@
 }
 
 .athlete{
-    min-width: 670px;
     display: flex;
     height: 50px;
+    width: 50%;
 }
 
 .athlete:nth-child(1){
@@ -55,7 +55,6 @@
 .athlete:nth-child(2) .ath_detail {
     align-items: start;
 }
-
 
 
 .ath{

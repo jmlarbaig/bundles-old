@@ -39,6 +39,7 @@ function updateDynamics(newScoring, status){
                                 else{
                                     if(overlay == 'progression' || overlay == 'commentator' || overlay == 'leaderboard'){
                                         if (heat.typeWod == 'amrap' && !Number.isNaN(Mvt_name[elemAth[i].lane].rounds)){
+                                            console.log(Mvt_name[elemAth[i].lane])
                                             percent = (Mvt_name[elemAth[i].lane].scoreRelMvt / Mvt_name[elemAth[i].lane].totalReps)*95
                                             elemAth[i].$item.find(".rounds").text("R"+(Mvt_name[elemAth[i].lane].rounds));
                                             elemAth[i].$item.find(".popup").text( "R"+(Mvt_name[elemAth[i].lane].rounds) + ' - ' + Mvt_name[elemAth[i].lane].mvtNames);
@@ -60,12 +61,12 @@ function updateDynamics(newScoring, status){
                                                 elemAth[i].$item.find(".popup").show();
                                             }
                                             else{
-                                                overlay == "versus" && elemAth[i].$item.find(".popup").hide();
+                                                overlay != "versus" && elemAth[i].$item.find(".popup").hide();
                                             }
                                         }
                                         else {
                                             if(Mvt_name[elemAth[i].lane].mvtNames == "" || Mvt_name[elemAth[i].lane].mvtNames.includes("Workout")){
-                                                overlay == "versus" && elemAth[i].$item.find(".popup").hide();
+                                                overlay != "versus" && elemAth[i].$item.find(".popup").hide();
                                             }
                                             else{
                                                 if (heat.typeWod == 'amrap' && !Number.isNaN(Mvt_name[elemAth[i].lane].rounds)){
@@ -95,6 +96,7 @@ function updateDynamics(newScoring, status){
 
                                 if(overlay == "versus"){
                                     elemAth[i].$item.find(".popup").show();
+                                    elemAth[i].$item.find(".popup").text(Mvt_name[elemAth[i].lane].mvtNames);
                                 }
                             }
                             else{
@@ -280,8 +282,8 @@ function updateDynamics(newScoring, status){
             else{
                 // overlay !== 'commentator' && $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height())
 
-                // elemAth.sort(ascendingLane);
-                // reposition("#leaderboard"+ key, elemAth);
+                elemAth.sort(ascendingLane);
+                reposition("#leaderboard"+ key, elemAth);
 
             }
 

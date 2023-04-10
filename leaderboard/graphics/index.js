@@ -101,6 +101,7 @@
     heatInfos.on('change', (newValue, oldValue)=>{
         if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
             heat = typeWorkout(newValue)
+            launchTimer()
             showTime(heat.timecap)
             if(overlay == 'sk'){
                 $('#timeCapKairos').text(newValue[0].timeCap)
@@ -127,9 +128,23 @@
 
     let statusWorkout = '0'
     let ntpStartTime;
-    let startTime;
+    let startTime = 0;
     let endTime;
     let timerLaunch = null;
+
+    function launchTimer (){
+        console.log(heat)
+        console.log(startTime)
+        if( heat != {} && startTime != 0){
+            var timecapIn = ((parseInt( tc.length ? parseInt(tc[1]) : 0)* 60) + parseInt( tc.length ? parseInt(tc[2]) : 0)) * 1000;
+            endTime = parseInt(startTime) + parseInt(timecapIn)
+            if(timerLaunch != null){
+                clearInterval(timerLaunch)
+                timerLaunch = null;
+            }
+            timerLaunch = setInterval(updateTime, 500);
+        }
+    }
 
     statusHeat.on('change', (newValue, oldValue)=>{
         if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
@@ -138,17 +153,16 @@
                 if( newValue.NtpTimeStart !== ntpStartTime){
                     ntpStartTime = newValue.NtpTimeStart
                     startTime = parseInt(ntpStartTime);
-                    var timecapIn = ((parseInt( tc.length ? parseInt(tc[1]) : 0)* 60) + parseInt( tc.length ? parseInt(tc[2]) : 0)) * 1000;
-                    console.log(timecapIn);
-                    endTime = parseInt(startTime) + parseInt(timecapIn)
-                    if(timerLaunch != null){
-                        clearInterval(timerLaunch)
-                        timerLaunch = null;
-                    }
-                    console.log('startTime : ', startTime)
-                    console.log('endTime :' , endTime)
+                    // var timecapIn = ((parseInt( tc.length ? parseInt(tc[1]) : 0)* 60) + parseInt( tc.length ? parseInt(tc[2]) : 0)) * 1000;
+                    // endTime = parseInt(startTime) + parseInt(timecapIn)
+                    // if(timerLaunch != null){
+                    //     clearInterval(timerLaunch)
+                    //     timerLaunch = null;
+                    // }
+                    // timerLaunch = setInterval(updateTime, 500);
+                    launchTimer();
                     newHeat = false
-                    timerLaunch = setInterval(updateTime, 500);
+
                 }
             }else{
                 if(timerLaunch != null){
@@ -191,8 +205,8 @@
                 switch(newValue.launchedTimer){
                     case 'start':
                         ntpStartTime = newValue.timer
-                        startTime = timeToDateTime(ntpStartTime);
-                        endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(newValue.timecap));
+                        startTime = parseInt(ntpStartTime);
+                        // endTime = timeToDateTime(ntpStartTime).setMinutes(startTime.getMinutes() + parseInt(newValue.timecap));
                         if(timerLaunch != null){
                             clearInterval(timerLaunch)
                             timerLaunch = null;
@@ -328,14 +342,16 @@
         if(!newValue.manualChrono){
             if( statusHeat.value != undefined && statusHeat.value.NtpTimeStart !== undefined){
                 ntpStartTime = statusHeat.value.NtpTimeStart
-                startTime = timeToDateTime(ntpStartTime)
-                endTime = timeToDateTime(ntpStartTime).setSeconds(( (parseInt( tc.length ? tc[1] : 0)* 60)) + (startTime.getSeconds() + parseInt( tc.length ? tc[0] : 0)));
-                
-                if(timerLaunch != null){
-                    clearInterval(timerLaunch)
-                    timerLaunch = null;
-                }
-                timerLaunch = setInterval(updateTime, 500);
+                startTime = parseInt(ntpStartTime);
+                // var timecapIn = ((parseInt( tc.length ? parseInt(tc[1]) : 0)* 60) + parseInt( tc.length ? parseInt(tc[2]) : 0)) * 1000;
+                // endTime = parseInt(startTime) + parseInt(timecapIn)
+
+                // if(timerLaunch != null){
+                //     clearInterval(timerLaunch)
+                //     timerLaunch = null;
+                // }
+                // timerLaunch = setInterval(updateTime, 500);
+                launchTimer()
             }
         }else{
             if(timerLaunch != null){

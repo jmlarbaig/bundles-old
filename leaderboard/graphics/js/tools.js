@@ -256,6 +256,7 @@ function mvtIndexAmrap(nbrReps, division){
     let res = nbrReps;
     let index = 0;
     let repTarget;
+    let repAmrap = 0;
     let arrayMvt = [];
     for (let wod of workouts){
         if (wod.division == division ){
@@ -268,9 +269,11 @@ function mvtIndexAmrap(nbrReps, division){
                         rounds = Math.floor(res / totalRep) +1;
                         if (rounds > 1) {
                             res -= totalRep * (rounds - 1);
+                            repAmrap = res;
                         }
                     }else{
                         rounds = 1;
+                        repAmrap = res;
                     }
                     while (res >= 0) {
                       res -= wod.mvt_reps[index];
@@ -294,7 +297,7 @@ function mvtIndexAmrap(nbrReps, division){
                 mvtToUP = wod.mvt_names[i].toLowerCase();
                 arrayMvt.push("<span>"+wod.mvt_names[i].toLowerCase()+"</span>")
             }
-            return( {'scoreAbsMvt':repMvt, 'scoreRelMvt': repMvt,'id':wod.mvt_id[index] || 0,'repTarget':repTarget || res,'mvtNames':wod.mvt_names[index] || 'WORKOUT', 'rounds':(rounds) || 0, 'totalReps': (wod.total_reps) || nbrReps, 'arrayMvt':arrayMvt || {}})
+            return( {'scoreAbsMvt':repMvt, 'scoreRelMvt': repAmrap,'id':wod.mvt_id[index] || 0,'repTarget':repTarget || res,'mvtNames':wod.mvt_names[index] || 'WORKOUT', 'rounds':(rounds) || 0, 'totalReps': totalRep || nbrReps, 'arrayMvt':arrayMvt || {}})
         }
     }
 }

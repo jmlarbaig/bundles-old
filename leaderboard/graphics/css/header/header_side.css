@@ -44,10 +44,9 @@
 
 #cap{
     padding: 10px;
-    border-radius: 10px;
     background-color:  black;
-    color: var(--tx_chrono_color);
-    margin: 5px auto;
+    color: white;
+    margin: 0px auto;
 }
 
 #heat{
