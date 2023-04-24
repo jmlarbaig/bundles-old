@@ -31,39 +31,39 @@ module.exports = (nodecg) => {
     const data_ath = nodecg.Replicant('assets:dataAth')
 
     data_ath.on('change', (newValue, oldValue) => {
-        if (newValue.length > 0){
-            if (JSON.stringify(newValue) != JSON.stringify(oldValue)){
+        if (newValue.length > 0) {
+            if (JSON.stringify(newValue) != JSON.stringify(oldValue)) {
                 let ath = [];
-                let liste_cc = {'Team':[], 'Individual':[]}
+                let liste_cc = { 'Team': [], 'Individual': [] }
 
                 const result = excelToJson({
-                    sourceFile: __dirname+'/../../../..'+newValue[0].url,
+                    sourceFile: __dirname + '/../../../..' + newValue[0].url,
                     columnToKey: {
                         '*': '{{columnHeader}}'
                     }
                 });
 
 
-                Object.values(result.Athletes).forEach( ( val, index ) => {
-                    ath[index] = Object.assign( {}, athletes_infos, val);
-                    if (val.Format == "Team"){
+                Object.values(result.Athletes).forEach((val, index) => {
+                    ath[index] = Object.assign({}, athletes_infos, val);
+                    if (val.Format == "Team") {
                         let team_name = val['Team Name']
 
-                        if(team_name.includes('"')){
-                            while(team_name.includes('"', -2)){
-                                team_name=  team_name.replace('"', '')
+                        if (team_name.includes('"')) {
+                            while (team_name.includes('"', -2)) {
+                                team_name = team_name.replace('"', '')
                             }
                         }
 
-                        if( !liste_cc['Team'].hasOwnProperty(team_name) ){
+                        if (!liste_cc['Team'].hasOwnProperty(team_name)) {
                             liste_cc['Team'][team_name] = []
                         }
 
                         liste_cc['Team'][team_name].push(val)
                     }
-                    else if (val.Format == "Individual"){
+                    else if (val.Format == "Individual") {
 
-                        let fullName = val['First Name']+ ' ' + val['Last Name']
+                        let fullName = val['First Name'] + ' ' + val['Last Name']
                         liste_cc['Individual'][fullName] = []
                         liste_cc['Individual'][fullName].push(val)
                     }
