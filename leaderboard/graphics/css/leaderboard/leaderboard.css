@@ -1,5 +1,4 @@
-
-.leaderboards{
+.leaderboards {
     position: relative;
     width: 100%;
     background-color: rgb(232, 232, 232);
@@ -14,7 +13,7 @@
     height: 100%;
 }
 
-.leaderboard{
+.leaderboard {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -25,10 +24,10 @@
     -ms-transition-duration: 0.7s;
 }
 
-.leaderboard .header{
+.leaderboard .header {
     padding: 20px 20px;
     font-weight: 900;
-    font-size: 30px; 
+    font-size: 30px;
     padding: 0px 20px;
     display: flex;
     flex-direction: row;
@@ -42,17 +41,21 @@
 }
 
 
-.leaderboard .division{
-    width: 15%;
+.leaderboard .division {
+    font-size: 16px;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
-.leaderboard #mvt{
+.leaderboard #mvt {
     width: 70%;
     text-transform: capitalize;
 }
 
-.leaderboard #mvt span:nth-child(1){
+.leaderboard #mvt span:nth-child(1) {
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     -ms-transition-duration: 0.7s;
@@ -60,7 +63,7 @@
     padding: 10px;
 }
 
-.leaderboard .repTar{
+.leaderboard .repTar {
     text-align: right;
     margin: auto;
     width: 15%;
@@ -73,13 +76,13 @@
     display: flex;
     flex-direction: column;
     font-weight: 900;
-    font-size: 24px;  
+    font-size: 24px;
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     -ms-transition-duration: 0.7s;
 }
 
-.leaderboard .athlete{
+.leaderboard .athlete {
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     -ms-transition-duration: 0.7s;
@@ -89,7 +92,7 @@
     width: 100%;
 }
 
-.leaderboard .athletes .ath{
+.leaderboard .athletes .ath {
     font-size: 1.2em;
     align-items: center;
     margin: 2px 0px;
@@ -102,8 +105,8 @@
 
 }
 
-.leaderboard .athlete .rank{
-    padding: 5px 10px ;
+.leaderboard .athlete .rank {
+    padding: 5px 10px;
     text-align: center;
     width: 70px;
     border-right: 2px solid white;
@@ -112,9 +115,9 @@
     text-overflow: ellipsis;
 }
 
-.leaderboard .athlete .lane{
+.leaderboard .athlete .lane {
     /* haut left right bas */
-    padding: 5px 10px ;
+    padding: 5px 10px;
     text-align: center;
     width: 100px;
     filter: blur(0px);
@@ -147,7 +150,7 @@
 
 .leaderboard .athlete .score {
     /* haut left right bas */
-    padding: 5px 10px ;
+    padding: 5px 10px;
     width: 10%;
     text-align: center;
     border-radius: --(border);
@@ -159,7 +162,7 @@
 .leaderboard .athlete .popup {
     /* haut left right bas */
     text-transform: uppercase;
-    padding: 5px 10px ;
+    padding: 5px 10px;
     width: 20%;
     text-align: center;
     white-space: nowrap;
@@ -169,7 +172,7 @@
 
 .leaderboard .athlete .flag {
     /* haut left right bas */
-    padding: 5px 10px ;
+    padding: 5px 10px;
     width: 40px;
     align-items: center;
 }
@@ -183,7 +186,7 @@
     background-size: contain;
 }
 
-.rounds{
+.rounds {
     width: 45px;
     max-width: 45px;
     text-align: center;
@@ -193,9 +196,9 @@
     text-overflow: ellipsis;
 }
 
-.leaderboard .athletes .powered{
+.leaderboard .athletes .powered {
     /* haut left right bas */
-    padding: 5px 10px ;
+    padding: 5px 10px;
     text-align: center;
     align-items: center;
     display: flex;
