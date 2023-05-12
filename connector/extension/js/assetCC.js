@@ -43,33 +43,34 @@ module.exports = (nodecg) => {
                     }
                 });
 
+                if (result.hasOwnProperty('default')) {
+                    Object.values(result.default).forEach((val, index) => {
+                        ath[index] = Object.assign({}, athletes_infos, val);
+                        if (val.Format == "Team") {
+                            let team_name = val['Team Name']
 
-                Object.values(result.Athletes).forEach((val, index) => {
-                    ath[index] = Object.assign({}, athletes_infos, val);
-                    if (val.Format == "Team") {
-                        let team_name = val['Team Name']
-
-                        if (team_name.includes('"')) {
-                            while (team_name.includes('"', -2)) {
-                                team_name = team_name.replace('"', '')
+                            if (team_name.includes('"')) {
+                                while (team_name.includes('"', -2)) {
+                                    team_name = team_name.replace('"', '')
+                                }
                             }
+
+                            if (!liste_cc['Team'].hasOwnProperty(team_name)) {
+                                liste_cc['Team'][team_name] = []
+                            }
+
+                            liste_cc['Team'][team_name].push(val)
                         }
+                        else if (val.Format == "Individual") {
 
-                        if (!liste_cc['Team'].hasOwnProperty(team_name)) {
-                            liste_cc['Team'][team_name] = []
+                            let fullName = val['First Name'] + ' ' + val['Last Name']
+                            liste_cc['Individual'][fullName] = []
+                            liste_cc['Individual'][fullName].push(val)
                         }
+                    })
 
-                        liste_cc['Team'][team_name].push(val)
-                    }
-                    else if (val.Format == "Individual") {
-
-                        let fullName = val['First Name'] + ' ' + val['Last Name']
-                        liste_cc['Individual'][fullName] = []
-                        liste_cc['Individual'][fullName].push(val)
-                    }
-                })
-
-                nodecg.sendMessage('liste_ath_cc_update', liste_cc)
+                    nodecg.sendMessage('liste_ath_cc_update', liste_cc)
+                }
 
             }
         }

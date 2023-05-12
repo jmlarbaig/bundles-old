@@ -256,8 +256,6 @@ module.exports = (nodecg, Connected) => {
 
                 cc.loadParticpantId(idEvent, parseInt(athlete.participantId)).then((result) => {
 
-                    // console.log(result)
-                    // listeCurrentHeat[athlete.station].overallStanding = result.overallStanding
                     listeCurrentHeat[athlete.station].qualifierRank = result.qualifierRank
                     listeCurrentHeat[athlete.station].workoutRank = [{}]
                     listeCurrentHeat[athlete.station].workoutRank = result.workoutRanks
@@ -286,6 +284,7 @@ module.exports = (nodecg, Connected) => {
                                     listeCurrentHeat_ath[athlete.station].ath_infos[index] = { ...ath_infos }
                                 } else {
                                     listeCurrentHeat_ath[athlete.station].ath_infos[index] = { ...result }
+                                    listeCurrentHeat_ath[athlete.station].ath_infos[index].fullName = ath['First Name'] + ' ' + ath['Last Name'];
                                 }
                                 listeCurrentHeat[athlete.station].ath = listeCurrentHeat_ath[athlete.station].ath_infos;
                                 // console.log(listeCurrentHeat)
