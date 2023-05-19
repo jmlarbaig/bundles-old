@@ -1,51 +1,57 @@
     :root {
-    --bg__color: rgba(0,0,0,0);
+        --bg__color: rgba(0, 0, 0, 0);
 
-    --main_color: rgba(0,0,0,0.9);
-    --second_color: black;
-    --finish_color: black;
-    --first_rank_color: black;
-    --second_rank_color: black;
-    --third_rank_color: black;
+        --main_color: rgba(0, 0, 0, 0.9);
+        --second_color: black;
+        --finish_color: black;
+        --first_rank_color: black;
+        --second_rank_color: black;
+        --third_rank_color: black;
 
-    --chrono_color:white;
-    --tx_chrono_color:white;
+        --chrono_color: white;
+        --tx_chrono_color: white;
 
-    --wod_color:white;
-    --tx_wod_color:white;
+        --wod_color: white;
+        --tx_wod_color: white;
 
-    --tx_main_color: white;
-    --tx_second_color: white;
-    --tx_finish_color: white;
-    --tx_firstRank_color: white;
-    --tx_secondRank_color: white;
-    --tx_thirdRank_color: white;
+        --tx_main_color: white;
+        --tx_second_color: white;
+        --tx_finish_color: white;
+        --tx_firstRank_color: white;
+        --tx_secondRank_color: white;
+        --tx_thirdRank_color: white;
 
-    --position_x_chrono: 300px;
-    --position_y_chrono: 75px;
+        --position_x_chrono: 300px;
+        --position_y_chrono: 75px;
 
-    --position_x_heat: 320px;
-    --position_y_heat: 320px;
+        --position_x_heat: 320px;
+        --position_y_heat: 320px;
 
-    --position_x_logo : 110px;
-    --position_y_logo : 40px;
+        --position_x_logo: 110px;
+        --position_y_logo: 40px;
 
-    --position_x_leaderboard : 200px;
-    --position_y_leaderboard : 75px;
+        --position_x_leaderboard: 200px;
+        --position_y_leaderboard: 75px;
 
-    --widthLogoEvent: 250px;
+        --widthLogoEvent: 250px;
 
-    --heigth: 29px;
-    --height_ath_side : 40px;
-    --height_ath_top : 50px;
-    --height_ath_tv : 60px;
-    --padding_ath_content: 11px;
-    --border: 0px 10px 10px 0px;
+        --heigth: 29px;
+        --height_ath_side: 40px;
+        --height_ath_top: 50px;
+        --height_ath_tv: 60px;
+        --padding_ath_content: 11px;
+        --border: 0px 10px 10px 0px;
 
-    --font-select:'Typographica';
+        --font-select: 'Typographica';
 
-    --first_linear_gradient:black;
-    --second_linear_gradient:black;
+        --first_linear_gradient: black;
+        --second_linear_gradient: black;
+
+
+        --first_left_bg_color: black;
+        --second_left_bg_color: black;
+        --first_right_bg_color: black;
+        --second_right_bg_color: black;
 
     }
 
@@ -116,31 +122,31 @@
     }
 
 
-    body{
+    body {
         background-color: var(--bg__color);
         font-family: var(--font-select);
         background-size: cover;
     }
 
-    .nobody{
+    .nobody {
         background-color: var(--main_color);
     }
 
-    .screen{
+    .screen {
         overflow: hidden;
         height: 1080px;
         width: 1920px;
     }
 
-    .laneBody{
+    .laneBody {
         background-color: transparent;
     }
 
-    .frame{
+    .frame {
         background-color: transparent;
     }
 
-    iframe{
+    iframe {
         position: fixed;
         top: 0px;
         bottom: 0px;
@@ -154,4 +160,3 @@
         overflow: hidden;
         z-index: 100;
     }
-

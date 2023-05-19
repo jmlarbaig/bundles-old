@@ -32,6 +32,12 @@
     padding: 0;
 }
 
+.initial_rank_versus {
+    padding: 0;
+    background-color: rgb(251, 251, 251);
+    color: black;
+}
+
 .initial_rank_top {
     background-color: rgb(237, 237, 237);
     color: black;
