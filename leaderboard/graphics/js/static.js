@@ -194,18 +194,18 @@ function resetLeaderboard(newData) {
 
                 if (overlay == "versus") {
                     if (indexAthletes == 0 || indexAthletes == 1) {
-                        elementAth.$item.show(500)
                         $list.append($item);
                     }
                 } else {
 
-                    elementAth.$item.show(500)
                     $list.append($item);
 
                     if (overlay == 'commentator') {
                         createStats(elementAth, indexDivision);
                     }
                 }
+
+                elementAth.$item.slideDown(1000)
 
                 $('.leaderboards').find('.box_mvt').hide()
 
