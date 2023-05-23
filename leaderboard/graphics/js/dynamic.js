@@ -86,13 +86,15 @@ function updateDynamics(newScoring, status) {
 
                                 if (overlay == "versus") {
                                     if (mvts != "") {
-                                        $('.box_mvt').show()
+                                        $('.box_mvt').slideDown(1000)
+                                        $('.box_mvt').find('#mvt').html(mvts)
                                     } else {
                                         $('.box_mvt').hide()
                                     }
+                                } else {
+                                    $('#mvt').html(mvts)
+                                    $('.mvt').html(mvts)
                                 }
-                                $('#mvt').html(mvts)
-                                $('.mvt').html(mvts)
 
                                 if (overlay == 'commentator' || overlay == 'progression' || overlay == 'leaderboard') {
                                     elemAth[i].$item.find(".popup").show();
