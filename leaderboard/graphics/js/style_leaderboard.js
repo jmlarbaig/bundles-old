@@ -425,8 +425,12 @@ function laneOverlay(data) {
 function headerVersus(indexDivision) {
     let $headerTop = $(
         '<div id="leaderboard' + indexDivision + '" class="leaderboard">' +
-        '</div>'
+        '</div>' +
+        '<div class= "box_mvt" >' +
+        '<div id="mvt" class="text-nowrap text-truncate"></div>' +
+        '</div >'
     );
+
 
     return $headerTop
 }

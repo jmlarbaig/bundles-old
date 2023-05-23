@@ -83,6 +83,14 @@ function updateDynamics(newScoring, status) {
                                 }
 
                                 let mvts = Mvt_name[elemAth[index].lane].arrayMvt.toString().replaceAll(',', ' - ').replaceAll('_', ' ')
+
+                                if (overlay == "versus") {
+                                    if (mvts != "") {
+                                        $('.box_mvt').show()
+                                    } else {
+                                        $('.box_mvt').hide()
+                                    }
+                                }
                                 $('#mvt').html(mvts)
                                 $('.mvt').html(mvts)
 
