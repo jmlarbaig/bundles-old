@@ -1,15 +1,24 @@
-
-.leaderboards{
+.leaderboards {
     z-index: 10;
     position: absolute;
     font-size: 1rem;
-	height: 50px;
+    height: 50px;
     width: 1630px;
-    top:100px;
+    top: 100px;
     left: 290px;
 }
 
-.leaderboard:nth-child(1){
+.leaderboardsBottom {
+    z-index: 10;
+    position: absolute;
+    font-size: 1rem;
+    height: 50px;
+    width: 1920px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.leaderboard:nth-child(1) {
     width: calc(1630px);
     overflow: hidden;
     position: relative;
@@ -21,7 +30,7 @@
     -ms-transition-duration: 0.7s;
 }
 
-.leaderboard:nth-child(2){
+.leaderboard:nth-child(2) {
     width: calc(1630px);
     overflow: hidden;
     position: relative;
@@ -38,13 +47,13 @@
     display: flex;
     flex-direction: row;
     font-weight: 900;
-    font-size: 20px;  
+    font-size: 20px;
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     -ms-transition-duration: 0.7s;
 }
 
-.leaderboard .athlete{
+.leaderboard .athlete {
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     -ms-transition-duration: 0.7s;
@@ -55,7 +64,7 @@
     color: black;
 }
 
-.leaderboard .athletes .ath{
+.leaderboard .athletes .ath {
     z-index: 10;
     display: flex;
     flex-direction: row;
@@ -65,10 +74,22 @@
     border-right: solid 2px rgba(0, 0, 0, 0.582);
 }
 
-.ath:after{
+.ath:after {}
+
+.leaderboard .athlete .rank {
+    height: var(--height_ath_top);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 45px;
+    margin: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.leaderboard .athlete .rank{
+.leaderboard .athlete .lane {
     height: var(--height_ath_top);
     display: flex;
     align-items: center;
@@ -91,7 +112,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    min-width: 0; 
+    min-width: 0;
 }
 
 .leaderboard .athlete .score {
@@ -105,14 +126,14 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    box-shadow: 7px 2px 23px -20px rgba(0,0,0,1) inset;
-    -webkit-box-shadow: 7px 2px 23px -20px rgba(0,0,0,1) inset;
-    -moz-box-shadow: 7px 2px 23px -20px rgba(0,0,0,1) inset;
+    box-shadow: 7px 2px 23px -20px rgba(0, 0, 0, 1) inset;
+    -webkit-box-shadow: 7px 2px 23px -20px rgba(0, 0, 0, 1) inset;
+    -moz-box-shadow: 7px 2px 23px -20px rgba(0, 0, 0, 1) inset;
     height: 50px;
 }
 
 
-.rounds{
+.rounds {
     width: 45px;
     max-width: 45px;
     text-align: center;
@@ -122,7 +143,7 @@
     text-overflow: ellipsis;
 }
 
-.popup{
+.popup {
     /* haut left right bas */
     z-index: 1;
     width: 244px;
@@ -137,11 +158,11 @@
     -moz-transition-duration: 1s;
     -webkit-transition-duration: 1s;
     -ms-transition-duration: 1s;
-    padding-left: 10px  ;
-    padding-right: 10px  ;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.leaderboard .athletes .powered{
+.leaderboard .athletes .powered {
     /* haut left right bas */
     padding: 0px 10px 0px 10px;
     text-align: center;
@@ -151,4 +172,48 @@
     justify-content: space-between;
     font-size: 12px;
     width: 300px;
+}
+
+
+.box_bandeau {
+    padding: 10px;
+    z-index: 20;
+    width: calc(1920px);
+    overflow: hidden;
+    position: absolute;
+    display: flex;
+    background: linear-gradient(90deg, var(--first_linear_gradient) 0%, var(--second_linear_gradient) 18%, var(--first_linear_gradient) 35%, var(--second_linear_gradient) 66%, var(--first_linear_gradient) 100%);
+    color: white;
+    bottom: 0px;
+    left: 0px;
+    font-size: 30px;
+}
+
+.bandeau {
+    display: inline-block;
+    /* modèle de boîte en ligne */
+    padding-right: 2em;
+    /* un peu d'espace pour la transition */
+    padding-left: 100%;
+    /* placement à droite du conteneur */
+    white-space: nowrap;
+    /* pas de passage à la ligne */
+    animation: defilement-rtl 30s infinite linear;
+}
+
+.bandeau span {
+    width: max-content;
+}
+
+
+@keyframes defilement-rtl {
+    0% {
+        transform: translate3d(0, 0, 0);
+        /* position initiale à droite */
+    }
+
+    100% {
+        transform: translate3d(-100%, 0, 0);
+        /* position finale à gauche */
+    }
 }

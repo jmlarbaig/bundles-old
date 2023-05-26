@@ -352,14 +352,7 @@ setupLeaderboard.on('change', (newValue, oldValue) => {
         if (statusHeat.value != undefined && statusHeat.value.NtpTimeStart !== undefined) {
             ntpStartTime = statusHeat.value.NtpTimeStart
             startTime = parseInt(ntpStartTime);
-            // var timecapIn = ((parseInt( tc.length ? parseInt(tc[1]) : 0)* 60) + parseInt( tc.length ? parseInt(tc[2]) : 0)) * 1000;
-            // endTime = parseInt(startTime) + parseInt(timecapIn)
 
-            // if(timerLaunch != null){
-            //     clearInterval(timerLaunch)
-            //     timerLaunch = null;
-            // }
-            // timerLaunch = setInterval(updateTime, 500);
             launchTimer()
         }
     } else {

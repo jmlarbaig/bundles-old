@@ -178,6 +178,7 @@ function repoLeft(lead_, aths_) {
         } else {
             margin = 0;
         }
+        console.log(lead_)
         if (elm.$item.find(lead_) != undefined) {
             elm.$item.css("left", y + "px");
             if (elm.$item.is(':hidden')) {

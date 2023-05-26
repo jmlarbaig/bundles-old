@@ -92,6 +92,8 @@ function resetLeaderboard(newData) {
         var divisionsNames = []
         var repTarget = [];
 
+        let listOfAth = [];
+
 
         for (let athletes of data.athletes) {
             if (!divisionsNames.includes(athletes.division)) {
@@ -116,6 +118,8 @@ function resetLeaderboard(newData) {
 
         // ! On crée un tableau par division
         Object.values(athletesDivision).forEach((elementDiv, indexDivision) => {
+
+            listOfAth.push("<span>#" + divisionsNames[indexDivision] + "</span>")
 
             let $tabItem;
             switch (overlay) {
@@ -163,6 +167,7 @@ function resetLeaderboard(newData) {
 
             let height_tot = 0;
 
+
             Object.values(elementDiv).forEach((elementAth, indexAthletes) => {
 
                 let $item;
@@ -191,6 +196,8 @@ function resetLeaderboard(newData) {
 
                 elementAth.$item = $item;
                 elementAth.$item.hide()
+
+                listOfAth.push("<span>#" + elementAth.lane + " - " + elementAth.displayName + "</span>")
 
                 if (overlay == "versus") {
                     if (indexAthletes == 0 || indexAthletes == 1) {
@@ -251,6 +258,16 @@ function resetLeaderboard(newData) {
                     });
 
                 }, 100)
+            }
+
+
+            $('.box_bandeau').hide()
+            $('.box_bandeau').find('.bandeau').remove()
+
+            $('.box_bandeau').slideDown()
+            if (elementDiv.length > 5) {
+                $('.box_bandeau').append(bandeau(indexDivision))
+                $('#bandeau' + indexDivision).html(listOfAth.toString().replaceAll(',', ' • ').replaceAll('_', ' ').toUpperCase())
             }
 
 
