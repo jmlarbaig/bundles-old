@@ -214,9 +214,6 @@ function mvtIndexForTime(nbrReps, division) {
     // console.log("FOR TIMENbr De reps = ", nbrReps, " & Division = ", division)
     let res = nbrReps;
     let index = 0;
-    let mvt;
-    let repTarget;
-    let id;
     let arrayMvt = [];
     // console.log(workouts)
     for (let wod of workouts) {
@@ -263,7 +260,7 @@ function mvtIndexAmrap(nbrReps, division) {
             let totalRep = wod.total_reps;
             if (res != 0) {
                 if (wod.mvt_reps[index] == 0) {
-                    return ({ 'scoreAbsMvt': (wod.mvt_reps[index] + res) || res, 'scoreRelMvt': res_seuil || res, 'id': wod.mvt_id[index] || 0, 'repTarget': 'MAX' || res, 'mvtNames': wod.mvt_names[index] || 'WORKOUT', 'rounds': (rounds + 1) || 1, 'totalReps': (wod.total_reps) || res, 'arrayMvt': arrayMvt || {} })
+                    return ({ 'scoreAbsMvt': (wod.mvt_reps[index] + res) || res, 'scoreRelMvt': res_seuil || res, 'id': wod.mvt_id[index] || 0, 'repTarget': 'MAX' || res, 'mvtNames': wod.mvt_names[index].replaceAll('_', ' ') || 'WORKOUT', 'rounds': (rounds + 1) || 1, 'totalReps': (wod.total_reps) || res, 'arrayMvt': arrayMvt || {} })
                 } else {
                     if (totalRep != 0) {
                         rounds = Math.floor(res / totalRep) + 1;
@@ -297,7 +294,43 @@ function mvtIndexAmrap(nbrReps, division) {
                 mvtToUP = wod.mvt_names[i].toLowerCase();
                 arrayMvt.push("<span>" + wod.mvt_names[i].toLowerCase() + "</span>")
             }
-            return ({ 'scoreAbsMvt': repMvt, 'scoreRelMvt': repAmrap, 'id': wod.mvt_id[index] || 0, 'repTarget': repTarget || res, 'mvtNames': wod.mvt_names[index] || 'WORKOUT', 'rounds': (rounds) || 0, 'totalReps': totalRep || nbrReps, 'arrayMvt': arrayMvt || {} })
+            return ({ 'scoreAbsMvt': repMvt, 'scoreRelMvt': repAmrap, 'id': wod.mvt_id[index] || 0, 'repTarget': repTarget || res, 'mvtNames': wod.mvt_names[index].replaceAll('_', ' ') || 'WORKOUT', 'rounds': (rounds) || 0, 'totalReps': totalRep || nbrReps, 'arrayMvt': arrayMvt || {} })
         }
     }
+}
+
+function mvtIndexRepMax(nbrReps, loadAttempted) {
+    let res = nbrReps;
+    let index = 0;
+    let arrayMvt = [];
+    for (let wod of workouts) {
+        if (true) {
+            if (res != 0) {
+                // console.log("RepTarget= ", wod.mvt_reps[0])
+                if (res == wod.total_reps && wod.mvt_names[wod.mvt_names.length - 1] == "Sprint") {
+                    res = 0
+                    index = wod.mvt_names.length - 1
+                }
+                else {
+                    while (res >= 0) {
+                        res = (res - wod.mvt_reps[index])
+                        // console.log("je suis à l'index : ", index)
+                        if (res >= 0) {
+                            index++;
+                        }
+                    }
+                }
+            }
+            else {
+                index = 0
+                res = -wod.mvt_reps[index];
+            }
+            for (let i = index; i < wod.mvt_names.length; i++) {
+                mvtToUP = wod.mvt_names[i].toLowerCase();
+                arrayMvt.push("<span>" + wod.mvt_names[i].toLowerCase() + "</span>")
+            }
+            return ({ 'scoreAbsMvt': nbrReps, 'scoreRelMvt': res, 'id': 0, 'repTarget': loadAttempted, 'rounds': 0, 'totalReps': 1, 'mvtNames': 'Barbell', 'arrayMvt': ['BARBELL'] })
+        }
+    }
+    return ({ 'scoreAbsMvt': res, 'scoreRelMvt': res, 'id': 0, 'repTarget': 0, 'rounds': 0, 'totalReps': 1, 'mvtNames': 'BARBELL', 'arrayMvt': ['WORKOUTS'] })
 }

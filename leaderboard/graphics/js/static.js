@@ -205,7 +205,11 @@ function resetLeaderboard(newData) {
                     }
                 }
 
-                elementAth.$item.slideDown(1000)
+                if (overlay == 'versus') {
+                    elementAth.$item.slideDown(1000)
+                } else {
+                    elementAth.$item.fadeIn(1000)
+                }
 
                 $('.leaderboards').find('.box_mvt').hide()
 
