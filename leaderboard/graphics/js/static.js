@@ -263,12 +263,10 @@ function resetLeaderboard(newData) {
 
             $('.box_bandeau').hide()
             $('.box_bandeau').find('.bandeau').remove()
+            $('.box_bandeau').append(bandeau(indexDivision))
+            $('#bandeau' + indexDivision).html(listOfAth.toString().replaceAll(',', ' • ').replaceAll('_', ' ').toUpperCase())
 
-            $('.box_bandeau').slideDown()
-            if (elementDiv.length > 5) {
-                $('.box_bandeau').append(bandeau(indexDivision))
-                $('#bandeau' + indexDivision).html(listOfAth.toString().replaceAll(',', ' • ').replaceAll('_', ' ').toUpperCase())
-            }
+            setupLeaderboard.value.bandeau ? $('.box_bandeau').slideDown() : $('.box_bandeau').hide()
 
 
         })
