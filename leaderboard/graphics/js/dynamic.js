@@ -14,8 +14,29 @@ function updateDynamics(newScoring, status) {
             if (newScoring[1].CurrentRank != null) {
                 Object.keys(elemAth).forEach(i => {
 
+                    if (overlay == 'overlay_side') {
+
+                        let newRank = fetchNewData(newScoring, elemAth[i].lane).CurrentRank;
+                        if (elemAth[i].CurrentRank != newRank && elemAth[i].score_abs != 0) {
+                            console.log('Current Rank = ', elemAth[i].CurrentRank)
+                            console.log('new Rank = ', newRank)
+                            if (elemAth[i].CurrentRank > newRank) {
+
+                                elemAth[i].$item.find('.rank').addClass('up_rank')
+                            } else if (elemAth[i].CurrentRank < newRank) {
+                                elemAth[i].$item.find('.rank').addClass('down_rank')
+
+                            }
+                            setTimeout(() => {
+                                elemAth[i].$item.find('.rank').removeClass('up_rank down_rank')
+
+                            }, 1500)
+                        }
+                    }
+
                     elemAth[i] = Object.assign({}, elemAth[i], fetchNewData(newScoring, elemAth[i].lane));
                     elemAth[i].$item.find(".rank").text(elemAth[i].CurrentRank);
+
 
                     if (status == "W" || status == "R") {
 
@@ -257,8 +278,8 @@ function updateDynamics(newScoring, status) {
                             if (elemAth[i].CurrentRank == 1) {
                                 elemAth[i].$item.find(".rank").addClass('first_rank')
                                 elemAth[i].$item.find(".rank").removeClass('initial_rank_top second_rank third_rank other_rank')
-                                elemAth[i].$item.find(".name").addClass('first_rank')
-                                elemAth[i].$item.find(".name").removeClass('initial_rank_top second_rank third_rank other_rank')
+                                elemAth[i].$item.find(".ath_sub").addClass('first_rank')
+                                elemAth[i].$item.find(".ath_sub").removeClass('initial_rank_top second_rank third_rank other_rank')
                                 elemAth[i].$item.find(".popup").addClass('first_rank')
                                 elemAth[i].$item.find(".popup").removeClass('initial_rank_top second_rank third_rank other_rank')
                                 elemAth[i].$item.find(".score").addClass('first_rank')
@@ -269,8 +290,8 @@ function updateDynamics(newScoring, status) {
                             else {
                                 elemAth[i].$item.find(".rank").addClass('initial_rank_top')
                                 elemAth[i].$item.find(".rank").removeClass('first_rank second_rank third_rank other_rank')
-                                elemAth[i].$item.find(".name").addClass('initial_rank_top')
-                                elemAth[i].$item.find(".name").removeClass('first_rank second_rank third_rank other_rank')
+                                elemAth[i].$item.find(".ath_sub").addClass('initial_rank_top')
+                                elemAth[i].$item.find(".ath_sub").removeClass('first_rank second_rank third_rank other_rank')
                                 elemAth[i].$item.find(".popup").addClass('initial_rank_top')
                                 elemAth[i].$item.find(".popup").removeClass('first_rank second_rank third_rank other_rank')
                                 elemAth[i].$item.find(".score").addClass('initial_rank_top')
@@ -286,8 +307,8 @@ function updateDynamics(newScoring, status) {
                             elemAth[i].$item.find(".rank").toggleClass('initial_rank_top', false)
                             elemAth[i].$item.find(".score").toggleClass('score finish_rank', true)
                             elemAth[i].$item.find(".score").toggleClass('initial_rank_top', false)
-                            elemAth[i].$item.find(".name").toggleClass('name finish_rank', true)
-                            elemAth[i].$item.find(".name").toggleClass('initial_rank_top', false)
+                            elemAth[i].$item.find(".ath_sub").toggleClass('name finish_rank', true)
+                            elemAth[i].$item.find(".ath_sub").toggleClass('initial_rank_top', false)
                             elemAth[i].$item.find(".popup").toggleClass('popup finish_rank', true)
                             elemAth[i].$item.find(".popup").toggleClass('initial_rank_top', false)
                         } else {

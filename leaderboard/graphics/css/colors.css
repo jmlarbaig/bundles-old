@@ -28,6 +28,17 @@
     fill: var(--second_color);
 }
 
+.up_rank {
+    background-color: green;
+    color: white;
+
+}
+
+.down_rank {
+    background-color: red;
+    color: white;
+}
+
 .intial_rank {
     padding: 0;
 }

@@ -127,6 +127,15 @@
         src: url("../fonts/Slenco-Black.otf");
     }
 
+    @font-face {
+        font-family: "headway";
+        src: url("../fonts/HEADWAY.ttf");
+    }
+
+    @font-face {
+        font-family: "okta";
+        src: url("../fonts/Okta\ Bold\ Italic.otf");
+    }
 
     body {
         background-color: var(--bg__color);

@@ -86,8 +86,10 @@ function overlayTop(data) {
         '<div class="athlete" id="aht' + data.lane + '">' +
         '<div class="ath">' +
         '<div class="rank initial_rank_top">' + data.lane + '</div>' +
-        // '<div class="lane initial_rank_top">' + data.lane + '</div>' +
-        '<div class="name initial_rank_top">' + name + '</div>' +
+        '<div class="ath_sub initial_rank_top">' +
+        '<div class="name ">' + name + '</div>' +
+        '<div class="lane ">#' + data.lane + '</div>' +
+        '</div>' +
         '<div class="score initial_rank_top"></div>' +
         '</div>' +
         '<div class="popup initial_rank_top">' + '</div>' +
