@@ -25,8 +25,6 @@ function updateDynamics(newScoring, status) {
 
                             let go = auth[elemAth[i].division] || (heat.typeWod == 'repmax')
 
-                            console.log(go)
-
                             if (workouts.length > 0 && go && elemAth[i].result == "") {
 
                                 if (heat.typeWod == 'amrap') {
@@ -50,8 +48,11 @@ function updateDynamics(newScoring, status) {
                                 }
                                 else {
                                     if (overlay == 'progression' || overlay == 'commentator' || overlay == 'leaderboard') {
+                                        console.log(Mvt_name)
                                         if (heat.typeWod == 'amrap' && !Number.isNaN(Mvt_name[elemAth[i].lane].rounds)) {
+                                            console.log(Mvt_name[elemAth[i].lane].scoreRelMvt)
                                             percent = (Mvt_name[elemAth[i].lane].scoreRelMvt / Mvt_name[elemAth[i].lane].totalReps) * 95
+                                            console.log(percent)
                                             elemAth[i].$item.find(".rounds").text("R" + (Mvt_name[elemAth[i].lane].rounds));
                                             elemAth[i].$item.find(".popup").text("R" + (Mvt_name[elemAth[i].lane].rounds) + ' - ' + Mvt_name[elemAth[i].lane].mvtNames);
                                         } else {
@@ -152,6 +153,11 @@ function updateDynamics(newScoring, status) {
                             if (overlay == 'progression') {
                                 $('#circle' + elemAth[i].lane).css("transform", "translateX(95%)");
                             }
+                        } else if (elemAth[i].status == "T") {
+                            let result = elemAth[i].result;
+                            elemAth[i].$item.find(".score").text('FIN');
+                            elemAth[i].$item.find(".popup").text(result);
+                            elemAth[i].$item.find(".popup").show();
                         }
                     } else if (status == "T") {
                         let result = elemAth[i].result;
@@ -167,6 +173,25 @@ function updateDynamics(newScoring, status) {
                         } else {
                             elemAth[i].$item.find(".popup").text('CAP ' + elemAth[i].score_abs);
                         }
+                        if ($('.leaderboard').is(':visible')) {
+                            if (overlay == 'overlay_side' || overlay == 'overlay_top' || overlay == 'versus') {
+
+                                timerAutomatic = setTimeout(() => {
+                                    $('#box_svg').slideUp(1000)
+                                    $('.leaderboard').slideUp(1000)
+                                    $('.box_chrono').slideUp(1000)
+                                    $('.box_heat').slideUp(1000)
+                                    // $(".mainSponsor").slideUp(1000)
+                                    if (overlay == 'versus') {
+
+                                        $('.box_mvt').slideUp(1000)
+                                    }
+                                    if (setupLeaderboard.value.automaticSchedule) {
+                                        launchAutomaticSchedule()
+                                    }
+                                }, 5000)
+                            }
+                        }
                     }
 
                     if (elemAth[i].result == "" && status != "T") {
@@ -175,8 +200,8 @@ function updateDynamics(newScoring, status) {
                                 console.log(elemAth[i])
                                 if (elemAth[i].CurrentRank == 1) {
                                     console.log('first')
-                                    elemAth[i].$item.find(".rank").addClass('first_rank')
-                                    elemAth[i].$item.find(".rank").removeClass('initial_rank_versus second_rank third_rank other_rank')
+                                    // elemAth[i].$item.find(".rank").addClass('first_rank')
+                                    // elemAth[i].$item.find(".rank").removeClass('initial_rank_versus second_rank third_rank other_rank')
                                     elemAth[i].$item.find(".popup").addClass('first_rank')
                                     elemAth[i].$item.find(".popup").removeClass('initial_rank_versus second_rank third_rank other_rank')
                                     elemAth[i].$item.find(".score").addClass('first_rank')
@@ -185,8 +210,8 @@ function updateDynamics(newScoring, status) {
                                 else {
                                     console.log(elemAth[i])
                                     console.log('orther')
-                                    elemAth[i].$item.find(".rank").addClass('initial_rank_versus')
-                                    elemAth[i].$item.find(".rank").removeClass('first_rank second_rank third_rank other_rank')
+                                    // elemAth[i].$item.find(".rank").addClass('initial_rank_versus')
+                                    // elemAth[i].$item.find(".rank").removeClass('first_rank second_rank third_rank other_rank')
                                     elemAth[i].$item.find(".popup").addClass('initial_rank_versus')
                                     elemAth[i].$item.find(".popup").removeClass('first_rank second_rank third_rank other_rank')
                                     elemAth[i].$item.find(".score").addClass('initial_rank_versus')
@@ -194,8 +219,8 @@ function updateDynamics(newScoring, status) {
                                 }
                             } else {
                                 if (elemAth[i].CurrentRank == 1) {
-                                    elemAth[i].$item.find(".rank").toggleClass('rank first_rank', true)
-                                    elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank other_rank', false)
+                                    // elemAth[i].$item.find(".rank").toggleClass('rank first_rank', true)
+                                    // elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank other_rank', false)
                                     elemAth[i].$item.find(".score").toggleClass('score first_rank', true)
                                     elemAth[i].$item.find(".score").toggleClass('second_rank third_rank other_rank', false)
                                     elemAth[i].$item.find(".circle").toggleClass('circle first_rank', true)
@@ -203,24 +228,24 @@ function updateDynamics(newScoring, status) {
 
                                 }
                                 else if (elemAth[i].CurrentRank == 2) {
-                                    elemAth[i].$item.find(".rank").toggleClass('rank second_rank', true)
-                                    elemAth[i].$item.find(".rank").toggleClass('first_rank third_rank other_rank', false)
+                                    // elemAth[i].$item.find(".rank").toggleClass('rank second_rank', true)
+                                    // elemAth[i].$item.find(".rank").toggleClass('first_rank third_rank other_rank', false)
                                     elemAth[i].$item.find(".score").toggleClass('score second_rank', true)
                                     elemAth[i].$item.find(".score").toggleClass('first_rank third_rank other_rank', false)
                                     elemAth[i].$item.find(".circle").toggleClass('circle second_rank', true)
                                     elemAth[i].$item.find(".circle").toggleClass('first_rank third_rank other_rank', false)
                                 }
                                 else if (elemAth[i].CurrentRank == 3) {
-                                    elemAth[i].$item.find(".rank").toggleClass('rank third_rank', true)
-                                    elemAth[i].$item.find(".rank").toggleClass('second_rank first_rank other_rank', false)
+                                    // elemAth[i].$item.find(".rank").toggleClass('rank third_rank', true)
+                                    // elemAth[i].$item.find(".rank").toggleClass('second_rank first_rank other_rank', false)
                                     elemAth[i].$item.find(".score").toggleClass('score third_rank', true)
                                     elemAth[i].$item.find(".score").toggleClass('second_rank first_rank other_rank', false)
                                     elemAth[i].$item.find(".circle").toggleClass('circle third_rank', true)
                                     elemAth[i].$item.find(".circle").toggleClass('second_rank first_rank other_rank', false)
                                 }
                                 else {
-                                    elemAth[i].$item.find(".rank").toggleClass('rank other_rank', true)
-                                    elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank', false)
+                                    // elemAth[i].$item.find(".rank").toggleClass('rank other_rank', true)
+                                    // elemAth[i].$item.find(".rank").toggleClass('second_rank third_rank first_rank', false)
                                     elemAth[i].$item.find(".score").toggleClass('score other_rank', true)
                                     elemAth[i].$item.find(".score").toggleClass('second_rank third_rank first_rank', false)
                                     elemAth[i].$item.find(".circle").toggleClass('circle other_rank', true)
@@ -330,7 +355,7 @@ function updateDynamics(newScoring, status) {
 
                     // Dans tous les cas, on prend la valeur height pour redéféinir les dimensions du leaderboard
                     // if(overlay === 'overlay_side' || overlay === 'leaderboard') {}
-                    if (overlay === 'overlay_top') { height_tot = height_top } else { (height_tot += elemAth[i].$item.height()) }
+                    if (overlay === 'overlay_top') { height_tot = height_top } else { (height_tot += elemAth[i].$item.height() + 10) }
 
                 })
                 elemAth.sort(ascendingRank);

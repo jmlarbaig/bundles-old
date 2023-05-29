@@ -192,11 +192,12 @@ function repoLeft(lead_, aths_) {
 
 function repoTop(lead_, aths_) {
     //initialisation la position de départ
-    let y = parseInt($(lead_ + " .header").css('height').replace('px'));
+    let y = parseInt($(lead_ + " .header").css('height').replace('px', ''));
     Object.values(aths_).forEach(elm => {
         if (elm.$item.find(lead_) != undefined) {
             elm.$item.css("top", y + "px");
             y += elm.$item.height();
+            y += parseInt(elm.$item.css('margin').split(' ')[0].replace('px', ''));
         }
     })
 }
@@ -250,7 +251,6 @@ function mvtIndexForTime(nbrReps, division) {
 }
 
 function mvtIndexAmrap(nbrReps, division) {
-    // console.log("AMRAP Nbr De reps = ", nbrReps, " & Division = ", division)
     let res = nbrReps;
     let index = 0;
     let repTarget;
@@ -261,17 +261,17 @@ function mvtIndexAmrap(nbrReps, division) {
             let totalRep = wod.total_reps;
             if (res != 0) {
                 if (wod.mvt_reps[index] == 0) {
-                    return ({ 'scoreAbsMvt': (wod.mvt_reps[index] + res) || res, 'scoreRelMvt': res_seuil || res, 'id': wod.mvt_id[index] || 0, 'repTarget': 'MAX' || res, 'mvtNames': wod.mvt_names[index].replaceAll('_', ' ') || 'WORKOUT', 'rounds': (rounds + 1) || 1, 'totalReps': (wod.total_reps) || res, 'arrayMvt': arrayMvt || {} })
+                    return ({ 'scoreAbsMvt': (wod.mvt_reps[index] + res) || res, 'scoreRelMvt': res, 'id': wod.mvt_id[index] || 0, 'repTarget': 'MAX' || res, 'mvtNames': wod.mvt_names[index].replaceAll('_', ' ') || 'WORKOUT', 'rounds': (rounds + 1) || 1, 'totalReps': (wod.total_reps) || res, 'arrayMvt': arrayMvt || {} })
                 } else {
                     if (totalRep != 0) {
                         rounds = Math.floor(res / totalRep) + 1;
                         if (rounds > 1) {
                             res -= totalRep * (rounds - 1);
-                            repAmrap = res;
                         }
+                        repAmrap = res;
                     } else {
                         rounds = 1;
-                        repAmrap = res;
+                        repAmrap = nbrReps;
                     }
                     while (res >= 0) {
                         res -= wod.mvt_reps[index];
@@ -334,4 +334,34 @@ function mvtIndexRepMax(nbrReps, loadAttempted) {
         }
     }
     return ({ 'scoreAbsMvt': res, 'scoreRelMvt': res, 'id': 0, 'repTarget': 0, 'rounds': 0, 'totalReps': 1, 'mvtNames': 'BARBELL', 'arrayMvt': ['WORKOUTS'] })
+}
+
+
+function launchAutomaticSchedule() {
+    timerAutomatic2 = setTimeout(() => {
+
+        // nodecg.sendMessageToBundle('heat_result', 'connector', { workoutHeatSelected: eventInfos.value.workoutId, heatSelected: eventInfos.value.heatId, num_heats: 10 })
+
+        let config = setupLeaderboard.value;
+
+        config.box_chrono = false;
+        config.box_heat = false;
+        config.box_logo = false;
+        config.attributionLane = false;
+
+        setupLeaderboard.value = config;
+
+        timerAutomatic3 = setTimeout(() => {
+
+            let config = setupLeaderboard.value;
+
+            config.box_chrono = true;
+            config.box_heat = true;
+            config.box_logo = true;
+            // config.heatResults = false;
+
+            setupLeaderboard.value = config;
+
+        }, 10000)
+    }, 2000)
 }

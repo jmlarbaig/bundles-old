@@ -36,7 +36,7 @@
         --widthLogoEvent: 250px;
 
         --heigth: 29px;
-        --height_ath_side: 40px;
+        --height_ath_side: 30px;
         --height_ath_top: 50px;
         --height_ath_tv: 60px;
         --padding_ath_content: 11px;
@@ -119,6 +119,12 @@
     @font-face {
         font-family: "Digit";
         src: url("../fonts/DS-DIGI.TTF");
+    }
+
+
+    @font-face {
+        font-family: "Slenco";
+        src: url("../fonts/Slenco-Black.otf");
     }
 
 

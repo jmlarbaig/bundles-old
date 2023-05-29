@@ -22,10 +22,10 @@
     "compatibleRange": "^1.1.1",
     "dashboardPanels": [
       {
-        "name":"planning",
+        "name": "planning",
         "title": "Planning",
         "file": "index.html",
-        "fullbleed":true
+        "fullbleed": true
       }
     ]
   },

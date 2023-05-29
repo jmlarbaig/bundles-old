@@ -26,7 +26,7 @@
         "title": "Overlay Control",
         "file": "overlay.html",
         "fullbleed": false,
-        "width":7,
+        "width": 7,
         "headerColor": "#525F78",
         "workspace": "Main Workspace"
       },
@@ -35,7 +35,7 @@
         "title": "Manual Timer Control",
         "file": "timer.html",
         "fullbleed": false,
-        "width":3,
+        "width": 3,
         "headerColor": "#525F78",
         "workspace": "Main Workspace"
       },
@@ -44,7 +44,7 @@
         "title": "Adjust Timer",
         "file": "adjustTimer.html",
         "fullbleed": false,
-        "width":3,
+        "width": 3,
         "headerColor": "#525F78",
         "workspace": "Main Workspace"
       }

@@ -19,6 +19,11 @@ let root = document.documentElement;
 let Clrs = {}
 let chrono;
 
+let timerAutomatic1;
+let timerAutomatic2;
+let timerAutomatic3;
+let timerAutomatic4;
+
 
 let showDrapeau;
 
@@ -84,6 +89,9 @@ eventInfos.on('change', (newValue, oldValue) => {
         if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
             resetHeat(newValue);
             if (newValue.heatId != heat.heatId) {
+                if ($('#box_svg').is(':visible')) {
+                    $('#box_svg').slideUp(1000)
+                }
                 newHeat = true;
                 best = []
                 bestPerf = []
@@ -121,9 +129,62 @@ workoutInfo.on('change', (newValue, oldValue) => {
 
 s_athletes.on('change', (newValue, oldValue) => {
     console.log('update Static :', JSON.stringify(newValue) !== JSON.stringify(oldValue))
-    // if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
-    resetLeaderboard(newValue);
-    // }
+    if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+
+        if (timerAutomatic1 != null) {
+            clearInterval(timerAutomatic1)
+            timerAutomatic1 = null;
+        }
+
+        if (timerAutomatic2 != null) {
+            clearInterval(timerAutomatic2)
+            timerAutomatic2 = null;
+        }
+
+        if (timerAutomatic3 != null) {
+            clearInterval(timerAutomatic3)
+            timerAutomatic3 = null;
+        }
+
+
+        if (setupLeaderboard.value.automaticSchedule) {
+
+            let config = setupLeaderboard.value;
+
+            config.box_chrono = false;
+            config.box_heat = false;
+            config.leaderboards = false;
+            setupLeaderboard.value = config;
+
+            setTimeout(() => {
+
+                let config = setupLeaderboard.value;
+                config.attributionLane = true;
+
+                setupLeaderboard.value = config;
+
+
+                setTimeout(() => {
+                    let config = setupLeaderboard.value;
+
+                    config.leaderboards = true;
+
+                    $('.leaderboard').hide()
+                    config.attributionLane = false;
+
+                    setupLeaderboard.value = config;
+                    setTimeout(() => {
+                        resetLeaderboard(newValue);
+
+                    }, 2000)
+                }, 10000)
+            }, 2000)
+        } else {
+
+            resetLeaderboard(newValue);
+        }
+
+    }
 })
 
 let statusWorkout = '0'
@@ -298,10 +359,10 @@ mainSponsors.on('change', (newValue) => {
     if (newValue.length > 0) {
 
         $(".mainSponsor").css("background-image", "url(" + newValue[0].url + ")");
-        $(".mainSponsor").fadeIn(1000)
+        $(".mainSponsor").toggle("slide")
     }
     else {
-        $(".mainSponsor").fadeOut(1000)
+        $(".mainSponsor").toggle("slide")
     }
 })
 

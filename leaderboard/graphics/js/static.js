@@ -70,6 +70,8 @@ var height_tot = 0
 function resetLeaderboard(newData) {
     try {
 
+
+
         var data = { athletes: "" }
         data.athletes = newData
         // console.log("Static Data = ", staticData)
@@ -78,6 +80,7 @@ function resetLeaderboard(newData) {
         if (overlay == 'overlay_top' || overlay == 'overlay_side') {
             setupLeaderboard.value.leaderboards != true ? $(".leaderboards").hide() : ""
         }
+
 
 
         var $tab = $(".leaderboards")
@@ -149,7 +152,12 @@ function resetLeaderboard(newData) {
             if (overlay == "versus") {
                 indexDivision == 0 ? $tab.append($tabItem) : '';
             } else {
+                $tabItem.hide()
                 $tab.append($tabItem);
+                setTimeout(() => {
+                    $tabItem.show(1000)
+
+                })
             }
 
 
@@ -215,7 +223,10 @@ function resetLeaderboard(newData) {
                 if (overlay == 'versus') {
                     elementAth.$item.slideDown(1000)
                 } else {
-                    elementAth.$item.fadeIn(1000)
+                    if (overlay != 'overlay_side') {
+
+                        elementAth.$item.fadeIn(1000)
+                    }
                 }
 
                 $('.leaderboards').find('.box_mvt').hide()
@@ -224,10 +235,9 @@ function resetLeaderboard(newData) {
 
                     // Dans tous les cas, on prend la valeur height pour redéféinir les dimensions du leaderboard
                     // if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
-                    if (overlay === 'overlay_top') { height_tot = height_top } else { (height_tot += elementAth.$item.height() + 2) }
+                    if (overlay === 'overlay_top') { height_tot = height_top } else { (height_tot += elementAth.$item.height() + 10) }
 
                     if (overlay != 'commentator' && overlay != 'sk') {
-                        console.log('height tot ', height_tot)
                         $("#leaderboard" + indexDivision + " #athletes").height(height_tot)
                         $("#leaderboard" + indexDivision).height(height_tot + $("#leaderboard" + indexDivision + " .header").height())
                     }
@@ -237,8 +247,55 @@ function resetLeaderboard(newData) {
                         reposition("#leaderboard" + indexDivision, athletesDivision[indexDivision]);
                     }
 
+
                 }, 1000)
 
+
+                if (overlay == 'overlay_side' || overlay == 'overlay_top' || overlay == 'versus') {
+
+                    setTimeout(() => {
+
+                        $('.leaderboard').slideDown(1000)
+                        // if (!$('.mainSponsor').is(':visible')) {
+                        //     $(".mainSponsor").fadeIn(1000)
+                        // }
+
+
+
+                        if (setupLeaderboard.value.automaticSchedule) {
+
+                            let config = setupLeaderboard.value;
+
+                            config.box_chrono = true;
+                            config.box_heat = true;
+                            setupLeaderboard.value = config;
+
+                        } else {
+                            let config = setupLeaderboard.value;
+
+                            if (!config.box_chrono || !config.box_heat) {
+                                setupLeaderboard.value = config;
+                            }
+
+                            $('.box_chrono').slideDown(1000)
+                            $('.box_heat').slideDown(1000)
+                        }
+
+
+                        $('#box_svg').slideDown(1000)
+                        setTimeout(() => {
+                            if (overlay == 'overlay_side') {
+                                elementAth.$item.toggle("slide")
+
+                            }
+
+                        }, 1000)
+                    }, 2000)
+
+                } else {
+
+                    $('.leaderboard').slideDown(1000)
+                }
             })
 
             if (overlay == 'commentator') {
@@ -276,4 +333,11 @@ function resetLeaderboard(newData) {
     }
 }
 
+
+function drawLine(svg) {
+    var g = svg.group({ stroke: 'white', strokeWidth: 2 });
+    svg.line(g, 80, 10, 80, 100);
+    svg.line(g, 80, 150, 80, 850);
+    // svg.line(g, 80, 950, 80, 1070);
+}
 
