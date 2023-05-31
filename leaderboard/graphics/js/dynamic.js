@@ -18,14 +18,10 @@ function updateDynamics(newScoring, status) {
 
                         let newRank = fetchNewData(newScoring, elemAth[i].lane).CurrentRank;
                         if (elemAth[i].CurrentRank != newRank && elemAth[i].score_abs != 0) {
-                            console.log('Current Rank = ', elemAth[i].CurrentRank)
-                            console.log('new Rank = ', newRank)
                             if (elemAth[i].CurrentRank > newRank) {
-
                                 elemAth[i].$item.find('.rank').addClass('up_rank')
                             } else if (elemAth[i].CurrentRank < newRank) {
                                 elemAth[i].$item.find('.rank').addClass('down_rank')
-
                             }
                             setTimeout(() => {
                                 elemAth[i].$item.find('.rank').removeClass('up_rank down_rank')
@@ -197,7 +193,7 @@ function updateDynamics(newScoring, status) {
                         if ($('.leaderboard').is(':visible')) {
                             if (overlay == 'overlay_side' || overlay == 'overlay_top' || overlay == 'versus') {
 
-                                timerAutomatic = setTimeout(() => {
+                                timerAutomatic1 = setTimeout(() => {
                                     $('#box_svg').slideUp(1000)
                                     $('.leaderboard').slideUp(1000)
                                     $('.box_chrono').slideUp(1000)
@@ -374,8 +370,6 @@ function updateDynamics(newScoring, status) {
                         })
                     }
 
-                    // Dans tous les cas, on prend la valeur height pour redéféinir les dimensions du leaderboard
-                    // if(overlay === 'overlay_side' || overlay === 'leaderboard') {}
                     if (overlay === 'overlay_top') { height_tot = height_top } else { (height_tot += elemAth[i].$item.height() + 10) }
 
                 })
@@ -391,11 +385,8 @@ function updateDynamics(newScoring, status) {
                 }
             }
             else {
-                // overlay !== 'commentator' && $("#leaderboard"+ key).height(height_tot + $("#leaderboard"+key + " .header").height())
-
                 elemAth.sort(ascendingLane);
                 reposition("#leaderboard" + key, elemAth);
-
             }
 
         })

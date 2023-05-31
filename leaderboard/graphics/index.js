@@ -19,10 +19,10 @@ let root = document.documentElement;
 let Clrs = {}
 let chrono;
 
-let timerAutomatic1;
-let timerAutomatic2;
-let timerAutomatic3;
-let timerAutomatic4;
+let timerAutomatic1 = null;
+let timerAutomatic2 = null;
+let timerAutomatic3 = null;
+let timerAutomatic4 = null;
 
 
 let showDrapeau;
