@@ -1,7 +1,7 @@
 .box_logo {
     position: absolute;
-    top: var(--position_y_logo);
-    left: var(--position_x_logo);
+    bottom: 40px;
+    right: 40px;
     width: var(--widthLogoEvent);
     height: var(--widthLogoEvent);
 }

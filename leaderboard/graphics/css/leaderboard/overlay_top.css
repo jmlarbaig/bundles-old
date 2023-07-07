@@ -19,7 +19,7 @@
 }
 
 .leaderboard:nth-child(1) {
-    width: calc(1630px);
+    width: var(--width_calc_top);
     overflow: hidden;
     position: relative;
     display: flex;
@@ -31,7 +31,7 @@
 }
 
 .leaderboard:nth-child(2) {
-    width: calc(1630px);
+    width: var(--width_calc_top);
     overflow: hidden;
     position: relative;
     display: flex;

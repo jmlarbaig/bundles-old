@@ -69,7 +69,11 @@ let laneEcho = 0
 
 let overlay = ''
 
+// if is android
+var isAndroid = false;
+
 $('document').ready(() => {
+    console.log(document)
     let ch = document.location.pathname.split('/')
     overlay = ch[ch.length - 1].replace('.html', '')
     console.log(overlay)
@@ -78,6 +82,19 @@ $('document').ready(() => {
     } else if (overlay.includes('echo') || overlay.includes('lane')) {
         laneEcho = parseInt(window.location.search.replace('?lane=', ''))
     }
+    var userAgent = navigator.userAgent.toLowerCase();
+    var Android = userAgent.indexOf("android") > -1;
+
+    widthWindow = window.innerWidth;
+    heightWindowd = window.innerHeight;
+
+    if (Android) {
+        isAndroid = true;
+
+    }
+    document.querySelector(':root').style.setProperty('--zoom', (widthWindow / 1920) * 100 + '%');
+    console.log(widthWindow)
+    console.log(heightWindowd)
 })
 
 let newHeat = false;
@@ -194,8 +211,6 @@ let endTime;
 let timerLaunch = null;
 
 function launchTimer() {
-    console.log(heat)
-    console.log(startTime)
     if (heat != {}) {
         if (startTime != 0) {
             var timecapIn = ((parseInt(tc.length ? parseInt(tc[1]) : 0) * 60) + parseInt(tc.length ? parseInt(tc[2]) : 0)) * 1000;
@@ -209,7 +224,6 @@ function launchTimer() {
             if (timerLaunch != null) {
                 clearInterval(timerLaunch)
                 timerLaunch = null;
-                // $(".chrono").find('#time').text(tc[1] + ":" + tc[0]);
                 $(".chrono").find('#time').text('STOP');
             }
         }
@@ -223,13 +237,6 @@ statusHeat.on('change', (newValue, oldValue) => {
             if (newValue.NtpTimeStart !== ntpStartTime) {
                 ntpStartTime = newValue.NtpTimeStart
                 startTime = parseInt(ntpStartTime);
-                // var timecapIn = ((parseInt( tc.length ? parseInt(tc[1]) : 0)* 60) + parseInt( tc.length ? parseInt(tc[2]) : 0)) * 1000;
-                // endTime = parseInt(startTime) + parseInt(timecapIn)
-                // if(timerLaunch != null){
-                //     clearInterval(timerLaunch)
-                //     timerLaunch = null;
-                // }
-                // timerLaunch = setInterval(updateTime, 500);
                 launchTimer();
                 newHeat = false
 

@@ -3,7 +3,7 @@
     position: absolute;
     top: 0px;
     left: -10px;
-    width: 1930px;
+    width: var(--width_top);
     height: 100px;
     color: white;
     text-transform: capitalize;
@@ -39,7 +39,7 @@
     position: absolute;
     top: 0px;
     left: 150px;
-    width: 1780px;
+    width: var(--width_box_heat);
     height: 100px;
     background: rgb(2, 0, 36);
     background: linear-gradient(90deg, var(--first_linear_gradient) 0%, var(--second_linear_gradient) 18%, var(--first_linear_gradient) 35%, var(--second_linear_gradient) 66%, var(--first_linear_gradient) 100%);
@@ -49,7 +49,7 @@
 
 .header .box_heat .heat {
     display: inline-block;
-    width: 1780px;
+    width: var(--width_box_heat);
     height: 100px;
 }
 
