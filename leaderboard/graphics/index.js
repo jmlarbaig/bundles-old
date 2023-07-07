@@ -85,8 +85,12 @@ $('document').ready(() => {
     var userAgent = navigator.userAgent.toLowerCase();
     var Android = userAgent.indexOf("android") > -1;
 
-    widthWindow = window.outerWidth;
-    heightWindowd = window.outerHeight;
+    // widthWindow = window.outerWidth;
+    // heightWindowd = window.outerHeight;
+
+
+    widthWindow = window.innerWidth;
+    heightWindowd = window.innerHeight;
 
     if (Android) {
         isAndroid = true;
@@ -498,8 +502,12 @@ setupLeaderboard.on('change', (newValue, oldValue) => {
             $("#frame").find('#osDivWod').slideUp()
         }
         setTimeout(() => {
-            widthWindow = window.outerWidth;
-            heightWindowd = window.outerHeight;
+            // widthWindow = window.outerWidth;
+            // heightWindowd = window.outerHeight;
+
+
+            widthWindow = window.innerWidth;
+            heightWindowd = window.innerHeight;
             console.log(window)
             // document.querySelector(':root').style.setProperty('--zoom', (widthWindow / 1920) * 100 + '%');
             console.log($("#frame").find("iframe").contents().find('body').css('zoom', (widthWindow / 1920) * 100 + '%'))
