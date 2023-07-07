@@ -35,10 +35,6 @@ $('document').ready(() => {
     widthWindow = window.innerWidth;
     heightWindowd = window.innerHeight;
 
-    if (Android) {
-        isAndroid = true;
-
-    }
     document.querySelector(':root').style.setProperty('--zoom', (widthWindow / 1920) * 100 + '%');
     console.log(widthWindow)
     console.log(heightWindowd)

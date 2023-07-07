@@ -433,7 +433,6 @@ setupLeaderboard.on('change', (newValue, oldValue) => {
 
 
     if (overlay == 'overlay_side' || overlay == 'overlay_top') {
-        $("#frame").css('zoom', (widthWindow / 1920) * 100 + '%');
         if (newValue.lowerthird) {
             $(function () {
                 if ($("#frame").find('#lower').length > 0) {
@@ -498,6 +497,13 @@ setupLeaderboard.on('change', (newValue, oldValue) => {
         } else {
             $("#frame").find('#osDivWod').slideUp()
         }
+        setTimeout(() => {
+            widthWindow = window.innerWidth;
+            heightWindowd = window.innerHeight;
+            // document.querySelector(':root').style.setProperty('--zoom', (widthWindow / 1920) * 100 + '%');
+            console.log($("#frame").find("iframe").contents().find('body').css('zoom', (widthWindow / 1920) * 100 + '%'))
+
+        }, 1000)
     }
 
 })
