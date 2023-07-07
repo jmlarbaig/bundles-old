@@ -32,8 +32,8 @@ let _config = {
 $('document').ready(() => {
     let ch = document.location.pathname.split('/')
     overlay = ch[ch.length - 1].replace('.html', '')
-    widthWindow = window.innerWidth;
-    heightWindowd = window.innerHeight;
+    widthWindow = window.outerWidth;
+    heightWindowd = window.outerHeight;
 
     document.querySelector(':root').style.setProperty('--zoom', (widthWindow / 1920) * 100 + '%');
     console.log(widthWindow)
