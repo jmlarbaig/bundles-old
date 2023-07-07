@@ -1,3 +1,7 @@
+:root {
+    --zoom: 100%;
+}
+
 .radio {
     margin: 0
 }
@@ -24,15 +28,18 @@
     pointer-events: none
 }
 
-.radio.is-disabled .radio__label,.radio.is-disabled .radio__lbl {
+.radio.is-disabled .radio__label,
+.radio.is-disabled .radio__lbl {
     color: #d0d0d0
 }
 
-.radio.is-disabled .radio__input-item:checked+.radio__ctrl-text:after,.radio.is-disabled input[type=radio]:checked+.radio__ctrl-text:after {
+.radio.is-disabled .radio__input-item:checked+.radio__ctrl-text:after,
+.radio.is-disabled input[type=radio]:checked+.radio__ctrl-text:after {
     border-color: #d0d0d0
 }
 
-.radio.is-disabled .radio__input-item:checked+.radio__ctrl-text:before,.radio.is-disabled input[type=radio]:checked+.radio__ctrl-text:before {
+.radio.is-disabled .radio__input-item:checked+.radio__ctrl-text:before,
+.radio.is-disabled input[type=radio]:checked+.radio__ctrl-text:before {
     background-color: #d0d0d0
 }
 
@@ -95,7 +102,8 @@
     margin-top: 20px
 }
 
-.radio .radio__input-item,.radio input[type=radio] {
+.radio .radio__input-item,
+.radio input[type=radio] {
     position: absolute;
     z-index: -1;
     left: 0;
@@ -111,22 +119,28 @@
     margin: 0
 }
 
-.radio .radio__input-item.input-validation-error+.radio__ctrl-text:after,.radio .radio__input-item.input-validation-error+.radio__ctrl-text:before,.radio input[type=radio].input-validation-error+.radio__ctrl-text:after,.radio input[type=radio].input-validation-error+.radio__ctrl-text:before {
+.radio .radio__input-item.input-validation-error+.radio__ctrl-text:after,
+.radio .radio__input-item.input-validation-error+.radio__ctrl-text:before,
+.radio input[type=radio].input-validation-error+.radio__ctrl-text:after,
+.radio input[type=radio].input-validation-error+.radio__ctrl-text:before {
     border-color: #ff4a46
 }
 
-.radio .radio__input-item.input-validation-error+.radio__ctrl-text:before,.radio input[type=radio].input-validation-error+.radio__ctrl-text:before {
+.radio .radio__input-item.input-validation-error+.radio__ctrl-text:before,
+.radio input[type=radio].input-validation-error+.radio__ctrl-text:before {
     background-color: #ff4a46
 }
 
-.radio .radio__input-item:checked+.radio__ctrl-text:after,.radio input[type=radio]:checked+.radio__ctrl-text:after {
+.radio .radio__input-item:checked+.radio__ctrl-text:after,
+.radio input[type=radio]:checked+.radio__ctrl-text:after {
     border-color: #4285f4;
     -webkit-transition: color .2s ease-out;
     -o-transition: color .2s ease-out;
     transition: color .2s ease-out
 }
 
-.radio .radio__input-item:checked+.radio__ctrl-text:before,.radio input[type=radio]:checked+.radio__ctrl-text:before {
+.radio .radio__input-item:checked+.radio__ctrl-text:before,
+.radio input[type=radio]:checked+.radio__ctrl-text:before {
     border: none;
     -webkit-border-radius: 100%;
     border-radius: 100%;
@@ -148,11 +162,13 @@
     transition: all .2s ease-in
 }
 
-.radio .radio__input-item+.radio__ctrl-text,.radio input[type=radio]+.radio__ctrl-text {
+.radio .radio__input-item+.radio__ctrl-text,
+.radio input[type=radio]+.radio__ctrl-text {
     margin-top: 0
 }
 
-.radio .radio__label,.radio .radio__lbl {
+.radio .radio__label,
+.radio .radio__lbl {
     color: #616161;
     font-size: 12px;
     font-weight: 500;
@@ -161,12 +177,14 @@
     margin-bottom: 4px
 }
 
-.radio .radio__label a,.radio .radio__lbl a {
+.radio .radio__label a,
+.radio .radio__lbl a {
     display: inline-block;
     vertical-align: top
 }
 
-.radio .radio__label a .material-icons,.radio .radio__lbl a .material-icons {
+.radio .radio__label a .material-icons,
+.radio .radio__lbl a .material-icons {
     font-size: 20px
 }
 
@@ -195,11 +213,13 @@
     color: #d0d0d0
 }
 
-.radio .radio__btn.is-disabled .radio__input-item:checked+.radio__ctrl-text:after,.radio .radio__btn.is-disabled input[type=radio]:checked+.radio__ctrl-text:after {
+.radio .radio__btn.is-disabled .radio__input-item:checked+.radio__ctrl-text:after,
+.radio .radio__btn.is-disabled input[type=radio]:checked+.radio__ctrl-text:after {
     border-color: #d0d0d0
 }
 
-.radio .radio__btn.is-disabled .radio__input-item:checked+.radio__ctrl-text:before,.radio .radio__btn.is-disabled input[type=radio]:checked+.radio__ctrl-text:before {
+.radio .radio__btn.is-disabled .radio__input-item:checked+.radio__ctrl-text:before,
+.radio .radio__btn.is-disabled input[type=radio]:checked+.radio__ctrl-text:before {
     background-color: #d0d0d0
 }
 
@@ -309,7 +329,8 @@ body {
     z-index: 1000;
     background-color: transparent;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
+    -moz-osx-font-smoothing: grayscale;
+    zoom: var(--zoom);
 }
 
 .mr-5 {
@@ -341,7 +362,8 @@ body {
     align-items: center
 }
 
-.flex-grow-1,.spacer {
+.flex-grow-1,
+.spacer {
     -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
@@ -373,14 +395,14 @@ body {
 }
 
 #ccEmbdFrm {
-    width: 100%!important;
-    max-width: 100%!important;
-    height: 580px!important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 580px !important;
     background-color: transparent
 }
 
 #ccEmbdFrm.is-mobile {
-    height: 400px!important
+    height: 400px !important
 }
 
 .select2-search.select2-search--dropdown {
@@ -388,7 +410,7 @@ body {
 }
 
 .select2-container {
-    width: 240px!important
+    width: 240px !important
 }
 
 .select2-container:hover .select2-selection {
@@ -444,7 +466,7 @@ body {
 
 .select2-container .select2-selection .select2-selection__rendered {
     color: #8d8e96;
-    font-family: Roboto,sans-serif,sans-serif;
+    font-family: Roboto, sans-serif, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 32px;
@@ -475,7 +497,7 @@ body {
     -webkit-border-radius: 2px;
     border-radius: 2px;
     color: #fff;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 35px
@@ -488,7 +510,7 @@ body {
     -webkit-border-radius: 2px;
     border-radius: 2px;
     color: #fff;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 35px
@@ -510,7 +532,7 @@ body {
 .select2-results__option[aria-selected] {
     padding: 0 0 0 40px;
     color: #fff;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 35px
@@ -1370,11 +1392,11 @@ span.custom-checkbox.switch .lever:after {
     border-radius: 21px;
     opacity: 1;
     left: 0;
-    -webkit-transition: left .3s ease,background .3s ease,-webkit-box-shadow .1s ease;
-    transition: left .3s ease,background .3s ease,-webkit-box-shadow .1s ease;
-    -o-transition: left .3s ease,background .3s ease,box-shadow .1s ease;
-    transition: left .3s ease,background .3s ease,box-shadow .1s ease;
-    transition: left .3s ease,background .3s ease,box-shadow .1s ease,-webkit-box-shadow .1s ease;
+    -webkit-transition: left .3s ease, background .3s ease, -webkit-box-shadow .1s ease;
+    transition: left .3s ease, background .3s ease, -webkit-box-shadow .1s ease;
+    -o-transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+    transition: left .3s ease, background .3s ease, box-shadow .1s ease;
+    transition: left .3s ease, background .3s ease, box-shadow .1s ease, -webkit-box-shadow .1s ease;
     top: 50%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -1527,7 +1549,7 @@ input[type=radio]:disabled:checked+label:after {
 
 #scoring-status .tooltip-inner {
     padding: .375rem .5rem;
-    background-color: rgba(66,66,66,.8);
+    background-color: rgba(66, 66, 66, .8);
     font-weight: 500
 }
 
@@ -1566,7 +1588,7 @@ input[type=radio]:disabled:checked+label:after {
 }
 
 .cue-card-table__table-wrapper {
-    background-color: rgba(31,13,50,.88);
+    background-color: rgba(31, 13, 50, .88);
     -webkit-border-radius: 0;
     border-radius: 0
 }
@@ -1602,12 +1624,12 @@ input[type=radio]:disabled:checked+label:after {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(33,33,33,.4);
+    background-color: rgba(33, 33, 33, .4);
     z-index: 2
 }
 
 .cue-card-table__header.header-without-background {
-    background-color: rgba(245,245,245,.95);
+    background-color: rgba(245, 245, 245, .95);
     -webkit-box-shadow: inset .5px .9px 0 #fff;
     box-shadow: inset .5px .9px 0 #fff
 }
@@ -1653,7 +1675,7 @@ input[type=radio]:disabled:checked+label:after {
 .cc-table__header__logo-text {
     width: 900px;
     color: #fff;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 53px;
     font-weight: 700;
     line-height: 42px;
@@ -1665,7 +1687,7 @@ input[type=radio]:disabled:checked+label:after {
     text-overflow: ellipsis;
     overflow: hidden;
     padding-right: 20px;
-    text-shadow: 2px 2px 2px rgba(48,48,48,.2);
+    text-shadow: 2px 2px 2px rgba(48, 48, 48, .2);
     position: relative;
     z-index: 3
 }
@@ -1705,7 +1727,7 @@ input[type=radio]:disabled:checked+label:after {
     z-index: 3;
     overflow: hidden;
     color: #fff;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 39px;
     font-weight: 700;
     line-height: 35px;
@@ -1714,7 +1736,7 @@ input[type=radio]:disabled:checked+label:after {
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
-    text-shadow: 2px 2px 2px rgba(48,48,48,.2)
+    text-shadow: 2px 2px 2px rgba(48, 48, 48, .2)
 }
 
 .header-without-background .cc-table__header__workout {
@@ -1744,10 +1766,10 @@ input[type=radio]:disabled:checked+label:after {
 
 .cue-card-table__table thead {
     background-color: #4a4c58;
-    background-image: -webkit-gradient(linear,left bottom,left top,from(rgba(0,0,0,.1)),to(rgba(255,255,255,.1)));
-    background-image: -webkit-linear-gradient(bottom,rgba(0,0,0,.1) 0,rgba(255,255,255,.1) 100%);
-    background-image: -o-linear-gradient(bottom,rgba(0,0,0,.1) 0,rgba(255,255,255,.1) 100%);
-    background-image: linear-gradient(to top,rgba(0,0,0,.1) 0,rgba(255,255,255,.1) 100%);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, .1)), to(rgba(255, 255, 255, .1)));
+    background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, .1) 0, rgba(255, 255, 255, .1) 100%);
+    background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, .1) 0, rgba(255, 255, 255, .1) 100%);
+    background-image: linear-gradient(to top, rgba(0, 0, 0, .1) 0, rgba(255, 255, 255, .1) 100%);
     height: 50px;
     vertical-align: middle;
     position: relative
@@ -1764,10 +1786,10 @@ input[type=radio]:disabled:checked+label:after {
     right: 0;
     height: 30px;
     opacity: .5;
-    background-image: -webkit-linear-gradient(bottom,transparent 0,#191a27 100%);
-    background-image: -webkit-gradient(linear,left bottom,left top,from(transparent),to(#191a27));
-    background-image: -o-linear-gradient(bottom,transparent 0,#191a27 100%);
-    background-image: linear-gradient(to top,transparent 0,#191a27 100%)
+    background-image: -webkit-linear-gradient(bottom, transparent 0, #191a27 100%);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(transparent), to(#191a27));
+    background-image: -o-linear-gradient(bottom, transparent 0, #191a27 100%);
+    background-image: linear-gradient(to top, transparent 0, #191a27 100%)
 }
 
 .cue-card-table__table thead tr th {
@@ -1783,15 +1805,15 @@ input[type=radio]:disabled:checked+label:after {
     right: 0;
     height: 30px;
     opacity: .5;
-    background-image: -webkit-linear-gradient(bottom,transparent 0,#191a27 100%);
-    background-image: -webkit-gradient(linear,left bottom,left top,from(transparent),to(#191a27));
-    background-image: -o-linear-gradient(bottom,transparent 0,#191a27 100%);
-    background-image: linear-gradient(to top,transparent 0,#191a27 100%)
+    background-image: -webkit-linear-gradient(bottom, transparent 0, #191a27 100%);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(transparent), to(#191a27));
+    background-image: -o-linear-gradient(bottom, transparent 0, #191a27 100%);
+    background-image: linear-gradient(to top, transparent 0, #191a27 100%)
 }
 
 .cue-card-table__table th {
     color: #b6b8c0;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 24px;
     font-weight: 700;
     line-height: 50px;
@@ -1804,7 +1826,9 @@ input[type=radio]:disabled:checked+label:after {
     line-height: 50px
 }
 
-.cue-card-table__table th[data-id=athlete_id],.cue-card-table__table th[data-id=lane],.cue-card-table__table th[data-id=rank] {
+.cue-card-table__table th[data-id=athlete_id],
+.cue-card-table__table th[data-id=lane],
+.cue-card-table__table th[data-id=rank] {
     width: 128px
 }
 
@@ -1812,7 +1836,8 @@ input[type=radio]:disabled:checked+label:after {
     width: 108px
 }
 
-.cue-card-table__table th[data-id=overall_points],.cue-card-table__table th[data-id=score] {
+.cue-card-table__table th[data-id=overall_points],
+.cue-card-table__table th[data-id=score] {
     width: 17%
 }
 
@@ -1827,10 +1852,10 @@ input[type=radio]:disabled:checked+label:after {
 }
 
 .cue-card-table__table tbody tr:first-child {
-    background: -webkit-linear-gradient(top,rgba(0,0,0,.65) 0,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 25%);
-    background: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,.65)),color-stop(24%,rgba(0,0,0,0)),color-stop(25%,rgba(0,0,0,0)));
-    background: -o-linear-gradient(top,rgba(0,0,0,.65) 0,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 25%);
-    background: linear-gradient(to bottom,rgba(0,0,0,.65) 0,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 25%)
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, .65) 0, rgba(0, 0, 0, 0) 24%, rgba(0, 0, 0, 0) 25%);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .65)), color-stop(24%, rgba(0, 0, 0, 0)), color-stop(25%, rgba(0, 0, 0, 0)));
+    background: -o-linear-gradient(top, rgba(0, 0, 0, .65) 0, rgba(0, 0, 0, 0) 24%, rgba(0, 0, 0, 0) 25%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .65) 0, rgba(0, 0, 0, 0) 24%, rgba(0, 0, 0, 0) 25%)
 }
 
 .cue-card-table__table tbody tr:first-child td {
@@ -1851,7 +1876,7 @@ input[type=radio]:disabled:checked+label:after {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     color: #fff;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 40px;
     font-weight: 600;
     text-transform: uppercase;
@@ -1860,13 +1885,13 @@ input[type=radio]:disabled:checked+label:after {
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     padding: 0 12px 0 0;
-    -webkit-box-shadow: 0 2px 0 0 rgba(80,79,88,.66);
-    box-shadow: 0 2px 0 0 rgba(80,79,88,.66)
+    -webkit-box-shadow: 0 2px 0 0 rgba(80, 79, 88, .66);
+    box-shadow: 0 2px 0 0 rgba(80, 79, 88, .66)
 }
 
 .cue-card-table__table tbody tr td:first-child {
     padding: 0 8px 0 40px;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 43px;
     font-weight: 600;
     text-transform: uppercase
@@ -1929,7 +1954,8 @@ input[type=radio]:disabled:checked+label:after {
     vertical-align: middle
 }
 
-.cue-card-table__table tbody tr td[data-table-body-content=affiliate],.cue-card-table__table td[data-table-body-content=score]>span {
+.cue-card-table__table tbody tr td[data-table-body-content=affiliate],
+.cue-card-table__table td[data-table-body-content=score]>span {
     font-size: 30px
 }
 
@@ -1947,13 +1973,13 @@ input[type=radio]:disabled:checked+label:after {
     transition-property: -webkit-transform;
     -o-transition-property: transform;
     transition-property: transform;
-    transition-property: transform,-webkit-transform;
+    transition-property: transform, -webkit-transform;
     -webkit-transition-duration: 1.5s;
     -o-transition-duration: 1.5s;
     transition-duration: 1.5s;
-    -webkit-transition-timing-function: cubic-bezier(.175,.885,.32,1.275);
-    -o-transition-timing-function: cubic-bezier(.175,.885,.32,1.275);
-    transition-timing-function: cubic-bezier(.175,.885,.32,1.275)
+    -webkit-transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
+    -o-transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
+    transition-timing-function: cubic-bezier(.175, .885, .32, 1.275)
 }
 
 #cueCardScreenHolder.animation-container .cue-card-table__table tbody tr:nth-child(1) {
@@ -2018,13 +2044,13 @@ input[type=radio]:disabled:checked+label:after {
 
 .cc-tt-footer {
     background-color: #4a4c58;
-    background-image: -webkit-gradient(linear,left bottom,left top,from(rgba(0,0,0,.1)),to(rgba(255,255,255,.1)));
-    background-image: -webkit-linear-gradient(bottom,rgba(0,0,0,.1) 0,rgba(255,255,255,.1) 100%);
-    background-image: -o-linear-gradient(bottom,rgba(0,0,0,.1) 0,rgba(255,255,255,.1) 100%);
-    background-image: linear-gradient(to top,rgba(0,0,0,.1) 0,rgba(255,255,255,.1) 100%);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, .1)), to(rgba(255, 255, 255, .1)));
+    background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, .1) 0, rgba(255, 255, 255, .1) 100%);
+    background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, .1) 0, rgba(255, 255, 255, .1) 100%);
+    background-image: linear-gradient(to top, rgba(0, 0, 0, .1) 0, rgba(255, 255, 255, .1) 100%);
     -webkit-border-radius: 0;
     border-radius: 0;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 18px;
     font-weight: 600;
     line-height: 30px;
@@ -2081,7 +2107,7 @@ input[type=radio]:disabled:checked+label:after {
 .cue-card-btn .material-icons {
     z-index: -10;
     position: absolute;
-    color: rgba(255,255,255,.7);
+    color: rgba(255, 255, 255, .7);
     font-size: 12px;
     visibility: hidden;
     opacity: 0;
@@ -2092,7 +2118,7 @@ input[type=radio]:disabled:checked+label:after {
 
 .cue-card-btn .cue-card-btn__text {
     color: #e0e0e0;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
@@ -2139,7 +2165,7 @@ input[type=radio]:disabled:checked+label:after {
 
 .cue-card-setup header {
     color: #fff;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 24px;
     font-weight: 500;
     line-height: 80px;
@@ -2226,7 +2252,7 @@ input[type=radio]:disabled:checked+label:after {
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: rgba(158,158,158,.5)
+    background-color: rgba(158, 158, 158, .5)
 }
 
 .cue-card-setup.is-updating .cue-card-setup__settings {
@@ -2242,7 +2268,7 @@ input[type=radio]:disabled:checked+label:after {
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: rgba(158,158,158,.5)
+    background-color: rgba(158, 158, 158, .5)
 }
 
 .cue-card-setup.is-updating .cue-card-setup__btn>a {
@@ -2315,7 +2341,9 @@ input[type=radio]:disabled:checked+label:after {
     transition: all .23s ease-in-out
 }
 
-.cue-card-setup__settings .form-group input:active,.cue-card-setup__settings .form-group input:focus,.cue-card-setup__settings .form-group input:hover {
+.cue-card-setup__settings .form-group input:active,
+.cue-card-setup__settings .form-group input:focus,
+.cue-card-setup__settings .form-group input:hover {
     border-color: #8d8e96;
     color: #fff
 }
@@ -2329,7 +2357,7 @@ input[type=radio]:disabled:checked+label:after {
 }
 
 .cue-card-setup__settings .form-group .minicolors input {
-    height: 34px!important
+    height: 34px !important
 }
 
 .cue-card-setup__btn {
@@ -2393,7 +2421,7 @@ input[type=radio]:disabled:checked+label:after {
 
 .cue-card-setup__btn>a {
     color: #9e9e9e;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 500;
     line-height: 22px;
@@ -2554,7 +2582,7 @@ input[type=radio]:disabled:checked+label:after {
 
 .cue-card-setup__btn p {
     color: #e0e0e0;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -2562,18 +2590,28 @@ input[type=radio]:disabled:checked+label:after {
     text-align: center
 }
 
-.cue-card-setup.is-updating .cue-card-setup__default-text,.cue-card-setup__btn.is-change .cue-card-setup__default-text,.cue-card-setup__btn.is-done .cue-card-setup__default-text,.cue-card-setup__btn.is-more .cue-card-setup__default-text,.cue-card-setup__change-text,.cue-card-setup__more-text,.cue-card-setup__updated-text,.cue-card-setup__updating-text {
+.cue-card-setup.is-updating .cue-card-setup__default-text,
+.cue-card-setup__btn.is-change .cue-card-setup__default-text,
+.cue-card-setup__btn.is-done .cue-card-setup__default-text,
+.cue-card-setup__btn.is-more .cue-card-setup__default-text,
+.cue-card-setup__change-text,
+.cue-card-setup__more-text,
+.cue-card-setup__updated-text,
+.cue-card-setup__updating-text {
     display: none
 }
 
-.cue-card-setup.is-updating .cue-card-setup__updating-text,.cue-card-setup__btn.is-change .cue-card-setup__change-text,.cue-card-setup__btn.is-done .cue-card-setup__updated-text,.cue-card-setup__btn.is-more .cue-card-setup__more-text {
+.cue-card-setup.is-updating .cue-card-setup__updating-text,
+.cue-card-setup__btn.is-change .cue-card-setup__change-text,
+.cue-card-setup__btn.is-done .cue-card-setup__updated-text,
+.cue-card-setup__btn.is-more .cue-card-setup__more-text {
     display: inline
 }
 
 .cue-card-setup__settings label {
     display: block;
     color: #fff;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 13px;
@@ -2625,7 +2663,7 @@ input[type=radio]:disabled:checked+label:after {
 
 .cue-card-setup__settings .checkbox-list input[type=checkbox]+label {
     color: #e0e0e0;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 24px
@@ -2688,7 +2726,7 @@ input[type=checkbox]:checked~label:before {
 
 .cc-setup__settings__autoscroll__header h3 {
     color: #fff;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 35px;
@@ -2698,7 +2736,7 @@ input[type=checkbox]:checked~label:before {
 .cc-setup__settings__autoscroll__header p {
     margin: 0;
     color: #9e9e9e;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.43;
@@ -2711,7 +2749,7 @@ input[type=checkbox]:checked~label:before {
     background-color: #303030;
     border: 1px solid #616161;
     color: #d0d0d0;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 500;
     padding: 0 30px
@@ -2723,7 +2761,8 @@ input[type=checkbox]:checked~label:before {
     color: #fff
 }
 
-.cc-setup__settings__prev-next .btn:active,.cc-setup__settings__prev-next .btn:focus {
+.cc-setup__settings__prev-next .btn:active,
+.cc-setup__settings__prev-next .btn:focus {
     color: #fff;
     background-color: #4285f4;
     -webkit-border-radius: 0 3px 3px 0;
@@ -2783,7 +2822,7 @@ input[type=checkbox]:checked~label:before {
 }
 
 .cc-setup__settings__autoscroll-wrapper.is-checked #windowTimeHolder {
-    display: block!important
+    display: block !important
 }
 
 .cc-setup__settings__autoscroll-wrapper.is-checked .select2-container.hover .select2-selection .select2-selection__rendered {
@@ -2821,7 +2860,7 @@ input[type=checkbox]:checked~label:before {
     right: auto;
     width: 48px;
     height: 48px;
-    background-color: rgba(158,158,158,.5)
+    background-color: rgba(158, 158, 158, .5)
 }
 
 .position-bottom.is-closed .cue-card-btn .material-icons {
@@ -2877,7 +2916,7 @@ input[type=checkbox]:checked~label:before {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    background-color: rgba(158,158,158,.5)
+    background-color: rgba(158, 158, 158, .5)
 }
 
 .position-bottom .cue-card-btn .cue-card-btn__text.material-icons {
@@ -2945,7 +2984,7 @@ input[type=checkbox]:checked~label:before {
     width: 90%;
     max-width: 580px;
     overflow: hidden;
-    background-color: rgba(28,35,45,.88);
+    background-color: rgba(28, 35, 45, .88);
     max-height: 90vh;
     position: relative;
     z-index: 1
@@ -2953,7 +2992,7 @@ input[type=checkbox]:checked~label:before {
 
 .streaming-assets__event {
     color: #212121;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 24px;
     font-weight: 700;
     line-height: 32px;
@@ -2965,8 +3004,8 @@ input[type=checkbox]:checked~label:before {
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     background-color: #fff;
-    -webkit-box-shadow: 0 4px 8px rgba(0,0,0,.24);
-    box-shadow: 0 4px 8px rgba(0,0,0,.24);
+    -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, .24);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .24);
     position: relative;
     z-index: 3;
     margin: 0
@@ -2975,15 +3014,15 @@ input[type=checkbox]:checked~label:before {
 .streaming-assets__ttl {
     margin: 0;
     color: #1c232d;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 48px;
     font-weight: 700;
     letter-spacing: .5px;
     line-height: 56px;
     padding: 24px;
-    -webkit-box-shadow: 4px 0 8px rgba(0,0,0,.24);
-    box-shadow: 4px 0 8px rgba(0,0,0,.24);
-    background-color: rgba(255,255,255,.88);
+    -webkit-box-shadow: 4px 0 8px rgba(0, 0, 0, .24);
+    box-shadow: 4px 0 8px rgba(0, 0, 0, .24);
+    background-color: rgba(255, 255, 255, .88);
     position: relative;
     z-index: 2
 }
@@ -2991,7 +3030,7 @@ input[type=checkbox]:checked~label:before {
 .streaming-assets__dscr {
     z-index: 1;
     color: #fff;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 24px;
     font-weight: 600;
     line-height: 32px;
@@ -3007,12 +3046,22 @@ input[type=checkbox]:checked~label:before {
     font-weight: 700
 }
 
-.streaming-assets__dscr li,.streaming-assets__dscr p,.streaming-assets__dscr ul {
+.streaming-assets__dscr li,
+.streaming-assets__dscr p,
+.streaming-assets__dscr ul {
     margin: 0;
     padding: 0
 }
 
-.streaming-assets__dscr li+li,.streaming-assets__dscr li+p,.streaming-assets__dscr li+ul,.streaming-assets__dscr p+li,.streaming-assets__dscr p+p,.streaming-assets__dscr p+ul,.streaming-assets__dscr ul+li,.streaming-assets__dscr ul+p,.streaming-assets__dscr ul+ul {
+.streaming-assets__dscr li+li,
+.streaming-assets__dscr li+p,
+.streaming-assets__dscr li+ul,
+.streaming-assets__dscr p+li,
+.streaming-assets__dscr p+p,
+.streaming-assets__dscr p+ul,
+.streaming-assets__dscr ul+li,
+.streaming-assets__dscr ul+p,
+.streaming-assets__dscr ul+ul {
     margin-top: 12px
 }
 
@@ -3035,7 +3084,7 @@ input[type=checkbox]:checked~label:before {
 
 .heat-main__dscr .table td {
     color: #fff;
-    font-family: "Roboto Condensed",sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 32px;
     font-weight: 600;
     line-height: 40px;
@@ -3044,7 +3093,7 @@ input[type=checkbox]:checked~label:before {
     padding: 24px 12px;
     background: 0;
     border: 0;
-    border-bottom: 1px solid rgba(0,0,0,.8)
+    border-bottom: 1px solid rgba(0, 0, 0, .8)
 }
 
 .heat-main__dscr .table td:first-child {
@@ -3072,11 +3121,13 @@ input[type=checkbox]:checked~label:before {
     display: block
 }
 
-.heat-main__dscr .table td img,.heat-main__dscr .table td span {
+.heat-main__dscr .table td img,
+.heat-main__dscr .table td span {
     vertical-align: middle
 }
 
-.heat-main__dscr .table td img+span,.heat-main__dscr .table td span+span {
+.heat-main__dscr .table td img+span,
+.heat-main__dscr .table td span+span {
     margin-left: 8px
 }
 
@@ -3090,13 +3141,13 @@ input[type=checkbox]:checked~label:before {
     transition-property: -webkit-transform;
     -o-transition-property: transform;
     transition-property: transform;
-    transition-property: transform,-webkit-transform;
+    transition-property: transform, -webkit-transform;
     -webkit-transition-duration: 2.5s;
     -o-transition-duration: 2.5s;
     transition-duration: 2.5s;
-    -webkit-transition-timing-function: cubic-bezier(.175,.885,.32,1.275);
-    -o-transition-timing-function: cubic-bezier(.175,.885,.32,1.275);
-    transition-timing-function: cubic-bezier(.175,.885,.32,1.275)
+    -webkit-transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
+    -o-transition-timing-function: cubic-bezier(.175, .885, .32, 1.275);
+    transition-timing-function: cubic-bezier(.175, .885, .32, 1.275)
 }
 
 #screenHolder .athlete_item:nth-child(1) {
@@ -3329,7 +3380,7 @@ input[type=checkbox]:checked~label:before {
     width: 800px;
     height: 116px;
     background-color: #fff;
-    background-color: rgba(255,255,255,.88);
+    background-color: rgba(255, 255, 255, .88);
     padding: 3rem 0 0 2.4rem;
     color: #212121;
     font-size: 36px;
@@ -3345,7 +3396,7 @@ input[type=checkbox]:checked~label:before {
 
 @media (aspect-ratio: 4 / 3) {
     .cue-card-jumbotron .header h2 {
-        padding-top:4.4rem;
+        padding-top: 4.4rem;
         height: 144px;
         font-size: 44px;
         letter-spacing: 1px
@@ -3367,14 +3418,14 @@ input[type=checkbox]:checked~label:before {
     overflow: hidden;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
-    -webkit-box-shadow: 4px 0 8px rgba(0,0,0,.24);
-    box-shadow: 4px 0 8px rgba(0,0,0,.24);
+    -webkit-box-shadow: 4px 0 8px rgba(0, 0, 0, .24);
+    box-shadow: 4px 0 8px rgba(0, 0, 0, .24);
     position: relative
 }
 
 @media (aspect-ratio: 4 / 3) {
     .cue-card-jumbotron .header h3 {
-        height:104px;
+        height: 104px;
         font-size: 32px;
         letter-spacing: 2px
     }
@@ -3383,10 +3434,10 @@ input[type=checkbox]:checked~label:before {
 .cue-card-jumbotron .cc-tt-footer {
     padding-left: 2.4rem;
     height: 52px;
-    -webkit-box-shadow: 4px 0 8px rgba(0,0,0,.24);
-    box-shadow: 4px 0 8px rgba(0,0,0,.24);
+    -webkit-box-shadow: 4px 0 8px rgba(0, 0, 0, .24);
+    box-shadow: 4px 0 8px rgba(0, 0, 0, .24);
     background-color: #000;
-    background-color: rgba(0,0,0,.5);
+    background-color: rgba(0, 0, 0, .5);
     color: #fff;
     font-size: 21px;
     font-weight: 600;
@@ -3409,7 +3460,7 @@ input[type=checkbox]:checked~label:before {
     flex-grow: 1;
     overflow: hidden;
     background-color: #000;
-    background-color: rgba(0,0,0,.8)
+    background-color: rgba(0, 0, 0, .8)
 }
 
 .cue-card-jumbotron table {
@@ -3430,11 +3481,11 @@ input[type=checkbox]:checked~label:before {
     font-weight: 700;
     line-height: 40px;
     letter-spacing: 1px;
-    -webkit-box-shadow: 4px 0 8px rgba(0,0,0,.24);
-    box-shadow: 4px 0 8px rgba(0,0,0,.24);
+    -webkit-box-shadow: 4px 0 8px rgba(0, 0, 0, .24);
+    box-shadow: 4px 0 8px rgba(0, 0, 0, .24);
     background-color: transparent;
     border-bottom: 2px solid #fff;
-    border-bottom: 2px solid rgba(255,255,255,.8);
+    border-bottom: 2px solid rgba(255, 255, 255, .8);
     position: relative
 }
 
@@ -3454,6 +3505,6 @@ input[type=checkbox]:checked~label:before {
     background-color: #2afd86;
     color: #212121;
     border-bottom-color: #000;
-    border-bottom-color: rgba(0,0,0,.8);
+    border-bottom-color: rgba(0, 0, 0, .8);
     position: static
 }
