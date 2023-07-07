@@ -39,7 +39,7 @@ $('document').ready(() => {
         isAndroid = true;
 
     }
-    document.querySelector(':root').style.setProperty('--zoom', (widthWindow / 1920) * 100 + '%');
+    // document.querySelector(':root').style.setProperty('--zoom', (widthWindow / 1920) * 100 + '%');
     console.log(widthWindow)
     console.log(heightWindowd)
 })

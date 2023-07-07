@@ -433,6 +433,7 @@ setupLeaderboard.on('change', (newValue, oldValue) => {
 
 
     if (overlay == 'overlay_side' || overlay == 'overlay_top') {
+        $("#frame").css('zoom', (widthWindow / 1920) * 100 + '%');
         if (newValue.lowerthird) {
             $(function () {
                 if ($("#frame").find('#lower').length > 0) {
