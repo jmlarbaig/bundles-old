@@ -238,8 +238,8 @@ statusHeat.on('change', (newValue, oldValue) => {
     if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
         if (!setupLeaderboard.value.manualChrono) {
             $(".chrono").find('#cap').text("CAP " + tc[1] + "'" + (tc[0] != "00" ? tc[0] : ''));
-            if (newValue.NtpTimeStart !== ntpStartTime) {
-                ntpStartTime = newValue.NtpTimeStart
+            if (newValue.PosixTimeStart !== ntpStartTime) {
+                ntpStartTime = newValue.PosixTimeStart
                 startTime = parseInt(ntpStartTime);
                 launchTimer();
                 newHeat = false
@@ -421,8 +421,8 @@ setupLeaderboard.on('change', (newValue, oldValue) => {
 
 
     if (!newValue.manualChrono) {
-        if (statusHeat.value != undefined && statusHeat.value.NtpTimeStart !== undefined) {
-            ntpStartTime = statusHeat.value.NtpTimeStart
+        if (statusHeat.value != undefined && statusHeat.value.PosixTimeStart !== undefined) {
+            ntpStartTime = statusHeat.value.PosixTimeStart
             startTime = parseInt(ntpStartTime);
 
             launchTimer()

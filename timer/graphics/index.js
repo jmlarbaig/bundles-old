@@ -77,8 +77,8 @@ function launchTimer() {
 
 statusHeat.on('change', (newValue, oldValue) => {
     if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
-        if (newValue.NtpTimeStart !== ntpStartTime) {
-            ntpStartTime = newValue.NtpTimeStart
+        if (newValue.PosixTimeStart !== ntpStartTime) {
+            ntpStartTime = newValue.PosixTimeStart
             startTime = parseInt(ntpStartTime);
             // var timecapIn = ((parseInt( tc.length ? parseInt(tc[1]) : 0)* 60) + parseInt( tc.length ? parseInt(tc[2]) : 0)) * 1000;
             // console.log(timecapIn);
