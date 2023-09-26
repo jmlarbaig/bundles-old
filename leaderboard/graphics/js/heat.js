@@ -14,6 +14,9 @@ function resetHeat(data) {
             case 'overlay_side':
                 $item = styleHeat_side(data)
                 break;
+            case 'overlay_side_v1':
+                $item = styleHeat_side(data)
+                break;
             case 'leaderboard':
                 $item = styleHeat_TV(data)
                 break;

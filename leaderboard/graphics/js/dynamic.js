@@ -14,7 +14,7 @@ function updateDynamics(newScoring, status) {
             if (newScoring[1].CurrentRank != null) {
                 Object.keys(elemAth).forEach(i => {
 
-                    if (overlay == 'overlay_side') {
+                    if (overlay == 'overlay_side' || overlay == 'overlay_side_v1') {
 
                         let newRank = fetchNewData(newScoring, elemAth[i].lane).CurrentRank;
                         if (elemAth[i].CurrentRank != newRank && elemAth[i].score_abs != 0) {
@@ -191,7 +191,7 @@ function updateDynamics(newScoring, status) {
                             elemAth[i].$item.find(".popup").text('CAP ' + elemAth[i].score_abs);
                         }
                         if ($('.leaderboard').is(':visible')) {
-                            if (overlay == 'overlay_side' || overlay == 'overlay_top' || overlay == 'versus') {
+                            if (overlay == 'overlay_side' || overlay == 'overlay_top' || overlay == 'versus' || overlay == 'overlay_side_v1') {
 
                                 timerAutomatic1 = setTimeout(() => {
                                     $('#box_svg').slideUp(1000)

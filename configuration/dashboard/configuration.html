@@ -18,12 +18,44 @@
 
 <body>
 	<div class='wrapper_V1 box_1'>
-		<h1>CONFIGURATION OVERLAY</h1>
+		<br>
+		<h1>Configuration Background & Style</h1>
+		<div class="wrapper">
+
+			<label for="sponsor">Background Color</label>
+			<input type="color" id="bg__color" value="#34C924" />
+
+			<label for="bg_trans">Background Transparents</label>
+			<input type="checkbox" class="switch_1" id="bg_trans" />
+
+			<label for="border">Border / None</label>
+			<input type="checkbox" class="switch_1" id="border" />
+
+			<label for="font-select">Choose Font family:</label>
+			<select name="fonts" id="font-select">
+				<option value="Adarsh">Adarsh</option>
+				<option value="Antonio">Antonio</option>
+				<option value="Bebas">Bebas</option>
+				<option value="Circo">Circo</option>
+				<option value="Coamei">Coamei</option>
+				<option value="Hoop">Hoop</option>
+				<option value="Montserrat">Montserrat</option>
+				<option value="Oswald">Oswald</option>
+				<option value="Power">Power</option>
+				<option value="Roboto">Roboto</option>
+				<option value="Strasua">Strasua</option>
+				<option value="Typographica">Typographica</option>
+			</select>
+
+		</div>
+		<br>
+		<hr>
+		<br>
+		<h1>Configuration Colors of leaderboards</h1>
 		<div class="wrapper">
 
 			<div class="col switch_box">
 				<table>
-					<caption style="text-align: center;">Colors Leaderboard</caption>
 					<tr>
 						<td>
 							<div class='switch_box'>
@@ -186,35 +218,112 @@
 
 			</div>
 
-			<div class='col switch_box'>
-				<label for="sponsor">Background Color</label>
-				<input type="color" id="bg__color" value="#34C924" />
+		</div>
+		<br>
+		<hr>
+		<br>
+		<h1>Configuration colors of Lane Assignements</h1>
+		<div class="wrapper">
 
-				<label for="bg_trans">BACKGROUND TRANSPARENT</label>
-				<input type="checkbox" class="switch_1" id="bg_trans" />
+			<div class="col switch_box">
+				<table>
+					<tr>
+						<td>
+							<div class='switch_box'>
+								<label for="sponsor">Background header</label>
+								<input type="color" id="lane_ass_background_header" value="#34C924" />
+							</div>
+						</td>
+						<td>
+							<div class='switch_box'>
+								<label for="sponsor">Text header</label>
+								<input type="color" id="lane_ass_text_header" value="#34C924" />
+							</div>
+						</td>
+						<td>
+							<div class='switch_box'>
+								<label for="sponsor">Background</label>
+								<input type="color" id="lane_ass_background" value="#34C924" />
+							</div>
+						</td>
+						<td>
+							<div class='switch_box'>
+								<label for="sponsor">Text</label>
+								<input type="color" id="lane_ass_text" value="#34C924" />
+							</div>
+						</td>
+					</tr>
 
-				<label for="border">BORDER / NONE</label>
-				<input type="checkbox" class="switch_1" id="border" />
+				</table>
 
-				<label for="font-select">Choose Font family:</label>
-				<select name="fonts" id="font-select">
-					<option value="Adarsh">Adarsh</option>
-					<option value="Antonio">Antonio</option>
-					<option value="Bebas">Bebas</option>
-					<option value="Circo">Circo</option>
-					<option value="Coamei">Coamei</option>
-					<option value="Hoop">Hoop</option>
-					<option value="Montserrat">Montserrat</option>
-					<option value="Oswald">Oswald</option>
-					<option value="Power">Power</option>
-					<option value="Roboto">Roboto</option>
-					<option value="Strasua">Strasua</option>
-					<option value="Typographica">Typographica</option>
-				</select>
 			</div>
 
 		</div>
+		<hr>
+		<h1>Configuration leaderboard V1</h1>
 		<div class="wrapper">
+			<div class="col">
+				<div class='switch_box'>
+					<label for="sponsor">Position X Logo</label>
+					<input type="number" id="position_x_logo_v1" value=0 />
+				</div>
+				<div class='switch_box'>
+					<label for="sponsor">Position Y Logo</label>
+					<input type="number" id="position_y_logo_v1" value=0 />
+				</div>
+			</div>
+
+			<div class="col">
+				<div class='switch_box'>
+					<label for="sponsor">Position X Chrono</label>
+					<input type="number" id="position_x_chrono_v1" value=0 />
+				</div>
+				<div class='switch_box'>
+					<label for="sponsor">Position Y Chrono</label>
+					<input type="number" id="position_y_chrono_v1" value=0 />
+				</div>
+			</div>
+
+			<div class="col">
+				<div class='switch_box'>
+					<label for="sponsor">Position X Heat</label>
+					<input type="number" id="position_x_heat_v1" value=0 />
+				</div>
+				<div class='switch_box'>
+					<label for="sponsor">Position Y Heat</label>
+					<input type="number" id="position_y_heat_v1" value=0 />
+				</div>
+			</div>
+
+			<div class="col">
+				<div class='switch_box'>
+					<label for="sponsor">Position X Leaderboard</label>
+					<input type="number" id="position_x_leaderboard_v1" value=0 />
+				</div>
+				<div class='switch_box'>
+					<label for="sponsor">Position Y Leaderboard</label>
+					<input type="number" id="position_y_leaderboard_v1" value=0 />
+				</div>
+			</div>
+
+			<div class="col">
+				<div class='switch_box'>
+					<label for="sponsor">Width of logo</label>
+					<input type="number" id="widthLogoEvent_v1" value=0 />
+				</div>
+
+				<div class='switch_box'>
+					<label for="px_name">Width of name</label>
+					<input type="number" id="px_name_v1" value=200 />
+				</div>
+			</div>
+
+		</div>
+		<br>
+		<hr>
+		<h1>Configuration leaderboard V2</h1>
+		<div class="wrapper">
+
 
 			<div class="col">
 				<div class='switch_box'>
@@ -260,15 +369,23 @@
 				</div>
 			</div>
 
-			<div class='switch_box'>
-				<label for="sponsor">Width of logo</label>
-				<input type="number" id="widthLogoEvent" value=0 />
+			<div class="col">
+				<div class='switch_box'>
+					<label for="sponsor">Width of logo</label>
+					<input type="number" id="widthLogoEvent" value=0 />
+				</div>
+
+				<div class='switch_box'>
+					<label for="px_name">Width of name</label>
+					<input type="number" id="px_name" value=200 />
+				</div>
 			</div>
 
-		</div>
+		</div><br>
+		<hr>
 		<div class='wrapper'>
 			<button type="button" id="actualiser" class="button-27" onclick="Actualiser()"> CONFIGURER </button>
-		</div>
+		</div><br><br>
 	</div>
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>

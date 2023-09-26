@@ -77,7 +77,7 @@ function resetLeaderboard(newData) {
         // console.log("Static Data = ", staticData)
         // ! On prend le tableau
 
-        if (overlay == 'overlay_top' || overlay == 'overlay_side') {
+        if (overlay == 'overlay_top' || overlay == 'overlay_side' || overlay == 'overlay_side_v1') {
             setupLeaderboard.value.leaderboards != true ? $(".leaderboards").hide() : ""
         }
 
@@ -127,6 +127,9 @@ function resetLeaderboard(newData) {
             let $tabItem;
             switch (overlay) {
                 case 'overlay_side':
+                    $tabItem = headerSide(divisionsNames, indexDivision, repTarget)
+                    break;
+                case 'overlay_side_v1':
                     $tabItem = headerSide(divisionsNames, indexDivision, repTarget)
                     break;
                 case 'overlay_top':
@@ -183,6 +186,9 @@ function resetLeaderboard(newData) {
                     case 'overlay_side':
                         $item = overlaySide(elementAth)
                         break;
+                    case 'overlay_side_v1':
+                        $item = overlaySide(elementAth)
+                        break;
                     case 'overlay_top':
                         $item = overlayTop(elementAth)
                         break;
@@ -223,7 +229,7 @@ function resetLeaderboard(newData) {
                 if (overlay == 'versus') {
                     elementAth.$item.slideDown(1000)
                 } else {
-                    if (overlay != 'overlay_side') {
+                    if (overlay != 'overlay_side' && overlay != 'overlay_side_v1') {
 
                         elementAth.$item.fadeIn(1000)
                     }
@@ -251,7 +257,7 @@ function resetLeaderboard(newData) {
                 }, 1000)
 
 
-                if (overlay == 'overlay_side' || overlay == 'overlay_top' || overlay == 'versus') {
+                if (overlay == 'overlay_side' || overlay == 'overlay_top' || overlay == 'versus' || overlay == 'overlay_side_v1') {
 
                     setTimeout(() => {
 
@@ -284,7 +290,7 @@ function resetLeaderboard(newData) {
 
                         $('#box_svg').slideDown(1000)
                         setTimeout(() => {
-                            if (overlay == 'overlay_side') {
+                            if (overlay == 'overlay_side' || overlay == 'overlay_side_v1') {
                                 elementAth.$item.toggle("slide")
 
                             }

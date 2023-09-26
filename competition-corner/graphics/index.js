@@ -105,9 +105,12 @@ Colors.on('change', (newValue, oldValue) => {
 
     let tabColor = newValue
 
+
     Object.keys(newValue).forEach((color, index) => {
 
-        root.style.setProperty("--" + color, color);
-    })
+        let _color = tabColor[color]
 
+
+        root.style.setProperty("--" + color, _color);
+    })
 })

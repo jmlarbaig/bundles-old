@@ -1,5 +1,9 @@
 :root {
     --zoom: 100%;
+    --lane_ass_background_header: #000000;
+    --lane_ass_text_header: white;
+    --lane_ass_background: #000000;
+    --lane_ass_text: white;
 }
 
 .radio {
@@ -1588,7 +1592,7 @@ input[type=radio]:disabled:checked+label:after {
 }
 
 .cue-card-table__table-wrapper {
-    background-color: rgba(31, 13, 50, .88);
+    background-color: var(--lane_ass_background);
     -webkit-border-radius: 0;
     border-radius: 0
 }
@@ -1629,7 +1633,7 @@ input[type=radio]:disabled:checked+label:after {
 }
 
 .cue-card-table__header.header-without-background {
-    background-color: rgba(245, 245, 245, .95);
+    background-color: var(--lane_ass_background_header);
     -webkit-box-shadow: inset .5px .9px 0 #fff;
     box-shadow: inset .5px .9px 0 #fff
 }
@@ -1674,7 +1678,7 @@ input[type=radio]:disabled:checked+label:after {
 
 .cc-table__header__logo-text {
     width: 900px;
-    color: #fff;
+    color: var(--lane_ass_text);
     font-family: "Roboto Condensed", sans-serif;
     font-size: 53px;
     font-weight: 700;
@@ -1695,7 +1699,7 @@ input[type=radio]:disabled:checked+label:after {
 .header-without-background .cc-table__header__logo-text {
     width: 900px;
     text-shadow: none;
-    color: #131418
+    color: var(--lane_ass_text_header)
 }
 
 .cc-table__header__workout {
@@ -1726,7 +1730,7 @@ input[type=radio]:disabled:checked+label:after {
     position: relative;
     z-index: 3;
     overflow: hidden;
-    color: #fff;
+    color: var(--lane_ass_text);
     font-family: "Roboto Condensed", sans-serif;
     font-size: 39px;
     font-weight: 700;
@@ -1740,7 +1744,7 @@ input[type=radio]:disabled:checked+label:after {
 }
 
 .header-without-background .cc-table__header__workout {
-    color: #131418
+    color: var(--lane_ass_text_header)
 }
 
 .cc-table__header__workout>span {
@@ -1875,7 +1879,7 @@ input[type=radio]:disabled:checked+label:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    color: #fff;
+    color: var(--lane_ass_text);
     font-family: "Roboto Condensed", sans-serif;
     font-size: 40px;
     font-weight: 600;

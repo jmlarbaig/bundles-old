@@ -34,6 +34,23 @@
         --position_y_leaderboard: 75px;
 
         --widthLogoEvent: 250px;
+        --px_name: 200px;
+
+
+        --position_x_chrono_v1: 300px;
+        --position_y_chrono_v1: 75px;
+
+        --position_x_heat_v1: 320px;
+        --position_y_heat_v1: 320px;
+
+        --position_x_logo_v1: 110px;
+        --position_y_logo_v1: 40px;
+
+        --position_x_leaderboard_v1: 200px;
+        --position_y_leaderboard_v1: 75px;
+
+        --widthLogoEvent_v1: 250px;
+        --px_name_v1: 200px;
 
         --heigth: 29px;
         --height_ath_side: 30px;
@@ -56,6 +73,7 @@
         --width_top: 1930px;
         --width_box_heat: 1780px;
         --width_calc_top: 1630px;
+
 
         --zoom: 100%;
 
