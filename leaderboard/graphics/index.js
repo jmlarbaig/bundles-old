@@ -19,6 +19,8 @@ let root = document.documentElement;
 let Clrs = {}
 let chrono;
 
+configBefore = {};
+
 let timerAutomatic1 = null;
 let timerAutomatic2 = null;
 let timerAutomatic3 = null;
@@ -29,6 +31,7 @@ let showDrapeau;
 
 const timerNTP = nodecg.Replicant('timerNTP', 'connector')
 const setupLeaderboard = nodecg.Replicant('setupLeaderboard')
+
 const Colors = nodecg.Replicant('Colors', 'configuration');
 
 const adjustT = nodecg.Replicant('adjustT')
@@ -171,10 +174,12 @@ s_athletes.on('change', (newValue, oldValue) => {
         if (setupLeaderboard.value.automaticSchedule) {
 
             let config = setupLeaderboard.value;
+            configBefore = config;
 
             config.box_chrono = false;
             config.box_heat = false;
             config.leaderboards = false;
+            config.box_bandeau = false;
             setupLeaderboard.value = config;
 
             setTimeout(() => {
@@ -186,11 +191,11 @@ s_athletes.on('change', (newValue, oldValue) => {
 
 
                 setTimeout(() => {
-                    let config = setupLeaderboard.value;
+                    let config = configBefore;
 
-                    config.leaderboards = true;
+                    // config.leaderboards = true;
 
-                    $('.leaderboard').hide()
+                    // $('.leaderboard').hide()
                     config.attributionLane = false;
 
                     setupLeaderboard.value = config;
@@ -399,6 +404,9 @@ let eventName
 
 // Congifuration et setup
 setupLeaderboard.on('change', (newValue, oldValue) => {
+    if (!configBefore.hasOwnProperty('leaderboards')) {
+        configBefore = newValue;
+    }
     Object.keys(newValue).forEach((params, index) => {
         let authorize = newValue[params]
         if (overlay == 'leaderboard' || overlay == 'progression' || overlay == 'commentator' || overlay == 'sk' || overlay == 'lane') {

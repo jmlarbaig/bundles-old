@@ -77,7 +77,7 @@ function resetLeaderboard(newData) {
         // console.log("Static Data = ", staticData)
         // ! On prend le tableau
 
-        if (overlay == 'overlay_top' || overlay == 'overlay_side' || overlay == 'overlay_side_v1') {
+        if (overlay.search("overlay") >= 0) {
             setupLeaderboard.value.leaderboards != true ? $(".leaderboards").hide() : ""
         }
 
@@ -239,8 +239,6 @@ function resetLeaderboard(newData) {
 
                 setTimeout(() => {
 
-                    // Dans tous les cas, on prend la valeur height pour redéféinir les dimensions du leaderboard
-                    // if(overlay === 'overlay_side') {(height_tot +=  elementAth.$item.height())}
                     if (overlay === 'overlay_top') { height_tot = height_top } else { (height_tot += elementAth.$item.height() + 10) }
 
                     if (overlay != 'commentator' && overlay != 'sk') {
@@ -257,16 +255,11 @@ function resetLeaderboard(newData) {
                 }, 1000)
 
 
-                if (overlay == 'overlay_side' || overlay == 'overlay_top' || overlay == 'versus' || overlay == 'overlay_side_v1') {
+                if (overlay.search("overlay") >= 0) {
 
                     setTimeout(() => {
 
                         $('.leaderboard').slideDown(1000)
-                        // if (!$('.mainSponsor').is(':visible')) {
-                        //     $(".mainSponsor").fadeIn(1000)
-                        // }
-
-
 
                         if (setupLeaderboard.value.automaticSchedule) {
 
@@ -292,7 +285,6 @@ function resetLeaderboard(newData) {
                         setTimeout(() => {
                             if (overlay == 'overlay_side' || overlay == 'overlay_side_v1') {
                                 elementAth.$item.toggle("slide")
-
                             }
 
                         }, 1000)

@@ -5,7 +5,9 @@ function loadTableLane(element) {
 
   $('#participantsTbl').removeClass('table-animation')
 
-  for (let i = initialCount; i < initialCount + 10; i++) {
+  console.table(element)
+
+  for (let i = initialCount; i < element.length; i++) {
     let lane = '-';
     let name = '-';
     let affiliate = '-';

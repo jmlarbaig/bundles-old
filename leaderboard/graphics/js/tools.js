@@ -343,10 +343,14 @@ function launchAutomaticSchedule() {
         // nodecg.sendMessageToBundle('heat_result', 'connector', { workoutHeatSelected: eventInfos.value.workoutId, heatSelected: eventInfos.value.heatId, num_heats: 10 })
 
         let config = setupLeaderboard.value;
+        console.log("before")
+        console.table(configBefore)
+        configBefore = setupLeaderboard.value;
 
         config.box_chrono = false;
         config.box_heat = false;
         config.box_logo = false;
+        config.box_bandeau = false;
         config.attributionLane = false;
 
         setupLeaderboard.value = config;
@@ -355,12 +359,13 @@ function launchAutomaticSchedule() {
 
             let config = setupLeaderboard.value;
 
-            config.box_chrono = true;
-            config.box_heat = true;
-            config.box_logo = true;
+            // config.box_chrono = configBefore.box_chrono;
+            // config.box_heat = configBefore.box_heat;
+            // config.box_logo = configBefore.box_logo;
             // config.heatResults = false;
 
-            setupLeaderboard.value = config;
+
+            setupLeaderboard.value = configBefore;
 
         }, 10000)
     }, 2000)

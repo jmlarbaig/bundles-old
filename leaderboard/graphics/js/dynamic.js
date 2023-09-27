@@ -191,13 +191,13 @@ function updateDynamics(newScoring, status) {
                             elemAth[i].$item.find(".popup").text('CAP ' + elemAth[i].score_abs);
                         }
                         if ($('.leaderboard').is(':visible')) {
-                            if (overlay == 'overlay_side' || overlay == 'overlay_top' || overlay == 'versus' || overlay == 'overlay_side_v1') {
+                            if (overlay.search("overlay") >= 0 || overlay == 'versus') {
 
                                 timerAutomatic1 = setTimeout(() => {
-                                    $('#box_svg').slideUp(1000)
-                                    $('.leaderboard').slideUp(1000)
-                                    $('.box_chrono').slideUp(1000)
-                                    $('.box_heat').slideUp(1000)
+                                    // $('#box_svg').slideUp(1000)
+                                    // $('.leaderboard').slideUp(1000)
+                                    // $('.box_chrono').slideUp(1000)
+                                    // $('.box_heat').slideUp(1000)
                                     // $(".mainSponsor").slideUp(1000)
                                     if (overlay == 'versus') {
 

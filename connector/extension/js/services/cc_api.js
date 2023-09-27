@@ -74,7 +74,7 @@ module.exports = () => {
     }
 
     async function loadAttributionLane(eventId, workoutId, heatId, start, end) {
-        return fetch("https://competitioncorner.net/api2/v1/events/" + eventId + "/cuecard/heat-lane?workoutId=" + workoutId + "&heatId=" + heatId + "&hideEmptyLanes=true&from=" + start + "&totalCount=" + end, {
+        return fetch("https://competitioncorner.net/api2/v1/events/" + eventId + "/cuecard/heat-lane?workoutId=" + workoutId + "&heatId=" + heatId + "&hideEmptyLanes=false&skipWd=false&per_page=999", {
             method: "GET",
             headers: { 'Authorization': 'Bearer ' + token },
         }).then((response) => {
