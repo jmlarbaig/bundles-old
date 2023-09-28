@@ -99,6 +99,11 @@
         "file": "versus.html",
         "width": 1920,
         "height": 1080
+      },
+      {
+        "file": "head_judge.html",
+        "width": 1920,
+        "height": 1080
       }
     ]
   },

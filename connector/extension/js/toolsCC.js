@@ -244,7 +244,6 @@ module.exports = (nodecg, Connected) => {
 
                 listeCurrentHeat[athlete.station].ath = []
 
-
                 if (liste_cc.Team.hasOwnProperty(partName)) {
                     listeCurrentHeat[athlete.station].ath = liste_cc.Team[partName]
                     listeCurrentHeat[athlete.station].type = 'team'

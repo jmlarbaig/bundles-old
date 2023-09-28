@@ -135,7 +135,7 @@
     /* haut left right bas */
     padding: 5px 5px 5px 5px;
     text-align: center;
-    width: 45px;
+    width: 50px;
     filter: blur(0px);
     height: var(--height_ath_side);
     white-space: nowrap;

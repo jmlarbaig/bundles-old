@@ -1,4 +1,4 @@
-.rowHeat{
+.rowHeat {
     padding-top: 20px;
     padding-bottom: 20px;
     width: 100%;
@@ -11,7 +11,7 @@
     border-bottom: white solid 2px;
 }
 
-.wodDescription{
+.wodDescription {
     padding-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 10px;
@@ -26,24 +26,24 @@
     text-transform: uppercase;
 }
 
-.cis_ath{
+.cis_ath {
     overflow-x: auto;
 }
 
-.rowHeat span{
+.rowHeat span {
     font-size: 20px;
 }
 
-.rowHeat h3{
+.rowHeat h3 {
     font-size: 30px;
     color: white;
 }
 
-.repTarget_Team{
+.repTarget_Team {
     padding-left: 20px;
 }
 
 
-.division{
+.division {
     padding-left: 20px;
 }

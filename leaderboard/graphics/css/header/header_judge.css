@@ -126,7 +126,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 20px 10px;
-    background-color: rgb(163, 163, 163);
+    background-color: rgb(255, 255, 255);
 }
 
 .controlHeat div {
@@ -135,6 +135,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.controlHeat .box {
+    border: solid 2px black;
 }
 
 .controlHeat .log-button button {

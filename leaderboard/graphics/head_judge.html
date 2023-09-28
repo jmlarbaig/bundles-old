@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Scoring Kairos</title>
+	<title>Head Judge</title>
 
 	<!-- JQUERY -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -29,7 +29,7 @@
 	<link rel="stylesheet" href="css/colors.css">
 	<link rel="stylesheet" href="css/button.css">
 
-	<link rel="stylesheet" href="css/header/header_com.css">
+	<link rel="stylesheet" href="css/header/header_judge.css">
 	<link rel="stylesheet" href="css/leaderboard/sk.css">
 
 
@@ -65,40 +65,41 @@
 				<button type='button' class="info" id='reloadWorkouts' onclick='reloadWorkout()'>Reload Workout
 				</button>
 			</div>
-			<div class="col input-form">
+			<div class=" input-form">
 				<label for="workoutsMqtt">Workout Selection</label>
 				<select id="workoutsMqtt" class="workouts">
 					<option value="0">NO WORKOUT LOADED</option>
 				</select>
 			</div>
-			<div class="col input-form">
+			<div class=" input-form">
 				<label for="heatsMqtt">Heat Selection</label>
 				<select id="heatsMqtt" class="heat">
 					<option value="0">NO HEAT LOADED</option>
 				</select>
 			</div>
-			<div class="col log-button">
+			<div class=" log-button">
 				<button type='button' class="danger" id='changeHeat' onclick='changeHeat()'>Change Heat</button>
 			</div>
+			<br>
+			<hr><br>
 
-
-			<div class="col box">
+			<div class=" box">
 				<label>Time Cap Workout</label>
 				<div id="timeCapKairos">00:00</div>
+
+				<div class=" stateTimer">
+					<label>State Heat</label>
+					<div id="stateTimer"></div>
+				</div>
 			</div>
+			<br>
+			<hr><br>
 
-			<div class="col stateTimer box">
-				<label>State Heat</label>
-				<div id="stateTimer"></div>
-			</div>
-
-
-			<div class="col log-button">
+			<div class=" log-button">
 				<button type='button' class="success" id='startChrono' onclick='startChrono()'>Start Chrono</button>
 			</div>
 
-
-			<div class="col">
+			<div class="">
 				<label for="countTimer">Count before timer</label>
 				<input type="number" id="countTimer" value="11" />
 			</div>
@@ -108,7 +109,6 @@
 		</div>
 	</div>
 
-	<div class="leaderboards" id="leaderboards"></div>
 
 	<script src="index.js"></script>
 	<script src='js/sk.js'></script>

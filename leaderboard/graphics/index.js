@@ -80,7 +80,7 @@ $('document').ready(() => {
     let ch = document.location.pathname.split('/')
     overlay = ch[ch.length - 1].replace('.html', '')
     console.log(overlay)
-    if (overlay == 'sk') {
+    if (overlay == 'sk' || overlay == 'head_judge') {
         createKairosView();
     } else if (overlay.includes('echo') || overlay.includes('lane')) {
         laneEcho = parseInt(window.location.search.replace('?lane=', ''))
@@ -135,7 +135,7 @@ heatInfos.on('change', (newValue, oldValue) => {
         heat = typeWorkout(newValue)
         launchTimer()
         showTime(heat.timecap)
-        if (overlay == 'sk') {
+        if (overlay == 'sk' || overlay == 'head_judge') {
             $('#timeCapKairos').text(newValue[0].timeCap)
             heatSize = newValue[0].heatsSize
         }
@@ -257,7 +257,7 @@ statusHeat.on('change', (newValue, oldValue) => {
             }
         }
         statusWorkout = newValue.status
-        if (overlay == 'sk') {
+        if (overlay == 'sk' || overlay == 'head_judge') {
             switch (newValue.status) {
                 case '0':
                     $('.stateTimer').css('background-color', 'white')
@@ -316,8 +316,10 @@ manualChrono.on('change', (newValue, oldValue) => {
 })
 
 d_athletes.on('change', (newValue, oldValue) => {
-    if (overlay != 'sk' && newValue != undefined && statusWorkout != 0) {
-        updateDynamics(newValue, statusWorkout);
+    if (overlay != 'sk' || overlay != 'head_judge') {
+        if (newValue != undefined && statusWorkout != 0) {
+            updateDynamics(newValue, statusWorkout);
+        }
     }
 })
 
@@ -409,7 +411,7 @@ setupLeaderboard.on('change', (newValue, oldValue) => {
     }
     Object.keys(newValue).forEach((params, index) => {
         let authorize = newValue[params]
-        if (overlay == 'leaderboard' || overlay == 'progression' || overlay == 'commentator' || overlay == 'sk' || overlay == 'lane') {
+        if (overlay == 'leaderboard' || overlay == 'progression' || overlay == 'commentator' || overlay == 'sk' || overlay == 'head_judge' || overlay == 'lane') {
             if (params != 'flag' && params != 'lane') {
                 authorize = true
             }

@@ -1,4 +1,3 @@
-
 html {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
@@ -10,12 +9,12 @@ html {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     color: #000
 }
 
 body {
-    font-family: Roboto,sans-serif;
+    font-family: Roboto, sans-serif;
     color: #757575;
     width: 100%;
     margin: 0;
@@ -62,11 +61,13 @@ h1+p {
     margin-top: 12px
 }
 
-h1+ol,h1+ul {
+h1+ol,
+h1+ul {
     margin-top: 32px
 }
 
-h1+.table-responsive,h1+table {
+h1+.table-responsive,
+h1+table {
     margin-top: 32px
 }
 
@@ -90,16 +91,18 @@ h2+p {
     margin-top: 12px
 }
 
-h2+ol,h2+ul {
+h2+ol,
+h2+ul {
     margin-top: 18px
 }
 
-h2+.table-responsive,h2+table {
+h2+.table-responsive,
+h2+table {
     margin-top: 16px
 }
 
 h3 {
-    color: #000;
+    /* color: #000; */
     margin: 0;
     font-size: 16px;
     font-weight: 400;
@@ -118,33 +121,44 @@ h3+p {
     margin-top: 12px
 }
 
-h3+ol,h3+ul {
+h3+ol,
+h3+ul {
     margin-top: 18px
 }
 
-ol,ul {
+ol,
+ul {
     margin: 18px 0 0 32px;
     padding: 0;
     list-style-position: outside
 }
 
-ol+h2,ul+h2 {
+ol+h2,
+ul+h2 {
     margin-top: 42px
 }
 
-ol+h3,ul+h3 {
+ol+h3,
+ul+h3 {
     margin-top: 36px
 }
 
-ol+p,ul+p {
+ol+p,
+ul+p {
     margin-top: 18px
 }
 
-ol+ol,ol+ul,ul+ol,ul+ul {
+ol+ol,
+ol+ul,
+ul+ol,
+ul+ul {
     margin-top: 18px
 }
 
-a,input,li,p {
+a,
+input,
+li,
+p {
     margin: 0;
     font-size: 14px;
     font-weight: 400;
@@ -157,7 +171,8 @@ a {
     cursor: pointer
 }
 
-a:focus,a:hover {
+a:focus,
+a:hover {
     color: #1266f1;
     text-decoration: underline;
     outline: 0;
@@ -169,7 +184,8 @@ li+li {
     margin-top: 6px
 }
 
-.label,label {
+.label,
+label {
     font-size: 12px;
     font-weight: 500;
     line-height: 20px;
@@ -182,7 +198,8 @@ li+li {
     display: block
 }
 
-.btn,button {
+.btn,
+button {
     font-size: 12px;
     font-weight: 500;
     line-height: 20px;
@@ -213,7 +230,8 @@ p+h3 {
     margin-top: 36px
 }
 
-p+ol,p+ul {
+p+ol,
+p+ul {
     margin-top: 18px
 }
 
@@ -230,19 +248,35 @@ p+ol,p+ul {
 }
 
 
-.cis_ath{
+.cis_ath {
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     min-height: fit-content;
+    width: fit-content;
 }
 
-.cueCardParents{
-    margin-left: 10px;
-    margin-right: 10px;
+.cueCardParents {
+    width: 300px;
+    margin: 10px;
     padding: 5px;
-    border: #1266f1 1px dashed;
+    border: black 2px solid;
+    border-radius: 1%;
+    zoom: 60%;
 }
 
+.box_lane_name {
+    text-align: center;
+    padding: 10px;
+}
+
+.cueCardParents:nth-child(odd) .box_lane_name {
+    background-color: #9e9e9e;
+    color: white;
+}
+
+.lane {
+    font-size: 30px;
+}
 
 .cards-list {
     margin-top: 16px;
@@ -272,10 +306,10 @@ p+ol,p+ul {
 
 @media only screen and (min-width: 1024px) {
     .cards-list {
-        -webkit-box-pack:start;
+        -webkit-box-pack: start;
         -webkit-justify-content: flex-start;
         -ms-flex-pack: start;
-        justify-content: flex-start
+        justify-content: center
     }
 }
 
@@ -284,7 +318,7 @@ p+ol,p+ul {
 }
 
 .cards-list .card-item {
-    min-width: 380px;
+    /* min-width: 100px; */
     -webkit-box-flex: 0;
     -webkit-flex: none;
     -ms-flex: none;
@@ -362,14 +396,14 @@ p+ol,p+ul {
     width: 100%
 }
 
-.card-item{
+.card-item {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
 }
 
 .card__athlete {
-    padding: 16px 24px;
+    padding: 5px 5px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -377,8 +411,8 @@ p+ol,p+ul {
 }
 
 .card__athlete__avatar {
-    width: 72px;
-    height: 72px;
+    width: 50px;
+    height: 50px;
     overflow: hidden;
     border: 0;
     -webkit-border-radius: 100%;
@@ -417,7 +451,7 @@ p+ol,p+ul {
 }
 
 .card__info>div {
-    padding: 16px 24px;
+    padding: 5px 5px;
     text-align: center;
     -webkit-flex-basis: auto;
     -ms-flex-preferred-size: auto;
@@ -465,29 +499,33 @@ p+ol,p+ul {
     width: 100%;
 }
 
-.workout_list{
+.workout_list {
     width: 100%;
 }
 
-.wodRank:nth-of-type(odd) {background: #CCC}
+.wodRank:nth-of-type(odd) {
+    background: #CCC
+}
 
-.wodRank:nth-of-type(even) {background: #FFF}
+.wodRank:nth-of-type(even) {
+    background: #FFF
+}
 
-.card_info_workoutName{
+.card_info_workoutName {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    width:170px;
+    width: 170px;
 }
 
-.card_info_workoutRank{
+.card_info_workoutRank {
     text-align: center;
     width: 80px;
 }
 
-.card_info_workoutResult{  
+.card_info_workoutResult {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -581,11 +619,13 @@ p+ol,p+ul {
     border-left: 1px solid #9e9e9e
 }
 
-.table--athlete-list .athlete-row td div,.table--athlete-list .athlete-row td span {
+.table--athlete-list .athlete-row td div,
+.table--athlete-list .athlete-row td span {
     color: #757575
 }
 
-.table--athlete-list .athlete-row td div:first-child,.table--athlete-list .athlete-row td span:first-child {
+.table--athlete-list .athlete-row td div:first-child,
+.table--athlete-list .athlete-row td span:first-child {
     color: #000;
     font-weight: 500
 }
@@ -662,13 +702,13 @@ p+ol,p+ul {
     margin-top: 20px
 }
 
-input[type=text]{
+input[type=text] {
     margin: 10px auto;
     height: 40px;
     width: 100%;
 }
 
-select{
+select {
     margin: 10px auto;
     height: 40px;
     width: 100%;
