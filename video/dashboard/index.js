@@ -5,7 +5,7 @@ const videoAth = nodecg.Replicant('assets:videoCall');
 const videoInfos = nodecg.Replicant('videoInfos')
 const videoShow = nodecg.Replicant('videoShow')
 
-videoAth.on('change', (newValue)=>{
+videoAth.on('change', (newValue) => {
     resetVideo(newValue)
 })
 
@@ -13,19 +13,19 @@ videoAth.on('change', (newValue)=>{
 //     resetVideoPub(newValue);
 // })
 
-function resetVideo(data){
-    try{        
+function resetVideo(data) {
+    try {
         // ! On prend le tableau 
-        
+
         var $lane = $("#videos")
         $lane.find(".video").remove();
 
-        var i=0;
-        for(let video of data){
+        var i = 0;
+        for (let video of data) {
             var $item = $(
-                '<div class="video box">' + 
-                    '<label >' + video.name  + '</label>' + 
-                    '<button onclick="affichageVideo()" id='+i+'>' + "Afficher" + '</button>' +
+                '<div class="video box">' +
+                '<label >' + video.name + '</label>' +
+                '<button onclick="affichageVideo()" id=' + i + '>' + "Afficher" + '</button>' +
                 '</div>'
             );
             $lane.append($item)
@@ -33,7 +33,7 @@ function resetVideo(data){
         }
 
     }
-    catch(e){
+    catch (e) {
         console.log(e)
     }
 }
@@ -42,16 +42,16 @@ function affichageVideo() {
     videoInfos.value = videoAth.value[event.target.id].url;
     videoShow.value = true;
     $(".button_lane").attr('disabled', true);
-    setTimeout(function(){ 
+    setTimeout(function () {
         $(".button_lane").attr('disabled', false);
-        videoShow.value = false; 
+        videoShow.value = false;
     }, 4000);
 }
 
 // function resetVideoPub(data){
 //     try{        
 //         // ! On prend le tableau 
-        
+
 //         var $lane = $("#pub__video")
 //         $lane.find(".pub_V").remove();
 
@@ -81,8 +81,8 @@ function affichageVideoPub() {
     videoInfos.value = pubVideo.value[event.target.id].url;
     videoShow.value = true;
     $(".button_lane").attr('disabled', true);
-    setTimeout(function(){ 
+    setTimeout(function () {
         $(".button_lane").attr('disabled', false);
-        videoShow.value = false; 
+        videoShow.value = false;
     }, 4000);
 }

@@ -657,13 +657,18 @@ function reloadWorkout() {
 
 
 
-const videoInfos = nodecg.Replicant('videoInfos', 'leaderboard')
-const videoShow = nodecg.Replicant('videoShow', 'leaderboard')
+const videoInfos = nodecg.Replicant('videoInfos', 'video')
+const videoShow = nodecg.Replicant('videoShow', 'video')
 
 let videocontainer = document.getElementById('video');
 let videosource = document.getElementById('sourceVid');
 
 videoShow.on('change', (newValue) => {
+    console.group();
+    console.log("Video")
+    console.log(videoInfos.value);
+    console.log(videoShow.value);
+    console.groupEnd();
     switch (newValue) {
         case true:
 
