@@ -147,6 +147,9 @@ function resetLeaderboard(newData) {
                 case 'sk':
                     $tabItem = headerScoringKairos(divisionsNames, indexDivision, repTarget)
                     break;
+                case 'head_judge':
+                    $tabItem = headerScoringKairos(divisionsNames, indexDivision, repTarget)
+                    break;
                 case 'versus':
                     $tabItem = headerVersus(indexDivision)
                     break;
@@ -202,6 +205,9 @@ function resetLeaderboard(newData) {
                         $item = commentator(elementAth)
                         break;
                     case 'sk':
+                        $item = scoringKairos(elementAth)
+                        break;
+                    case 'head_judge':
                         $item = scoringKairos(elementAth)
                         break;
                     case 'versus':

@@ -29,6 +29,9 @@ function resetHeat(data) {
             case 'sk':
                 $item = styleHeat_TV(data)
                 break;
+            case 'head_judge':
+                $item = styleHeat_TV(data)
+                break;
             case 'versus':
                 $item = styleHeat_Versus(data)
                 break;

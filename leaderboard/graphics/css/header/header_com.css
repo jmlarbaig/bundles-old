@@ -121,7 +121,7 @@
 
 .controlHeat {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -129,17 +129,7 @@
     background-color: rgb(163, 163, 163);
 }
 
-.controlHeat div {
-    width: max-content;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.controlHeat .log-button button {
-    width: 400px;
-    height: 50px;
+.controlHeat .col {
     padding: 10px;
     display: flex;
     flex-direction: column;
