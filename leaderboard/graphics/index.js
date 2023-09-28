@@ -81,6 +81,13 @@ $('document').ready(() => {
     overlay = ch[ch.length - 1].replace('.html', '')
     console.log(overlay)
     if (overlay == 'sk' || overlay == 'head_judge') {
+        setInterval(() => {
+            const date = new Date();
+            const hour = date.getHours();
+            const min = date.getMinutes();
+            const sec = date.getSeconds();
+            $('.hours').text(hour + ':' + min + ':' + sec);
+        }, 1000)
         createKairosView();
     } else if (overlay.includes('echo') || overlay.includes('lane')) {
         laneEcho = parseInt(window.location.search.replace('?lane=', ''))

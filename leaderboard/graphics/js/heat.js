@@ -110,6 +110,7 @@ function styleHeat_TV(element) {
     return $item
 }
 
+
 function styleHeat_Versus(element) {
     let $item = $(
         '<div class="heat_content">' +
