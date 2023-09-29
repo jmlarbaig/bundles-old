@@ -267,6 +267,7 @@ p+ul {
 .box_lane_name {
     text-align: center;
     padding: 10px;
+    min-height: 200px;
 }
 
 .cueCardParents:nth-child(odd) .box_lane_name {

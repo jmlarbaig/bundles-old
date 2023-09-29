@@ -176,7 +176,7 @@
 .leaderboard .athlete .score {
     /* haut left right bas */
     padding: 2px 10px;
-    width: 60px;
+    width: var(--px_score);
     max-width: 120px;
     text-align: center;
     border-radius: --(border);
@@ -184,6 +184,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    -moz-transition-duration: 0.7s;
+    -webkit-transition-duration: 0.7s;
+    -ms-transition-duration: 0.7s;
 }
 
 .leaderboard .athlete .flag {

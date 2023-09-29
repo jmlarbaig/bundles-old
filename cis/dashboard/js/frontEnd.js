@@ -38,9 +38,9 @@ function updateFront(data) {
                 '<input type="checkbox" id="ath_' + val.lane + '" onclick="askAffichage()"/>' +
                 '<span class="toogle"></span>' +
                 '</div>' +
-                '<br>' + '<br>' +
+                '<hr><h4>Workout results</h4>' +
                 '<div class="cards-list workout_list" id="workouts_' + val.lane + '"/>' +
-                '<br>' + '<br>' +
+                '<hr><h4>Athletes list</h4>' +
                 '<div class="cards-list" id="cards_' + val.lane + '"/>' +
                 '</div>'
             );
