@@ -1,3 +1,13 @@
-# connector
+# Bundles Chicken Bucket
 
-Déploiment du bundle connector dans gitHub
+# CIS 
+
+# Competition Corner
+
+# Configuration
+
+# Leaderboard
+
+# Timer
+
+# Planning
