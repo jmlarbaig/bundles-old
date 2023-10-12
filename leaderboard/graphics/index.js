@@ -453,7 +453,7 @@ setupLeaderboard.on('change', (newValue, oldValue) => {
     }
 
 
-    if (overlay == 'overlay_side' || overlay == 'overlay_top') {
+    if (overlay == 'overlay_side' || overlay == 'overlay_top' || overlay == 'overlay_side_v1') {
         if (newValue.lowerthird) {
             $(function () {
                 if ($("#frame").find('#lower').length > 0) {

@@ -4,6 +4,8 @@
     right: 40px;
     width: var(--widthLogoEvent);
     height: var(--widthLogoEvent);
+    background-color: var(--box_logo_color);
+    z-index: 100;
 }
 
 .logo {

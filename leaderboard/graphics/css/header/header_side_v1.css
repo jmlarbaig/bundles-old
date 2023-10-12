@@ -4,9 +4,11 @@
     left: var(--position_x_logo_v1);
     width: var(--widthLogoEvent_v1);
     height: var(--widthLogoEvent_v1);
+    background-color: var(--box_logo_color);
     -moz-transition-duration: 0.7s;
     -webkit-transition-duration: 0.7s;
     -ms-transition-duration: 0.7s;
+    z-index: 100;
 }
 
 .logo {
